@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
+  
+
+  
+  <title>Hako</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="無様だ">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Hako">
+<meta property="og:url" content="mercurixito.github.io/index.html">
+<meta property="og:site_name" content="Hako">
+<meta property="og:description" content="無様だ">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:author" content="Victor Chen">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Hako" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 4.2.0"><!-- hexo-inject:begin --><!-- hexo-inject:end --></head>
+
+<body>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hako</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="mercurixito.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main">
+  
+    <article id="post-first" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/03/16/first/" class="article-date">
+  <time datetime="2020-03-16T13:52:05.000Z" itemprop="datePublished">2020-03-16</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/03/16/first/">First Post</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="First-post-of-blogs"><a href="#First-post-of-blogs" class="headerlink" title="First post of blogs"></a>First post of blogs</h2><p>Recently I am gonna migrate my blog to hexo, and I am gonna explore hexo with more intersting things, from the start, I may just use the default hexo theme – <code>landscape</code>.</p>
+<p>Still, the first things I should do is to make <code>Mathjax</code> work compatibly with <code>Hexo</code>. Let’s take the equations below for an example.</p>
+<p>$$<br>    G^{*} = \arg \min_{G} \max_{D} \left[ \mathbb{E}_{x \sim p_{data}}<br>    (\log D(x)) + \mathbb{E_{z \sim p_{z}}} \log( 1 - D(G(z))) \right]<br>$$</p>
+        
+          <p class="article-more-link">
+            <a href="/2020/03/16/first/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="mercurixito.github.io/2020/03/16/first/" data-id="ck7vo5ytp0005u4ucaj5vg7rq" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%9D%82%E8%B0%88/" rel="tag">杂谈</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-RP-WGAN" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/02/07/RP-WGAN/" class="article-date">
+  <time datetime="2020-02-07T08:41:13.000Z" itemprop="datePublished">2020-02-07</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/02/07/RP-WGAN/">论文研读：WGAN</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><ol>
+<li><p>生成式模型的目的：学习目标的分布（比如图像的分布）</p>
+<p> 通常的做法：</p>
+<p> 给定一类分布的族${P_{\Theta}}$，在这类族中，寻找最优的参数，使得可以逼近真实分布${P_{\tau}}$，通常的做法是 MLE，并且MLE正好和最小化${P_{\Theta}}$和${P_{\tau}}$的KL距离等价。</p>
+<p> <strong>问题是</strong>：这类函数族${P_{\Theta}}$和${P_{\tau}}$可能没有多大的交集，所以通常会选择${P_{\Theta}}$为高斯分布，能够尽可能多地涵盖分布。</p>
+</li>
+<li><p>Modern way:</p>
+<p> 现在一般的做法是：给定一个随机的噪声${Z}$，寻找一个分布的映射函数${f_{W}}$，将${Z}$映射到分布${P_{g}}$，使得${P_{g}}$和${P_{r}}$接近，已有的这方面的工作包括：</p>
+<ul>
+<li>VAE（变分自编码器）</li>
+<li>GAN</li>
+</ul>
+</li>
+</ol>
+        
+          <p class="article-more-link">
+            <a href="/2020/02/07/RP-WGAN/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="mercurixito.github.io/2020/02/07/RP-WGAN/" data-id="ck7vo5ytm0003u4uc9yjh92a0" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/GAN/" rel="tag">GAN</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Paper-Reading/" rel="tag">Paper Reading</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-KL-Divergenece1" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/10/14/KL-Divergenece1/" class="article-date">
+  <time datetime="2019-10-14T08:32:46.000Z" itemprop="datePublished">2019-10-14</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/10/14/KL-Divergenece1/">数学:KL散度</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="KL-divergence-KL-散度"><a href="#KL-divergence-KL-散度" class="headerlink" title="KL divergence(KL 散度)"></a>KL divergence(KL 散度)</h2><p>KL散度(Kullback-Leibler (KL) divergence)通常用来<strong>衡量两个单独的概率分布的差异</strong>，设对于同一随机变量的两个概率分布为${P(x)}$和${Q(x)}$，则它们的KL散度定义为：</p>
+<p>$${<br>    D_{KL}(p \vert \vert q) = \mathbb{E}_{x\sim P} \left[ \log P(x) - \log Q(x) \right]<br>}$$</p>
+<p>KL散度具有的性质有：</p>
+<ul>
+<li><strong>非负</strong>：要使得KL散度为0，当且仅当${P(x)}$和${Q(x)}$是在离散型变量的情况下是相同的分布，或者在连续型变量的情况下是“几乎处处”相同的[1]。</li>
+<li><strong>非对称</strong>：对某些${P(x)}$和${Q(x)}$，KL散度和逆KL散度通常并不相等，也就是${D_{KL}(P\vert\vert Q) \neq D_{KL}(Q \vert \vert P)}$。</li>
+</ul>
+<p>本文将从三个角度分析KL散度的非对称性：直观看法，理论说明，计算实验。</p>
+        
+          <p class="article-more-link">
+            <a href="/2019/10/14/KL-Divergenece1/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="mercurixito.github.io/2019/10/14/KL-Divergenece1/" data-id="ck7vo5yta0000u4ucawm3cc1r" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Mathematic/" rel="tag">Mathematic</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Probability/" rel="tag">Probability</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-Singular-Value-Decomposition" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/09/23/Singular-Value-Decomposition/" class="article-date">
+  <time datetime="2019-09-23T08:05:33.000Z" itemprop="datePublished">2019-09-23</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/09/23/Singular-Value-Decomposition/">数学：SVD分解[1]——原理</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="Preface-前言"><a href="#Preface-前言" class="headerlink" title="Preface 前言"></a>Preface 前言</h2><p><code>SVD (Singular Value Decomposition)</code> 在机器学习等其他领域有着非常广泛的应用，本文主要是受到计算机图像学课和以前看到的材料的启发，希望对<code>SVD</code>有更深入的了解。</p>
+<p>相关的pdf资料可以参见<a href="https://github.com/MercuriXito/BUAA-Gradudate-Lessons/blob/master/2019%20autumn/computer%20graphic/lesson%202/2018_Lecture02-SVD.pdf" target="_blank" rel="noopener">我<code>github</code>上的记录</a>。本文行文基本上是对它的翻译和理解。</p>
+        
+          <p class="article-more-link">
+            <a href="/2019/09/23/Singular-Value-Decomposition/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="mercurixito.github.io/2019/09/23/Singular-Value-Decomposition/" data-id="ck7vo5yto0004u4uchk6g9tjn" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linear-Algebra/" rel="tag">Linear Algebra</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Mathematic/" rel="tag">Mathematic</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-RP-DNN-acc1" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/05/26/RP-DNN-acc1/" class="article-date">
+  <time datetime="2019-05-26T08:48:31.000Z" itemprop="datePublished">2019-05-26</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/05/26/RP-DNN-acc1/">论文研读(1.1)：超深层网络加速</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><hr>
+<p>深入DL领域读论文是必不可少的工作(其实我还有别的原因)，本意是开个好头吧，然后主要是学习最新的思想，开拓下自己的眼界。我觉得论文研读主要是从翻译、理解、算法实现、实验几个方面下手。</p>
+<p>最近研读的是<a href="https://arxiv.org/abs/1505.06798" target="_blank" rel="noopener">Accelerating Very Deep Convolutional Networks for Classfication and Dectection</a>，作者主要对“超深层网络”(文中对SPP-10和VGG-16两种模型进行了实验)通过通道维度上的分解，达到加速的目的，并且提出了优化算法，显著降低了由于低秩分解带来的损失。</p>
+        
+          <p class="article-more-link">
+            <a href="/2019/05/26/RP-DNN-acc1/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="mercurixito.github.io/2019/05/26/RP-DNN-acc1/" data-id="ck7vo5yth0001u4uc1d2a1dax" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Paper-Reading/" rel="tag">Paper Reading</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/GAN/" rel="tag">GAN</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linear-Algebra/" rel="tag">Linear Algebra</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mathematic/" rel="tag">Mathematic</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Paper-Reading/" rel="tag">Paper Reading</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Probability/" rel="tag">Probability</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9D%82%E8%B0%88/" rel="tag">杂谈</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/GAN/" style="font-size: 10px;">GAN</a> <a href="/tags/Linear-Algebra/" style="font-size: 10px;">Linear Algebra</a> <a href="/tags/Mathematic/" style="font-size: 20px;">Mathematic</a> <a href="/tags/Paper-Reading/" style="font-size: 20px;">Paper Reading</a> <a href="/tags/Probability/" style="font-size: 10px;">Probability</a> <a href="/tags/%E6%9D%82%E8%B0%88/" style="font-size: 10px;">杂谈</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">三月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">二月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">十月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">九月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">五月 2019</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2020/03/16/first/">First Post</a>
+          </li>
+        
+          <li>
+            <a href="/2020/02/07/RP-WGAN/">论文研读：WGAN</a>
+          </li>
+        
+          <li>
+            <a href="/2019/10/14/KL-Divergenece1/">数学:KL散度</a>
+          </li>
+        
+          <li>
+            <a href="/2019/09/23/Singular-Value-Decomposition/">数学：SVD分解[1]——原理</a>
+          </li>
+        
+          <li>
+            <a href="/2019/05/26/RP-DNN-acc1/">论文研读(1.1)：超深层网络加速</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2020 Victor Chen<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a><br>
+      banner image from <a href="https://www.pixiv.net/artworks/80036479" target="_blank">This</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}},"extensions":["tex2jax.js"],"jax":["input/TeX","output/HTML-CSS"]});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+</body>
+</html>

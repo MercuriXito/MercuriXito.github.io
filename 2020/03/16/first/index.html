@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
+  
+
+  
+  <title>First Post | Hako</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="First post of blogsRecently I am gonna migrate my blog to hexo, and I am gonna explore hexo with more intersting things, from the start, I may just use the default hexo theme – landscape. Still, the f">
+<meta property="og:type" content="article">
+<meta property="og:title" content="First Post">
+<meta property="og:url" content="mercurixito.github.io/2020/03/16/first/index.html">
+<meta property="og:site_name" content="Hako">
+<meta property="og:description" content="First post of blogsRecently I am gonna migrate my blog to hexo, and I am gonna explore hexo with more intersting things, from the start, I may just use the default hexo theme – landscape. Still, the f">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-03-16T13:52:05.000Z">
+<meta property="article:modified_time" content="2020-03-17T08:31:58.988Z">
+<meta property="article:author" content="Victor Chen">
+<meta property="article:tag" content="杂谈">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Hako" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 4.2.0"><!-- hexo-inject:begin --><!-- hexo-inject:end --></head>
+
+<body>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hako</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="mercurixito.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-first" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/03/16/first/" class="article-date">
+  <time datetime="2020-03-16T13:52:05.000Z" itemprop="datePublished">2020-03-16</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      First Post
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="First-post-of-blogs"><a href="#First-post-of-blogs" class="headerlink" title="First post of blogs"></a>First post of blogs</h2><p>Recently I am gonna migrate my blog to hexo, and I am gonna explore hexo with more intersting things, from the start, I may just use the default hexo theme – <code>landscape</code>.</p>
+<p>Still, the first things I should do is to make <code>Mathjax</code> work compatibly with <code>Hexo</code>. Let’s take the equations below for an example.</p>
+<p>$$<br>    G^{*} = \arg \min_{G} \max_{D} \left[ \mathbb{E}_{x \sim p_{data}}<br>    (\log D(x)) + \mathbb{E_{z \sim p_{z}}} \log( 1 - D(G(z))) \right]<br>$$</p>
+<a id="more"></a>
+
+<h2 id="Tips-for-using-Mathjax-in-Hexo"><a href="#Tips-for-using-Mathjax-in-Hexo" class="headerlink" title="Tips for using Mathjax in Hexo"></a>Tips for using Mathjax in Hexo</h2><p>Use <a href="https://github.com/hexojs/hexo-math" target="_blank" rel="noopener">hexo-math</a> plugins for convenience. </p>
+<p>Several Steps:</p>
+<ol>
+<li><p><code>npm install hexo-math --save</code> to download it.</p>
+</li>
+<li><p>No need <code>hexo math install</code> for <code>hexo-math</code> newer than 1.0.6.</p>
+</li>
+<li><p>Specify the configuration in <code>_config.yml</code> using <code>Mathjax</code>：</p>
+</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"># MathJax Support</span><br><span class="line">math:</span><br><span class="line">  engine: &#39;mathjax&#39;</span><br><span class="line">  mathjax:</span><br><span class="line">    src: https:&#x2F;&#x2F;cdnjs.cloudflare.com&#x2F;ajax&#x2F;libs&#x2F;mathjax&#x2F;2.7.1&#x2F;MathJax.js</span><br><span class="line">    config: </span><br><span class="line">      # MathJax config</span><br><span class="line">      tex2jax:</span><br><span class="line">        inlineMath: [ [&#39;$&#39;,&#39;$&#39;], [&quot;\\(&quot;,&quot;\\)&quot;] ]</span><br><span class="line">        skipTags: [&#39;script&#39;, &#39;noscript&#39;, &#39;style&#39;, &#39;textarea&#39;, &#39;pre&#39;, &#39;code&#39;]</span><br><span class="line">        processEscapes: true</span><br><span class="line">      TeX:</span><br><span class="line">        equationNumbers:</span><br><span class="line">          autoNumber: &quot;AMS&quot;</span><br><span class="line">      extensions: [&quot;tex2jax.js&quot;]</span><br><span class="line">      jax: [&quot;input&#x2F;TeX&quot;, &quot;output&#x2F;HTML-CSS&quot;]</span><br></pre></td></tr></table></figure>
+
+<ol start="4">
+<li>Make sure that every post that you want to use <code>Mathjax</code> with the header:</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mathjax: true</span><br></pre></td></tr></table></figure>
+
+<p>And the whole things will be down! But we would discuss later about how to deal with<br>compatability between <code>Mathjax</code> and Markdown parser. Because you have to use <code>\</code> to<br>convert <code>_</code> or <code>*</code> to avoid parse the equation errorly. </p>
+<h2 id="Discuss-Later"><a href="#Discuss-Later" class="headerlink" title="Discuss Later"></a>Discuss Later</h2><p>We will modify the <code>marked.js</code> file to escape from parsing some codes in equations, such as:</p>
+<ul>
+<li>two <code>_</code> in equations would be parsed as <code>&lt;em&gt;&lt;/em&gt;</code></li>
+<li><code>\{</code>,<code>\\</code>,<code>\}</code> would not be parsed.</li>
+</ul>
+<p>Let’s take the equations below as an example.</p>
+<p>$$<br>    G^{*} = \arg \min_{G} \max_{D} \left\{ \mathbb{E}_{x \sim p_{data}}<br>    (\log D(x)) + \mathbb{E_{z \sim p_{z}}} \log( 1 - D(G(z))) \right\}<br>$$</p>
+<p>Most ways on web I searched have already out of date because hexo-render-marked has updated its regluar expression to parse <code>em</code> and <code>escape</code>. And I simply updated the ways below:</p>
+<ul>
+<li>modify <code>escape</code> in <code>inline</code> to:</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">escape: &#x2F;^\\([!&quot;#$%&amp;&#39;()*+,\-.&#x2F;:;&lt;&#x3D;&gt;?@\[\]^_&#96;|~])&#x2F;, &#x2F;&#x2F; \&#123; \&#125; \\</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>modify <code>em</code> in <code>inline</code> to:</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">em: &#x2F;^\*([^\s*&lt;\[])\*(?!\*)|^\*([^\s&lt;&quot;][\s\S]*[?^\s\*])\*(?!\*|[^\spunctuation])|^\*([^\s*&quot;&lt;\[][\s\S]*?[^\s])\*(?!\*)&#x2F;,</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>modify <code>br</code> in <code>inline</code> to:</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">br: &#x2F;^( &#123;2,&#125;)\n(?!\s*$)&#x2F;,</span><br></pre></td></tr></table></figure>
+
+<p>Use <code>hexo clean</code> to clean the cache and restart the server, things will be fine! :) </p>
+<p><strong>Note</strong>:</p>
+<ul>
+<li>the version of <code>marked</code> I tested is <code>0.7.0</code>.</li>
+<li>After the modification, some of the features may not be used:<ul>
+<li><code>\\</code> for a new line</li>
+<li>double <code>_</code> for italic (use double <code>*</code> instead).</li>
+</ul>
+</li>
+</ul>
+<h2 id="Other-Modification"><a href="#Other-Modification" class="headerlink" title="Other Modification"></a>Other Modification</h2><p>With The clear theme <code>landscape</code>, I feel much better. Further modification would be adapted. </p>
+<p>A bunch of features that I would need further:</p>
+<ul>
+<li><input disabled="" type="checkbox"> Content index of each post.</li>
+<li><input disabled="" type="checkbox"> Much fluently compatible with original <code>LaTeX</code> codes, so I can transfer between them easily. </li>
+<li><input disabled="" type="checkbox"> Self-introduction item in the side bars.</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="mercurixito.github.io/2020/03/16/first/" data-id="ck7vo5ytp0005u4ucaj5vg7rq" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%9D%82%E8%B0%88/" rel="tag">杂谈</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2020/02/07/RP-WGAN/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">论文研读：WGAN</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/GAN/" rel="tag">GAN</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linear-Algebra/" rel="tag">Linear Algebra</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mathematic/" rel="tag">Mathematic</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Paper-Reading/" rel="tag">Paper Reading</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Probability/" rel="tag">Probability</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9D%82%E8%B0%88/" rel="tag">杂谈</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/GAN/" style="font-size: 10px;">GAN</a> <a href="/tags/Linear-Algebra/" style="font-size: 10px;">Linear Algebra</a> <a href="/tags/Mathematic/" style="font-size: 20px;">Mathematic</a> <a href="/tags/Paper-Reading/" style="font-size: 20px;">Paper Reading</a> <a href="/tags/Probability/" style="font-size: 10px;">Probability</a> <a href="/tags/%E6%9D%82%E8%B0%88/" style="font-size: 10px;">杂谈</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">三月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">二月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">十月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">九月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">五月 2019</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2020/03/16/first/">First Post</a>
+          </li>
+        
+          <li>
+            <a href="/2020/02/07/RP-WGAN/">论文研读：WGAN</a>
+          </li>
+        
+          <li>
+            <a href="/2019/10/14/KL-Divergenece1/">数学:KL散度</a>
+          </li>
+        
+          <li>
+            <a href="/2019/09/23/Singular-Value-Decomposition/">数学：SVD分解[1]——原理</a>
+          </li>
+        
+          <li>
+            <a href="/2019/05/26/RP-DNN-acc1/">论文研读(1.1)：超深层网络加速</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2020 Victor Chen<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a><br>
+      banner image from <a href="https://www.pixiv.net/artworks/80036479" target="_blank">This</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}},"extensions":["tex2jax.js"],"jax":["input/TeX","output/HTML-CSS"]});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+</body>
+</html>
