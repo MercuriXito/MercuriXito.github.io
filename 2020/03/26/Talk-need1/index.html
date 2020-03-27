@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
+  
+
+  
+  <title>What I need in my blog? | Hako</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="记录下对blog的需求，确实有很多不方便的地方。。。 Need new features  公式中的${*}$不能正常解析，还是需要一个办法，其实最好的办法就是对$,$$符号内的行间和行内公式不进行markdown的解析，but why can’t we do that？  markdown本身的语法是行末两个以上空格、或者空行换行，为什么hexo-render-marked只要文本换行就显示换行">
+<meta property="og:type" content="article">
+<meta property="og:title" content="What I need in my blog?">
+<meta property="og:url" content="mercurixito.github.io/2020/03/26/Talk-need1/index.html">
+<meta property="og:site_name" content="Hako">
+<meta property="og:description" content="记录下对blog的需求，确实有很多不方便的地方。。。 Need new features  公式中的${*}$不能正常解析，还是需要一个办法，其实最好的办法就是对$,$$符号内的行间和行内公式不进行markdown的解析，but why can’t we do that？  markdown本身的语法是行末两个以上空格、或者空行换行，为什么hexo-render-marked只要文本换行就显示换行">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-03-26T03:02:06.000Z">
+<meta property="article:modified_time" content="2020-03-27T03:17:35.311Z">
+<meta property="article:author" content="Victor Chen">
+<meta property="article:tag" content="杂谈">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Hako" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 4.2.0"><!-- hexo-inject:begin --><!-- hexo-inject:end --></head>
+
+<body>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hako</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="mercurixito.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-Talk-need1" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/03/26/Talk-need1/" class="article-date">
+  <time datetime="2020-03-26T03:02:06.000Z" itemprop="datePublished">2020-03-26</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      What I need in my blog?
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>记录下对blog的需求，确实有很多不方便的地方。。。</p>
+<h2 id="Need-new-features"><a href="#Need-new-features" class="headerlink" title="Need new features"></a>Need new features</h2><ul>
+<li><input disabled="" type="checkbox"> 公式中的${*}$不能正常解析，还是需要一个办法，其实最好的办法就是对<code>$</code>,<code>$$</code>符号内的行间和行内公式不进行markdown的解析，but why can’t we do that？</li>
+<li><input disabled="" type="checkbox"> <code>markdown</code>本身的语法是行末两个以上空格、或者空行换行，为什么<code>hexo-render-marked</code>只要文本换行就显示换行呢？</li>
+<li><input disabled="" type="checkbox"> 我终于认识到我对<code>LaTeX</code>和<code>Markdown</code>的差异的关键在<strong>缩进，尤其是首行缩进</strong>。</li>
+</ul>
+<p>可能最终还是要走向<code>LaTeX</code>记录笔记的道路了，可惜blog不支持，所以找了相关的<code>LaTeX2Markdown</code>的项目。</p>
+<a id="more"></a>
+
+<h2 id="LaTeX2Markdown"><a href="#LaTeX2Markdown" class="headerlink" title="LaTeX2Markdown"></a>LaTeX2Markdown</h2><p>目前项目是挂在<a href="https://gist.github.com/MercuriXito/6031e9be887c63e50ed7718367ba7d3f" target="_blank" rel="noopener">我的gist</a>上，之后整理好了会作为一个独立的项目。该项目是基于<a href="https://github.com/ajtulloch/LaTeX2Markdown" target="_blank" rel="noopener">https://github.com/ajtulloch/LaTeX2Markdown</a>开发的，主要用正则表达式匹配替换的方法，相比起来增加的features有：</p>
+<ul>
+<li><input checked="" disabled="" type="checkbox"> 将<code>verbatim</code>环境转化为代码。</li>
+<li><input checked="" disabled="" type="checkbox"> 交叉引用替换：支持<code>BibTeX</code>的引用方式，读取对应的<code>bibtex</code>文件，自动生成参考文献列表，而且可以将文中的<code>\cite</code>替换成参考文献的索引，非常方便省事。（不过<strong>我的bibtex都是<code>Mendeley</code>导出的，比较标准，而且参考文献列表也只支持一种简单的格式</strong>）</li>
+<li><input disabled="" type="checkbox"> 图片替换：将<code>figure</code>环境替换成图片引用，并且将文档中的<strong>有关图片的</strong><code>ref</code>命令替换成引用。</li>
+<li><input disabled="" type="checkbox"> 公式替换：<code>Mathjax</code>好像不支持<code>\equation</code>环境，将它转化为<code>$$</code>，并且将文档中有关公式的<code>ref</code>命令替换成公式的引用。</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="mercurixito.github.io/2020/03/26/Talk-need1/" data-id="ck89m84h800002wucb1lo78ta" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%9D%82%E8%B0%88/" rel="tag">杂谈</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2020/03/27/RP-steerability/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          论文研读： on the steerabilty of generative adversarial networks
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2020/03/20/GAN-metrics2/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">GAN metrics (2)</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/GAN/" rel="tag">GAN</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linear-Algebra/" rel="tag">Linear Algebra</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mathematic/" rel="tag">Mathematic</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Paper-Reading/" rel="tag">Paper Reading</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Probability/" rel="tag">Probability</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/disentanglement/" rel="tag">disentanglement</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/metrics/" rel="tag">metrics</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9D%82%E8%B0%88/" rel="tag">杂谈</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/GAN/" style="font-size: 20px;">GAN</a> <a href="/tags/Linear-Algebra/" style="font-size: 10px;">Linear Algebra</a> <a href="/tags/Mathematic/" style="font-size: 13.33px;">Mathematic</a> <a href="/tags/Paper-Reading/" style="font-size: 16.67px;">Paper Reading</a> <a href="/tags/Probability/" style="font-size: 10px;">Probability</a> <a href="/tags/disentanglement/" style="font-size: 10px;">disentanglement</a> <a href="/tags/metrics/" style="font-size: 13.33px;">metrics</a> <a href="/tags/%E6%9D%82%E8%B0%88/" style="font-size: 13.33px;">杂谈</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">三月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">二月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">十月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">九月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">五月 2019</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2020/03/27/RP-steerability/">论文研读： on the steerabilty of generative adversarial networks</a>
+          </li>
+        
+          <li>
+            <a href="/2020/03/26/Talk-need1/">What I need in my blog?</a>
+          </li>
+        
+          <li>
+            <a href="/2020/03/20/GAN-metrics2/">GAN metrics (2)</a>
+          </li>
+        
+          <li>
+            <a href="/2020/03/19/GAN-metrics1/">GAN metrics (1)</a>
+          </li>
+        
+          <li>
+            <a href="/2020/03/16/first/">First Post</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2020 Victor Chen<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a><br>
+      banner image from <a href="https://www.pixiv.net/artworks/80036479" target="_blank">This</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}},"extensions":["tex2jax.js"],"jax":["input/TeX","output/HTML-CSS"]});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+</body>
+</html>
