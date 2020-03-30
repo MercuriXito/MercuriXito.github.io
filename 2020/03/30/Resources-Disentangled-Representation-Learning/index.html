@@ -5,19 +5,20 @@
   
 
   
-  <title>What I need in my blog? | Hako</title>
+  <title>Resources： Disentangled Representation Learning | Hako</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="记录下对blog的需求，确实有很多不方便的地方。。。 Need new features  公式中的${*}$不能正常解析，还是需要一个办法，其实最好的办法就是对$,$$符号内的行间和行内公式不进行markdown的解析，but why can’t we do that？  markdown本身的语法是行末两个以上空格、或者空行换行，为什么hexo-render-marked只要文本换行就显示换行">
+  <meta name="description" content="Introduction领域Disentangled Representation Learning的相关资料：包含论文、tutorial等。 Papers InfoGAN: Interpretable Representation Learning by Information Maximizing Generative Adversarial Nets. [paper] ${\beta}$-G">
 <meta property="og:type" content="article">
-<meta property="og:title" content="What I need in my blog?">
-<meta property="og:url" content="mercurixito.github.io/2020/03/26/Talk-need1/index.html">
+<meta property="og:title" content="Resources： Disentangled Representation Learning">
+<meta property="og:url" content="mercurixito.github.io/2020/03/30/Resources-Disentangled-Representation-Learning/index.html">
 <meta property="og:site_name" content="Hako">
-<meta property="og:description" content="记录下对blog的需求，确实有很多不方便的地方。。。 Need new features  公式中的${*}$不能正常解析，还是需要一个办法，其实最好的办法就是对$,$$符号内的行间和行内公式不进行markdown的解析，but why can’t we do that？  markdown本身的语法是行末两个以上空格、或者空行换行，为什么hexo-render-marked只要文本换行就显示换行">
+<meta property="og:description" content="Introduction领域Disentangled Representation Learning的相关资料：包含论文、tutorial等。 Papers InfoGAN: Interpretable Representation Learning by Information Maximizing Generative Adversarial Nets. [paper] ${\beta}$-G">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2020-03-26T03:02:06.000Z">
-<meta property="article:modified_time" content="2020-03-27T03:17:35.311Z">
+<meta property="article:published_time" content="2020-03-30T02:53:39.000Z">
+<meta property="article:modified_time" content="2020-03-30T15:19:32.433Z">
 <meta property="article:author" content="Victor Chen">
-<meta property="article:tag" content="杂谈">
+<meta property="article:tag" content="Disentangled Representation Learning">
+<meta property="article:tag" content="resources">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternate" href="/atom.xml" title="Hako" type="application/atom+xml">
@@ -67,10 +68,10 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main"><article id="post-Talk-need1" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-Resources-Disentangled-Representation-Learning" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2020/03/26/Talk-need1/" class="article-date">
-  <time datetime="2020-03-26T03:02:06.000Z" itemprop="datePublished">2020-03-26</time>
+    <a href="/2020/03/30/Resources-Disentangled-Representation-Learning/" class="article-date">
+  <time datetime="2020-03-30T02:53:39.000Z" itemprop="datePublished">2020-03-30</time>
 </a>
     
   </div>
@@ -81,7 +82,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      What I need in my blog?
+      Resources： Disentangled Representation Learning
     </h1>
   
 
@@ -89,30 +90,53 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>记录下对blog的需求，确实有很多不方便的地方。。。</p>
-<h2 id="Need-new-features"><a href="#Need-new-features" class="headerlink" title="Need new features"></a>Need new features</h2><ul>
-<li><input disabled="" type="checkbox"> 公式中的${*}$不能正常解析，还是需要一个办法，其实最好的办法就是对<code>$</code>,<code>$$</code>符号内的行间和行内公式不进行markdown的解析，but why can’t we do that？</li>
-<li><input disabled="" type="checkbox"> <code>markdown</code>本身的语法是行末两个以上空格、或者空行换行，为什么<code>hexo-render-marked</code>只要文本换行就显示换行呢？</li>
-<li><input disabled="" type="checkbox"> 我终于认识到我对<code>LaTeX</code>和<code>Markdown</code>的差异的关键在<strong>缩进，尤其是首行缩进</strong>。</li>
+        <h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><p>领域<code>Disentangled Representation Learning</code>的相关资料：包含论文、tutorial等。</p>
+<h2 id="Papers"><a href="#Papers" class="headerlink" title="Papers"></a>Papers</h2><ul>
+<li>InfoGAN: Interpretable Representation Learning by Information Maximizing Generative Adversarial Nets. <a href="https://arxiv.org/abs/1606.03657" target="_blank" rel="noopener">[paper]</a></li>
+<li>${\beta}$-GAN: Learning Basic Visual Concepts with a Constrained Variational Framework. <a href="https://openreview.net/forum?id=Sy2fzU9gl" target="_blank" rel="noopener">[paper]</a> <a href="https://github.com/sootlasten/beta-vae" target="_blank" rel="noopener">[codes]</a></li>
 </ul>
-<p>可能最终还是要走向<code>LaTeX</code>记录笔记的道路了，可惜blog不支持，所以找了相关的<code>LaTeX2Markdown</code>的项目。</p>
 <a id="more"></a>
 
-<h2 id="LaTeX2Markdown"><a href="#LaTeX2Markdown" class="headerlink" title="LaTeX2Markdown"></a>LaTeX2Markdown</h2><p>目前项目是挂在<a href="https://gist.github.com/MercuriXito/6031e9be887c63e50ed7718367ba7d3f" target="_blank" rel="noopener">我的gist</a>上，之后整理好了会作为一个独立的项目。该项目是基于<a href="https://github.com/ajtulloch/LaTeX2Markdown" target="_blank" rel="noopener">https://github.com/ajtulloch/LaTeX2Markdown</a>开发的，主要用正则表达式匹配替换的方法，相比起来增加的features有：</p>
+<h2 id="Unsorted-papers"><a href="#Unsorted-papers" class="headerlink" title="Unsorted papers"></a>Unsorted papers</h2><p>我认为和<code>Disentangled Representation Learning</code>有关的papers：</p>
 <ul>
-<li><input checked="" disabled="" type="checkbox"> 将<code>verbatim</code>环境转化为代码。</li>
-<li><input checked="" disabled="" type="checkbox"> 交叉引用替换：支持<code>BibTeX</code>的引用方式，读取对应的<code>bibtex</code>文件，自动生成参考文献列表，而且可以将文中的<code>\cite</code>替换成参考文献的索引，非常方便省事。（不过<strong>我的bibtex都是<code>Mendeley</code>导出的，比较标准，而且参考文献列表也只支持一种简单的格式</strong>）</li>
-<li><input disabled="" type="checkbox"> 图片替换：将<code>figure</code>环境替换成图片引用，并且将文档中的<strong>有关图片的</strong><code>ref</code>命令替换成引用。</li>
-<li><input disabled="" type="checkbox"> 公式替换：<code>Mathjax</code>好像不支持<code>\equation</code>环境，将它转化为<code>$$</code>，并且将文档中有关公式的<code>ref</code>命令替换成公式的引用。</li>
+<li><p>On the “steerability” of generative adversarial networks. <a href="https://arxiv.org/abs/1907.07171" target="_blank" rel="noopener">[paper]</a> <a href="https://ali-design.github.io/gan_steerability/" target="_blank" rel="noopener">[codes]</a></p>
+</li>
+<li><p>Interpreting the Latent Space of GANs for Semantic Face Editing. <a href="https://arxiv.org/abs/1907.10786" target="_blank" rel="noopener">[paper]</a> <a href="https://shenyujun.github.io/InterFaceGAN/" target="_blank" rel="noopener">[codes]</a></p>
+</li>
+</ul>
+<h2 id="Other-resources"><a href="#Other-resources" class="headerlink" title="Other resources"></a>Other resources</h2><ul>
+<li><p><a href="https://sites.google.com/view/disentanglenips2017" target="_blank" rel="noopener">NIPs 2017 Workshop: Learning Disentangled Representations:<br>from Perception to Control</a></p>
+</li>
+<li><p><a href="https://github.com/sootlasten/disentangled-representation-papers" target="_blank" rel="noopener">List of papers about disentangled representations</a></p>
+</li>
+</ul>
+<h2 id="Other"><a href="#Other" class="headerlink" title="Other"></a>Other</h2><p>简述 InfoGAN。</p>
+<p>latent space 由noise${z}$和 latent codes ${c}$组成，通过生成器得到${G(z,c)}$。</p>
+<p>如果不加限制，${G}$容易忽略${c}$的影响，idea是计算互信息量：${I(c,G(z,c))}$。</p>
+<p>$${<br>    I(c, G(z,c)) = H(c) - H(c \vert G(c,z))<br>}$$</p>
+<p>互信息量的含义是：已知${G(c,z)}$的情况下${c}$的信息量（信息熵）和未知时的信息量减少的多少。我们希望，对任意一张生成图片，它很明显具有某种latent code编码的特性，也就是使得${H(c \vert G(c,z))}$尽可能小，所以要互信息量大。</p>
+<p>如何将互信息量加入训练？先验分布${P(c \vert x)}$难以计算，使用<code>Variational Information Maximization</code>的方法用另一个${Q(c \vert x)}$得到它的下界：</p>
+<p>$${<br>    I(c, G(z,c)) \geq \mathbb{E}_{x \sim G(z,c)}\left[<br>    \mathbb{E}_{c^{\prime} \sim P(c \vert x)\left[ Q(c^{\prime} \vert x) \right]}\right] + H(c) = L_{1}(G,Q)<br>}$$</p>
+<p>当${P = Q}$时取等号，而且${I(c, G(z,c))}$取最小值。给定${c}$的分布不变，${H(c)}$为固定的常数，只需要优化加号的左项。</p>
+<p>整个Loss：</p>
+<p>$${<br>    \min_{G, Q} \min_{D} V(G,D) - \lambda L_{1}(G,Q)<br>}$$</p>
+<p><strong>实现</strong></p>
+<p>${D}$和classifier权重共享，除了最后一层不同。${D}$输出binary结果。classifier对每一个控制的${c_{i}}$，如果${c_{i}}$是离散的变量（给定的分布也是离散的），通过softmax得到${Q(c_{i} \vert x)}$。如果${c_{i}}$是连续的变量（给定的分布也是连续的），直接把${Q(c_{i} \vert x)}$看成一个可分解的高斯变换，<strong>也就是输出两个数表示均值和方差</strong>。</p>
+<p><strong>实现的Codes</strong></p>
+<ul>
+<li><a href="https://github.com/Natsu6767/InfoGAN-PyTorch" target="_blank" rel="noopener">pytorch-infoGAN</a><ul>
+<li>对每个离散变量使用随机的one_hot变量，对每个连续的变量使用随机的[-1,1]的变量。然后将它们concat。</li>
+</ul>
+</li>
 </ul>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="mercurixito.github.io/2020/03/26/Talk-need1/" data-id="ck89m84h800002wucb1lo78ta" class="article-share-link">Share</a>
+      <a data-url="mercurixito.github.io/2020/03/30/Resources-Disentangled-Representation-Learning/" data-id="ck8elkv67000048ucc5g15v8u" class="article-share-link">Share</a>
       
       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%9D%82%E8%B0%88/" rel="tag">杂谈</a></li></ul>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Disentangled-Representation-Learning/" rel="tag">Disentangled Representation Learning</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/resources/" rel="tag">resources</a></li></ul>
 
     </footer>
   </div>
@@ -120,19 +144,19 @@
     
 <nav id="article-nav">
   
-    <a href="/2020/03/27/RP-steerability/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2020/03/30/Resources-GAN/" id="article-nav-newer" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Newer</strong>
       <div class="article-nav-title">
         
-          论文研读： on the steerabilty of generative adversarial networks
+          Resources： GAN
         
       </div>
     </a>
   
   
-    <a href="/2020/03/20/GAN-metrics2/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2020/03/27/RP-steerability/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">GAN metrics (2)</div>
+      <div class="article-nav-title">论文研读： on the steerabilty of generative adversarial networks</div>
     </a>
   
 </nav>
