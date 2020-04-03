@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
+  
+
+  
+  <title>论文研读：InterFaceGAN | Hako</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="本文是对”Interpreting the Latent Space of GANs for Semantic Face Editing. [paper] [codes]“[2]一文的学习。 Introduction 本文研究的问题是：在latent space上修改输入噪声，操作GAN生成的图像不同语义。本文的工作都基于以下假设： Assumption 1:  单个语义图像对应的图片在laten">
+<meta property="og:type" content="article">
+<meta property="og:title" content="论文研读：InterFaceGAN">
+<meta property="og:url" content="mercurixito.github.io/2020/04/03/RP-InterFaceGAN/index.html">
+<meta property="og:site_name" content="Hako">
+<meta property="og:description" content="本文是对”Interpreting the Latent Space of GANs for Semantic Face Editing. [paper] [codes]“[2]一文的学习。 Introduction 本文研究的问题是：在latent space上修改输入噪声，操作GAN生成的图像不同语义。本文的工作都基于以下假设： Assumption 1:  单个语义图像对应的图片在laten">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="/images/2020-04-03/interfacegan_cond_mani1.png">
+<meta property="og:image" content="/images/2020-04-03/interfacegan_cond_mani2.png">
+<meta property="og:image" content="/images/2020-04-03/interfacegan_cond_mani3.png">
+<meta property="og:image" content="/images/2020-04-03/interfacegan_cond_mani3.png">
+<meta property="article:published_time" content="2020-04-03T09:16:24.000Z">
+<meta property="article:modified_time" content="2020-04-03T09:47:05.539Z">
+<meta property="article:author" content="Victor Chen">
+<meta property="article:tag" content="GAN">
+<meta property="article:tag" content="Paper Reading">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="/images/2020-04-03/interfacegan_cond_mani1.png">
+  
+    <link rel="alternate" href="/atom.xml" title="Hako" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 4.2.0"><!-- hexo-inject:begin --><!-- hexo-inject:end --></head>
+
+<body>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hako</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="mercurixito.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-RP-InterFaceGAN" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/04/03/RP-InterFaceGAN/" class="article-date">
+  <time datetime="2020-04-03T09:16:24.000Z" itemprop="datePublished">2020-04-03</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      论文研读：InterFaceGAN
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>本文是对”Interpreting the Latent Space of GANs for Semantic Face Editing. <a href="https://arxiv.org/abs/1907.10786" target="_blank" rel="noopener">[paper]</a> <a href="https://shenyujun.github.io/InterFaceGAN/" target="_blank" rel="noopener">[codes]</a>“[2]一文的学习。</p>
+<h3 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h3><hr>
+<p>本文研究的问题是：在latent space上修改输入噪声，操作GAN生成的图像不同语义。<br>本文的工作都基于以下假设：</p>
+<p><strong>Assumption 1</strong>:</p>
+<blockquote>
+<p>单个语义图像对应的图片在latent space上线性可分。</p>
+</blockquote>
+<a id="more"></a>
+
+<h3 id="FrameWork"><a href="#FrameWork" class="headerlink" title="FrameWork"></a>FrameWork</h3><hr>
+<p>一个well-trained的GAN学习隐空间(通常是多元标准正态分布)到图像流形的映射${g: \mathcal{Z} \to \mathcal{X}, \mathcal{Z} \in \mathbb{R}^{d}}$。</p>
+<p>加入一个语义评分(semantic scoring)函数${f_{s}: \mathcal{X} \to \mathcal{S} \in \mathbb{R}^{m} }$，这个函数表示了图像的表示某种语义的程度。</p>
+<p><strong>Property 1</strong>:</p>
+<p>对任意向量${\mathbf{n} \in \mathbb{R}^{d}}$，且${\mathbf{n} \neq \mathbf{0}}$，集合${\left\{\mathbf{z} \in \mathbb{R}^{d}: \mathbf{n}^{T} \mathbf{z}  = 0\right\}}$定义了一个${\mathbb{R}^{d}}$上的一个超平面，对任意${\mathbb{R}^{d}}$的向量${\mathbf{z}}$，${\mathbf{n}^{T} \mathbf{z} &gt; 0}$的所有点位于超平面的同一侧。</p>
+<p><strong>Property 2</strong>:</p>
+<p>对任意${\mathbf{b} \in \mathbb{R}^{d}}$，且${| \mathbf{b} | = 1}$，若隐空间${\mathcal{Z} \sim \mathcal{N}(0, \mathbf{I}_{d})}$，对任意${\alpha \geq 1, d \geq 4}$：</p>
+<p>$${<br>    P(\vert \mathbf{n}^{T}\mathbf{z} \vert \leq 2\alpha \sqrt{\frac{d}{d - 2}})<br>    \geq (1 - 3e^{-cd})(1 - \frac{2}{\alpha}e^{-\alpha^2/2})<br>}$$</p>
+<p>成立，其中${c}$为常数。</p>
+<p>Property2就是想说明<strong>大部分的latent space内的点都在由${\mathbf{n}}$决定的超平面的附近</strong>。</p>
+<h4 id="Single-Semantic"><a href="#Single-Semantic" class="headerlink" title="Single Semantic"></a>Single Semantic</h4><p>基于假设1，如果我们想改变某一种语义，只要移动latent code使之越过该语义属性在latent space上的超平面即可。由Property1，一个线性超平面可以由向量${\mathbf{n}}$确定（且${\mathbf{n}}$是单位向量，${\mathbf{n}^{T}\mathbf{n} = 1}$）。(<strong>注：Property1中${\mathbf{n}}$确定的超平面显然经过${\mathbf{0}}$，虽然文章没有提及，但是由于我们一般取噪声${\mathcal{Z} \sim \mathcal{N}(0,\mathbf{I}_{d})}$，所以可以理解</strong>)</p>
+<p>任意一个latent space上的点到该超平面的距离为：</p>
+<p>$${d(\mathbf{n}, \mathbf{z}) = {\mathbf{n}}^{T} \mathbf{z}}$$</p>
+<p>我们希望latent code到超平面的距离与它生成图片包含的对应语义属性的语义性成正比：</p>
+<p>$${<br>    f(g(\mathbf{z})) = \lambda d(\mathbf{n}, \mathbf{z}) \qquad \lambda &gt; 0<br>}$$</p>
+<p>其中${\lambda}$为超参数，这样我们可以<strong>用一个单位向量${\mathbf{n}}$表示一种语义，而且可以在latent space上就可以直接衡量生成的图片的语义性</strong>。</p>
+<h4 id="Multiple-Semantic"><a href="#Multiple-Semantic" class="headerlink" title="Multiple Semantic"></a>Multiple Semantic</h4><p>针对多种复合语义性的衡量可以用类似的方法，用${\mathbf{n}_{i}}$表示不同的语义超平面法向量，多个语义属性的语义性强弱可以表示为：</p>
+<p>$${<br>    s \equiv f_{s}(g(z)) = \Lambda N^{T} z<br>}$$</p>
+<p>其中${N = \left[\mathbf{ {n}_{1} },\cdots,\mathbf{ {n}_{m} }\right]}$，${\Lambda}$为对角阵（不希望语义重叠），同时可得${s}$的均值和方差：</p>
+<p>$${<br>    \begin{aligned}<br>        \mu_{s} &amp;= \mathbb{E}(\Lambda N^{T} z) = 0 \\\\<br>        \Sigma_{s} &amp;= \mathbb{E}(ss^{T}) = \mathbb{E}(\Lambda N^{T} z z^{T} N \Lambda^{T}) \\\\<br>        &amp;= \Lambda N^{T} N \Lambda^{T} \\\\<br>    \end{aligned}<br>}$$</p>
+<p>可得${s \sim \mathcal{N}(0, \Sigma_{s})}$。当且仅当${\Sigma_{s}}$为对角阵时，${s}$衡量的语义属性都是disentangled的，因为此时向量组${\left[\mathbf{ {n}_{1} },\cdots,\mathbf{ {n}_{m} }\right]}$正交。如果不为对角阵，<strong>${n_{i}^{T}n_{j}}$可以衡量两个属性的entanglement的大小</strong>。</p>
+<h4 id="Manipulation"><a href="#Manipulation" class="headerlink" title="Manipulation"></a>Manipulation</h4><p><strong>Single Manipulation:</strong> 现在我们能直接在latent space上衡量语义性，要操作latent code生成的图片的语义性就很简单了，对单个语义，只要沿法向量方向移动就行：</p>
+<p>$${<br>    z = z_{0} + \alpha \mathbf{n}<br>}$$</p>
+<p>${\alpha &gt; 0}$增强语义性，${\alpha &lt; 0}$减弱甚至更改语义性。</p>
+<p>除此之外，作者提出了对多个entangled的属性操作的方法（Conditional Manipulation）。</p>
+<p><strong>Conditional Manipulation:</strong> 假设两个语义属性s1,s2是entangled的，它们分别对应法向量${\mathbf{n}_{1},\mathbf{n}_{2}}$，此时要使得改变语义属性s1，而不改变s2，可以沿着${\mathbf{w} = \mathbf{n}_{1} - (\mathbf{n}^{T}_{1}\mathbf{n}_{2})\mathbf{n}_{2}}$移动，如图12所示。</p>
+<p><img src="/images/2020-04-03/interfacegan_cond_mani1.png" alt="Conditional Manipulation在子空间的直观解释"></p>
+<p><img src="/images/2020-04-03/interfacegan_cond_mani2.png" alt="Conditional Manipulation在二维视角下的直观解释"></p>
+<p>可以看到${ {\mathbf{w} }^{T}\mathbf{n_{2}} = 0}$，也沿着${\mathbf{w}}$方向移动就是沿着${\mathbf{ {n}_{2}}}$的超平面平行的方向，穿过${\mathbf{ {n}_{1}}}$的超平面。</p>
+<p>对多个entangled的属性而要只改变其中一个，作者提出用相同的方法：减去所有其他entangled属性的法向量。(<strong>注：这里作者原文为”If there is more than one attribute to be conditioned on, we just subtract the projection from the primal direction onto the plane that is constructed by all conditioned directions.”我觉得没有说的很清楚，猜测应该是和两个属性entangled的方法一致。</strong>)</p>
+<p><strong>Real Image Manipulation:</strong> 作者进一步扩展到真实图片的编辑，只要将真实图片通过某种方法映射到latent space上，再移动，最后再通过GAN生成即可。</p>
+<h3 id="Experiments"><a href="#Experiments" class="headerlink" title="Experiments"></a>Experiments</h3><p>作者主要围绕PGGAN[1]和StyleGAN[3]两种模型进行实验。</p>
+<ul>
+<li>实验1. Check if the assumption is right.</li>
+</ul>
+<p>对不同的单个语义的图片，在latent space上训练Linear SVM，计算验证集和整个集合上的分类正确率，在不同语义上的实验都取得了比较高的分类正确率，所以一定程度上验证了线性可分的假设。</p>
+<ul>
+<li>实验2. Latent Space Manipulation.</li>
+</ul>
+<p>(1) Single Attribute Manipulation. (2) Distance Effect： 作者观察到，当移动样本距离超平面过远（大于给定值）时，生成的图片不真实。但是服从${\mathcal{N}(0, \mathbf{I}_{d})}$的噪声中很难采样到那么远的噪声，所以没关系。(3) Artifacts Correction: 作者将生成质量的好与坏也作为一对语义信息，学习超平面，将生成质量不好的图片变成好的图片。</p>
+<ul>
+<li>实验3. Conditional Manipulation</li>
+</ul>
+<p>(1) Correlation between Attributes. 本节作者提出了两种衡量语义属性相关性的方法，一是两属性的法向量的余弦相似度，二是将attribute score看成随机变量，随机采样并计算它们的Pearson相关系数。两种方法的效果差不多。<br>(<strong>注：这里的${E(XY)}$怎么计算？</strong>)在研究的五种语义属性中，发现年龄，性别，是否戴眼镜三个属性具有较强的相关性，姿势和笑脸属性和其他属性比较不相关。这反映了数据集中属性的倾向。</p>
+<p>(2) Conditional Result. 展示了下结果。</p>
+<ul>
+<li>实验4. StyleGAN</li>
+</ul>
+<p>本节作者在StyleGAN的${\mathcal{Z}}$ latent space和${\mathcal{W}}$ latent space进行实验，发现：(1) ${\mathcal{W}}$ latent space 的效果更好，长距离的变化显著，${\mathcal{W}}$ latent space比${\mathcal{Z}}$ latent space更加disentangled（这和StyleGAN原论文的结论一致）<br>(2) Conditional Manipulation的方法在${\mathcal{W}}$ latent space上失效了，作者将原因归结于${\mathcal{W}}$ latent space中已经包含了融合特征<br>（如eyeglasses-age）的法向量，而且它和单个特征（如eyeglasses）的法向量是正交的，减去投影几乎不改变法向量，所以没有影响。</p>
+<ul>
+<li>实验5. Real Image Manipulation</li>
+</ul>
+<p>作者将真实图片通过InverseGAN的方法变换到latent space，在latent space上操作，再通过GAN可以对真实图片的属性进行修改。作者使用了两种Inverse GAN的方法：基于优化的方法和Encoder-based的方法。InverseGAN 的方法在PGGAN上效果差（作者认为是训练集和真实图像差异太大的原因），而在StyleGAN上成功。</p>
+<h3 id="Implementation-Details"><a href="#Implementation-Details" class="headerlink" title="Implementation Details"></a>Implementation Details</h3><ol>
+<li>normal vector</li>
+</ol>
+<p>首先在数据集上预训练一个分类的网络，预测各属性的得分。随机生成500K个图像，对每张图像得到各个属性得分，对每个属性，选取得分最高的10K图像和最低的10K图像（为了避免中间的属性），取70%作为训练集，30%作为测试集，训练Linear SVM对latent codes分类，得到分类超平面，<br>得到法向量，并归一化。</p>
+<p>但是作者也提到了由于预训练的分类网络不能完全分类准确，学习到的法向量不一定准确，对属性的entanglement性有一定的影响。</p>
+<h3 id="质疑"><a href="#质疑" class="headerlink" title="质疑"></a>质疑</h3><ol>
+<li>扩展性</li>
+</ol>
+<p>为什么作者没有进一步把方法扩展到BigGAN？我觉得CelebA-HQ、FF-HQ数据集有很强的连续性，而且在之上训练的StyleGAN，PGGAN效果很好，如作者所言，模型本身已经学习了一些disentangled<br>representation，所以效果好的本身可能是由于StyleGAN本身已经很好。假设1成立建立在GAN已经训练地很好的基础上。</p>
+<ol start="2">
+<li>StyleGAN实验问题</li>
+</ol>
+<p>实验3.4中作者指出decorrelate的方法对StyleGAN的${\mathcal{W}}$ Space不起作用，原因是StyleGAN已经学习到融合特征的direction（比如说eyeglasses-age），而且 eyeglasses-age direction 和 eyeglasses direction 正交，但是这两个方向可能正交（没有关联）吗？</p>
+<ol start="3">
+<li>Conditional Manipulation存在的问题</li>
+</ol>
+<p>如果根据线性假设1，那么如果存在超过两个以上的语义属性是entangled的，变化限度不限的情况下，不可能存在方向${w}$，使得沿着${w}$改变${z}$只改变一个语义属性，而保留其他语义属性不变。而且作者没有过多地对超过两个以上entangled的语义属性做实验（仅在Fig8中展示了一个三个属性entangled的结果），这是一个不足的地方。</p>
+<p><img src="/images/2020-04-03/interfacegan_cond_mani3.png" alt="图3. 三种entangled属性情况1：这种情况下不可能使得只有一种属性改变"></p>
+<p><img src="/images/2020-04-03/interfacegan_cond_mani3.png" alt="三种entangled属性情况2：这种情况下如果限制变化的限度可以使得只有一种属性改变"></p>
+<p>图3,4简单展示了两种三个属性entangled的情况。在图3的情况下，要操作${z}$按某个方向移动跨越超平面${H_1}$，必须穿过${H_2}$或${H_3}$，引起${n_2}$或${n_3}$代表的语义属性的变化。在图4的情况下，虽然操作${z}$的移动方向必不可免会和超平面相交，但是只要控制变化限度，就可以达到只改变${n_1}$对应的语义属性。</p>
+<p>除此之外如果两个属性非常相关，那么需要比较大的距离移动才能改变一个语义属性，同时保持另一个不变。但是过大的距离又可能导致图片失真。</p>
+<p>所以Conditional Manipulation方法需要进一步的改进。</p>
+<ol start="4">
+<li>写作方面，我认为：</li>
+</ol>
+<p>(1)作者在理论部分阐述地过多，而且提出的semantic score function等一些概念公式其实几乎没什么作用，十分鸡肋。文章理论部分最重要的部分在于假设，其次是Conditional Manipulation。</p>
+<p>(2) 对于法向量${n}$的计算细节，作者只是在附录中提及，我觉得这个是非常重要的实现细节，应当放置在理论部分之后，实验部分之前。</p>
+<h3 id="评价和启发"><a href="#评价和启发" class="headerlink" title="评价和启发"></a>评价和启发</h3><p>文章的亮点在于：提出并近似地验证了假设1，通过假设可以直接在隐空间内衡量某种语义性的大小，然后只要按照方向移动操作生成图像的语义性。</p>
+<p>文章给出了一种隐空间语义性的描述方法，但是<strong>并没有解决disentangled的问题</strong>，对多个disentangled的属性，仍不能很好地只对其中的一个进行改变。对我的启发是：如果文章对隐空间的描述正确的话，多属性的disentangled问题很难在${\mathcal{Z}}$空间内解决，类似StyleGAN的做法，<strong>将${\mathcal{Z}}$空间投影到${\mathcal{W}}$空间，再从${\mathcal{W}}$到图像${\mathcal{X}}$，在${\mathcal{W}}$上操作语义是更好的做法</strong>。</p>
+<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><hr>
+<ol>
+<li><p>Tero Karras, Timo Aila, Samuli Laine and Jaakko Lehtinen. <strong>Progressive growing of GANs for improved quality, stability, and variation</strong>. 2018</p>
+</li>
+<li><p>Yujun Shen, Jinjin Gu, Xiaoou Tang and Bolei Zhou. <strong>Interpreting the Latent Space of GANs for Semantic Face Editing</strong>. 2019</p>
+</li>
+<li><p>Tero Karras, Samuli Laine and Timo Aila. <strong>A style-based generator architecture for generative adversarial networks</strong>. 2019</p>
+</li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="mercurixito.github.io/2020/04/03/RP-InterFaceGAN/" data-id="ck8jzn9j10000fcuc2ctq7no1" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/GAN/" rel="tag">GAN</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Paper-Reading/" rel="tag">Paper Reading</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2020/03/31/RP-GANs1/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">论文略读： SGAN(Stacked GAN)</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Disentangled-Representation-Learning/" rel="tag">Disentangled Representation Learning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GAN/" rel="tag">GAN</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linear-Algebra/" rel="tag">Linear Algebra</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mathematic/" rel="tag">Mathematic</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Paper-Reading/" rel="tag">Paper Reading</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Probability/" rel="tag">Probability</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/disentanglement/" rel="tag">disentanglement</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/metrics/" rel="tag">metrics</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/resources/" rel="tag">resources</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9D%82%E8%B0%88/" rel="tag">杂谈</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Disentangled-Representation-Learning/" style="font-size: 10px;">Disentangled Representation Learning</a> <a href="/tags/GAN/" style="font-size: 20px;">GAN</a> <a href="/tags/Linear-Algebra/" style="font-size: 10px;">Linear Algebra</a> <a href="/tags/Mathematic/" style="font-size: 13.33px;">Mathematic</a> <a href="/tags/Paper-Reading/" style="font-size: 16.67px;">Paper Reading</a> <a href="/tags/Probability/" style="font-size: 10px;">Probability</a> <a href="/tags/disentanglement/" style="font-size: 10px;">disentanglement</a> <a href="/tags/metrics/" style="font-size: 13.33px;">metrics</a> <a href="/tags/resources/" style="font-size: 13.33px;">resources</a> <a href="/tags/%E6%9D%82%E8%B0%88/" style="font-size: 13.33px;">杂谈</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">四月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">三月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">二月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">十月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">九月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">五月 2019</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2020/04/03/RP-InterFaceGAN/">论文研读：InterFaceGAN</a>
+          </li>
+        
+          <li>
+            <a href="/2020/03/31/RP-GANs1/">论文略读： SGAN(Stacked GAN)</a>
+          </li>
+        
+          <li>
+            <a href="/2020/03/30/Resources-GAN/">Resources： GAN</a>
+          </li>
+        
+          <li>
+            <a href="/2020/03/30/Resources-Disentangled-Representation-Learning/">Resources： Disentangled Representation Learning</a>
+          </li>
+        
+          <li>
+            <a href="/2020/03/27/RP-steerability/">论文研读： on the steerabilty of generative adversarial networks</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2020 Victor Chen<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a><br>
+      banner image from <a href="https://www.pixiv.net/artworks/80036479" target="_blank">This</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}},"extensions":["tex2jax.js"],"jax":["input/TeX","output/HTML-CSS"]});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+</body>
+</html>

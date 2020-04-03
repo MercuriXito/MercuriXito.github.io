@@ -15,7 +15,7 @@
 <meta property="og:description" content="记录下对blog的需求，确实有很多不方便的地方。。。 Need new features  公式中的${*}$不能正常解析，还是需要一个办法，其实最好的办法就是对$,$$符号内的行间和行内公式不进行markdown的解析，but why can’t we do that？  markdown本身的语法是行末两个以上空格、或者空行换行，为什么hexo-render-marked只要文本换行就显示换行">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2020-03-26T03:02:06.000Z">
-<meta property="article:modified_time" content="2020-03-27T03:17:35.311Z">
+<meta property="article:modified_time" content="2020-04-03T09:38:39.336Z">
 <meta property="article:author" content="Victor Chen">
 <meta property="article:tag" content="杂谈">
 <meta name="twitter:card" content="summary">
@@ -94,6 +94,7 @@
 <li><input disabled="" type="checkbox"> 公式中的${*}$不能正常解析，还是需要一个办法，其实最好的办法就是对<code>$</code>,<code>$$</code>符号内的行间和行内公式不进行markdown的解析，but why can’t we do that？</li>
 <li><input disabled="" type="checkbox"> <code>markdown</code>本身的语法是行末两个以上空格、或者空行换行，为什么<code>hexo-render-marked</code>只要文本换行就显示换行呢？</li>
 <li><input disabled="" type="checkbox"> 我终于认识到我对<code>LaTeX</code>和<code>Markdown</code>的差异的关键在<strong>缩进，尤其是首行缩进</strong>。</li>
+<li><input disabled="" type="checkbox"> 公示里的双大括号<code>\{\{</code>,<code>\}\}</code>会被误认为是标记的变量名，造成解析错误。</li>
 </ul>
 <p>可能最终还是要走向<code>LaTeX</code>记录笔记的道路了，可惜blog不支持，所以找了相关的<code>LaTeX2Markdown</code>的项目。</p>
 <a id="more"></a>
@@ -170,7 +171,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">归档</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">三月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">二月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">十月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">九月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">五月 2019</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">四月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">三月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">二月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">十月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">九月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">五月 2019</a></li></ul>
     </div>
   </div>
 
@@ -181,6 +182,10 @@
     <h3 class="widget-title">最新文章</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2020/04/03/RP-InterFaceGAN/">论文研读：InterFaceGAN</a>
+          </li>
         
           <li>
             <a href="/2020/03/31/RP-GANs1/">论文略读： SGAN(Stacked GAN)</a>
@@ -196,10 +201,6 @@
         
           <li>
             <a href="/2020/03/27/RP-steerability/">论文研读： on the steerabilty of generative adversarial networks</a>
-          </li>
-        
-          <li>
-            <a href="/2020/03/26/Talk-need1/">What I need in my blog?</a>
           </li>
         
       </ul>

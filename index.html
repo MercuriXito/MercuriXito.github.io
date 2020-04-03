@@ -66,6 +66,55 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-RP-InterFaceGAN" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/04/03/RP-InterFaceGAN/" class="article-date">
+  <time datetime="2020-04-03T09:16:24.000Z" itemprop="datePublished">2020-04-03</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/04/03/RP-InterFaceGAN/">论文研读：InterFaceGAN</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>本文是对”Interpreting the Latent Space of GANs for Semantic Face Editing. <a href="https://arxiv.org/abs/1907.10786" target="_blank" rel="noopener">[paper]</a> <a href="https://shenyujun.github.io/InterFaceGAN/" target="_blank" rel="noopener">[codes]</a>“[2]一文的学习。</p>
+<h3 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h3><hr>
+<p>本文研究的问题是：在latent space上修改输入噪声，操作GAN生成的图像不同语义。<br>本文的工作都基于以下假设：</p>
+<p><strong>Assumption 1</strong>:</p>
+<blockquote>
+<p>单个语义图像对应的图片在latent space上线性可分。</p>
+</blockquote>
+        
+          <p class="article-more-link">
+            <a href="/2020/04/03/RP-InterFaceGAN/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="mercurixito.github.io/2020/04/03/RP-InterFaceGAN/" data-id="ck8jzn9j10000fcuc2ctq7no1" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/GAN/" rel="tag">GAN</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Paper-Reading/" rel="tag">Paper Reading</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-RP-GANs1" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2020/03/31/RP-GANs1/" class="article-date">
@@ -296,6 +345,7 @@
 <li><input disabled="" type="checkbox"> 公式中的${*}$不能正常解析，还是需要一个办法，其实最好的办法就是对<code>$</code>,<code>$$</code>符号内的行间和行内公式不进行markdown的解析，but why can’t we do that？</li>
 <li><input disabled="" type="checkbox"> <code>markdown</code>本身的语法是行末两个以上空格、或者空行换行，为什么<code>hexo-render-marked</code>只要文本换行就显示换行呢？</li>
 <li><input disabled="" type="checkbox"> 我终于认识到我对<code>LaTeX</code>和<code>Markdown</code>的差异的关键在<strong>缩进，尤其是首行缩进</strong>。</li>
+<li><input disabled="" type="checkbox"> 公示里的双大括号<code>\{\{</code>,<code>\}\}</code>会被误认为是标记的变量名，造成解析错误。</li>
 </ul>
 <p>可能最终还是要走向<code>LaTeX</code>记录笔记的道路了，可惜blog不支持，所以找了相关的<code>LaTeX2Markdown</code>的项目。</p>
         
@@ -516,56 +566,6 @@
 
 
   
-    <article id="post-KL-Divergenece1" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2019/10/14/KL-Divergenece1/" class="article-date">
-  <time datetime="2019-10-14T08:32:46.000Z" itemprop="datePublished">2019-10-14</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/10/14/KL-Divergenece1/">数学:KL散度</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="KL-divergence-KL-散度"><a href="#KL-divergence-KL-散度" class="headerlink" title="KL divergence(KL 散度)"></a>KL divergence(KL 散度)</h2><p>KL散度(Kullback-Leibler (KL) divergence)通常用来<strong>衡量两个单独的概率分布的差异</strong>，设对于同一随机变量的两个概率分布为${P(x)}$和${Q(x)}$，则它们的KL散度定义为：</p>
-<p>$${<br>    D_{KL}(p \vert \vert q) = \mathbb{E}_{x\sim P} \left[ \log P(x) - \log Q(x) \right]<br>}$$</p>
-<p>KL散度具有的性质有：</p>
-<ul>
-<li><strong>非负</strong>：要使得KL散度为0，当且仅当${P(x)}$和${Q(x)}$是在离散型变量的情况下是相同的分布，或者在连续型变量的情况下是“几乎处处”相同的[1]。</li>
-<li><strong>非对称</strong>：对某些${P(x)}$和${Q(x)}$，KL散度和逆KL散度通常并不相等，也就是${D_{KL}(P\vert\vert Q) \neq D_{KL}(Q \vert \vert P)}$。</li>
-</ul>
-<p>本文将从三个角度分析KL散度的非对称性：直观看法，理论说明，计算实验。</p>
-        
-          <p class="article-more-link">
-            <a href="/2019/10/14/KL-Divergenece1/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="mercurixito.github.io/2019/10/14/KL-Divergenece1/" data-id="ck7ygs2jq0006bguch7n294qx" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Mathematic/" rel="tag">Mathematic</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Probability/" rel="tag">Probability</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
 
 
   <nav id="page-nav">
@@ -603,7 +603,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">归档</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">三月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">二月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">十月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">九月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">五月 2019</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">四月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">三月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">二月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">十月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">九月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">五月 2019</a></li></ul>
     </div>
   </div>
 
@@ -614,6 +614,10 @@
     <h3 class="widget-title">最新文章</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2020/04/03/RP-InterFaceGAN/">论文研读：InterFaceGAN</a>
+          </li>
         
           <li>
             <a href="/2020/03/31/RP-GANs1/">论文略读： SGAN(Stacked GAN)</a>
@@ -629,10 +633,6 @@
         
           <li>
             <a href="/2020/03/27/RP-steerability/">论文研读： on the steerabilty of generative adversarial networks</a>
-          </li>
-        
-          <li>
-            <a href="/2020/03/26/Talk-need1/">What I need in my blog?</a>
           </li>
         
       </ul>
