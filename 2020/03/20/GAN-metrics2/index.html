@@ -2,21 +2,40 @@
 <html>
 <head>
   <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
-  
+<!--   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0-rc.1/dist/katex.min.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.10.0-rc.1/dist/katex.min.js"></script> -->
+
+  <!-- Default Mathjax Support -->
+  <script type="text/x-mathjax-config">
+     MathJax.Hub.Config({"HTML-CSS": { preferredFont: "TeX", availableFonts: ["STIX","TeX"], linebreaks: { automatic:true }, EqnChunk: (MathJax.Hub.Browser.isMobile ? 10 : 50) },
+          tex2jax: { inlineMath: [ ["$", "$"], ["\\(","\\)"] ], processEscapes: true, ignoreClass: "tex2jax_ignore|dno",skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']},
+          TeX: {  noUndefined: { attributes: { mathcolor: "red", mathbackground: "#FFEEEE", mathsize: "90%" } }, Macros: { href: "{}" } },
+          messageStyle: "none"
+      }); 
+  </script>
+  <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+          var all = MathJax.Hub.getAllJax(), i;
+          for(i=0; i < all.length; i += 1) {
+              all[i].SourceElement().parentNode.className += ' has-jax';
+          }
+      });
+  </script>
+  <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 
   
   <title>GAN metrics (2) | Hako</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="前言本文主要讨论用于衡量图片质量的常用方法和用于评估 GAN 效果的方法。  MSE PSNR SSIM[1] MS-SSIM[2]">
+  <meta name="description" content="前言 本文主要讨论用于衡量图片质量的常用方法和用于评估 GAN 效果的方法。  MSE PSNR SSIM[1] MS-SSIM[2]">
 <meta property="og:type" content="article">
 <meta property="og:title" content="GAN metrics (2)">
 <meta property="og:url" content="mercurixito.github.io/2020/03/20/GAN-metrics2/index.html">
 <meta property="og:site_name" content="Hako">
-<meta property="og:description" content="前言本文主要讨论用于衡量图片质量的常用方法和用于评估 GAN 效果的方法。  MSE PSNR SSIM[1] MS-SSIM[2]">
+<meta property="og:description" content="前言 本文主要讨论用于衡量图片质量的常用方法和用于评估 GAN 效果的方法。  MSE PSNR SSIM[1] MS-SSIM[2]">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="/images/2020-03-20/ms_ssim.png">
 <meta property="article:published_time" content="2020-03-20T08:43:52.000Z">
-<meta property="article:modified_time" content="2020-03-20T13:26:03.610Z">
+<meta property="article:modified_time" content="2020-03-20T14:50:51.879Z">
 <meta property="article:author" content="Victor Chen">
 <meta property="article:tag" content="GAN">
 <meta property="article:tag" content="metrics">
@@ -92,7 +111,8 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>本文主要讨论用于衡量图片质量的常用方法和用于评估 GAN 效果的方法。</p>
+        <h2 id="前言"><a class="markdownIt-Anchor" href="#前言"></a> 前言</h2>
+<p>本文主要讨论用于衡量图片质量的常用方法和用于评估 GAN 效果的方法。</p>
 <ul>
 <li><code>MSE</code></li>
 <li><code>PSNR</code></li>
@@ -100,105 +120,147 @@
 <li><code>MS-SSIM</code>[2]</li>
 </ul>
 <a id="more"></a>
-
-<h2 id="评估图片质量的方法"><a href="#评估图片质量的方法" class="headerlink" title="评估图片质量的方法"></a>评估图片质量的方法</h2><p>方法主要是衡量两张图片的相似度，以下用${X}$和${Y}$代指两张图片，如果${X}$是一张高质量图片，${Y}$是待测图片，如果两张图片相似，那么${Y}$也有很高的质量。</p>
+<h2 id="评估图片质量的方法"><a class="markdownIt-Anchor" href="#评估图片质量的方法"></a> 评估图片质量的方法</h2>
+<p>方法主要是衡量两张图片的相似度，以下用${X}$和${Y}$代指两张图片，如果${X}$是一张高质量图片，${Y}$是待测图片，如果两张图片相似，那么${Y}$也有很高的质量。</p>
 <p><strong>MSE</strong></p>
 <p>就是两张图片的像素差的平方的均值。</p>
-<p>$${<br>    MSE(X,Y) = \frac{1}{MN} \sum_{i = 1}^{M} \sum_{j = 1}^{N} (X_{i,j} - Y_{i,j})^{2}<br>}$$</p>
+<p>$${<br />
+MSE(X,Y) = \frac{1}{MN} \sum_{i = 1}^{M} \sum_{j = 1}^{N} (X_{i,j} - Y_{i,j})^{2}<br />
+}$$</p>
 <p>容易知道，<strong>MSE 是越小，两张图片越接近，质量也就越好</strong>。 RMSE 就是再开个根号。</p>
 <p><strong>PSNR(Peak Singal-to-noise ratio) 峰值信噪比</strong></p>
 <p>最高响应（可以取得的最大值，对8bit图片就是255）的平方除以MSE，再取对数。</p>
-<p>$${<br>    PSNR(X,Y) = 10 \log_{10} \left( \frac{MAX^{2}}{MSE(X,Y)} \right)<br>}$$</p>
+<p>$${<br />
+PSNR(X,Y) = 10 \log_{10} \left( \frac{MAX^{2}}{MSE(X,Y)} \right)<br />
+}$$</p>
 <p><strong>PSNR 是越大越好</strong>，但是没有上界。</p>
-<h3 id="SSIM-1"><a href="#SSIM-1" class="headerlink" title="SSIM [1]"></a>SSIM [1]</h3><hr>
+<h3 id="ssim-1"><a class="markdownIt-Anchor" href="#ssim-1"></a> SSIM [1]</h3>
+<hr />
 <p>SSIM 分三个部分：</p>
 <ul>
 <li>亮度：${l(X,Y)}$</li>
 <li>对比度：${c(X,Y)}$</li>
 <li>结构相似度：${s(X,Y)}$</li>
 </ul>
-<p>$${<br>    SSIM(X,Y) = [l(X,Y)]^{\alpha} [c(X,Y)]^{\beta} [s(X,Y)]^{\gamma}<br>}$$</p>
-<p>$${<br>    \begin{aligned}<br>    l(\mathbf{x},\mathbf{y}) &amp;= \frac{2 \mu_{x} \mu_{y} + C_{1}}{u_{x}^{2} + u_{y}^{2} + C_{1}} \\<br>    c(\mathbf{x},\mathbf{y}) &amp;= \frac{2 \sigma_{x} \sigma_{y} + C_{2}}{\sigma_{x}^{2} + \sigma_{y}^{2} + C_{2}} \\<br>    s(\mathbf{x},\mathbf{y}) &amp;= \frac{\sigma_{x,y} + C_{3}}{\sigma_{x}\sigma_{y} + C_{3}}<br>    \end{aligned}<br>}$$</p>
+<p>$${<br />
+SSIM(X,Y) = [l(X,Y)]^{\alpha} [c(X,Y)]^{\beta} [s(X,Y)]^{\gamma}<br />
+}$$</p>
+<p>$${<br />
+\begin{aligned}<br />
+l(\mathbf{x},\mathbf{y}) &amp;= \frac{2 \mu_{x} \mu_{y} + C_{1}}{u_{x}^{2} + u_{y}^{2} + C_{1}} \<br />
+c(\mathbf{x},\mathbf{y}) &amp;= \frac{2 \sigma_{x} \sigma_{y} + C_{2}}{\sigma_{x}^{2} + \sigma_{y}^{2} + C_{2}} \<br />
+s(\mathbf{x},\mathbf{y}) &amp;= \frac{\sigma_{x,y} + C_{3}}{\sigma_{x}\sigma_{y} + C_{3}}<br />
+\end{aligned}<br />
+}$$</p>
 <p>其中${\mu_{x},\mu_{y},\sigma_{x}^{2},\sigma_{y}^{2},\sigma_{x,y}}$分别是图片${x,y}$的均值，方差，协方差。</p>
-<h4 id="实际SSIM计算-3"><a href="#实际SSIM计算-3" class="headerlink" title="实际SSIM计算[3]"></a>实际SSIM计算[3]</h4><p>上述的SSIM计算公式包含的超参数有：三种指标的比例${\alpha, \beta, \gamma}$，三种指标计算中的常数${C_{1},C_{2},C_{3}}$。</p>
+<h4 id="实际ssim计算3"><a class="markdownIt-Anchor" href="#实际ssim计算3"></a> 实际SSIM计算[3]</h4>
+<p>上述的SSIM计算公式包含的超参数有：三种指标的比例${\alpha, \beta, \gamma}$，三种指标计算中的常数${C_{1},C_{2},C_{3}}$。</p>
 <p>在实际的SSIM计算中<strong>一般会将上面的式子进行变换：取${\alpha = \beta = \gamma = 1}$，取${C_{3} = C_{2} / 2}$</strong>，式子变为：</p>
-<p>$${<br>    \begin{aligned}<br>        SSIM(\mathbf{x},\mathbf{y}) &amp;= \frac{(2 \mu_{x} \mu_{y} + C_{1})(2 \sigma_{x,y} + C_{2})}{(\mu_{x}^{2} + \mu_{y}^{2} + C_{1})(\sigma_{x}^{2} + \sigma_{y}^{2} + C_{2})} \\<br>        &amp;= l(\mathbf{x},\mathbf{y}) \frac{2 \sigma_{x,y} + C_{2}}{\sigma_{x}^{2} + \sigma_{y}^{2} + C_{2}}<br>    \end{aligned}<br>}$$</p>
+<p>$${<br />
+\begin{aligned}<br />
+SSIM(\mathbf{x},\mathbf{y}) &amp;= \frac{(2 \mu_{x} \mu_{y} + C_{1})(2 \sigma_{x,y} + C_{2})}{(\mu_{x}^{2} + \mu_{y}^{2} + C_{1})(\sigma_{x}^{2} + \sigma_{y}^{2} + C_{2})} \<br />
+&amp;= l(\mathbf{x},\mathbf{y}) \frac{2 \sigma_{x,y} + C_{2}}{\sigma_{x}^{2} + \sigma_{y}^{2} + C_{2}}<br />
+\end{aligned}<br />
+}$$</p>
 <p>而且<strong>使用 NxN 的窗口，窗口按照类似滤波器的方式在图片上以strid=1移动，每次计算窗口内的局部SSIM，最后取平均值</strong>。</p>
-<h4 id="其他SSIM的细节"><a href="#其他SSIM的细节" class="headerlink" title="其他SSIM的细节"></a>其他SSIM的细节</h4><ul>
+<h4 id="其他ssim的细节"><a class="markdownIt-Anchor" href="#其他ssim的细节"></a> 其他SSIM的细节</h4>
+<ul>
 <li>计算细节：</li>
 </ul>
 <p>可以<strong>借助已有的卷积函数（如pytorch的torch.nn.functional.conv2d），只要设置卷积核为box filter，就可以求得各个window的均值</strong>，再借助方差、协方差的公式：</p>
-<p>$${<br>    \sigma_{X}^{2} = \mathbb{E}X^{2} - (\mathbb{E}X)^{2}<br>}$$</p>
-<p>$${<br>    \sigma_{X,Y} = \mathbb{E}(XY) - \mathbb{E}X\mathbb{E}Y<br>}$$</p>
+<p>$${<br />
+\sigma_{X}^{2} = \mathbb{E}X^{2} - (\mathbb{E}X)^{2}<br />
+}$$</p>
+<p>$${<br />
+\sigma_{X,Y} = \mathbb{E}(XY) - \mathbb{E}X\mathbb{E}Y<br />
+}$$</p>
 <p>这样计算起来比较高效。</p>
 <p>但是<strong>在官方实现的matlab代码中默认使用的是大小为11x11,${\sigma = 1.5}$的旋转对称高斯低通滤波器</strong>。所以在一份pytorch的实现（见下面）中也是用的高斯滤波器。</p>
 <ul>
-<li><p>数值问题：</p>
-<p>  <strong>协方差的计算会出现负数，可以将负数置0处理（relu）</strong>。</p>
+<li>
+<p>数值问题：</p>
+<p><strong>协方差的计算会出现负数，可以将负数置0处理（relu）</strong>。</p>
 </li>
-<li><p>超参数取值：</p>
+<li>
+<p>超参数取值：</p>
 </li>
 </ul>
 <p>${C_{1},C_{2}}$ 通常的计算公式是：</p>
-<p>$${<br>C_{i} = (K_{i} L)^{2} \qquad (i = 1, 2)<br>}$$</p>
+<p>$${<br />
+C_{i} = (K_{i} L)^{2} \qquad (i = 1, 2)<br />
+}$$</p>
 <p>其中 ${L}$ 和PSNR中的一样也是最大响应（8bit图像为255），${K_{1},K_{2}}$通常的取值为${(0.01,0.03)}$</p>
-<h3 id="MS-SSIM-2"><a href="#MS-SSIM-2" class="headerlink" title="MS-SSIM [2]"></a>MS-SSIM [2]</h3><hr>
-<p>MS-SSIM 在 SSIM 的基础上扩展成多个尺度的，idea是人眼对中间频率最敏感（<code>human visual sensitivity peaks at middle frequencies (around 4 cycles per degree
-of visual angle) and decreases along both high- and low-frequency
-directions[2]</code>）。</p>
+<h3 id="ms-ssim-2"><a class="markdownIt-Anchor" href="#ms-ssim-2"></a> MS-SSIM [2]</h3>
+<hr />
+<p>MS-SSIM 在 SSIM 的基础上扩展成多个尺度的，idea是人眼对中间频率最敏感（<code>human visual sensitivity peaks at middle frequencies (around 4 cycles per degree of visual angle) and decreases along both high- and low-frequency directions[2]</code>）。</p>
 <p>对原图，进行低通滤波、下采样（大小减半）得到每一个scale的图片，共进行${M - 1}$次。</p>
 <p><strong>除了最底层的scale</strong>，对第${j = 0,\cdots,M-1}$的scale的图片按照SSIM的相同方法可以计算到${c_{j}(\mathbf{x},\mathbf{y}),s_{j}(\mathbf{x},\mathbf{y})}$。</p>
 <p><strong>最底层的scale，三种指标都计算</strong>，记作${l_{M}(\mathbf{x},\mathbf{y}),c_{M}(\mathbf{x},\mathbf{y}),s_{M}(\mathbf{x},\mathbf{y})}$。</p>
 <p>最后按照下式计算它们的乘积：</p>
-<p>$${<br>    MSSSIM(\mathbf{x},\mathbf{y}) = [l_{M}(\mathbf{x},\mathbf{y})]^{\alpha_{M}} \prod_{j = 1}^{M} [c_{j}(\mathbf{x},\mathbf{y})]^{\beta_{j}} [s_{j}(\mathbf{x},\mathbf{y})]^{\gamma_{j}}<br>}$$</p>
+<p>$${<br />
+MSSSIM(\mathbf{x},\mathbf{y}) = [l_{M}(\mathbf{x},\mathbf{y})]^{\alpha_{M}} \prod_{j = 1}^{M} [c_{j}(\mathbf{x},\mathbf{y})]^{\beta_{j}} [s_{j}(\mathbf{x},\mathbf{y})]^{\gamma_{j}}<br />
+}$$</p>
 <p>如下图所示：</p>
-<p><img src="/images/2020-03-20/ms_ssim.png" alt="MS-SSIM计算方式"></p>
-<h4 id="MS-SSIM-实现细节"><a href="#MS-SSIM-实现细节" class="headerlink" title="MS-SSIM 实现细节"></a>MS-SSIM 实现细节</h4><p>一般：</p>
+<p><img src="/images/2020-03-20/ms_ssim.png" alt="MS-SSIM计算方式" /></p>
+<h4 id="ms-ssim-实现细节"><a class="markdownIt-Anchor" href="#ms-ssim-实现细节"></a> MS-SSIM 实现细节</h4>
+<p>一般：</p>
 <ul>
 <li>取${M}$为5</li>
 <li>且对<strong>每个scale的${\alpha_{j} = \beta_{j} = \gamma_{j}}$</strong></li>
 <li>对所有的j，保证${\sum_{j = 1}^{M} \gamma_{j} = 1}$。</li>
 </ul>
 <p>如果接着令${C_{3} = C_{2} / 2}$，那么也可以化简成类似SSIM的两项：</p>
-<p>$${<br>    MSSSIM(\mathbf{x},\mathbf{y}) = [l_{M}(\mathbf{x},\mathbf{y})]^{\gamma_{M}} \prod_{j = 1}^{M} [\frac{2 \sigma_{x,y,j} + C_{2}}{\sigma_{x,j}^{2} + \sigma_{y,j}^{2} + C_{2} }]^{\gamma_{j}}<br>}$$</p>
-<h4 id="其他细节"><a href="#其他细节" class="headerlink" title="其他细节"></a>其他细节</h4><ul>
-<li><p>数值问题：</p>
-<p>  和之前SSIM说的一样，<strong>MS-SSIM 的计算中的协方差可能为负数，对负数取分数指数，会导致<code>nan</code></strong>，通常的做法是：</p>
+<p>$${<br />
+MSSSIM(\mathbf{x},\mathbf{y}) = [l_{M}(\mathbf{x},\mathbf{y})]^{\gamma_{M}} \prod_{j = 1}^{M} [\frac{2 \sigma_{x,y,j} + C_{2}}{\sigma_{x,j}^{2} + \sigma_{y,j}^{2} + C_{2} }]^{\gamma_{j}}<br />
+}$$</p>
+<h4 id="其他细节"><a class="markdownIt-Anchor" href="#其他细节"></a> 其他细节</h4>
+<ul>
+<li>
+<p>数值问题：</p>
+<p>和之前SSIM说的一样，<strong>MS-SSIM 的计算中的协方差可能为负数，对负数取分数指数，会导致<code>nan</code></strong>，通常的做法是：</p>
 <ul>
 <li><strong>调大${C_{2}}$，使得数值为正</strong>。</li>
 <li><strong>将协方差所有负数值置0，<code>relu</code></strong>。</li>
 </ul>
 </li>
-<li><p>超参数取值：</p>
-<p>  文章[2]中，作者对${M=5}$时实验的最佳${\gamma_{i}}$取值为：${(0.0448,0.2856,0.3001,0.2363,0.1333)}$。</p>
+<li>
+<p>超参数取值：</p>
+<p>文章[2]中，作者对${M=5}$时实验的最佳${\gamma_{i}}$取值为：${(0.0448,0.2856,0.3001,0.2363,0.1333)}$。</p>
 </li>
 </ul>
-<h2 id="用于评价GAN"><a href="#用于评价GAN" class="headerlink" title="用于评价GAN"></a>用于评价GAN</h2><hr>
+<h2 id="用于评价gan"><a class="markdownIt-Anchor" href="#用于评价gan"></a> 用于评价GAN</h2>
+<hr />
 <p>SSIM, MS-SSIM 可以用于衡量两张图片的相似性，ACGAN[4] 将它引入，<strong>用于衡量各类别生成的图片的多样性，和检测训练中的mode collapse问题</strong>。</p>
 <p>具体的做法其实很简单：</p>
 <p><strong>对每个类别生成的图片，任意选择100对，衡量两两的 MS-SSIM，取均值</strong>，<strong>得分高表明该类生成的图像都非常相似，所以图片的多样性比较低，反之图片的多样性高</strong>。</p>
-<h2 id="其他资料"><a href="#其他资料" class="headerlink" title="其他资料"></a>其他资料</h2><hr>
+<h2 id="其他资料"><a class="markdownIt-Anchor" href="#其他资料"></a> 其他资料</h2>
+<hr />
 <ol>
 <li><a href="https://ece.uwaterloo.ca/~z70wang/research/ssim/" target="_blank" rel="noopener">SSIM 主页</a>（包含一份 matlab 代码）</li>
 <li><a href="https://github.com/VainF/pytorch-msssim" target="_blank" rel="noopener">SSIM,MS-SSIM pytorch 实现</a></li>
 <li><a href="https://gist.github.com/MercuriXito/c1be227dde6c56df1e9f40a11ee09bad" target="_blank" rel="noopener">我的实现</a></li>
 </ol>
-<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><hr>
+<h2 id="reference"><a class="markdownIt-Anchor" href="#reference"></a> Reference</h2>
+<hr />
 <ol>
-<li><p>Wang, Z., Bovik, A. C., Sheikh, H. R., &amp; Simoncelli, E. P. (2004). <strong>Image quality assessment: From error visibility to structural similarity.</strong> IEEE Transactions on Image Processing, 13(4), 600–612. <a href="https://doi.org/10.1109/TIP.2003.819861" target="_blank" rel="noopener">https://doi.org/10.1109/TIP.2003.819861</a></p>
+<li>
+<p>Wang, Z., Bovik, A. C., Sheikh, H. R., &amp; Simoncelli, E. P. (2004). <strong>Image quality assessment: From error visibility to structural similarity.</strong> IEEE Transactions on Image Processing, 13(4), 600–612. <a href="https://doi.org/10.1109/TIP.2003.819861" target="_blank" rel="noopener">https://doi.org/10.1109/TIP.2003.819861</a></p>
 </li>
-<li><p>Wang, Z., Simoncelli, E. P., &amp; Bovik, A. C. (2003). <strong>Multi-scale structural similarity for image quality assessment</strong>. Conference Record of the Asilomar Conference on Signals, Systems and Computers, 2, 1398–1402. <a href="https://doi.org/10.1109/acssc.2003.1292216" target="_blank" rel="noopener">https://doi.org/10.1109/acssc.2003.1292216</a></p>
+<li>
+<p>Wang, Z., Simoncelli, E. P., &amp; Bovik, A. C. (2003). <strong>Multi-scale structural similarity for image quality assessment</strong>. Conference Record of the Asilomar Conference on Signals, Systems and Computers, 2, 1398–1402. <a href="https://doi.org/10.1109/acssc.2003.1292216" target="_blank" rel="noopener">https://doi.org/10.1109/acssc.2003.1292216</a></p>
 </li>
-<li><p><a href="https://zh.wikipedia.org/zh/%E7%B5%90%E6%A7%8B%E7%9B%B8%E4%BC%BC%E6%80%A7" target="_blank" rel="noopener">结构相似性 wikipedia</a></p>
+<li>
+<p><a href="https://zh.wikipedia.org/zh/%E7%B5%90%E6%A7%8B%E7%9B%B8%E4%BC%BC%E6%80%A7" target="_blank" rel="noopener">结构相似性 wikipedia</a></p>
 </li>
-<li><p>Odena, A., Olah, C., &amp; Shlens, J. (2017). <strong>Conditional image synthesis with auxiliary classifier gans.</strong> 34th International Conference on Machine Learning, ICML 2017, 6, 4043–4055.</p>
+<li>
+<p>Odena, A., Olah, C., &amp; Shlens, J. (2017). <strong>Conditional image synthesis with auxiliary classifier gans.</strong> 34th International Conference on Machine Learning, ICML 2017, 6, 4043–4055.</p>
 </li>
 </ol>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="mercurixito.github.io/2020/03/20/GAN-metrics2/" data-id="ck8072lzh0000noucbda01vvm" class="article-share-link">Share</a>
+      <a data-url="mercurixito.github.io/2020/03/20/GAN-metrics2/" data-id="ck96vk95z000158uc8u2t8pyb" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/GAN/" rel="tag">GAN</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/metrics/" rel="tag">metrics</a></li></ul>
@@ -240,7 +302,7 @@ directions[2]</code>）。</p>
   <div class="widget-wrap">
     <h3 class="widget-title">标签</h3>
     <div class="widget">
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Disentangled-Representation-Learning/" rel="tag">Disentangled Representation Learning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GAN/" rel="tag">GAN</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linear-Algebra/" rel="tag">Linear Algebra</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mathematic/" rel="tag">Mathematic</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Paper-Reading/" rel="tag">Paper Reading</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Probability/" rel="tag">Probability</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/disentanglement/" rel="tag">disentanglement</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/metrics/" rel="tag">metrics</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/resources/" rel="tag">resources</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9D%82%E8%B0%88/" rel="tag">杂谈</a></li></ul>
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Disentangled-Representation-Learning/" rel="tag">Disentangled Representation Learning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GAN/" rel="tag">GAN</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linear-Algebra/" rel="tag">Linear Algebra</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mathematic/" rel="tag">Mathematic</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Paper-Reading/" rel="tag">Paper Reading</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Probability/" rel="tag">Probability</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/disentanglement/" rel="tag">disentanglement</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/metrics/" rel="tag">metrics</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/resources/" rel="tag">resources</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/unsupervised-gan-controlling/" rel="tag">unsupervised gan controlling</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9D%82%E8%B0%88/" rel="tag">杂谈</a></li></ul>
     </div>
   </div>
 
@@ -250,7 +312,7 @@ directions[2]</code>）。</p>
   <div class="widget-wrap">
     <h3 class="widget-title">标签云</h3>
     <div class="widget tagcloud">
-      <a href="/tags/Disentangled-Representation-Learning/" style="font-size: 10px;">Disentangled Representation Learning</a> <a href="/tags/GAN/" style="font-size: 20px;">GAN</a> <a href="/tags/Linear-Algebra/" style="font-size: 10px;">Linear Algebra</a> <a href="/tags/Mathematic/" style="font-size: 13.33px;">Mathematic</a> <a href="/tags/Paper-Reading/" style="font-size: 16.67px;">Paper Reading</a> <a href="/tags/Probability/" style="font-size: 10px;">Probability</a> <a href="/tags/disentanglement/" style="font-size: 10px;">disentanglement</a> <a href="/tags/metrics/" style="font-size: 13.33px;">metrics</a> <a href="/tags/resources/" style="font-size: 13.33px;">resources</a> <a href="/tags/%E6%9D%82%E8%B0%88/" style="font-size: 13.33px;">杂谈</a>
+      <a href="/tags/Disentangled-Representation-Learning/" style="font-size: 10px;">Disentangled Representation Learning</a> <a href="/tags/GAN/" style="font-size: 20px;">GAN</a> <a href="/tags/Linear-Algebra/" style="font-size: 10px;">Linear Algebra</a> <a href="/tags/Mathematic/" style="font-size: 12.5px;">Mathematic</a> <a href="/tags/Paper-Reading/" style="font-size: 17.5px;">Paper Reading</a> <a href="/tags/Probability/" style="font-size: 10px;">Probability</a> <a href="/tags/disentanglement/" style="font-size: 10px;">disentanglement</a> <a href="/tags/metrics/" style="font-size: 12.5px;">metrics</a> <a href="/tags/resources/" style="font-size: 12.5px;">resources</a> <a href="/tags/unsupervised-gan-controlling/" style="font-size: 15px;">unsupervised gan controlling</a> <a href="/tags/%E6%9D%82%E8%B0%88/" style="font-size: 15px;">杂谈</a>
     </div>
   </div>
 
@@ -272,23 +334,23 @@ directions[2]</code>）。</p>
       <ul>
         
           <li>
+            <a href="/2020/04/19/Talk-need2/">Talk-need2</a>
+          </li>
+        
+          <li>
+            <a href="/2020/04/17/RP-controlling/">论文研读：Controlling generative models with continuous factors of variations</a>
+          </li>
+        
+          <li>
+            <a href="/2020/04/10/RP-GANalyse/">论文研读： GANalyze: Toward visual definitions of cognitive image properties.</a>
+          </li>
+        
+          <li>
             <a href="/2020/04/03/RP-InterFaceGAN/">论文研读：InterFaceGAN</a>
           </li>
         
           <li>
             <a href="/2020/03/31/RP-GANs1/">论文略读： SGAN(Stacked GAN)</a>
-          </li>
-        
-          <li>
-            <a href="/2020/03/30/Resources-GAN/">Resources： GAN</a>
-          </li>
-        
-          <li>
-            <a href="/2020/03/30/Resources-Disentangled-Representation-Learning/">Resources： Disentangled Representation Learning</a>
-          </li>
-        
-          <li>
-            <a href="/2020/03/27/RP-steerability/">论文研读： on the steerabilty of generative adversarial networks</a>
           </li>
         
       </ul>

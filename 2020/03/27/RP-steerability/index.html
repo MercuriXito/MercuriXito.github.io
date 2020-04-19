@@ -2,26 +2,46 @@
 <html>
 <head>
   <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
-  
+<!--   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0-rc.1/dist/katex.min.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.10.0-rc.1/dist/katex.min.js"></script> -->
+
+  <!-- Default Mathjax Support -->
+  <script type="text/x-mathjax-config">
+     MathJax.Hub.Config({"HTML-CSS": { preferredFont: "TeX", availableFonts: ["STIX","TeX"], linebreaks: { automatic:true }, EqnChunk: (MathJax.Hub.Browser.isMobile ? 10 : 50) },
+          tex2jax: { inlineMath: [ ["$", "$"], ["\\(","\\)"] ], processEscapes: true, ignoreClass: "tex2jax_ignore|dno",skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']},
+          TeX: {  noUndefined: { attributes: { mathcolor: "red", mathbackground: "#FFEEEE", mathsize: "90%" } }, Macros: { href: "{}" } },
+          messageStyle: "none"
+      }); 
+  </script>
+  <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+          var all = MathJax.Hub.getAllJax(), i;
+          for(i=0; i < all.length; i += 1) {
+              all[i].SourceElement().parentNode.className += ' has-jax';
+          }
+      });
+  </script>
+  <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 
   
   <title>论文研读： on the steerabilty of generative adversarial networks | Hako</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="本文是对”on the steerabilty of generative adversarial networks”[2]一文的学习。 Introduction研究的问题阐述：对latent space的隐变量${z}$进行移动得到${z^{*}}$，使得GAN生成的图片${G(z^{*})}$是原来生成的图片${G(z)}$通过某种变换之后得到的图片，本文提出了线性和非线性两种移动方法。本文研">
+  <meta name="description" content="本文是对&quot;on the steerabilty of generative adversarial networks&quot;[2]一文的学习。  Introduction 研究的问题阐述：对latent space的隐变量${z}$进行移动得到${z^{\ast}}$，使得GAN生成的图片${G(z^{\ast})}$是原来生成的图片${G(z)}$通过某种变换之后得到的图片，本文提">
 <meta property="og:type" content="article">
 <meta property="og:title" content="论文研读： on the steerabilty of generative adversarial networks">
 <meta property="og:url" content="mercurixito.github.io/2020/03/27/RP-steerability/index.html">
 <meta property="og:site_name" content="Hako">
-<meta property="og:description" content="本文是对”on the steerabilty of generative adversarial networks”[2]一文的学习。 Introduction研究的问题阐述：对latent space的隐变量${z}$进行移动得到${z^{*}}$，使得GAN生成的图片${G(z^{*})}$是原来生成的图片${G(z)}$通过某种变换之后得到的图片，本文提出了线性和非线性两种移动方法。本文研">
+<meta property="og:description" content="本文是对&quot;on the steerabilty of generative adversarial networks&quot;[2]一文的学习。  Introduction 研究的问题阐述：对latent space的隐变量${z}$进行移动得到${z^{\ast}}$，使得GAN生成的图片${G(z^{\ast})}$是原来生成的图片${G(z)}$通过某种变换之后得到的图片，本文提">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="/images/2020-03-27/on_2_way.png">
 <meta property="og:image" content="/images/2020-03-27/transition.png">
 <meta property="og:image" content="/images/2020-03-27/dataset_transition.png">
 <meta property="article:published_time" content="2020-03-27T02:37:02.000Z">
-<meta property="article:modified_time" content="2020-03-27T03:00:31.788Z">
+<meta property="article:modified_time" content="2020-04-19T09:19:03.370Z">
 <meta property="article:author" content="Victor Chen">
 <meta property="article:tag" content="GAN">
 <meta property="article:tag" content="Paper Reading">
+<meta property="article:tag" content="unsupervised gan controlling">
 <meta property="article:tag" content="disentanglement">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="/images/2020-03-27/on_2_way.png">
@@ -95,50 +115,77 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>本文是对”on the steerabilty of generative adversarial networks”[2]一文的学习。</p>
-<h3 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h3><p>研究的问题阐述：对latent space的隐变量${z}$进行移动得到${z^{*}}$，使得GAN生成的图片${G(z^{*})}$是原来生成的图片${G(z)}$通过某种变换之后得到的图片，本文提出了线性和非线性两种移动方法。<br>本文研究的变换包括：</p>
+        <p>本文是对&quot;on the steerabilty of generative adversarial networks&quot;[2]一文的学习。</p>
+<h3 id="introduction"><a class="markdownIt-Anchor" href="#introduction"></a> Introduction</h3>
+<p>研究的问题阐述：对latent space的隐变量${z}$进行移动得到${z^{\ast}}$，使得GAN生成的图片${G(z^{\ast})}$是原来生成的图片${G(z)}$通过某种变换之后得到的图片，本文提出了线性和非线性两种移动方法。<br />
+本文研究的变换包括：</p>
 <ul>
 <li>颜色变换。</li>
 <li>目标物体的放大和缩小。</li>
 <li>左右上下移动。</li>
 <li>旋转变化。</li>
 </ul>
-<h3 id="Methods"><a href="#Methods" class="headerlink" title="Methods"></a>Methods</h3><p>主要包含三个部分的内容：</p>
+<h3 id="methods"><a class="markdownIt-Anchor" href="#methods"></a> Methods</h3>
+<p>主要包含三个部分的内容：</p>
 <ol>
-<li>构造 ${z^{*}}$ 的方法，分为线性和非线性两种。</li>
+<li>构造 ${z^{\ast}}$ 的方法，分为线性和非线性两种。</li>
 <li>对生成图像的变换效果量化。</li>
 <li>提出两种降低该方法的限制的方法。</li>
 </ol>
 <a id="more"></a>
-
-<h4 id="Methods-of-walking-latent-space"><a href="#Methods-of-walking-latent-space" class="headerlink" title="Methods of walking latent space"></a>Methods of walking latent space</h4><p>线性方法：对给定的目标图片的变换，希望学习到一个N维向量${w}$：<br>(<strong>${w}$在这里是一个累加步的意思，其实在公式中使用${\frac{w}{|w|}}$会不会更加 make sense，这样学习的就仅仅是变换的方向，不过确实除了方向还要学习大小，但是我确实感觉这里又有一个${\alpha}$比较多余，没有完全分开大小和方向。</strong>)</p>
-<p>$${<br>    w^{*} = \arg \min_{w} \mathbb{E}_{z, \alpha}\left[<br>          \mathcal{L}(G(z + \alpha w), edit(G(z);\alpha))<br>      \right]<br>}$$</p>
+<h4 id="methods-of-walking-latent-space"><a class="markdownIt-Anchor" href="#methods-of-walking-latent-space"></a> Methods of walking latent space</h4>
+<p>线性方法：对给定的目标图片的变换，希望学习到一个N维向量${w}$：<br />
+(<strong>${w}$在这里是一个累加步的意思，其实在公式中使用${\frac{w}{|w|}}$会不会更加 make sense，这样学习的就仅仅是变换的方向，不过确实除了方向还要学习大小，但是我确实感觉这里又有一个${\alpha}$比较多余，没有完全分开大小和方向。</strong>)</p>
+<p>$${<br />
+w^{\ast} = \arg \min_{w} \mathbb{E}_{z, \alpha}\left[<br />
+\mathcal{L}(G(z + \alpha w), edit(G(z);\alpha))<br />
+\right]<br />
+}$$</p>
 <p>其中${\alpha}$表示变换的大小，又对应在隐空间中移动${z}$的程度；${G(z)}$表示原始隐变量{z}$生成的图片。</p>
-<p>整个公式可以理解为：操作${z}$累加${\alpha w^{*}}$得到${z^{*}}$，生成图片${G(z^{*})}$。原始生成图片${G(z)}$经过对应程度${\alpha}$的变换得到图片${edit(G(z);\alpha)}$。<br>优化的目标就是${G(z^{*})}$和${edit(G(z);\alpha)}$距离的期望最小。在文章中${\mathcal{L}}$使用L2距离。</p>
-<p>非线性的方法： 目标改变成学习一个非线性映射${f: z \to z^{\prime}}$，它将latent space 上的点映射成另一个点。对原始的${z}$进行多次映射要对应地对目标的图片进行多次的变换，最佳的非线性映射${f^{*}}$表达式：</p>
-<p>$${<br>    f^{*} = \arg \min_{f} \mathbb{E}_{z, n} \left[<br>        | G(f^{(n)}(z)) - edit(G(z);n\epsilon) |<br>    \right]<br>}$$</p>
+<p>整个公式可以理解为：操作${z}$累加${\alpha w^{\ast}}$得到${z^{\ast}}$，生成图片${G(z^{\ast})}$。原始生成图片${G(z)}$经过对应程度${\alpha}$的变换得到图片${edit(G(z);\alpha)}$。<br />
+优化的目标就是${G(z^{\ast})}$和${edit(G(z);\alpha)}$距离的期望最小。在文章中${\mathcal{L}}$使用L2距离。</p>
+<p>非线性的方法： 目标改变成学习一个非线性映射${f: z \to z^{\prime}}$，它将latent space 上的点映射成另一个点。对原始的${z}$进行多次映射要对应地对目标的图片进行多次的变换，最佳的非线性映射${f^{\ast}}$表达式：</p>
+<p>$${<br />
+f^{\ast} = \arg \min_{f} \mathbb{E}_{z, n} \left[<br />
+| G(f^{(n)}(z)) - edit(G(z);n\epsilon) |<br />
+\right]<br />
+}$$</p>
 <p>在这里可以用一个前馈神经网络来近似${f}$。两种方法的直观解释如图1所示。</p>
 <p>作者还提到使用${ z = z + \alpha NN(z) }$ 的形式，容易导致将等式右边的${z}$项忽略。<em>(有点不明白，可能需要进一步的实验验证。)</em></p>
-<p><img src="/images/2020-03-27/on_2_way.png" alt="两种方法的直观解释"></p>
-<h4 id="量化steerability的效果"><a href="#量化steerability的效果" class="headerlink" title="量化steerability的效果"></a>量化steerability的效果</h4><p>这里作者主要谈及如何对 walk latent space 的方法进行评价，对不同的目标tranformation有不同的评价方法，评价方法主要和如何对训练集进行transformation有关。</p>
+<p><img src="/images/2020-03-27/on_2_way.png" alt="两种方法的直观解释" /></p>
+<h4 id="量化steerability的效果"><a class="markdownIt-Anchor" href="#量化steerability的效果"></a> 量化steerability的效果</h4>
+<p>这里作者主要谈及如何对 walk latent space 的方法进行评价，对不同的目标tranformation有不同的评价方法，评价方法主要和如何对训练集进行transformation有关。</p>
 <ul>
-<li><p>颜色变换：对训练集的颜色变换是调整RGB通道的系数，对每张生成图片和walk后生成的图片，随机采样一百个像素，取每个通道改变的均值。</p>
+<li>
+<p>颜色变换：对训练集的颜色变换是调整RGB通道的系数，对每张生成图片和walk后生成的图片，随机采样一百个像素，取每个通道改变的均值。</p>
 </li>
-<li><p>放大缩小、位移变换：作者使用了一个 MobileNet-SSD 用于检测主要物体的位置。如果成功检测到物体，提取对应的正确标签的 bounding box。bounding box 的面积和整体image的比例用于评价放大缩小的效果。bounding box 的中心(X,Y)位置之差除以图片的整体尺寸用于评价位移效果。</p>
+<li>
+<p>放大缩小、位移变换：作者使用了一个 MobileNet-SSD 用于检测主要物体的位置。如果成功检测到物体，提取对应的正确标签的 bounding box。bounding box 的面积和整体image的比例用于评价放大缩小的效果。bounding box 的中心(X,Y)位置之差除以图片的整体尺寸用于评价位移效果。</p>
 </li>
 </ul>
-<h4 id="减少这种方法的限制"><a href="#减少这种方法的限制" class="headerlink" title="减少这种方法的限制"></a>减少这种方法的限制</h4><p>对这种方法确实存在一定的限制，作者猜想<strong>这种限制来源于数据集（如果GAN在数据集中没有见过类似变换后的图像，GAN很难生成可以满足这种变换的图像）</strong>为了提高 latent space 的操作性，进一步提出了两种在训练中使用的方法。</p>
+<h4 id="减少这种方法的限制"><a class="markdownIt-Anchor" href="#减少这种方法的限制"></a> 减少这种方法的限制</h4>
+<p>对这种方法确实存在一定的限制，作者猜想**这种限制来源于数据集（如果GAN在数据集中没有见过类似变换后的图像，GAN很难生成可以满足这种变换的图像）**为了提高 latent space 的操作性，进一步提出了两种在训练中使用的方法。</p>
 <ol>
-<li><p>数据增强：可以使得 GAN 能学习到不同视角、变换后的图片。</p>
+<li>
+<p>数据增强：可以使得 GAN 能学习到不同视角、变换后的图片。</p>
 </li>
-<li><p>修改训练的损失函数${\mathcal{L}_{GAN}}$，添加${\mathcal{L}_{edit}}$，同时对增加步${w}$和生成器${G}$进行优化。</p>
+<li>
+<p>修改训练的损失函数${\mathcal{L}_{GAN}}$，添加${\mathcal{L}_{edit}}$，同时对增加步${w}$和生成器${G}$进行优化。</p>
 </li>
 </ol>
-<p>$${<br>    G^{*}, w^{*} = \arg \min(\mathcal{L}_{GAN} + \mathcal{L}_{edit})<br>}$$</p>
-<p>$${<br>    \mathcal{L}_{edit} = L_{2}(G(z + \alpha w) - edit(G(z), \alpha))<br>}$$</p>
+<p>$${<br />
+G^{\ast}, w^{\ast} = \arg \min(\mathcal{L}_{GAN} + \mathcal{L}_{edit})<br />
+}$$</p>
+<p>$${<br />
+\mathcal{L}_{edit} = L_{2}(G(z + \alpha w) - edit(G(z), \alpha))<br />
+}$$</p>
 <p>${\mathcal{L}_{GAN}}$是一种修改过后的WGAN Loss。</p>
-<p>$${<br>    \mathcal{L}_{GAN} = \max_{D} \mathbb{E}_{z, \alpha}[D(G(z + \alpha w))] -<br>    \mathbb{E}_{x, \alpha}[D(edit(x, \alpha))]<br>}$$</p>
-<h3 id="实验和结论"><a href="#实验和结论" class="headerlink" title="实验和结论"></a>实验和结论</h3><p>作者设计了一系列的实验：</p>
+<p>$${<br />
+\mathcal{L}_{GAN} = \max_{D} \mathbb{E}_{z, \alpha}[D(G(z + \alpha w))] -<br />
+\mathbb{E}_{x, \alpha}[D(edit(x, \alpha))]<br />
+}$$</p>
+<h3 id="实验和结论"><a class="markdownIt-Anchor" href="#实验和结论"></a> 实验和结论</h3>
+<p>作者设计了一系列的实验：</p>
 <ul>
 <li>实验1: Image Transform Limitation</li>
 </ul>
@@ -153,8 +200,10 @@
 </ul>
 <p>作者设计了实验说明上一个实验的假设，提出：如果不同的类有不同的变形限度是因为不同类的多样性问题，那么类的变形限度和该类图片的标准差存在关系。</p>
 <p>记${model(\alpha)}$表示对原latent space移动${\alpha}$大小再经过生成器得到的图片分布，类变形限度用最大和最小变形的图片均值表示，对第${k}$个类，这一公式表示为：</p>
-<p>$${<br>\Delta \mu_{k} = \mu_{k,model(+\alpha^{*})} - \mu_{k, model(-\alpha^{*})}<br>}$$</p>
-<p>${\alpha^{*}}$是训练中使用的最大系数（同时保持比较低的FID）。</p>
+<p>$${<br />
+\Delta \mu_{k} = \mu_{k,model(+\alpha^{\ast})} - \mu_{k, model(-\alpha^{\ast})}<br />
+}$$</p>
+<p>${\alpha^{\ast}}$是训练中使用的最大系数（同时保持比较低的FID）。</p>
 <p>实验观察到它和类图片的标准差${\sigma_{k}}$存在相关性，说明了实验一中的假设。</p>
 <ul>
 <li>实验3：Comparison between linear way and non-linear way</li>
@@ -173,22 +222,26 @@
 <li>“不加数据增强” 劣于 “数据增强” 劣于 “数据增强 + 联合训练”。</li>
 <li>在 DCGAN trained on CIFAR10上，三种方法都失效了。</li>
 </ol>
-<h3 id="复现尝试"><a href="#复现尝试" class="headerlink" title="复现尝试"></a>复现尝试</h3><p>基于以上的方法做了一个小小的复现：</p>
+<h3 id="复现尝试"><a class="markdownIt-Anchor" href="#复现尝试"></a> 复现尝试</h3>
+<p>基于以上的方法做了一个小小的复现：</p>
 <p>(1) 数据集： MNIST（经过数据增强，包含Zoom和Center Shift）。</p>
 <p>(2) GAN：使用 DCGAN 的架构，对判别器使用spectral normalization[1]，使用 Vanilla GAN Loss 和类似ACGAN的分类Loss[3]训练。</p>
 <p>(3) 使用文中的线性方法。</p>
 <p>结果（只针对Zoom变换，并等差地取64个变换等级）：</p>
-<p><img src="/images/2020-03-27/transition.png" alt="线性方法引导的生成图像的Zoom变换"></p>
-<p><img src="/images/2020-03-27/dataset_transition.png" alt="真实图像Zoom变换"></p>
+<p><img src="/images/2020-03-27/transition.png" alt="线性方法引导的生成图像的Zoom变换" /></p>
+<p><img src="/images/2020-03-27/dataset_transition.png" alt="真实图像Zoom变换" /></p>
 <p>训练的时间不长，也没有细调参数，但是还是一定程度上达到了引导Zoom变换的效果，如图2所示。</p>
-<h3 id="评价"><a href="#评价" class="headerlink" title="评价"></a>评价</h3><p>首先，本篇文章在GAN的latent space的探索上迈进了一步。作者成功在latent space上引导GAN生成的经过某些指定修改的图片。</p>
+<h3 id="评价"><a class="markdownIt-Anchor" href="#评价"></a> 评价</h3>
+<p>首先，本篇文章在GAN的latent space的探索上迈进了一步。作者成功在latent space上引导GAN生成的经过某些指定修改的图片。</p>
 <p>主要的贡献的在于：</p>
 <ul>
 <li><strong>提出了线性和非线性的方法引导</strong>。</li>
 <li>分析<strong>这种方法的limitation源于数据集各类图片的多样性</strong>。</li>
-<li>提出了两种降低limitation的方法：(1) 数据增强，手动<br>提高图片多样性；(2) 修改损失函数，同步训练。</li>
+<li>提出了两种降低limitation的方法：(1) 数据增强，手动<br />
+提高图片多样性；(2) 修改损失函数，同步训练。</li>
 </ul>
-<h3 id="Future-Work"><a href="#Future-Work" class="headerlink" title="Future Work"></a>Future Work</h3><ul>
+<h3 id="future-work"><a class="markdownIt-Anchor" href="#future-work"></a> Future Work</h3>
+<ul>
 <li>更好的reduce limitation的方法：</li>
 </ul>
 <p>作者提到，对<strong>在CIFAR10上训练的DCGAN，两种降低limitation的方法都失效</strong>了。而且作者认为transform limitation和图片的质量是trade-off。</p>
@@ -200,23 +253,27 @@
 <li>latent space 分析：</li>
 </ul>
 <p><strong>基于以上的方法，可以对latent space的性质展开更多的分析</strong>，比如latent space的线性结构等。</p>
-<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><hr>
+<h2 id="reference"><a class="markdownIt-Anchor" href="#reference"></a> Reference</h2>
+<hr />
 <ol>
-<li><p>Takeru Miyato, Toshiki Kataoka, Masanori Koyama and Yuichi Yoshida. <strong>Spectral normalization for generative adversarial networks</strong>. 2018</p>
+<li>
+<p>Takeru Miyato, Toshiki Kataoka, Masanori Koyama and Yuichi Yoshida. <strong>Spectral normalization for generative adversarial networks</strong>. 2018</p>
 </li>
-<li><p>Ali Jahanian, Lucy Chai and Phillip Isola. <strong>On the “steerability” of generative adversarial networks</strong>. 2019</p>
+<li>
+<p>Ali Jahanian, Lucy Chai and Phillip Isola. <strong>On the “steerability” of generative adversarial networks</strong>. 2019</p>
 </li>
-<li><p>Augustus Odena, Christopher Olah and Jonathon Shlens. <strong>Conditional image synthesis with auxiliary classifier gans</strong>. 2017</p>
+<li>
+<p>Augustus Odena, Christopher Olah and Jonathon Shlens. <strong>Conditional image synthesis with auxiliary classifier gans</strong>. 2017</p>
 </li>
 </ol>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="mercurixito.github.io/2020/03/27/RP-steerability/" data-id="ck89l8u3w0000awuc5a5s4syb" class="article-share-link">Share</a>
+      <a data-url="mercurixito.github.io/2020/03/27/RP-steerability/" data-id="ck96vk96j000g58uc8sok97lw" class="article-share-link">Share</a>
       
       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/GAN/" rel="tag">GAN</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Paper-Reading/" rel="tag">Paper Reading</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/disentanglement/" rel="tag">disentanglement</a></li></ul>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/GAN/" rel="tag">GAN</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Paper-Reading/" rel="tag">Paper Reading</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/disentanglement/" rel="tag">disentanglement</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/unsupervised-gan-controlling/" rel="tag">unsupervised gan controlling</a></li></ul>
 
     </footer>
   </div>
@@ -255,7 +312,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">标签</h3>
     <div class="widget">
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Disentangled-Representation-Learning/" rel="tag">Disentangled Representation Learning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GAN/" rel="tag">GAN</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linear-Algebra/" rel="tag">Linear Algebra</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mathematic/" rel="tag">Mathematic</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Paper-Reading/" rel="tag">Paper Reading</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Probability/" rel="tag">Probability</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/disentanglement/" rel="tag">disentanglement</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/metrics/" rel="tag">metrics</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/resources/" rel="tag">resources</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9D%82%E8%B0%88/" rel="tag">杂谈</a></li></ul>
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Disentangled-Representation-Learning/" rel="tag">Disentangled Representation Learning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GAN/" rel="tag">GAN</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linear-Algebra/" rel="tag">Linear Algebra</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mathematic/" rel="tag">Mathematic</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Paper-Reading/" rel="tag">Paper Reading</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Probability/" rel="tag">Probability</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/disentanglement/" rel="tag">disentanglement</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/metrics/" rel="tag">metrics</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/resources/" rel="tag">resources</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/unsupervised-gan-controlling/" rel="tag">unsupervised gan controlling</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9D%82%E8%B0%88/" rel="tag">杂谈</a></li></ul>
     </div>
   </div>
 
@@ -265,7 +322,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">标签云</h3>
     <div class="widget tagcloud">
-      <a href="/tags/Disentangled-Representation-Learning/" style="font-size: 10px;">Disentangled Representation Learning</a> <a href="/tags/GAN/" style="font-size: 20px;">GAN</a> <a href="/tags/Linear-Algebra/" style="font-size: 10px;">Linear Algebra</a> <a href="/tags/Mathematic/" style="font-size: 13.33px;">Mathematic</a> <a href="/tags/Paper-Reading/" style="font-size: 16.67px;">Paper Reading</a> <a href="/tags/Probability/" style="font-size: 10px;">Probability</a> <a href="/tags/disentanglement/" style="font-size: 10px;">disentanglement</a> <a href="/tags/metrics/" style="font-size: 13.33px;">metrics</a> <a href="/tags/resources/" style="font-size: 13.33px;">resources</a> <a href="/tags/%E6%9D%82%E8%B0%88/" style="font-size: 13.33px;">杂谈</a>
+      <a href="/tags/Disentangled-Representation-Learning/" style="font-size: 10px;">Disentangled Representation Learning</a> <a href="/tags/GAN/" style="font-size: 20px;">GAN</a> <a href="/tags/Linear-Algebra/" style="font-size: 10px;">Linear Algebra</a> <a href="/tags/Mathematic/" style="font-size: 12.5px;">Mathematic</a> <a href="/tags/Paper-Reading/" style="font-size: 17.5px;">Paper Reading</a> <a href="/tags/Probability/" style="font-size: 10px;">Probability</a> <a href="/tags/disentanglement/" style="font-size: 10px;">disentanglement</a> <a href="/tags/metrics/" style="font-size: 12.5px;">metrics</a> <a href="/tags/resources/" style="font-size: 12.5px;">resources</a> <a href="/tags/unsupervised-gan-controlling/" style="font-size: 15px;">unsupervised gan controlling</a> <a href="/tags/%E6%9D%82%E8%B0%88/" style="font-size: 15px;">杂谈</a>
     </div>
   </div>
 
@@ -287,23 +344,23 @@
       <ul>
         
           <li>
+            <a href="/2020/04/19/Talk-need2/">Talk-need2</a>
+          </li>
+        
+          <li>
+            <a href="/2020/04/17/RP-controlling/">论文研读：Controlling generative models with continuous factors of variations</a>
+          </li>
+        
+          <li>
+            <a href="/2020/04/10/RP-GANalyse/">论文研读： GANalyze: Toward visual definitions of cognitive image properties.</a>
+          </li>
+        
+          <li>
             <a href="/2020/04/03/RP-InterFaceGAN/">论文研读：InterFaceGAN</a>
           </li>
         
           <li>
             <a href="/2020/03/31/RP-GANs1/">论文略读： SGAN(Stacked GAN)</a>
-          </li>
-        
-          <li>
-            <a href="/2020/03/30/Resources-GAN/">Resources： GAN</a>
-          </li>
-        
-          <li>
-            <a href="/2020/03/30/Resources-Disentangled-Representation-Learning/">Resources： Disentangled Representation Learning</a>
-          </li>
-        
-          <li>
-            <a href="/2020/03/27/RP-steerability/">论文研读： on the steerabilty of generative adversarial networks</a>
           </li>
         
       </ul>

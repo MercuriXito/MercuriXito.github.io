@@ -24,17 +24,17 @@
   <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 
   
-  <title>What I need in my blog? | Hako</title>
+  <title>Talk-need2 | Hako</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="记录下对blog的需求，确实有很多不方便的地方。。。  Need new features   [x] 公式中的${*}$不能正常解析，还是需要一个办法，其实最好的办法就是对$,$$符号内的行间和行内公式不进行markdown的解析，but why can’t we do that？ 使用\ast替代。   [ ] markdown本身的语法是行末两个以上空格、或者空行换行，为什么hexo-ren">
+  <meta name="description" content="Need of my blog 以后所有关于blog的坑都记录在这里，记不下了再开新坑。  Need of my blog Steps  Change - 2020-04-19">
 <meta property="og:type" content="article">
-<meta property="og:title" content="What I need in my blog?">
-<meta property="og:url" content="mercurixito.github.io/2020/03/26/Talk-need1/index.html">
+<meta property="og:title" content="Talk-need2">
+<meta property="og:url" content="mercurixito.github.io/2020/04/19/Talk-need2/index.html">
 <meta property="og:site_name" content="Hako">
-<meta property="og:description" content="记录下对blog的需求，确实有很多不方便的地方。。。  Need new features   [x] 公式中的${*}$不能正常解析，还是需要一个办法，其实最好的办法就是对$,$$符号内的行间和行内公式不进行markdown的解析，but why can’t we do that？ 使用\ast替代。   [ ] markdown本身的语法是行末两个以上空格、或者空行换行，为什么hexo-ren">
+<meta property="og:description" content="Need of my blog 以后所有关于blog的坑都记录在这里，记不下了再开新坑。  Need of my blog Steps  Change - 2020-04-19">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2020-03-26T03:02:06.000Z">
-<meta property="article:modified_time" content="2020-04-19T09:07:07.741Z">
+<meta property="article:published_time" content="2020-04-19T07:53:52.000Z">
+<meta property="article:modified_time" content="2020-04-19T09:11:36.479Z">
 <meta property="article:author" content="Victor Chen">
 <meta property="article:tag" content="杂谈">
 <meta name="twitter:card" content="summary">
@@ -86,10 +86,10 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main"><article id="post-Talk-need1" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-Talk-need2" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2020/03/26/Talk-need1/" class="article-date">
-  <time datetime="2020-03-26T03:02:06.000Z" itemprop="datePublished">2020-03-26</time>
+    <a href="/2020/04/19/Talk-need2/" class="article-date">
+  <time datetime="2020-04-19T07:53:52.000Z" itemprop="datePublished">2020-04-19</time>
 </a>
     
   </div>
@@ -100,7 +100,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      What I need in my blog?
+      Talk-need2
     </h1>
   
 
@@ -108,38 +108,52 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>记录下对blog的需求，确实有很多不方便的地方。。。</p>
-<h2 id="need-new-features"><a class="markdownIt-Anchor" href="#need-new-features"></a> Need new features</h2>
+        <h2 id="need-of-my-blog"><a class="markdownIt-Anchor" href="#need-of-my-blog"></a> Need of my blog</h2>
+<p>以后所有关于blog的坑都记录在这里，记不下了再开新坑。</p>
+<p><ul class="markdownIt-TOC">
+<li><a href="#need-of-my-blog">Need of my blog</a></li>
+<li><a href="#steps">Steps</a>
 <ul>
-<li>
-<p>[x] 公式中的${*}$不能正常解析，还是需要一个办法，其实最好的办法就是对<code>$</code>,<code>$$</code>符号内的行间和行内公式不进行markdown的解析，but why can’t we do that？</p>
-<p>使用<code>\ast</code>替代。</p>
-</li>
-<li>
-<p>[ ] <code>markdown</code>本身的语法是行末两个以上空格、或者空行换行，为什么<code>hexo-render-marked</code>只要文本换行就显示换行呢？</p>
-</li>
-<li>
-<p>[ ] 我终于认识到我对<code>LaTeX</code>和<code>Markdown</code>的差异的关键在<strong>缩进，尤其是首行缩进</strong>。</p>
-</li>
-<li>
-<p>[ ] 公示里的双大括号<code>\{\{</code>,<code>\}\}</code>会被误认为是标记的变量名，造成解析错误。</p>
+<li><a href="#change-2020-04-19">Change - 2020-04-19</a></li>
+</ul>
 </li>
 </ul>
-<p>可能最终还是要走向<code>LaTeX</code>记录笔记的道路了，可惜blog不支持，所以找了相关的<code>LaTeX2Markdown</code>的项目。</p>
+</p>
 <a id="more"></a>
-<h2 id="latex2markdown"><a class="markdownIt-Anchor" href="#latex2markdown"></a> LaTeX2Markdown</h2>
-<p>目前项目是挂在<a href="https://gist.github.com/MercuriXito/6031e9be887c63e50ed7718367ba7d3f" target="_blank" rel="noopener">我的gist</a>上，之后整理好了会作为一个独立的项目。该项目是基于<a href="https://github.com/ajtulloch/LaTeX2Markdown" target="_blank" rel="noopener">https://github.com/ajtulloch/LaTeX2Markdown</a>开发的，主要用正则表达式匹配替换的方法，相比起来增加的features有：</p>
+<h2 id="steps"><a class="markdownIt-Anchor" href="#steps"></a> Steps</h2>
+<h3 id="change-2020-04-19"><a class="markdownIt-Anchor" href="#change-2020-04-19"></a> Change - 2020-04-19</h3>
+<hr />
+<p>更换markdown渲染器为<code>hexo-renderer-markdown-it-plus</code>，并还是使用<code>mathjax</code>作公式渲染（<code>hexo-renderer-markdown-it-plus</code>默认<code>KaTeX</code>，但是在landscape主题下太丑了）。</p>
+<p>不知道为什么<code>hexo-renderer-markdown-it-plus</code>下不能够 disenable <code>markdown-it-katex</code>，所以我直接在<code>renderer.js</code>中注释掉了<code>markdown-it-katex</code>。</p>
+<p>在<code>_config.yml</code>中指定<code>markdown-it-mathjax</code>开启：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">markdown_it_plus:</span><br><span class="line">    # 中间的省略</span><br><span class="line">    plugins:</span><br><span class="line">      - plugin:</span><br><span class="line">        name: &#39;@iktakahiro&#x2F;markdown-it-katex&#39;</span><br><span class="line">        enable: false</span><br><span class="line">      - plugin:</span><br><span class="line">        name: markdown-it-mathjax</span><br><span class="line">        enable: true</span><br></pre></td></tr></table></figure>
+<p>然后在<code>header.js</code>中添加<code>Mathjax</code>解析的<code>&lt;script type=&quot;text/javascript&quot;&gt;&lt;/script&gt;</code>：主要是参考了<a href="https://github.com/hexojs/hexo-renderer-markdown-it/issues/36" target="_blank" rel="noopener">这篇回答</a>。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">&lt;% <span class="keyword">if</span>(page.math)&#123; %&gt;</span><br><span class="line">&lt;script type=<span class="string">"text/x-mathjax-config"</span>&gt;</span><br><span class="line">   MathJax.Hub.Config(&#123;<span class="string">"HTML-CSS"</span>: &#123; <span class="attr">preferredFont</span>: <span class="string">"TeX"</span>, <span class="attr">availableFonts</span>: [<span class="string">"STIX"</span>,<span class="string">"TeX"</span>], <span class="attr">linebreaks</span>: &#123; <span class="attr">automatic</span>:<span class="literal">true</span> &#125;, <span class="attr">EqnChunk</span>: (MathJax.Hub.Browser.isMobile ? <span class="number">10</span> : <span class="number">50</span>) &#125;,</span><br><span class="line">        tex2jax: &#123; <span class="attr">inlineMath</span>: [ [<span class="string">"$"</span>, <span class="string">"$"</span>], [<span class="string">"\\("</span>,<span class="string">"\\)"</span>] ], <span class="attr">processEscapes</span>: <span class="literal">true</span>, <span class="attr">ignoreClass</span>: <span class="string">"tex2jax_ignore|dno"</span>,<span class="attr">skipTags</span>: [<span class="string">'script'</span>, <span class="string">'noscript'</span>, <span class="string">'style'</span>, <span class="string">'textarea'</span>, <span class="string">'pre'</span>, <span class="string">'code'</span>]&#125;,</span><br><span class="line">        TeX: &#123;  <span class="attr">noUndefined</span>: &#123; <span class="attr">attributes</span>: &#123; <span class="attr">mathcolor</span>: <span class="string">"red"</span>, <span class="attr">mathbackground</span>: <span class="string">"#FFEEEE"</span>, <span class="attr">mathsize</span>: <span class="string">"90%"</span> &#125; &#125;, <span class="attr">Macros</span>: &#123; <span class="attr">href</span>: <span class="string">"&#123;&#125;"</span> &#125; &#125;,</span><br><span class="line">        messageStyle: <span class="string">"none"</span></span><br><span class="line">    &#125;); </span><br><span class="line">&lt;<span class="regexp">/script&gt;</span></span><br><span class="line"><span class="regexp">&lt;script type="text/</span>x-mathjax-config<span class="string">"&gt;</span></span><br><span class="line"><span class="string">    MathJax.Hub.Queue(function() &#123;</span></span><br><span class="line"><span class="string">        var all = MathJax.Hub.getAllJax(), i;</span></span><br><span class="line"><span class="string">        for(i=0; i &lt; all.length; i += 1) &#123;</span></span><br><span class="line"><span class="string">            all[i].SourceElement().parentNode.className += ' has-jax';</span></span><br><span class="line"><span class="string">        &#125;</span></span><br><span class="line"><span class="string">    &#125;);</span></span><br><span class="line"><span class="string">&lt;/script&gt;</span></span><br><span class="line"><span class="string">&lt;script type="</span>text/javascript<span class="string">" src="</span>http:<span class="comment">//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"&gt;&lt;/script&gt;</span></span><br><span class="line">&lt;% &#125; %&gt;</span><br></pre></td></tr></table></figure>
+<p>这时候还是会出现和<code>mathjax</code>解析不兼容的问题，已知的包括：</p>
 <ul>
-<li>[x] 将<code>verbatim</code>环境转化为代码。</li>
-<li>[x] 交叉引用替换：支持<code>BibTeX</code>的引用方式，读取对应的<code>bibtex</code>文件，自动生成参考文献列表，而且可以将文中的<code>\cite</code>替换成参考文献的索引，非常方便省事。（不过<strong>我的bibtex都是<code>Mendeley</code>导出的，比较标准，而且参考文献列表也只支持一种简单的格式</strong>）</li>
-<li>[x] 图片替换：将<code>figure</code>环境替换成图片引用，并且将文档中的<strong>有关图片的</strong><code>ref</code>命令替换成引用。</li>
-<li>[ ] 公式替换：<code>Mathjax</code>好像不支持<code>\equation</code>环境，将它转化为<code>$$</code>，并且将文档中有关公式的<code>ref</code>命令替换成公式的引用。</li>
+<li>[x] 两个<code>_</code>解析成斜体：还是老方法，不使用<code>_</code>强调了，在<code>markdown-it</code>的<code>emphasis.js</code>中将以下行替换掉。</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; if (marker !&#x3D;&#x3D; 0x5F &#x2F;* _ *&#x2F; &amp;&amp; marker !&#x3D;&#x3D; 0x2A &#x2F;* * *&#x2F;) &#123; return false; &#125;</span><br><span class="line">if (marker !&#x3D;&#x3D; 0x2A &#x2F;* * *&#x2F;) &#123; return false; &#125; &#x2F;&#x2F; Only use * to emphasis, for compatible with &#96;Mathjax&#96;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>[x] 因为默认包含<code>markdown-it-sup</code>，所以两个<code>^</code>会解析成<code>sup</code>上标。 这里我还是在<code>renderer.js</code>中把它注释掉了，现在我也用不到这个包。</li>
+<li>[ ] 针对大括号<code>\left\{</code>会把<code>\{</code>直接转义成<code>{</code>，但是在 LaTeX 中公式中需要再次转义，所以很难办。。。 <strong>未解决</strong>。</li>
+</ul>
+<p><strong>未来目标</strong>：</p>
+<ul>
+<li>可能还是<strong>尽早换个<code>KaTeX</code>比较好看的主题</strong>吧。 主题要求：
+<ul>
+<li>KaTeX 兼容好，渲染的公式美观。</li>
+<li>多级缩进美观。</li>
+<li>字体大小合适。</li>
+<li>支持 <code>- [ ]</code> 待办事项语法。</li>
+</ul>
+</li>
 </ul>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="mercurixito.github.io/2020/03/26/Talk-need1/" data-id="ck96vk96m000n58uch1i3f4aa" class="article-share-link">Share</a>
+      <a data-url="mercurixito.github.io/2020/04/19/Talk-need2/" data-id="ck96vk96n000o58uc5wsq1kmw" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%9D%82%E8%B0%88/" rel="tag">杂谈</a></li></ul>
@@ -150,19 +164,10 @@
     
 <nav id="article-nav">
   
-    <a href="/2020/03/27/RP-steerability/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
-        
-          论文研读： on the steerabilty of generative adversarial networks
-        
-      </div>
-    </a>
   
-  
-    <a href="/2020/03/20/GAN-metrics2/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2020/04/17/RP-controlling/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">GAN metrics (2)</div>
+      <div class="article-nav-title">论文研读：Controlling generative models with continuous factors of variations</div>
     </a>
   
 </nav>

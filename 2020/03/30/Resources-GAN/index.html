@@ -2,20 +2,39 @@
 <html>
 <head>
   <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
-  
+<!--   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0-rc.1/dist/katex.min.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.10.0-rc.1/dist/katex.min.js"></script> -->
+
+  <!-- Default Mathjax Support -->
+  <script type="text/x-mathjax-config">
+     MathJax.Hub.Config({"HTML-CSS": { preferredFont: "TeX", availableFonts: ["STIX","TeX"], linebreaks: { automatic:true }, EqnChunk: (MathJax.Hub.Browser.isMobile ? 10 : 50) },
+          tex2jax: { inlineMath: [ ["$", "$"], ["\\(","\\)"] ], processEscapes: true, ignoreClass: "tex2jax_ignore|dno",skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']},
+          TeX: {  noUndefined: { attributes: { mathcolor: "red", mathbackground: "#FFEEEE", mathsize: "90%" } }, Macros: { href: "{}" } },
+          messageStyle: "none"
+      }); 
+  </script>
+  <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+          var all = MathJax.Hub.getAllJax(), i;
+          for(i=0; i < all.length; i += 1) {
+              all[i].SourceElement().parentNode.className += ' has-jax';
+          }
+      });
+  </script>
+  <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 
   
   <title>Resources： GAN | Hako</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="IntroductionGAN大领域内的资料整理，会逐渐地更新划分成多个小领域，可能有多个papers包含在不同的领域中。 Papers Uncoditional GANs Unconditional GAN 是最原始的GAN的任务，对目标的图片的分布建模，学习映射${z \to x}$。  Generative Adversarial Nets. ( GAN ) Deep Generative">
+  <meta name="description" content="Introduction GAN大领域内的资料整理，会逐渐地更新划分成多个小领域，可能有多个papers包含在不同的领域中。  Papers   Uncoditional GANs  Unconditional GAN 是最原始的GAN的任务，对目标的图片的分布建模，学习映射${z \to x}$。  Generative Adversarial Nets. ( GAN ) Deep Gener">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Resources： GAN">
 <meta property="og:url" content="mercurixito.github.io/2020/03/30/Resources-GAN/index.html">
 <meta property="og:site_name" content="Hako">
-<meta property="og:description" content="IntroductionGAN大领域内的资料整理，会逐渐地更新划分成多个小领域，可能有多个papers包含在不同的领域中。 Papers Uncoditional GANs Unconditional GAN 是最原始的GAN的任务，对目标的图片的分布建模，学习映射${z \to x}$。  Generative Adversarial Nets. ( GAN ) Deep Generative">
+<meta property="og:description" content="Introduction GAN大领域内的资料整理，会逐渐地更新划分成多个小领域，可能有多个papers包含在不同的领域中。  Papers   Uncoditional GANs  Unconditional GAN 是最原始的GAN的任务，对目标的图片的分布建模，学习映射${z \to x}$。  Generative Adversarial Nets. ( GAN ) Deep Gener">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2020-03-30T03:44:20.000Z">
-<meta property="article:modified_time" content="2020-04-02T10:03:20.504Z">
+<meta property="article:modified_time" content="2020-04-18T06:29:37.165Z">
 <meta property="article:author" content="Victor Chen">
 <meta property="article:tag" content="GAN">
 <meta property="article:tag" content="resources">
@@ -90,9 +109,12 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><p><code>GAN</code>大领域内的资料整理，会逐渐地更新划分成多个小领域，可能有多个papers包含在不同的领域中。</p>
-<h2 id="Papers"><a href="#Papers" class="headerlink" title="Papers"></a>Papers</h2><hr>
-<h3 id="Uncoditional-GANs"><a href="#Uncoditional-GANs" class="headerlink" title="Uncoditional GANs"></a>Uncoditional GANs</h3><hr>
+        <h2 id="introduction"><a class="markdownIt-Anchor" href="#introduction"></a> Introduction</h2>
+<p><code>GAN</code>大领域内的资料整理，会逐渐地更新划分成多个小领域，可能有多个papers包含在不同的领域中。</p>
+<h2 id="papers"><a class="markdownIt-Anchor" href="#papers"></a> Papers</h2>
+<hr />
+<h3 id="uncoditional-gans"><a class="markdownIt-Anchor" href="#uncoditional-gans"></a> Uncoditional GANs</h3>
+<hr />
 <p>Unconditional GAN 是最原始的GAN的任务，对目标的图片的分布建模，学习映射${z \to x}$。</p>
 <ul>
 <li>Generative Adversarial Nets. ( GAN )</li>
@@ -103,8 +125,8 @@
 <li>Analyzing and Improving the Image Quality of StyleGAN. ( Style-GAN2 )</li>
 </ul>
 <a id="more"></a>
-
-<h3 id="Conditional-GANs"><a href="#Conditional-GANs" class="headerlink" title="Conditional GANs"></a>Conditional GANs</h3><hr>
+<h3 id="conditional-gans"><a class="markdownIt-Anchor" href="#conditional-gans"></a> Conditional GANs</h3>
+<hr />
 <p>Conditonal GANs 是加入可控隐变量（监督信息，很多情况下是分类标签）的GAN的结构，Conditional GANs 的应用比 Unconditional GANs 的应用范围更广，而且 Conditional GANs 可以用于高质量的多类图像分布建模。</p>
 <ul>
 <li>Conditional Generative Adversarial Nets. (cGAN)</li>
@@ -112,13 +134,15 @@
 <li>Conditional Image Synthesis with Auxiliary Classifier GANs. (ACGAN)</li>
 <li>Stacked Generative Adversarial Networks. ( StackedGAN )</li>
 <li>Spectral Normalization for Generative Adversarial Networks. ( SN-GAN )</li>
-<li>cGAN with Projection Discriminator. </li>
+<li>cGAN with Projection Discriminator.</li>
 <li>Self-Attention Generative Adversarial Networks. ( SA-GAN )</li>
 <li>Large Scale GAN Traning for high fidelity natural image synthesis. ( BigGAN )</li>
 <li>Large Scale Adversarial Representation Learning. ( BigBiGAN )</li>
 <li>LOGAN: Latent Optimisatoin for Generative Adversarial Networks.</li>
 </ul>
-<h3 id="Improving-GANs"><a href="#Improving-GANs" class="headerlink" title="Improving GANs"></a>Improving GANs</h3><p>改进GAN的技术，考虑GAN最主要的两个问题：mode collapse 和 unstable training。 可以考虑的解决方法有：改进loss，改进模型结构等。</p>
+<h3 id="improving-gans"><a class="markdownIt-Anchor" href="#improving-gans"></a> Improving GANs</h3>
+<hr />
+<p>改进GAN的技术，考虑GAN最主要的两个问题：mode collapse 和 unstable training。 可以考虑的解决方法有：改进loss，改进模型结构等。</p>
 <ul>
 <li>Wasserstain Generative Adversarial Networks. ( WGAN )</li>
 <li>Improved Traning of Wasserstain GANs ( WGAN-GP )</li>
@@ -126,66 +150,114 @@
 <li>Improved techniques for training GAN.</li>
 <li>f-GAN: Training Generative Neural Samplers using Variational Divergence Minimization.</li>
 </ul>
-<h3 id="Disentangled-Representation-Learning"><a href="#Disentangled-Representation-Learning" class="headerlink" title="Disentangled Representation Learning"></a>Disentangled Representation Learning</h3><p>Disentangled Representation Learning 和 <code>VAE</code>，<code>Conditional GAN</code> 的联系十分密切。针对的是生成模型的生成效果的语义可控性。</p>
+<h3 id="disentangled-representation-learning"><a class="markdownIt-Anchor" href="#disentangled-representation-learning"></a> Disentangled Representation Learning</h3>
+<hr />
+<p>Disentangled Representation Learning 和 <code>VAE</code>，<code>Conditional GAN</code> 的联系十分密切。针对的是生成模型的生成效果的语义可控性。</p>
 <ul>
-<li>InfoGAN: Interpretable Representation Learning by Information Maximizing Generative Adversarial Nets. </li>
+<li>InfoGAN: Interpretable Representation Learning by Information Maximizing Generative Adversarial Nets.</li>
 <li>Adversarial Feature Learning ( BiGAN )</li>
 <li>On the “steerability” of generative adversarial networks. <a href="https://arxiv.org/abs/1907.07171" target="_blank" rel="noopener">[paper]</a> <a href="https://ali-design.github.io/gan_steerability/" target="_blank" rel="noopener">[codes]</a></li>
 <li>Interpreting the Latent Space of GANs for Semantic Face Editing. <a href="https://arxiv.org/abs/1907.10786" target="_blank" rel="noopener">[paper]</a> <a href="https://shenyujun.github.io/InterFaceGAN/" target="_blank" rel="noopener">[codes]</a></li>
 </ul>
-<h3 id="Semi-supervised-Learning"><a href="#Semi-supervised-Learning" class="headerlink" title="Semi-supervised Learning"></a>Semi-supervised Learning</h3><p>GAN可以用于Semi-supervised Learning，对仅含有部分、或者少量标签的数据集。</p>
-<h3 id="Image2Image-Translation"><a href="#Image2Image-Translation" class="headerlink" title="Image2Image Translation"></a>Image2Image Translation</h3><p>Image2Image 是GAN中非常重要的一类任务，而且它包含的子任务十分广泛，而且Text2Image、Video2Video等其实都可以归为这一类，它们对GAN的应用具有非常相似的地方。</p>
+<h3 id="semi-supervised-learning"><a class="markdownIt-Anchor" href="#semi-supervised-learning"></a> Semi-supervised Learning</h3>
+<hr />
+<p>GAN可以用于Semi-supervised Learning，对仅含有部分、或者少量标签的数据集。</p>
+<h3 id="image2image-translation"><a class="markdownIt-Anchor" href="#image2image-translation"></a> Image2Image Translation</h3>
+<hr />
+<p>Image2Image 是GAN中非常重要的一类任务，而且它包含的子任务十分广泛，而且Text2Image、Video2Video等其实都可以归为这一类，它们对GAN的应用具有非常相似的地方。</p>
 <ul>
 <li>Image-to-Image Translation with Conditional Generative Adversarial Networks. ( pix2pix )</li>
 <li>Unpaired Image-to-Image Translation using Cycle-Consistent Adversarial Networks. ( CycleGAN )</li>
 <li>StarGAN: Unified Generative Adversarial Networks for Multi-Domain Image-to-Image Translation. ( StarGAN )</li>
 <li>U-GAT-IT: Unsupervised Generative Attentional Networks with Adaptive Layer Instance Normalization for Image-to-Image Translation.</li>
 </ul>
-<h3 id="Applications-of-GANs"><a href="#Applications-of-GANs" class="headerlink" title="Applications of GANs"></a>Applications of GANs</h3><p>着重对GAN的某一任务(应用)的研究。</p>
+<h3 id="applications-of-gans"><a class="markdownIt-Anchor" href="#applications-of-gans"></a> Applications of GANs</h3>
+<hr />
+<p>着重对GAN的某一任务(应用)的研究，这一部分和最后一部分有重合。</p>
 <ul>
 <li>Photo-Realistic Single Image Super-Resolution Using a Generative Adversarial Network. ( SRGAN  for super-resolution )</li>
 <li>GANimation: Anatomically-aware Facial Animation from a Single Image.</li>
-<li>Perceptual Losses for Real-Time Style Transfer and Super-Resolution. </li>
-<li>Arbitrary Style Transfer in Real-time with Adaptive Instance Normalization. </li>
+<li>Perceptual Losses for Real-Time Style Transfer and Super-Resolution.</li>
+<li>Arbitrary Style Transfer in Real-time with Adaptive Instance Normalization.</li>
 <li>Precomputed Real-Time Texture Synthesis with Markovian Generative Adversarial Networks. ( Markovian GAN)</li>
-<li>SketchyGAN: Towards Diverse and Realistic Sketch to Image Synthesis. </li>
+<li>SketchyGAN: Towards Diverse and Realistic Sketch to Image Synthesis.</li>
 </ul>
-<h2 id="GAN-and-few-shot-learning"><a href="#GAN-and-few-shot-learning" class="headerlink" title="GAN and few-shot learning"></a>GAN and few-shot learning</h2><p>GAN 和 few-shot learning 的结合，主要关注 few-shot generation。</p>
+<h2 id="gan-and-few-shot-learning"><a class="markdownIt-Anchor" href="#gan-and-few-shot-learning"></a> GAN and few-shot learning</h2>
+<hr />
+<p>GAN 和 few-shot learning 的结合，主要关注 few-shot generation。</p>
 <ul>
 <li>InGAN: Capturing and Retargeting the “DNA” of a Natural Image.</li>
 <li>SinGAN: Learning a Generative Model from a Single Natural Image.</li>
-<li>Few-Shot Adversarial Learning of Realistic Neural Talking Head Models. </li>
+<li>Few-Shot Adversarial Learning of Realistic Neural Talking Head Models.</li>
 <li>MetaGAN: An Adversarial Approach to Few-Shot Learning. (实际上这篇主要不是讲GAN，而是将GAN用于few-shot learning的classification)</li>
 </ul>
-<h2 id="Evaluation-of-GANs"><a href="#Evaluation-of-GANs" class="headerlink" title="Evaluation of GANs"></a>Evaluation of GANs</h2><p>GAN生成图片的质量的衡量是一个still open problem，但是仅仅针对 GAN Evalutaion 的papers在我看过的papers中不多，大多都是提一嘴。</p>
+<h2 id="evaluation-of-gans"><a class="markdownIt-Anchor" href="#evaluation-of-gans"></a> Evaluation of GANs</h2>
+<hr />
+<p>GAN生成图片的质量的衡量是一个still open problem，但是仅仅针对 GAN Evalutaion 的papers在我看过的papers中不多，大多都是提一嘴的程度。</p>
+<p><strong>具体的方法</strong>如下：</p>
 <ul>
 <li><code>IS</code>: Improved techniques for training GAN.</li>
-<li><code>Slice-Wasserstain-Distance</code>: Progressive Growing of GANs for Improved Quality, Stability and Variation. </li>
-<li><code>Wasserstain-Distance</code>: Wasserstain Generative Adversarial Networks. </li>
-<li><code>FID</code>: GANs Trained by a Two Time-Scale Update Rule<br>Converge to a Local Nash Equilibrium. </li>
+<li><code>Slice-Wasserstain-Distance</code>: Progressive Growing of GANs for Improved Quality, Stability and Variation.</li>
+<li><code>Wasserstain-Distance</code>: Wasserstain Generative Adversarial Networks.</li>
+<li><code>FID</code>: GANs Trained by a Two Time-Scale Update Rule Converge to a Local Nash Equilibrium.</li>
 <li><code>MS-SSIM</code>: Conditional Image Synthesis with Auxiliary Classifier GANs. (ACGAN)</li>
 <li><code>PPL</code>: StyleGAN</li>
+<li><code>LPIPS</code>: The unreasonable effectiveness of deep features as a perceptual metric. CVPR2018.</li>
 </ul>
-<h3 id="Unsorted"><a href="#Unsorted" class="headerlink" title="Unsorted"></a>Unsorted</h3><hr>
+<p>将他们可以<strong>分类</strong>为：</p>
+<ul>
+<li>传统的图像质量评价方法：MS-SSIM, LPIPS.</li>
+<li>基于Inception的模型：IS, FID.</li>
+<li>其他： PPL, Wasserstain-Distance, Sliced-WD.</li>
+</ul>
+<h2 id="technics"><a class="markdownIt-Anchor" href="#technics"></a> Technics</h2>
+<hr />
+<p>在GAN中会用到的特殊结构、结构。</p>
+<ul>
+<li><code>Conditional Batch Norm</code>: Modulating early visual processing by language. NIPS2017. CGAN用于注入噪声的方法。</li>
+</ul>
+<h3 id="unsorted"><a class="markdownIt-Anchor" href="#unsorted"></a> Unsorted</h3>
+<hr />
 <ul>
 <li>StackGAN: Text to Photo-realistic Image Synthesis with Stacked Generative Adversarial Networks. ( StackGAN )</li>
 <li>Boundary Equilibrium GANs. ( BEGAN )</li>
 <li>Energy-based Generative Adversarial Networks. ( EBGAN )</li>
 <li>Real or not real, that is the question. ( RealnessGAN )</li>
 <li>A Review on Generative Adversarial Networks: Algorithms, Theory, and Applications. ( GAN Review in 2020 )</li>
+<li>Invertible Conditional GANs for image editing. (IcGAN) <a href="https://arxiv.org/abs/1611.06355" target="_blank" rel="noopener">[paper]</a> <a href="https://github.com/Guim3/IcGAN" target="_blank" rel="noopener">[codes]</a><br />
+加入Encoder结构编码图像的属性，这些属性又以cGAN的方式注入到GAN中生成，可以完成属性修改操作。</li>
+<li>Learning to Discover Cross-Domain Relations with Generative Adversarial Networks. (DiscoGAN) <a href="https://github.com/SKTBrain/DiscoGAN" target="_blank" rel="noopener">[codes]</a> <a href="https://arxiv.org/abs/1703.05192" target="_blank" rel="noopener">[paper]</a> CycleGAN 同期工作，域到域的Image2Image任务。</li>
+<li>DualGAN.</li>
 </ul>
-<h2 id="Other-Useful-Material-about-GAN"><a href="#Other-Useful-Material-about-GAN" class="headerlink" title="Other Useful Material about GAN"></a>Other Useful Material about GAN</h2><ul>
-<li>Tips and tricks to make GANs work: <a href="https://github.com/soumith/ganhacks" target="_blank" rel="noopener">[materials]</a></li>
-</ul>
-<h2 id="Projects-of-Application"><a href="#Projects-of-Application" class="headerlink" title="Projects of Application"></a>Projects of Application</h2><hr>
+<h2 id="other-useful-material-about-gan"><a class="markdownIt-Anchor" href="#other-useful-material-about-gan"></a> Other Useful Material about GAN</h2>
+<hr />
 <ul>
-<li>画风的图像风格转换GAN. <a href="https://github.com/giddyyupp/ganilla" target="_blank" rel="noopener">[project]</a></li>
+<li>Tips and tricks to make GANs work: <a href="https://github.com/soumith/ganhacks" target="_blank" rel="noopener">[materials]</a></li>
+<li>GAN 汇总1: <a href="https://github.com/nightrome/really-awesome-gan" target="_blank" rel="noopener">[really-awesome-gan]</a></li>
+</ul>
+<h2 id="projects-of-application"><a class="markdownIt-Anchor" href="#projects-of-application"></a> Projects of Application</h2>
+<hr />
+<p>特殊的应用，或者是一类的应用任务。</p>
+<ul>
+<li>Image2Image：可以用于各种图像处理任务。</li>
+<li>画风的图像风格转换GAN. <a href="https://github.com/giddyyupp/ganilla" target="_blank" rel="noopener">[project]</a> <a href="https://arxiv.org/abs/2002.05638" target="_blank" rel="noopener">[paper]</a></li>
+<li>style2paints: 线稿上色. <a href="https://github.com/lllyasviel/style2paints" target="_blank" rel="noopener">[project]</a> Two-stage Sketch Colorization. <a href="http://www.cse.cuhk.edu.hk/~ttwong/papers/colorize/colorize.pdf" target="_blank" rel="noopener">[paper]</a></li>
+<li>clourise:黑白照片转彩色照片 <a href="https://colourise.sg/" target="_blank" rel="noopener">[homepage]</a></li>
+<li>Virtual Try-On: 虚拟试衣。
+<ul>
+<li>一篇知乎上的Review. <a href="https://zhuanlan.zhihu.com/p/93945103" target="_blank" rel="noopener">[page]</a></li>
+<li>Towards Multi-Pose Guided Virtual Try-on Network. ICCV2019. <a href="http://openaccess.thecvf.com/content_ICCV_2019/html/Dong_Towards_Multi-Pose_Guided_Virtual_Try-On_Network_ICCV_2019_paper.html" target="_blank" rel="noopener">[paper]</a></li>
+<li>VITON: An Image-Based Virtual Try-On Network. CVPR2018. <a href="http://openaccess.thecvf.com/content_cvpr_2018/html/Han_VITON_An_Image-Based_CVPR_2018_paper.html" target="_blank" rel="noopener">[paper]</a> 但是好像作者用的是Encoder-Decoder结构哈哈。</li>
+<li>VTNFP: An Image-Based Virtual Try-On Network With Body and Clothing Feature Preservation. <a href="http://openaccess.thecvf.com/content_ICCV_2019/html/Yu_VTNFP_An_Image-Based_Virtual_Try-On_Network_With_Body_and_Clothing_ICCV_2019_paper.html" target="_blank" rel="noopener">[paper]</a></li>
+</ul>
+</li>
+<li>aiportraits: <a href="https://aiportraits.org/" target="_blank" rel="noopener">[homepage]</a> 人脸转绘画。</li>
 </ul>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="mercurixito.github.io/2020/03/30/Resources-GAN/" data-id="ck8ellg15000548uchygacssu" class="article-share-link">Share</a>
+      <a data-url="mercurixito.github.io/2020/03/30/Resources-GAN/" data-id="ck96vk96k000i58ucfcff77qj" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/GAN/" rel="tag">GAN</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/resources/" rel="tag">resources</a></li></ul>
@@ -227,7 +299,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">标签</h3>
     <div class="widget">
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Disentangled-Representation-Learning/" rel="tag">Disentangled Representation Learning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GAN/" rel="tag">GAN</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linear-Algebra/" rel="tag">Linear Algebra</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mathematic/" rel="tag">Mathematic</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Paper-Reading/" rel="tag">Paper Reading</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Probability/" rel="tag">Probability</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/disentanglement/" rel="tag">disentanglement</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/metrics/" rel="tag">metrics</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/resources/" rel="tag">resources</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9D%82%E8%B0%88/" rel="tag">杂谈</a></li></ul>
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Disentangled-Representation-Learning/" rel="tag">Disentangled Representation Learning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GAN/" rel="tag">GAN</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linear-Algebra/" rel="tag">Linear Algebra</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mathematic/" rel="tag">Mathematic</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Paper-Reading/" rel="tag">Paper Reading</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Probability/" rel="tag">Probability</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/disentanglement/" rel="tag">disentanglement</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/metrics/" rel="tag">metrics</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/resources/" rel="tag">resources</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/unsupervised-gan-controlling/" rel="tag">unsupervised gan controlling</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9D%82%E8%B0%88/" rel="tag">杂谈</a></li></ul>
     </div>
   </div>
 
@@ -237,7 +309,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">标签云</h3>
     <div class="widget tagcloud">
-      <a href="/tags/Disentangled-Representation-Learning/" style="font-size: 10px;">Disentangled Representation Learning</a> <a href="/tags/GAN/" style="font-size: 20px;">GAN</a> <a href="/tags/Linear-Algebra/" style="font-size: 10px;">Linear Algebra</a> <a href="/tags/Mathematic/" style="font-size: 13.33px;">Mathematic</a> <a href="/tags/Paper-Reading/" style="font-size: 16.67px;">Paper Reading</a> <a href="/tags/Probability/" style="font-size: 10px;">Probability</a> <a href="/tags/disentanglement/" style="font-size: 10px;">disentanglement</a> <a href="/tags/metrics/" style="font-size: 13.33px;">metrics</a> <a href="/tags/resources/" style="font-size: 13.33px;">resources</a> <a href="/tags/%E6%9D%82%E8%B0%88/" style="font-size: 13.33px;">杂谈</a>
+      <a href="/tags/Disentangled-Representation-Learning/" style="font-size: 10px;">Disentangled Representation Learning</a> <a href="/tags/GAN/" style="font-size: 20px;">GAN</a> <a href="/tags/Linear-Algebra/" style="font-size: 10px;">Linear Algebra</a> <a href="/tags/Mathematic/" style="font-size: 12.5px;">Mathematic</a> <a href="/tags/Paper-Reading/" style="font-size: 17.5px;">Paper Reading</a> <a href="/tags/Probability/" style="font-size: 10px;">Probability</a> <a href="/tags/disentanglement/" style="font-size: 10px;">disentanglement</a> <a href="/tags/metrics/" style="font-size: 12.5px;">metrics</a> <a href="/tags/resources/" style="font-size: 12.5px;">resources</a> <a href="/tags/unsupervised-gan-controlling/" style="font-size: 15px;">unsupervised gan controlling</a> <a href="/tags/%E6%9D%82%E8%B0%88/" style="font-size: 15px;">杂谈</a>
     </div>
   </div>
 
@@ -259,23 +331,23 @@
       <ul>
         
           <li>
+            <a href="/2020/04/19/Talk-need2/">Talk-need2</a>
+          </li>
+        
+          <li>
+            <a href="/2020/04/17/RP-controlling/">论文研读：Controlling generative models with continuous factors of variations</a>
+          </li>
+        
+          <li>
+            <a href="/2020/04/10/RP-GANalyse/">论文研读： GANalyze: Toward visual definitions of cognitive image properties.</a>
+          </li>
+        
+          <li>
             <a href="/2020/04/03/RP-InterFaceGAN/">论文研读：InterFaceGAN</a>
           </li>
         
           <li>
             <a href="/2020/03/31/RP-GANs1/">论文略读： SGAN(Stacked GAN)</a>
-          </li>
-        
-          <li>
-            <a href="/2020/03/30/Resources-GAN/">Resources： GAN</a>
-          </li>
-        
-          <li>
-            <a href="/2020/03/30/Resources-Disentangled-Representation-Learning/">Resources： Disentangled Representation Learning</a>
-          </li>
-        
-          <li>
-            <a href="/2020/03/27/RP-steerability/">论文研读： on the steerabilty of generative adversarial networks</a>
           </li>
         
       </ul>

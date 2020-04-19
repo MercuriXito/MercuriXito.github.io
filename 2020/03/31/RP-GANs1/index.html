@@ -2,21 +2,40 @@
 <html>
 <head>
   <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
-  
+<!--   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0-rc.1/dist/katex.min.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.10.0-rc.1/dist/katex.min.js"></script> -->
+
+  <!-- Default Mathjax Support -->
+  <script type="text/x-mathjax-config">
+     MathJax.Hub.Config({"HTML-CSS": { preferredFont: "TeX", availableFonts: ["STIX","TeX"], linebreaks: { automatic:true }, EqnChunk: (MathJax.Hub.Browser.isMobile ? 10 : 50) },
+          tex2jax: { inlineMath: [ ["$", "$"], ["\\(","\\)"] ], processEscapes: true, ignoreClass: "tex2jax_ignore|dno",skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']},
+          TeX: {  noUndefined: { attributes: { mathcolor: "red", mathbackground: "#FFEEEE", mathsize: "90%" } }, Macros: { href: "{}" } },
+          messageStyle: "none"
+      }); 
+  </script>
+  <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+          var all = MathJax.Hub.getAllJax(), i;
+          for(i=0; i < all.length; i += 1) {
+              all[i].SourceElement().parentNode.className += ' has-jax';
+          }
+      });
+  </script>
+  <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 
   
   <title>论文略读： SGAN(Stacked GAN) | Hako</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Introduction本文是对几篇GAN的略读，主要阐述想法和技术，其中蕴含的idea或者实现细节搁置不提，有机会再提出来单独讲讲吧，included papers:  SGAN(StackedGAN)">
+  <meta name="description" content="Introduction 本文是对几篇GAN的略读，主要阐述想法和技术，其中蕴含的idea或者实现细节搁置不提，有机会再提出来单独讲讲吧，included papers:  SGAN(StackedGAN)">
 <meta property="og:type" content="article">
 <meta property="og:title" content="论文略读： SGAN(Stacked GAN)">
 <meta property="og:url" content="mercurixito.github.io/2020/03/31/RP-GANs1/index.html">
 <meta property="og:site_name" content="Hako">
-<meta property="og:description" content="Introduction本文是对几篇GAN的略读，主要阐述想法和技术，其中蕴含的idea或者实现细节搁置不提，有机会再提出来单独讲讲吧，included papers:  SGAN(StackedGAN)">
+<meta property="og:description" content="Introduction 本文是对几篇GAN的略读，主要阐述想法和技术，其中蕴含的idea或者实现细节搁置不提，有机会再提出来单独讲讲吧，included papers:  SGAN(StackedGAN)">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="/images/2020-03-31/SGAN.png">
 <meta property="article:published_time" content="2020-03-31T03:20:36.000Z">
-<meta property="article:modified_time" content="2020-03-31T07:04:01.790Z">
+<meta property="article:modified_time" content="2020-04-19T09:16:01.479Z">
 <meta property="article:author" content="Victor Chen">
 <meta property="article:tag" content="GAN">
 <meta property="article:tag" content="Paper Reading">
@@ -92,16 +111,18 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><p>本文是对几篇GAN的略读，主要阐述想法和技术，其中蕴含的idea或者实现细节搁置不提，有机会再提出来单独讲讲吧，included papers:</p>
+        <h2 id="introduction"><a class="markdownIt-Anchor" href="#introduction"></a> Introduction</h2>
+<p>本文是对几篇GAN的略读，主要阐述想法和技术，其中蕴含的idea或者实现细节搁置不提，有机会再提出来单独讲讲吧，included papers:</p>
 <ul>
 <li>SGAN(StackedGAN)</li>
 </ul>
 <a id="more"></a>
-
-<h2 id="SGAN-Stacked-GAN"><a href="#SGAN-Stacked-GAN" class="headerlink" title="SGAN (Stacked GAN)"></a>SGAN (Stacked GAN)</h2><hr>
+<h2 id="sgan-stacked-gan"><a class="markdownIt-Anchor" href="#sgan-stacked-gan"></a> SGAN (Stacked GAN)</h2>
+<hr />
 <p>SGAN属于Conditional GAN的一种(文章指出进行修改也可以进行unsupervised学习)，在模型上采用了多层级的G和D的架构，并使用一个预训练的分类DNN，它将<strong>多层级的G的目标看成是invert DNN的forward的过程</strong>，抽出它的不同层级的特征作为不同层级的GAN的目标，希望<strong>不同层级的GAN学习到DNN输出的高层特征到DNN输入的底层特征的解码</strong>。</p>
 <p>同时SGAN还有<strong>分层单独训练</strong>和<strong>端到端</strong>的两种训练方法。</p>
-<h3 id="模型"><a href="#模型" class="headerlink" title="模型"></a>模型</h3><hr>
+<h3 id="模型"><a class="markdownIt-Anchor" href="#模型"></a> 模型</h3>
+<hr />
 <p>模型主要包括三个部分：</p>
 <ul>
 <li>用于分类的pre-trained DNN，把预训练的分类网络划分成不同的blocks（conv + pooling的组合），称之为Encoder:${E_{i}}$。</li>
@@ -110,41 +131,65 @@
 </ul>
 <p><strong>Encoders</strong></p>
 <p>每一个${E_{i}}$的输入${h_{i}}$是上一层的输出: ${h_{0}}$为训练的图片，${h_{N}}$为标签。</p>
-<p>$${<br>    h_{i+1} = E_{i}(h_{i})<br>}$$</p>
+<p>$${<br />
+h_{i+1} = E_{i}(h_{i})<br />
+}$$</p>
 <p><strong>Generators</strong></p>
 <p>${G_{i}}$接受${E_{i}}$的输出和噪声：</p>
-<p>$${<br>    \hat{h_{i}} = G_{i}(h_{i+1}, z)<br>}$$</p>
+<p>$${<br />
+\hat{h_{i}} = G_{i}(h_{i+1}, z)<br />
+}$$</p>
 <p>当使用端到端的训练时，${G_{i}}$接受上一层生成器的输出：</p>
-<p>$${<br>    \hat{h_{i}} = G_{i}(\hat{h_{i+1}}, z)<br>}$$</p>
+<p>$${<br />
+\hat{h_{i}} = G_{i}(\hat{h_{i+1}}, z)<br />
+}$$</p>
 <p>进一步，作者解释了使用多层的生成器的idea：将label到image的条件分布变成了多个分布的联合分布，而每个${G_{i}}$对中间的简单的分布进行建模：</p>
-<p>$${<br>    \begin{align}<br>    P_{G}(\hat{x} \vert y) &amp;= P_{G}(\hat{h_{0}} \vert \hat{h_{N}}) \\<br>    &amp; \propto P_{G}(\hat{h_{0}},\cdots,\hat{h_{N-1}} \vert \hat{h_{N}}) \\<br>    &amp;= \prod_{i} P_{G_{i}}(\hat{h_{i}} \vert \hat{h_{i+1}}) \\<br>    \end{align}<br>}$$</p>
-<p><img src="/images/2020-03-31/SGAN.png" alt="整体模型架构"></p>
-<h3 id="Loss"><a href="#Loss" class="headerlink" title="Loss"></a>Loss</h3><hr>
+<p>$${<br />
+\begin{aligned}<br />
+P_{G}(\hat{x} \vert y) &amp;= P_{G}(\hat{h_{0}} \vert \hat{h_{N}}) \<br />
+&amp; \propto P_{G}(\hat{h_{0}},\cdots,\hat{h_{N-1}} \vert \hat{h_{N}}) \<br />
+&amp;= \prod_{i} P_{G_{i}}(\hat{h_{i}} \vert \hat{h_{i+1}}) \<br />
+\end{aligned}<br />
+}$$</p>
+<p><img src="/images/2020-03-31/SGAN.png" alt="整体模型架构" /></p>
+<h3 id="loss"><a class="markdownIt-Anchor" href="#loss"></a> Loss</h3>
+<hr />
 <p>每层的GAN采用了三种Loss训练：</p>
-<p>$${<br>    \mathcal{L}_{G_{i}} = \lambda_{1} \mathcal{L}_{G_{i}}^{adv}  + \lambda_{2} \mathcal{L}_{G_{i}}^{cond} + \lambda_{3} \mathcal{L}_{G_{i}}^{ent}<br>}$$</p>
+<p>$${<br />
+\mathcal{L}_{G_{i}} = \lambda_{1} \mathcal{L}_{G_{i}}^{adv}  + \lambda_{2} \mathcal{L}_{G_{i}}^{cond} + \lambda_{3} \mathcal{L}_{G_{i}}^{ent}<br />
+}$$</p>
 <p><strong>GAN Loss</strong></p>
 <p>GAN Loss使用的原始paper中提到的修改过的Vanilla GAN Loss，每个层级的${D_{i}}$需要鉴别该层级的真实的图片输入的feature${h_{i}}$和${G_{i}}$生成的feature${\hat{h_{i}}}$的真实性。</p>
-<p>$${<br>    D_{i}^{*} = \max \left[ \mathbb{E}_{h_{i}}[ \log D_{i}(h_{i})] + \mathbb{E}_{h_{i+1},z}[ \log( 1 - D_{i}(G_{i}(h_{i+1}, z)))] \right]<br>}$$</p>
-<p>$${<br>    G_{i}^{*} = \max \mathbb{E}_{h_{i+1}, z}[ \log(D_{i}(G_{i}(h_{i+1},z)))]<br>}$$</p>
+<p>$${<br />
+D_{i}^{\ast} = \max \left[ \mathbb{E}_{h_{i}}[ \log D_{i}(h_{i})] + \mathbb{E}_{h_{i+1},z}[ \log( 1 - D_{i}(G_{i}(h_{i+1}, z)))] \right]<br />
+}$$</p>
+<p>$${<br />
+G_{i}^{\ast} = \max \mathbb{E}_{h_{i+1}, z}[ \log(D_{i}(G_{i}(h_{i+1},z)))]<br />
+}$$</p>
 <p><strong>Conditional Loss</strong></p>
 <p>Idea是<strong>防止${G_{i}}$忽略conditional的信息</strong>${h_{i+1}}$，在<strong>某种意义上可以看成是重建的Loss</strong>。</p>
 <p>具体做法是将${\hat{h_{i}}}$再带入到${E_{i}}$中得到${h_{i+1}^{\prime}}$，优化它和${h_{i+1}}$的差异。</p>
-<p>$${<br>    \mathcal{L}_{G_{i}}^{cond} = \mathbb{E}_{h_{i+1},z} [f(E_{i}(G_{i}(h_{i+1},z)), h_{i+1}) ]<br>}$$</p>
+<p>$${<br />
+\mathcal{L}_{G_{i}}^{cond} = \mathbb{E}_{h_{i+1},z} [f(E_{i}(G_{i}(h_{i+1},z)), h_{i+1}) ]<br />
+}$$</p>
 <p><strong>Entropy Loss</strong></p>
 <p>使用conditional loss的同时，<strong>GAN又可能会忽略噪声${z}$的影响</strong>，所以这一项是为了防止忽略噪声，我觉得可以把conditional loss看成重建误差，目的是提高图片质量，而这里的误差可以看成是为了提高生成图片的多样性，所以也很像一个图像质量和多样性的trade-off。</p>
 <p>作者首先提到现有（当时）的方法没有很好地解决这一问题，接着从信息熵的角度提出了和InfoGAN类似的方法。</p>
-<p>$${<br>    \mathcal{L}_{G_{i}}^{ent} = \mathbb{E}_{z_{i}} [ \mathbb{E}_{\hat{h_{i}}} [ -\log Q_{i}(z_{i} \vert \hat{h_{i}})] ]<br>}$$</p>
+<p>$${<br />
+\mathcal{L}_{G_{i}}^{ent} = \mathbb{E}_{z_{i}} [ \mathbb{E}_{\hat{h_{i}}} [ -\log Q_{i}(z_{i} \vert \hat{h_{i}})] ]<br />
+}$$</p>
 <p>为了鼓励diversity，转化成<strong>提高${G_{i}}$的建模的分布${p(\hat{h_{i}}\vert h_{i+1})}$的熵</strong>：${H(\hat{h_{i}}\vert h_{i+1})}$，<strong>作者用<code>Variational Conditional Entropy Maximization</code> 的方法证明了优化上式的Entropy Loss是提高熵（证明不详述，和InfoGAN中的证明非常类似）</strong>。</p>
 <p>思想也是用一个${Q_{i}}$分布去近似后验分布${P_{i}(z\vert \hat{h_{i}})}$，实际中${Q_{i}}$由一个参数化的DNN输出，然后一样地和${D_{i}}$权值共享，一样地对连续分布，看成高斯分布，不一样的是，${Q_{i}}$仅输出均值，而方差给定。</p>
 <p>问题：为什么这样一来，最后说${\mathcal{L}_{G_{i}}^{ent}}$等价L2重建误差？</p>
-<h2 id="References"><a href="#References" class="headerlink" title="References"></a>References</h2><ol>
-<li>Xun Huang, Yixuan Li, <strong>Stacked Generative Adversarial Networks</strong>. </li>
+<h2 id="references"><a class="markdownIt-Anchor" href="#references"></a> References</h2>
+<ol>
+<li>Xun Huang, Yixuan Li, <strong>Stacked Generative Adversarial Networks</strong>.</li>
 </ol>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="mercurixito.github.io/2020/03/31/RP-GANs1/" data-id="ck8fjsaof0000jkucg6ksa0g2" class="article-share-link">Share</a>
+      <a data-url="mercurixito.github.io/2020/03/31/RP-GANs1/" data-id="ck96vk96a000558uca9lbgfya" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/GAN/" rel="tag">GAN</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Paper-Reading/" rel="tag">Paper Reading</a></li></ul>
@@ -186,7 +231,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">标签</h3>
     <div class="widget">
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Disentangled-Representation-Learning/" rel="tag">Disentangled Representation Learning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GAN/" rel="tag">GAN</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linear-Algebra/" rel="tag">Linear Algebra</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mathematic/" rel="tag">Mathematic</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Paper-Reading/" rel="tag">Paper Reading</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Probability/" rel="tag">Probability</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/disentanglement/" rel="tag">disentanglement</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/metrics/" rel="tag">metrics</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/resources/" rel="tag">resources</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9D%82%E8%B0%88/" rel="tag">杂谈</a></li></ul>
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Disentangled-Representation-Learning/" rel="tag">Disentangled Representation Learning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GAN/" rel="tag">GAN</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linear-Algebra/" rel="tag">Linear Algebra</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mathematic/" rel="tag">Mathematic</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Paper-Reading/" rel="tag">Paper Reading</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Probability/" rel="tag">Probability</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/disentanglement/" rel="tag">disentanglement</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/metrics/" rel="tag">metrics</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/resources/" rel="tag">resources</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/unsupervised-gan-controlling/" rel="tag">unsupervised gan controlling</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9D%82%E8%B0%88/" rel="tag">杂谈</a></li></ul>
     </div>
   </div>
 
@@ -196,7 +241,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">标签云</h3>
     <div class="widget tagcloud">
-      <a href="/tags/Disentangled-Representation-Learning/" style="font-size: 10px;">Disentangled Representation Learning</a> <a href="/tags/GAN/" style="font-size: 20px;">GAN</a> <a href="/tags/Linear-Algebra/" style="font-size: 10px;">Linear Algebra</a> <a href="/tags/Mathematic/" style="font-size: 13.33px;">Mathematic</a> <a href="/tags/Paper-Reading/" style="font-size: 16.67px;">Paper Reading</a> <a href="/tags/Probability/" style="font-size: 10px;">Probability</a> <a href="/tags/disentanglement/" style="font-size: 10px;">disentanglement</a> <a href="/tags/metrics/" style="font-size: 13.33px;">metrics</a> <a href="/tags/resources/" style="font-size: 13.33px;">resources</a> <a href="/tags/%E6%9D%82%E8%B0%88/" style="font-size: 13.33px;">杂谈</a>
+      <a href="/tags/Disentangled-Representation-Learning/" style="font-size: 10px;">Disentangled Representation Learning</a> <a href="/tags/GAN/" style="font-size: 20px;">GAN</a> <a href="/tags/Linear-Algebra/" style="font-size: 10px;">Linear Algebra</a> <a href="/tags/Mathematic/" style="font-size: 12.5px;">Mathematic</a> <a href="/tags/Paper-Reading/" style="font-size: 17.5px;">Paper Reading</a> <a href="/tags/Probability/" style="font-size: 10px;">Probability</a> <a href="/tags/disentanglement/" style="font-size: 10px;">disentanglement</a> <a href="/tags/metrics/" style="font-size: 12.5px;">metrics</a> <a href="/tags/resources/" style="font-size: 12.5px;">resources</a> <a href="/tags/unsupervised-gan-controlling/" style="font-size: 15px;">unsupervised gan controlling</a> <a href="/tags/%E6%9D%82%E8%B0%88/" style="font-size: 15px;">杂谈</a>
     </div>
   </div>
 
@@ -218,23 +263,23 @@
       <ul>
         
           <li>
+            <a href="/2020/04/19/Talk-need2/">Talk-need2</a>
+          </li>
+        
+          <li>
+            <a href="/2020/04/17/RP-controlling/">论文研读：Controlling generative models with continuous factors of variations</a>
+          </li>
+        
+          <li>
+            <a href="/2020/04/10/RP-GANalyse/">论文研读： GANalyze: Toward visual definitions of cognitive image properties.</a>
+          </li>
+        
+          <li>
             <a href="/2020/04/03/RP-InterFaceGAN/">论文研读：InterFaceGAN</a>
           </li>
         
           <li>
             <a href="/2020/03/31/RP-GANs1/">论文略读： SGAN(Stacked GAN)</a>
-          </li>
-        
-          <li>
-            <a href="/2020/03/30/Resources-GAN/">Resources： GAN</a>
-          </li>
-        
-          <li>
-            <a href="/2020/03/30/Resources-Disentangled-Representation-Learning/">Resources： Disentangled Representation Learning</a>
-          </li>
-        
-          <li>
-            <a href="/2020/03/27/RP-steerability/">论文研读： on the steerabilty of generative adversarial networks</a>
           </li>
         
       </ul>

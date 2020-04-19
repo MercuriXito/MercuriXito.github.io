@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
+<!--   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0-rc.1/dist/katex.min.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.10.0-rc.1/dist/katex.min.js"></script> -->
+
+  <!-- Default Mathjax Support -->
+  <script type="text/x-mathjax-config">
+     MathJax.Hub.Config({"HTML-CSS": { preferredFont: "TeX", availableFonts: ["STIX","TeX"], linebreaks: { automatic:true }, EqnChunk: (MathJax.Hub.Browser.isMobile ? 10 : 50) },
+          tex2jax: { inlineMath: [ ["$", "$"], ["\\(","\\)"] ], processEscapes: true, ignoreClass: "tex2jax_ignore|dno",skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']},
+          TeX: {  noUndefined: { attributes: { mathcolor: "red", mathbackground: "#FFEEEE", mathsize: "90%" } }, Macros: { href: "{}" } },
+          messageStyle: "none"
+      }); 
+  </script>
+  <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+          var all = MathJax.Hub.getAllJax(), i;
+          for(i=0; i < all.length; i += 1) {
+              all[i].SourceElement().parentNode.className += ' has-jax';
+          }
+      });
+  </script>
+  <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+  <title>论文研读：Controlling generative models with continuous factors of variations | Hako</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="本文针对&quot;Controlling generative models with continuous factors of variations&quot;[1] 一文学习。  problem 本文和之前阅读的论文问题也差不多：针对连续的变换${T}$，在latent space上寻找方向${\vec{u}}$，使得生成的图像是原图像经过${T}$变换后的图像。 是一种无监督（或者自监督">
+<meta property="og:type" content="article">
+<meta property="og:title" content="论文研读：Controlling generative models with continuous factors of variations">
+<meta property="og:url" content="mercurixito.github.io/2020/04/17/RP-controlling/index.html">
+<meta property="og:site_name" content="Hako">
+<meta property="og:description" content="本文针对&quot;Controlling generative models with continuous factors of variations&quot;[1] 一文学习。  problem 本文和之前阅读的论文问题也差不多：针对连续的变换${T}$，在latent space上寻找方向${\vec{u}}$，使得生成的图像是原图像经过${T}$变换后的图像。 是一种无监督（或者自监督">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="/images/2020-04-17/algorithm.png">
+<meta property="article:published_time" content="2020-04-17T09:17:11.000Z">
+<meta property="article:modified_time" content="2020-04-19T09:43:07.278Z">
+<meta property="article:author" content="Victor Chen">
+<meta property="article:tag" content="GAN">
+<meta property="article:tag" content="Paper Reading">
+<meta property="article:tag" content="unsupervised gan controlling">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="/images/2020-04-17/algorithm.png">
+  
+    <link rel="alternate" href="/atom.xml" title="Hako" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 4.2.0"><!-- hexo-inject:begin --><!-- hexo-inject:end --></head>
+
+<body>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hako</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="mercurixito.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-RP-controlling" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/04/17/RP-controlling/" class="article-date">
+  <time datetime="2020-04-17T09:17:11.000Z" itemprop="datePublished">2020-04-17</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      论文研读：Controlling generative models with continuous factors of variations
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>本文针对&quot;Controlling generative models with continuous factors of variations&quot;[1] 一文学习。</p>
+<h3 id="problem"><a class="markdownIt-Anchor" href="#problem"></a> problem</h3>
+<p>本文和之前阅读的论文问题也差不多：针对<strong>连续</strong>的变换${T}$，<strong>在latent space上寻找方向${\vec{u}}$，使得生成的图像是原图像经过${T}$变换后的图像</strong>。</p>
+<p>是一种无监督（或者自监督）的控制GAN生成图像的方法。</p>
+<a id="more"></a>
+<h3 id="paper-framework"><a class="markdownIt-Anchor" href="#paper-framework"></a> Paper Framework</h3>
+<p>整体的文章结构如下：</p>
+<ul>
+<li>
+<p>Introduction 简要介绍了GAN的发展和通过控制latent code修改生成图像的以往工作。</p>
+</li>
+<li>
+<p>Methods</p>
+</li>
+<li>
+<p>Experiments</p>
+<ul>
+<li>量化方法：对研究的三种变换（x,y轴平移，比例放缩）提出了基于saliency detection的量化方法，探究控制变换量${t}$和检测的实际变换量的关系，并记录实际变换量的方差（方差越小表示${t}$越能精确控制实际变换量大小）。</li>
+<li>Results on BigGAN：展示了BigGAN的结果，并对BigGAN不同层次注入的${z}$的影响进行了研究。</li>
+<li>The importance of disentangled representations：在训练好的${\beta}$-VAE上应用该方法。</li>
+</ul>
+</li>
+<li>
+<p>Related Work</p>
+</li>
+<li>
+<p>Appendix:</p>
+<ul>
+<li>分析使用MSE作为Reconstruction Loss函数的缺点：倾向忽略高频率信号影响，使图像模糊。</li>
+<li>说明用于dSprites数据集上图像生成的${\beta}$-VAE结构。</li>
+<li>超参数比较（LPIPS量化结果）：包括(1) ${\sigma}$(高斯核的方差) 的选择。(2) 是否 constraint。 (3) 比对其他的Reconstruction Loss。</li>
+<li>说明Inverse GAN求解的优化困难问题。</li>
+<li>展示了更多结果。</li>
+</ul>
+</li>
+</ul>
+<p>从文章结构来说，Appendix C部分应该放入实验部分。Related Work 一节放置在Introduction之后比较好。</p>
+<h3 id="methods"><a class="markdownIt-Anchor" href="#methods"></a> Methods</h3>
+<p>整体上，作者的研究思路是：</p>
+<p>先对原噪声${z_0}$生成的图像${I = G(z_0)}$经过变换${T_{\delta_t}}$（ 变换大小由${\delta_t}$决定）得到图像${I^{\prime}}$，求解Inverse GAN问题，即找到${I^{\prime}}$对应的latent codes ${z_{\delta_t}}$，并且得到由数对${\{ z_0, z_{\delta_t}, \delta_t \}}$组成的数据集。由该数据集研究求解某一种变换在latent space的方向${\vec{u}}$。</p>
+<p>所以，作者的主要理论性工作可以分为两步：首先是Inverse GAN，其次是求解variations对应的latent space上的方向${\vec{u}}$。</p>
+<h4 id="inverse-gan"><a class="markdownIt-Anchor" href="#inverse-gan"></a> Inverse GAN</h4>
+<p>Inverse GAN的问题是：对任意一张图像找到它在latent space上对应的点。寻找最优的latent codes ${z}$，使得GAN使用它生成的图像和目标图像的距离最小，距离由${\mathcal{L}(I_1,I_2)}$度量。</p>
+<p>$${<br />
+\hat{z} = \arg \min_{z \in \mathcal{Z}} \mathcal{L}(I,G(z))<br />
+}$$</p>
+<p>和Inverse GAN问题不同的是，这里的任意一张图像${I}$是原latent code ${z_0}$生成图像经过transform得到的。</p>
+<p>$${<br />
+I = T_{t}(G(z_0))<br />
+}$$</p>
+<p>本质上作者希望找到某种变化得到图像对应的latent codes的规律。</p>
+<p>由${z \sim \mathcal{N}(0,\mathbb{I}_{d})}$，则${|z| \sim \chi_{d}}$</p>
+<p>$${<br />
+\left\{<br />
+\begin{aligned}<br />
+\lim_{d \to +\infty} &amp;\mathbf{E}\left[ |z| \right] = \sqrt{d} \\<br />
+\lim_{d \to +\infty} &amp;\mathbf{Var}\left[ |z| \right] = 0 \\<br />
+\end{aligned}<br />
+\right.<br />
+}$$</p>
+<p>添加优化约束：${|z| \leq \sqrt{d}}$ (注：直观解释：<strong>限制${z}$的范围，避免生成图像的失真</strong>。)</p>
+<h4 id="reconstruction-loss"><a class="markdownIt-Anchor" href="#reconstruction-loss"></a> Reconstruction Loss</h4>
+<p>$${<br />
+\begin{aligned}<br />
+\mathcal{L}(I_1,I_2) &amp;= | \mathcal{F}{I_1 - I_2} \mathcal{F}(\sigma)|^{2} \\<br />
+&amp;= | (I_1 - I_2) \ast \sigma |^{2}<br />
+\end{aligned}<br />
+}$$</p>
+<p>其中${\sigma}$为高斯核，${\ast}$表示卷积运算。</p>
+<p>(注：选择原因：<strong>MSE会倾向更多地惩罚高频信号，使得图像模糊</strong>（原文Appendix A进行了理论分析），该选择使得对高频信号的penalty降低，使得图像更真实（可参考原文Appendix C对比实验）)</p>
+<h4 id="solve"><a class="markdownIt-Anchor" href="#solve"></a> Solve</h4>
+<p>原始问题：</p>
+<p>$${<br />
+z_{T} = \arg \min_{z \in \mathcal{Z}, |z| \leq \sqrt{d}}<br />
+\mathcal{L}(G(z),T_{T}(I))<br />
+}$$</p>
+<p>初始化对该问题求解影响大，作者提出迭代求解：将${T_{t}}$分解成一系列小的变换${T_{\delta_0}, T_{\delta_1}, \cdots, T_{\delta_N}}$，（其中${T_{\delta_0} = I, \delta_N = \delta_T}$），求解一系列的子问题，前一个子问题的最优值作为下一个子问题的初始值，迭代求解。</p>
+<p>$${<br />
+z_{n} = \arg \min_{z \in \mathcal{Z}, |z| \leq \sqrt{d}}<br />
+\mathcal{L}(G(z;z_{int} := z_{n-1}),T_{\delta_n}(z_0)) \qquad \text{for} \qquad n = 1, \cdots, N<br />
+}$$</p>
+<p>算法中的几个细节：</p>
+<ul>
+<li>${\mathcal{L}}$<strong>不计算未定义区域的值</strong>。（因为平移导致没有定义的区域）</li>
+<li>经过transformed的图像不一定在图像流形上，可能导致求解的最优latent code和tranformed的图像还是差的很多，所以<strong>作者抛弃求解得到的重建误差超过阈值的latent code。</strong></li>
+</ul>
+<p>如此可以得到${(z_{0},z_{\delta_n},\delta_n)}$组成的多对值，${z_{0}}$表示初始值，${z_{\delta_n}}$是求解的最优latent code，${\delta_n}$是${z_{0}}$和${z_{\delta_n}}$生成图像的变换程度之差。完整算法如算法1。(注：<strong>为了方便理解较原文算法有所改动</strong>)</p>
+<p><img src="/images/2020-04-17/algorithm.png" alt="InverseGAN 求解算法" /></p>
+<h4 id="defactor-the-variations"><a class="markdownIt-Anchor" href="#defactor-the-variations"></a> Defactor the variations</h4>
+<p>接下来作者寻找变换对应的方向${\vec{u}}$（\textbf{the way how factors of variations are encoded in the latent space} ）。作者提出假设：某一变换的变换程度${t}$可以从latent code在方向${\vec{u}}$上投影预测得到，即：</p>
+<p>$${<br />
+t = f(z) = g(\langle\vec{z},\vec{u}\rangle)<br />
+}$$</p>
+<p>限制${|\vec{u}| = 1}$，${g}$是分段线性函数。</p>
+<p>(注：在作者的代码实现中，${g}$表示成一个多个分段线性函数，为什么取分段线性函数，<strong>它的取法尚有疑问</strong>。不过，特殊地，如果${g_{\theta}(x) = \theta x}$，意味着此时${t}$直接和${\langle z, \vec{u} \rangle}$成线性关系，也是resonable的，所以作者更加合理地${g}$取成分段线性函数，<strong>但是如何选取分段会对最终的结果有影响吗，有多大的影响？</strong>)</p>
+<p>$${<br />
+t = f_{\theta,\vec{u}}(z) = g_{\theta}(\langle\vec{u},z\rangle)  \qquad |\vec{u}| = 1<br />
+}$$</p>
+<p>根据得到的数据集：${(z_{0},z_{\delta_t},\delta_t)}$不能直接得到${t}$，所以改成差分的形式：</p>
+<p>$${<br />
+\delta_{t} = t_{G(z_{\delta_t})} - t_{G(z_0)} =<br />
+f_{\theta,\vec{u}}(z_{\delta_t}) - f_{\theta,\vec{u}}(z_{0})  \qquad |\vec{u}| = 1 \qquad g_{\theta}(0) = 0<br />
+}$$</p>
+<p>其中${\vec{u}}$和${\theta}$是可学习的参数，${\vec{u}}$为相应变换在latent pace上移动方向。<strong>${f}$的训练如同回归训练，使用MSE Loss</strong>。</p>
+<p>在latent space上修改生成图像的变换大小由以下公式：</p>
+<p>$${<br />
+z = z - \langle z, \vec{u} \rangle \vec{u} + t \vec{u}<br />
+}$$</p>
+<h3 id="conclusions"><a class="markdownIt-Anchor" href="#conclusions"></a> Conclusions</h3>
+<p>实验得到的结论有：</p>
+<ul>
+<li>Results on BigGAN</li>
+</ul>
+<p>结论：<br />
+(1) 检测的变换量随控制变换量${t}$的增加而增加，方法有效。(2) 即使不同类使用同一个变换的${\vec{u}}$也可以达到相同的效果。(3) BigGAN 将 ${z}$ 分为六个部分注入到不同层，作者对这六个部分的${u}$的范数进行比较，通常都是第一个部分的${\vec{u}}$的范数最大，也就是它对控制器最大的作用，除此之外，y-position变换的第五个level的范数较其他两个变换范数偏大。作者将这一发现归因于变换会同时改变物体的纵向位置和背景，两种因素有相关性。(4) 当${t}$过大时，实际变换大小反而下降，作者认为一部分原因是当图像主要物体和图像差不多大时，saliency model的表现会变差，导致检测的实际变换大小不准确。</p>
+<ul>
+<li>Disentangled Representation</li>
+</ul>
+<p>对${\beta}$-VAE，${\beta}$越大，latent spaces越disentangled。该方法对${\beta}$-VAE也取得了相同的效果，而且${\beta}$越大，实际变换的大小的方差越小，效果越好。作者认为这说明latent space越disentangled，该方法表现越好。</p>
+<h3 id="问题"><a class="markdownIt-Anchor" href="#问题"></a> 问题</h3>
+<ul>
+<li>${f_{\theta, \vec{u}}}$ 函数</li>
+</ul>
+<p>从文中看${f_{\theta, \vec{u}}}$的作用仅仅在于求解${\vec{u}}$上了。我认为${f_{\theta, \vec{u}}}$函数在预测程度上是否准确，可以从侧面反映${\vec{u}}$的可靠性，而作者并没有对此深入，导致这个函数整体比较鸡肋。</p>
+<ul>
+<li>本篇文章也没有对方法的限度继续实验，继续增大或者减小${t}$，生成的图像一定会出现失真或者实际可变换的大小不能继续改变的情况，如何改善该问题是一个值得思考的方向。</li>
+</ul>
+<p>本文比较有意义的是提出了一种新的Inverse GAN的方法，而且很有意思地构造了数据集${D}$，数据集${D}$的进一步探索可能会带来一些新的想法。</p>
+<h2 id="reference"><a class="markdownIt-Anchor" href="#reference"></a> Reference</h2>
+<hr />
+<p>[1] Plumerault, A., Borgne, H. Le, &amp; Hudelot, C. (2020). Controlling generative models with continuous factors of variations. 1–16. <a href="http://arxiv.org/abs/2001.10238" target="_blank" rel="noopener">http://arxiv.org/abs/2001.10238</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="mercurixito.github.io/2020/04/17/RP-controlling/" data-id="ck96vk96g000c58ucbihg1c1y" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/GAN/" rel="tag">GAN</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Paper-Reading/" rel="tag">Paper Reading</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/unsupervised-gan-controlling/" rel="tag">unsupervised gan controlling</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2020/04/19/Talk-need2/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Talk-need2
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2020/04/10/RP-GANalyse/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">论文研读： GANalyze: Toward visual definitions of cognitive image properties.</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Disentangled-Representation-Learning/" rel="tag">Disentangled Representation Learning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GAN/" rel="tag">GAN</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linear-Algebra/" rel="tag">Linear Algebra</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mathematic/" rel="tag">Mathematic</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Paper-Reading/" rel="tag">Paper Reading</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Probability/" rel="tag">Probability</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/disentanglement/" rel="tag">disentanglement</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/metrics/" rel="tag">metrics</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/resources/" rel="tag">resources</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/unsupervised-gan-controlling/" rel="tag">unsupervised gan controlling</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9D%82%E8%B0%88/" rel="tag">杂谈</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Disentangled-Representation-Learning/" style="font-size: 10px;">Disentangled Representation Learning</a> <a href="/tags/GAN/" style="font-size: 20px;">GAN</a> <a href="/tags/Linear-Algebra/" style="font-size: 10px;">Linear Algebra</a> <a href="/tags/Mathematic/" style="font-size: 12.5px;">Mathematic</a> <a href="/tags/Paper-Reading/" style="font-size: 17.5px;">Paper Reading</a> <a href="/tags/Probability/" style="font-size: 10px;">Probability</a> <a href="/tags/disentanglement/" style="font-size: 10px;">disentanglement</a> <a href="/tags/metrics/" style="font-size: 12.5px;">metrics</a> <a href="/tags/resources/" style="font-size: 12.5px;">resources</a> <a href="/tags/unsupervised-gan-controlling/" style="font-size: 15px;">unsupervised gan controlling</a> <a href="/tags/%E6%9D%82%E8%B0%88/" style="font-size: 15px;">杂谈</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">四月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">三月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">二月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">十月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">九月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">五月 2019</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2020/04/19/Talk-need2/">Talk-need2</a>
+          </li>
+        
+          <li>
+            <a href="/2020/04/17/RP-controlling/">论文研读：Controlling generative models with continuous factors of variations</a>
+          </li>
+        
+          <li>
+            <a href="/2020/04/10/RP-GANalyse/">论文研读： GANalyze: Toward visual definitions of cognitive image properties.</a>
+          </li>
+        
+          <li>
+            <a href="/2020/04/03/RP-InterFaceGAN/">论文研读：InterFaceGAN</a>
+          </li>
+        
+          <li>
+            <a href="/2020/03/31/RP-GANs1/">论文略读： SGAN(Stacked GAN)</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2020 Victor Chen<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a><br>
+      banner image from <a href="https://www.pixiv.net/artworks/80036479" target="_blank">This</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}},"extensions":["tex2jax.js"],"jax":["input/TeX","output/HTML-CSS"]});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+</body>
+</html>

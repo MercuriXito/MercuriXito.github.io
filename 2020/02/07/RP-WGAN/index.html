@@ -2,17 +2,36 @@
 <html>
 <head>
   <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
-  
+<!--   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0-rc.1/dist/katex.min.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.10.0-rc.1/dist/katex.min.js"></script> -->
+
+  <!-- Default Mathjax Support -->
+  <script type="text/x-mathjax-config">
+     MathJax.Hub.Config({"HTML-CSS": { preferredFont: "TeX", availableFonts: ["STIX","TeX"], linebreaks: { automatic:true }, EqnChunk: (MathJax.Hub.Browser.isMobile ? 10 : 50) },
+          tex2jax: { inlineMath: [ ["$", "$"], ["\\(","\\)"] ], processEscapes: true, ignoreClass: "tex2jax_ignore|dno",skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']},
+          TeX: {  noUndefined: { attributes: { mathcolor: "red", mathbackground: "#FFEEEE", mathsize: "90%" } }, Macros: { href: "{}" } },
+          messageStyle: "none"
+      }); 
+  </script>
+  <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+          var all = MathJax.Hub.getAllJax(), i;
+          for(i=0; i < all.length; i += 1) {
+              all[i].SourceElement().parentNode.className += ' has-jax';
+          }
+      });
+  </script>
+  <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 
   
   <title>论文研读：WGAN | Hako</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Introduction 生成式模型的目的：学习目标的分布（比如图像的分布）  通常的做法：  给定一类分布的族${P_{\Theta}}$，在这类族中，寻找最优的参数，使得可以逼近真实分布${P_{\tau}}$，通常的做法是 MLE，并且MLE正好和最小化${P_{\Theta}}$和${P_{\tau}}$的KL距离等价。  问题是：这类函数族${P_{\Theta}}$和${P_{\tau">
+  <meta name="description" content="Introduction   生成式模型的目的：学习目标的分布（比如图像的分布） 通常的做法： 给定一类分布的族${P_{\Theta}}$，在这类族中，寻找最优的参数，使得可以逼近真实分布${P_{\tau}}$，通常的做法是 MLE，并且MLE正好和最小化${P_{\Theta}}$和${P_{\tau}}$的KL距离等价。 问题是：这类函数族${P_{\Theta}}$和${P_{\tau">
 <meta property="og:type" content="article">
 <meta property="og:title" content="论文研读：WGAN">
 <meta property="og:url" content="mercurixito.github.io/2020/02/07/RP-WGAN/index.html">
 <meta property="og:site_name" content="Hako">
-<meta property="og:description" content="Introduction 生成式模型的目的：学习目标的分布（比如图像的分布）  通常的做法：  给定一类分布的族${P_{\Theta}}$，在这类族中，寻找最优的参数，使得可以逼近真实分布${P_{\tau}}$，通常的做法是 MLE，并且MLE正好和最小化${P_{\Theta}}$和${P_{\tau}}$的KL距离等价。  问题是：这类函数族${P_{\Theta}}$和${P_{\tau">
+<meta property="og:description" content="Introduction   生成式模型的目的：学习目标的分布（比如图像的分布） 通常的做法： 给定一类分布的族${P_{\Theta}}$，在这类族中，寻找最优的参数，使得可以逼近真实分布${P_{\tau}}$，通常的做法是 MLE，并且MLE正好和最小化${P_{\Theta}}$和${P_{\tau}}$的KL距离等价。 问题是：这类函数族${P_{\Theta}}$和${P_{\tau">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="/images/2020-02-07/WGAN-algorithms.png">
 <meta property="article:published_time" content="2020-02-07T08:41:13.000Z">
@@ -92,14 +111,17 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><ol>
-<li><p>生成式模型的目的：学习目标的分布（比如图像的分布）</p>
-<p> 通常的做法：</p>
-<p> 给定一类分布的族${P_{\Theta}}$，在这类族中，寻找最优的参数，使得可以逼近真实分布${P_{\tau}}$，通常的做法是 MLE，并且MLE正好和最小化${P_{\Theta}}$和${P_{\tau}}$的KL距离等价。</p>
-<p> <strong>问题是</strong>：这类函数族${P_{\Theta}}$和${P_{\tau}}$可能没有多大的交集，所以通常会选择${P_{\Theta}}$为高斯分布，能够尽可能多地涵盖分布。</p>
+        <h2 id="introduction"><a class="markdownIt-Anchor" href="#introduction"></a> Introduction</h2>
+<ol>
+<li>
+<p>生成式模型的目的：学习目标的分布（比如图像的分布）</p>
+<p>通常的做法：</p>
+<p>给定一类分布的族${P_{\Theta}}$，在这类族中，寻找最优的参数，使得可以逼近真实分布${P_{\tau}}$，通常的做法是 MLE，并且MLE正好和最小化${P_{\Theta}}$和${P_{\tau}}$的KL距离等价。</p>
+<p><strong>问题是</strong>：这类函数族${P_{\Theta}}$和${P_{\tau}}$可能没有多大的交集，所以通常会选择${P_{\Theta}}$为高斯分布，能够尽可能多地涵盖分布。</p>
 </li>
-<li><p>Modern way:</p>
-<p> 现在一般的做法是：给定一个随机的噪声${Z}$，寻找一个分布的映射函数${f_{W}}$，将${Z}$映射到分布${P_{g}}$，使得${P_{g}}$和${P_{r}}$接近，已有的这方面的工作包括：</p>
+<li>
+<p>Modern way:</p>
+<p>现在一般的做法是：给定一个随机的噪声${Z}$，寻找一个分布的映射函数${f_{W}}$，将${Z}$映射到分布${P_{g}}$，使得${P_{g}}$和${P_{r}}$接近，已有的这方面的工作包括：</p>
 <ul>
 <li>VAE（变分自编码器）</li>
 <li>GAN</li>
@@ -107,127 +129,185 @@
 </li>
 </ol>
 <a id="more"></a>
-
-<h2 id="Distances"><a href="#Distances" class="headerlink" title="Distances"></a>Distances</h2><p>使${P_{g}}$和${P_{r}}$接近可以通过优化二者的距离的度量，所以选择合适的分布的距离的度量十分重要，好的度量应该具有良好的函数性质(如连续、一致连续等)便于优化，而且对所有分布都能够真实反映二者的距离，以下作者对四种距离做了分析：</p>
+<h2 id="distances"><a class="markdownIt-Anchor" href="#distances"></a> Distances</h2>
+<p>使${P_{g}}$和${P_{r}}$接近可以通过优化二者的距离的度量，所以选择合适的分布的距离的度量十分重要，好的度量应该具有良好的函数性质(如连续、一致连续等)便于优化，而且对所有分布都能够真实反映二者的距离，以下作者对四种距离做了分析：</p>
 <p>定义${\mathcal{X}}$为<code>compact metrix set</code>(随机变量)，${\Sigma}$是${\mathcal{X}}$的波莱尔子集(?)，${\mathrm{Prob}(\mathcal{X})}$是所有定义在${\mathcal{X}}$上的分布的空间，对于两个分布${\mathbb{P}_{r}, \mathbb{P}_{g} \in \mathrm{Prob}(\mathcal{X})}$有以下的距离的定义：</p>
 <ul>
 <li>TV 距离：</li>
 </ul>
-<p>$${<br>    \delta(\mathbb{P}_{r}, \mathbb{P}_{g}) = \sup_{A \in \Sigma}| \mathbb{P}_{r}(A) - \mathbb{P}_{g}(A) |<br>}$$</p>
+<p>$${<br />
+\delta(\mathbb{P}_{r}, \mathbb{P}_{g}) = \sup_{A \in \Sigma}| \mathbb{P}_{r}(A) - \mathbb{P}_{g}(A) |<br />
+}$$</p>
 <ul>
 <li>KL 距离：</li>
 </ul>
-<p>$${<br>    KL(\mathbb{P}_{r} \vert \vert \mathbb{P}_{g}) = \int \log \left( \frac{\mathbb{P}_{r}(x)}{\mathbb{P}_{g}(x)} \right) \mathbb{P}_{r}(x) d \mu(x)<br>}$$</p>
+<p>$${<br />
+KL(\mathbb{P}_{r} \vert \vert \mathbb{P}_{g}) = \int \log \left( \frac{\mathbb{P}_{r}(x)}{\mathbb{P}_{g}(x)} \right) \mathbb{P}_{r}(x) d \mu(x)<br />
+}$$</p>
 <ul>
 <li>JS 距离：</li>
 </ul>
-<p>$${<br>    JS(\mathbb{P}_{r} \vert \vert \mathbb{P}_{g}) = \frac{1}{2}\left( KL(\mathbb{P}_{r} \vert \vert \mathbb{P}_{m}) + KL(\mathbb{P}_{g} \vert \vert \mathbb{P}_{m}) \right)<br>}$$</p>
+<p>$${<br />
+JS(\mathbb{P}_{r} \vert \vert \mathbb{P}_{g}) = \frac{1}{2}\left( KL(\mathbb{P}_{r} \vert \vert \mathbb{P}_{m}) + KL(\mathbb{P}_{g} \vert \vert \mathbb{P}_{m}) \right)<br />
+}$$</p>
 <p>(注：原论文这有笔误)</p>
 <ul>
 <li>EM(Earth Move) or Wasserstain-1 距离：</li>
 </ul>
-<p>$${<br>    W(\mathbb{P}_{r}, \mathbb{P}_{g}) = \inf_{\gamma \in \prod(\mathbb{P}_{r}, \mathbb{P}_{g})} \mathbb{E}_{(x,y) \sim \gamma} | x - y |<br>}$$</p>
+<p>$${<br />
+W(\mathbb{P}_{r}, \mathbb{P}_{g}) = \inf_{\gamma \in \prod(\mathbb{P}_{r}, \mathbb{P}_{g})} \mathbb{E}_{(x,y) \sim \gamma} | x - y |<br />
+}$$</p>
 <p>这四种距离:</p>
 <ul>
-<li><p>KL距离的缺点是：不对称，即${KL(\mathbb{P}_{r} \vert \vert \mathbb{P}_{g}) \neq KL(\mathbb{P}_{g} \vert \vert \mathbb{P}_{g})}$，作者指出的KL距离包含的问题有:</p>
+<li>
+<p>KL距离的缺点是：不对称，即${KL(\mathbb{P}_{r} \vert \vert \mathbb{P}_{g}) \neq KL(\mathbb{P}_{g} \vert \vert \mathbb{P}_{g})}$，作者指出的KL距离包含的问题有:</p>
 <ul>
-<li><p>如果两个分布${\mathbb{P}_{r}, \mathbb{P}_{g}}$几乎没有什么交集，那么KL距离会变得没有定义(趋向正无穷)。</p>
-<p>  ${\mathbb{P}_{r},\mathbb{P}_{g}}$没有什么交集，当${\mathbb{P}_{r}}$取概率比较大的随机变量${\mathcal{X}}$的值时，${\mathbb{P}_{g}(\mathcal{X}) \to 0}$，KL距离中，log函数的分子趋向0，整个值趋向正无穷。</p>
+<li>
+<p>如果两个分布${\mathbb{P}_{r}, \mathbb{P}_{g}}$几乎没有什么交集，那么KL距离会变得没有定义(趋向正无穷)。</p>
+<p>${\mathbb{P}_{r},\mathbb{P}_{g}}$没有什么交集，当${\mathbb{P}_{r}}$取概率比较大的随机变量${\mathcal{X}}$的值时，${\mathbb{P}_{g}(\mathcal{X}) \to 0}$，KL距离中，log函数的分子趋向0，整个值趋向正无穷。</p>
 </li>
 </ul>
 </li>
-<li><p>其中<strong>JS距离是KL距离的优化</strong>，${\mathbb{P}_{m}}$取${\frac{\mathbb{P}_{r} + \mathbb{P}_{g}}{2}}$，它是对称的。</p>
+<li>
+<p>其中<strong>JS距离是KL距离的优化</strong>，${\mathbb{P}_{m}}$取${\frac{\mathbb{P}_{r} + \mathbb{P}_{g}}{2}}$，它是对称的。</p>
 <ul>
 <li>JS 距离是对称的，而且它对任意的两个分布都是有定义的。</li>
 </ul>
 </li>
-<li><p>TV距离是对两个分布，同一个样本出现的最大值。</p>
+<li>
+<p>TV距离是对两个分布，同一个样本出现的最大值。</p>
 </li>
-<li><p>EM(Wassertain-1)距离理解起来有点抽象，其中${\prod(\mathbb{P}_{r}, \mathbb{P}_{g})}$是联合分布${\gamma}$的集合，集合中的每一个元素(每一个联合分布)${\gamma}$，它的边缘分布是${\mathbb{P}_{r}}$和${\mathbb{P}_{g}}$。</p>
+<li>
+<p>EM(Wassertain-1)距离理解起来有点抽象，其中${\prod(\mathbb{P}_{r}, \mathbb{P}_{g})}$是联合分布${\gamma}$的集合，集合中的每一个元素(每一个联合分布)${\gamma}$，它的边缘分布是${\mathbb{P}_{r}}$和${\mathbb{P}_{g}}$。</p>
 </li>
 </ul>
-<h3 id="Examples"><a href="#Examples" class="headerlink" title="Examples"></a>Examples</h3><p>文章作者举了例子来阐述了EM距离在连续性上的优越性：</p>
+<h3 id="examples"><a class="markdownIt-Anchor" href="#examples"></a> Examples</h3>
+<p>文章作者举了例子来阐述了EM距离在连续性上的优越性：</p>
 <p>令${Z \sim U[0,1]}$，${\mathbb{P}_{0}}$是${(0,Z)}$二维随机变量的分布，而${\mathbb{P}_{\theta}}$是二维随机变量${(\theta, Z)}$的随机分布族，其中${\theta}$是超参数。</p>
 <p>可以发现，当且仅当${\theta = 0}$时，${\mathbb{P}_{0}}$和${\mathbb{P}_{\theta}}$<strong>是同一分布</strong>，而当${\theta \neq 0}$时，${\mathbb{P}_{0}}$和${\mathbb{P}_{\theta}}$<strong>是完全没有交集的两个分布</strong>，下面我们可以分情况计算这四种距离：</p>
 <ul>
 <li>KL 距离：同一分布时${KL(\mathbb{P}_{0} \vert \vert \mathbb{P}_{\theta}) = 0}$，而完全没有交集的两个分布时，${KL(\mathbb{P}_{0} \vert \vert \mathbb{P}_{\theta}) = \infty}$，即：</li>
 </ul>
-<p>$${<br>\begin{aligned}<br>    KL(\mathbb{P}_{0} \vert \vert \mathbb{P}_{\theta}) =&amp; 0 \quad &amp; iff \quad \theta = 0 \\<br>    &amp; \infty \quad  &amp; iff \quad \theta \neq 0<br>\end{aligned}<br>}$$</p>
+<p>$${<br />
+\begin{aligned}<br />
+KL(\mathbb{P}_{0} \vert \vert \mathbb{P}_{\theta}) =&amp; 0 \quad &amp; iff \quad \theta = 0 \<br />
+&amp; \infty \quad  &amp; iff \quad \theta \neq 0<br />
+\end{aligned}<br />
+}$$</p>
 <ul>
 <li>JS 距离：同一分布的情况下，同样JS距离也是0，不同分布下：</li>
 </ul>
 <p>$${JS(\mathbb{P}_{0}, \mathbb{P}_{\theta}) = KL(\mathbb{P}_{0} \vert \vert \mathbb{P}_{m}) + KL(\mathbb{P}_{\theta} \vert \vert \mathbb{P}_{m}) }$$</p>
-<p>$${<br>\begin{aligned}<br>    KL(\mathbb{P}_{0} \vert \vert \mathbb{P}_{m}) &amp;= \int \log \left( \frac{\mathbb{P}_{0}(x)}{\frac{\mathbb{P}_{0}(x) + \mathbb{P}_{\theta}(x)}{2}} \right) \mathbb{P}_{0}(x) du(x) \\<br>    &amp;= \log 2 \int \mathbb{P}_{0}(x) du(x) \\<br>    &amp;= \log 2<br>\end{aligned}<br>}$$</p>
+<p>$${<br />
+\begin{aligned}<br />
+KL(\mathbb{P}_{0} \vert \vert \mathbb{P}_{m}) &amp;= \int \log \left( \frac{\mathbb{P}_{0}(x)}{\frac{\mathbb{P}_{0}(x) + \mathbb{P}_{\theta}(x)}{2}} \right) \mathbb{P}_{0}(x) du(x) \<br />
+&amp;= \log 2 \int \mathbb{P}_{0}(x) du(x) \<br />
+&amp;= \log 2<br />
+\end{aligned}<br />
+}$$</p>
 <p>同理有：</p>
-<p>$${<br>    KL(\mathbb{P}_{\theta} \vert \vert \mathbb{P}_{m}) = \log 2<br>}$$</p>
+<p>$${<br />
+KL(\mathbb{P}_{\theta} \vert \vert \mathbb{P}_{m}) = \log 2<br />
+}$$</p>
 <p>则：</p>
-<p>$${<br>\begin{aligned}<br>    JS(\mathbb{P}_{0}, \mathbb{P}_{\theta}) =&amp; 0 \quad &amp; iff \quad \theta = 0 \\<br>    &amp; \log 2 \quad &amp;  iff \quad \theta \neq 0<br>\end{aligned}<br>}$$</p>
+<p>$${<br />
+\begin{aligned}<br />
+JS(\mathbb{P}_{0}, \mathbb{P}_{\theta}) =&amp; 0 \quad &amp; iff \quad \theta = 0 \<br />
+&amp; \log 2 \quad &amp;  iff \quad \theta \neq 0<br />
+\end{aligned}<br />
+}$$</p>
 <ul>
-<li><p>TV 距离：<br>  直观上很容易看出TV距离的值，当二者是同一分布时，对任意${A \in \Sigma}$，都有${\mathbb{P}_{0}(A) - \mathbb{P}_{\theta}(A)}$，则$TV(\mathbb{P}_{0},\mathbb{P}_{\theta}) = 0$。</p>
-<p>  当二者是完全没有交集的分布时，对同一个${A \in \Sigma}$，${| \mathbb{P}_{0}(A) - \mathbb{P}_{\theta}(A) |}$的最大值是1：概率取值在${[0,1]}$，最大的差就是1。</p>
-<p>  则有：</p>
+<li>
+<p>TV 距离：<br />
+直观上很容易看出TV距离的值，当二者是同一分布时，对任意${A \in \Sigma}$，都有${\mathbb{P}_{0}(A) - \mathbb{P}_{\theta}(A)}$，则$TV(\mathbb{P}_{0},\mathbb{P}_{\theta}) = 0$。</p>
+<p>当二者是完全没有交集的分布时，对同一个${A \in \Sigma}$，${| \mathbb{P}_{0}(A) - \mathbb{P}_{\theta}(A) |}$的最大值是1：概率取值在${[0,1]}$，最大的差就是1。</p>
+<p>则有：</p>
 </li>
 </ul>
-<p>$${<br>\begin{aligned}<br>    TV(\mathbb{P}_{0}, \mathbb{P}_{\theta}) =&amp; 0 \quad &amp; iff \quad \theta = 0 \\<br>    &amp; 1 \quad &amp;  iff \quad \theta \neq 0<br>\end{aligned}<br>}$$</p>
+<p>$${<br />
+\begin{aligned}<br />
+TV(\mathbb{P}_{0}, \mathbb{P}_{\theta}) =&amp; 0 \quad &amp; iff \quad \theta = 0 \<br />
+&amp; 1 \quad &amp;  iff \quad \theta \neq 0<br />
+\end{aligned}<br />
+}$$</p>
 <ul>
 <li>EM距离：</li>
 </ul>
-<p>$${<br>\begin{aligned}<br>    W(\mathbb{P}_{0}, \mathbb{P}_{\theta}) =&amp; \inf \mathbb{E}_{(x,y) \sim \gamma} | (0,Z) - (\theta, Z) | \\<br>    =&amp;  \inf \mathbb{E}_{(x,y) \sim \gamma} \vert \theta \vert \\<br>\end{aligned}<br>}$$</p>
+<p>$${<br />
+\begin{aligned}<br />
+W(\mathbb{P}_{0}, \mathbb{P}_{\theta}) =&amp; \inf \mathbb{E}_{(x,y) \sim \gamma} | (0,Z) - (\theta, Z) | \<br />
+=&amp;  \inf \mathbb{E}_{(x,y) \sim \gamma} \vert \theta \vert \<br />
+\end{aligned}<br />
+}$$</p>
 <p>又 ${\theta}$ 是常数。</p>
-<p>$${<br>    W(\mathbb{P}_{0}, \mathbb{P}_{\theta}) = \vert \theta \vert<br>}$$</p>
+<p>$${<br />
+W(\mathbb{P}_{0}, \mathbb{P}_{\theta}) = \vert \theta \vert<br />
+}$$</p>
 <p>比较这四种距离，发现只有EM距离对于${\theta}$是连续的，<strong>只有EM距离可以使得当${\theta \to 0}$时，分布族${(\mathbb{P}_{\theta_{t}})_{t \in \mathbb{N}}}$收敛到${\mathbb{P}_{0}}$</strong>，而且当两个分布完全不相交时，其他距离对于${\theta}$的导数是0，使得无法通过梯度下降学习。</p>
-<h2 id="WGAN-和-实际计算EM距离"><a href="#WGAN-和-实际计算EM距离" class="headerlink" title="WGAN 和 实际计算EM距离"></a>WGAN 和 实际计算EM距离</h2><p>EM距离中的${\inf}$计算是非常困难的，作者使用了Kantorovich-Rubinstein对偶，将距离变成了另一个公式：</p>
-<p>$${<br>    W(\mathbb{P}_{r}, \mathbb{P}_{\theta}) = sup_{|f|_{L} \leq 1} \mathbb{E}_{x \sim \mathbb{P}_{r}} [f(x)] - \mathbb{E}_{x \sim \mathbb{P}_{\theta}} [f(x)]<br>}$$</p>
+<h2 id="wgan-和-实际计算em距离"><a class="markdownIt-Anchor" href="#wgan-和-实际计算em距离"></a> WGAN 和 实际计算EM距离</h2>
+<p>EM距离中的${\inf}$计算是非常困难的，作者使用了Kantorovich-Rubinstein对偶，将距离变成了另一个公式：</p>
+<p>$${<br />
+W(\mathbb{P}_{r}, \mathbb{P}_{\theta}) = sup_{|f|_{L} \leq 1} \mathbb{E}_{x \sim \mathbb{P}_{r}} [f(x)] - \mathbb{E}_{x \sim \mathbb{P}_{\theta}} [f(x)]<br />
+}$$</p>
 <blockquote>
 <p>其中${f}$是${\mathcal{X} \to \mathbb{R}}$，即将随机变量映射到实数空间的函数。而且${f}$满足1-Lipschitz条件。</p>
 </blockquote>
 <p>上式的意思是，对所有满足<code>1-Lipschitz</code>的函数${f}$，${\mathbb{E}_{x \sim \mathbb{P}_{r}} [f(x)] - \mathbb{E}_{x \sim \mathbb{P}_{\theta}} [f(x)]}$ 的上确界。</p>
 <p>将<code>1-Lipschitz</code>条件替换为<code>K-Lipschitz</code>条件(${K}$为任意常数)，如果我们有满足<code>K-Lipschitz</code>条件的函数族${f_{w}}$(${w \in \mathcal{W}}$)，把求解${W(\mathbb{P}_{r},\mathbb{P}_{\theta})}$变成求最优值的问题：</p>
-<p>$${<br>    \max_{w \in \mathcal{W}}\mathbb{E}_{x \sim \mathbb{P}_{r}} [f_{w}(x)] - \mathbb{E}_{z \sim p(z)}[f_{w}(g_{\theta}(z))]<br>}$$</p>
+<p>$${<br />
+\max_{w \in \mathcal{W}}\mathbb{E}_{x \sim \mathbb{P}_{r}} [f_{w}(x)] - \mathbb{E}_{z \sim p(z)}[f_{w}(g_{\theta}(z))]<br />
+}$$</p>
 <p>这里就可以引入函数的万能近似器NN了，将其中的${f_{w}}$和${g_{\theta}}$替换，最终得到的WGAN的优化目标为：</p>
-<p>$${<br>    \min_{G} \max_{D \in \mathcal{D}} \mathbb{E}_{x \sim p_{data}}[D(x)] - \mathbb{E}_{z \sim p_{z}}[D(G(z))]<br>}$$</p>
+<p>$${<br />
+\min_{G} \max_{D \in \mathcal{D}} \mathbb{E}_{x \sim p_{data}}[D(x)] - \mathbb{E}_{z \sim p_{z}}[D(G(z))]<br />
+}$$</p>
 <p>其中${\mathcal{D}}$表示满足Lipschitz-1条件的函数族。</p>
 <p>WGAN的训练过程如下图所述：</p>
-<p><img src="/images/2020-02-07/WGAN-algorithms.png" alt="WGAN过程"></p>
+<p><img src="/images/2020-02-07/WGAN-algorithms.png" alt="WGAN过程" /></p>
 <p>不难看出D训练地越好，越能反应真实的Wasserstain距离，所以作者也提出可以<strong>将损失函数的值作为Wasserstain距离的近似，衡量WGAN学习的好坏。</strong></p>
 <p>总结的上图的要点有：</p>
 <ul>
-<li><p>改变原有的损失函数的计算方式。</p>
-</li>
-<li><p>使用权重裁剪(weight-clipping)处理D，使得它满足<code>1-Lipschitz</code>条件，通常c取0.01。</p>
+<li>改变原有的损失函数的计算方式。</li>
+<li>使用权重裁剪(weight-clipping)处理D，使得它满足<code>1-Lipschitz</code>条件，通常c取0.01。</li>
+</ul>
 <blockquote>
 <p>在WGAN-GP中论述了权重裁剪将使得D简单化，使用梯度惩罚(Gradient-Penalty)替代</p>
 </blockquote>
-</li>
-<li><p>使用RMSProp的方法替代带动量的优化算法（经验之谈）。</p>
-<blockquote>
-<p>在WGAN-GP使用的是Adam算法。 </p>
-</blockquote>
-</li>
+<ul>
+<li>使用RMSProp的方法替代带动量的优化算法（经验之谈）。</li>
 </ul>
-<h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><p>一点经验之谈： </p>
+<blockquote>
+<p>在WGAN-GP使用的是Adam算法。</p>
+</blockquote>
+<h2 id="其他"><a class="markdownIt-Anchor" href="#其他"></a> 其他</h2>
+<p>一点经验之谈：</p>
 <ul>
 <li>WGAN的<strong>收敛速度通常来说比较慢</strong>，要多训练几个epochs。</li>
-<li>WGAN<strong>容易收敛</strong>。 </li>
+<li>WGAN<strong>容易收敛</strong>。</li>
 <li><strong>Wasserstain距离的规律是开始逐渐增大，达到某个数值后开始减小</strong>：原因是开始训练D使得D比较好，D训练地比较好提供给G的梯度变大，使得G开始训练。</li>
 </ul>
 <p>WGAN使得训练GAN更加容易，至于Mode Collapse，作者只是提到在实验中并没有发现这一现象。</p>
-<h2 id="附录"><a href="#附录" class="headerlink" title="附录"></a>附录</h2><h4 id="1-Lipschitz条件"><a href="#1-Lipschitz条件" class="headerlink" title="1. Lipschitz条件"></a>1. Lipschitz条件</h4><p>Lipschitz条件的定义：</p>
+<h2 id="附录"><a class="markdownIt-Anchor" href="#附录"></a> 附录</h2>
+<h4 id="1-lipschitz条件"><a class="markdownIt-Anchor" href="#1-lipschitz条件"></a> 1. Lipschitz条件</h4>
+<p>Lipschitz条件的定义：</p>
 <blockquote>
-<p>  对函数${f(x)}$，对任意定义域内的点${x_{1},x_{2}}$，都存在${L}$，使得：</p>
+<p>对函数${f(x)}$，对任意定义域内的点${x_{1},x_{2}}$，都存在${L}$，使得：</p>
 </blockquote>
-<p>$${<br>    | f(x_{1}) - f(x_{2}) | \leq L | x_{1} - x_{2}  |<br>}$$</p>
+<p>$${<br />
+| f(x_{1}) - f(x_{2}) | \leq L | x_{1} - x_{2}  |<br />
+}$$</p>
 <p>直观上看，就是函数${f}$任意两点连线斜率小于${L}$。</p>
 <p>满足上述条件的函数也称Lipschitz连续，比起连续的函数，满足Lipschitz连续的函数更加光滑，而且它对函数的变化做了要求：<strong>函数在任意区间的变化不能超过线性的变化</strong>，<strong>线性变化的大小不超过Lipschitz常数${L}$</strong>。</p>
 <p>在非凸优化中，Lipschitz条件对函数定义了一类边界。</p>
-<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><ul>
+<h2 id="reference"><a class="markdownIt-Anchor" href="#reference"></a> Reference</h2>
+<ul>
 <li><a href="https://arxiv.org/abs/1701.07875" target="_blank" rel="noopener">Wasserstain Generative Adversarial Network</a></li>
 </ul>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="mercurixito.github.io/2020/02/07/RP-WGAN/" data-id="ck7ygs2jk0002bgucbsoy6f6a" class="article-share-link">Share</a>
+      <a data-url="mercurixito.github.io/2020/02/07/RP-WGAN/" data-id="ck96vk96f000a58uc7tdw1vzx" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/GAN/" rel="tag">GAN</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Paper-Reading/" rel="tag">Paper Reading</a></li></ul>
@@ -269,7 +349,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">标签</h3>
     <div class="widget">
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Disentangled-Representation-Learning/" rel="tag">Disentangled Representation Learning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GAN/" rel="tag">GAN</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linear-Algebra/" rel="tag">Linear Algebra</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mathematic/" rel="tag">Mathematic</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Paper-Reading/" rel="tag">Paper Reading</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Probability/" rel="tag">Probability</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/disentanglement/" rel="tag">disentanglement</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/metrics/" rel="tag">metrics</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/resources/" rel="tag">resources</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9D%82%E8%B0%88/" rel="tag">杂谈</a></li></ul>
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Disentangled-Representation-Learning/" rel="tag">Disentangled Representation Learning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GAN/" rel="tag">GAN</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linear-Algebra/" rel="tag">Linear Algebra</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mathematic/" rel="tag">Mathematic</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Paper-Reading/" rel="tag">Paper Reading</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Probability/" rel="tag">Probability</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/disentanglement/" rel="tag">disentanglement</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/metrics/" rel="tag">metrics</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/resources/" rel="tag">resources</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/unsupervised-gan-controlling/" rel="tag">unsupervised gan controlling</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9D%82%E8%B0%88/" rel="tag">杂谈</a></li></ul>
     </div>
   </div>
 
@@ -279,7 +359,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">标签云</h3>
     <div class="widget tagcloud">
-      <a href="/tags/Disentangled-Representation-Learning/" style="font-size: 10px;">Disentangled Representation Learning</a> <a href="/tags/GAN/" style="font-size: 20px;">GAN</a> <a href="/tags/Linear-Algebra/" style="font-size: 10px;">Linear Algebra</a> <a href="/tags/Mathematic/" style="font-size: 13.33px;">Mathematic</a> <a href="/tags/Paper-Reading/" style="font-size: 16.67px;">Paper Reading</a> <a href="/tags/Probability/" style="font-size: 10px;">Probability</a> <a href="/tags/disentanglement/" style="font-size: 10px;">disentanglement</a> <a href="/tags/metrics/" style="font-size: 13.33px;">metrics</a> <a href="/tags/resources/" style="font-size: 13.33px;">resources</a> <a href="/tags/%E6%9D%82%E8%B0%88/" style="font-size: 13.33px;">杂谈</a>
+      <a href="/tags/Disentangled-Representation-Learning/" style="font-size: 10px;">Disentangled Representation Learning</a> <a href="/tags/GAN/" style="font-size: 20px;">GAN</a> <a href="/tags/Linear-Algebra/" style="font-size: 10px;">Linear Algebra</a> <a href="/tags/Mathematic/" style="font-size: 12.5px;">Mathematic</a> <a href="/tags/Paper-Reading/" style="font-size: 17.5px;">Paper Reading</a> <a href="/tags/Probability/" style="font-size: 10px;">Probability</a> <a href="/tags/disentanglement/" style="font-size: 10px;">disentanglement</a> <a href="/tags/metrics/" style="font-size: 12.5px;">metrics</a> <a href="/tags/resources/" style="font-size: 12.5px;">resources</a> <a href="/tags/unsupervised-gan-controlling/" style="font-size: 15px;">unsupervised gan controlling</a> <a href="/tags/%E6%9D%82%E8%B0%88/" style="font-size: 15px;">杂谈</a>
     </div>
   </div>
 
@@ -301,23 +381,23 @@
       <ul>
         
           <li>
+            <a href="/2020/04/19/Talk-need2/">Talk-need2</a>
+          </li>
+        
+          <li>
+            <a href="/2020/04/17/RP-controlling/">论文研读：Controlling generative models with continuous factors of variations</a>
+          </li>
+        
+          <li>
+            <a href="/2020/04/10/RP-GANalyse/">论文研读： GANalyze: Toward visual definitions of cognitive image properties.</a>
+          </li>
+        
+          <li>
             <a href="/2020/04/03/RP-InterFaceGAN/">论文研读：InterFaceGAN</a>
           </li>
         
           <li>
             <a href="/2020/03/31/RP-GANs1/">论文略读： SGAN(Stacked GAN)</a>
-          </li>
-        
-          <li>
-            <a href="/2020/03/30/Resources-GAN/">Resources： GAN</a>
-          </li>
-        
-          <li>
-            <a href="/2020/03/30/Resources-Disentangled-Representation-Learning/">Resources： Disentangled Representation Learning</a>
-          </li>
-        
-          <li>
-            <a href="/2020/03/27/RP-steerability/">论文研读： on the steerabilty of generative adversarial networks</a>
           </li>
         
       </ul>

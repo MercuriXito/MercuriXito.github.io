@@ -2,17 +2,36 @@
 <html>
 <head>
   <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
-  
+<!--   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0-rc.1/dist/katex.min.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.10.0-rc.1/dist/katex.min.js"></script> -->
+
+  <!-- Default Mathjax Support -->
+  <script type="text/x-mathjax-config">
+     MathJax.Hub.Config({"HTML-CSS": { preferredFont: "TeX", availableFonts: ["STIX","TeX"], linebreaks: { automatic:true }, EqnChunk: (MathJax.Hub.Browser.isMobile ? 10 : 50) },
+          tex2jax: { inlineMath: [ ["$", "$"], ["\\(","\\)"] ], processEscapes: true, ignoreClass: "tex2jax_ignore|dno",skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']},
+          TeX: {  noUndefined: { attributes: { mathcolor: "red", mathbackground: "#FFEEEE", mathsize: "90%" } }, Macros: { href: "{}" } },
+          messageStyle: "none"
+      }); 
+  </script>
+  <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+          var all = MathJax.Hub.getAllJax(), i;
+          for(i=0; i < all.length; i += 1) {
+              all[i].SourceElement().parentNode.className += ' has-jax';
+          }
+      });
+  </script>
+  <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 
   
   <title>论文研读(1.1)：超深层网络加速 | Hako</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="前言 深入DL领域读论文是必不可少的工作(其实我还有别的原因)，本意是开个好头吧，然后主要是学习最新的思想，开拓下自己的眼界。我觉得论文研读主要是从翻译、理解、算法实现、实验几个方面下手。 最近研读的是Accelerating Very Deep Convolutional Networks for Classfication and Dectection，作者主要对“超深层网络”(文中对SPP-">
+  <meta name="description" content="前言  深入DL领域读论文是必不可少的工作(其实我还有别的原因)，本意是开个好头吧，然后主要是学习最新的思想，开拓下自己的眼界。我觉得论文研读主要是从翻译、理解、算法实现、实验几个方面下手。 最近研读的是Accelerating Very Deep Convolutional Networks for Classfication and Dectection，作者主要对“超深层网络”(文中对SP">
 <meta property="og:type" content="article">
 <meta property="og:title" content="论文研读(1.1)：超深层网络加速">
 <meta property="og:url" content="mercurixito.github.io/2019/05/26/RP-DNN-acc1/index.html">
 <meta property="og:site_name" content="Hako">
-<meta property="og:description" content="前言 深入DL领域读论文是必不可少的工作(其实我还有别的原因)，本意是开个好头吧，然后主要是学习最新的思想，开拓下自己的眼界。我觉得论文研读主要是从翻译、理解、算法实现、实验几个方面下手。 最近研读的是Accelerating Very Deep Convolutional Networks for Classfication and Dectection，作者主要对“超深层网络”(文中对SPP-">
+<meta property="og:description" content="前言  深入DL领域读论文是必不可少的工作(其实我还有别的原因)，本意是开个好头吧，然后主要是学习最新的思想，开拓下自己的眼界。我觉得论文研读主要是从翻译、理解、算法实现、实验几个方面下手。 最近研读的是Accelerating Very Deep Convolutional Networks for Classfication and Dectection，作者主要对“超深层网络”(文中对SP">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="/images/2019-05-26/fig1.png">
 <meta property="article:published_time" content="2019-05-26T08:48:31.000Z">
@@ -91,18 +110,21 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><hr>
+        <h2 id="前言"><a class="markdownIt-Anchor" href="#前言"></a> 前言</h2>
+<hr />
 <p>深入DL领域读论文是必不可少的工作(其实我还有别的原因)，本意是开个好头吧，然后主要是学习最新的思想，开拓下自己的眼界。我觉得论文研读主要是从翻译、理解、算法实现、实验几个方面下手。</p>
 <p>最近研读的是<a href="https://arxiv.org/abs/1505.06798" target="_blank" rel="noopener">Accelerating Very Deep Convolutional Networks for Classfication and Dectection</a>，作者主要对“超深层网络”(文中对SPP-10和VGG-16两种模型进行了实验)通过通道维度上的分解，达到加速的目的，并且提出了优化算法，显著降低了由于低秩分解带来的损失。</p>
 <a id="more"></a>
-
-<h2 id="研读"><a href="#研读" class="headerlink" title="研读"></a>研读</h2><hr>
+<h2 id="研读"><a class="markdownIt-Anchor" href="#研读"></a> 研读</h2>
+<hr />
 <p>主要包含一些重点的原文翻译、理解和引申思考。</p>
-<h3 id="引言与必要性"><a href="#引言与必要性" class="headerlink" title="引言与必要性"></a>引言与必要性</h3><hr>
+<h3 id="引言与必要性"><a class="markdownIt-Anchor" href="#引言与必要性"></a> 引言与必要性</h3>
+<hr />
 <p>这里简单地说一下必要性和实际意义。</p>
 <p>ML，DL领域的模型主要是训练和用其进行预测，这算是模型最基本的两个要素。一般来说预测的开销要远低于训练，人们对预测的开销的关注也高于训练的，因为在某些实际应用中，预测必须能在规定的时间内快速响应，或者是模型的预测必须要运行在较低计算能力的处理器上（比如移动设备）等。DL中的卷积神经网络(CNNs)在图像识别领域取得了巨大的成功，尤其是一些深层网络，比如VGG，ResNet等，其在ImageNet上预训练的模型也时常被用做图像特征的提取器。但是实际中由于网络层次的增加，整个网络的运行时间也随之增加，而且我们可以发现，运行CNNs时，其花销在卷积层上的时间可以达到90%以上(在VGG-16上的运行测试可以发现)。这限制了CNNs的应用，尤其是在移动设备、图像特征提取器方面。从卷积层方面加速CNNs是一个很好的课题。而原文的研究正是针对深层的CNN网络的test时间的加速。</p>
 <p>原文的相关工作一节中还提到，加速过程由两个重要的部分组成：(i)一种降低时间复杂度的层分解方法。(ii)分解设计的优化算法（即优化分解后得到的参数，使得它最大程度地近似原有的输出）。</p>
-<h3 id="线性加速方法"><a href="#线性加速方法" class="headerlink" title="线性加速方法"></a>线性加速方法</h3><hr>
+<h3 id="线性加速方法"><a class="markdownIt-Anchor" href="#线性加速方法"></a> 线性加速方法</h3>
+<hr />
 <p>线性加速方法基于这样一种假设：每一层卷积层的输出近似地属于一种低秩子空间。如果我们用低秩子空间的近似输出 $y^{\prime}$ 来近似替代原有的输出 $y$，并且将原有的得到 ${y}$ 的卷积过程，替换成得到低秩近似输出的 ${y^{\prime}}$ 的卷积过程，那么由于 ${y^{\prime}}$ 的低秩性，替换的过程的复杂度就有可能减少。</p>
 <blockquote>
 <p>在这里，我们考虑包含 ${d}$ 个大小为 ${k\times k\times c}$ 的卷积核的卷积层，其中 ${k}$ 为卷积核的空间大小，${c}$ 是该层的输入通道个数，并使用 ${W \in \mathbf{R}^{k^{2}c}}$ 表示该卷积层的权重。我们使用 ${x \in \mathbf{R}^{k^{2}c} }$ 表示单次卷积运算的输入，它的大小与卷积核大小相等。我们将 ${W}$ 和 ${x}$ 展开成列向量，并再添加一维输入作为常数的bias，即 ${W,b \in \mathbf{R}^{k^{2}c+1}}$。则某一层某一点的输出 ${y \in \mathbf{R}^{d}}$ 可以由以下公式计算得到：</p>
@@ -113,7 +135,7 @@
 <p>$$ y=PW^{\prime}x+b $$</p>
 <p>记上式为式(3)，该公式就相当于新的卷积过程，使用它计算得到 $y$ 的计算输出的时间复杂度是${O(d^{\prime}k^{2}c)+O(dd^{\prime})}$，而使用公式(1)(即原有的卷积过程)的复杂度是${O(dk^{2}c)}$。对于许多典型的网络或卷积层，我们通常有${O(dd^{\prime})}\ll O(d^{\prime}k^{2}c)$，所以使用公式(3)理论上可以将时间复杂度降至${d^{\prime}/d}$。</p>
 </blockquote>
-<p><img src="/images/2019-05-26/fig1.png" alt="分解的卷积层图"></p>
+<p><img src="/images/2019-05-26/fig1.png" alt="分解的卷积层图" /></p>
 <blockquote>
 <p>上图形象地描述了使用公式(3)对实际网络的分解效果，我们将使用两层网络替换原有的网络，他们分别由参数 ${W^{\prime},P}$(分解后的卷积层) 和 ${W}$(原卷积层) 给定。矩阵 ${W^{\prime}}$ 实际上表示大小为 ${k\times k\times c}$ 的 ${d^{\prime}}$ 个卷积核。这些卷积核将输出 ${d^{\prime}}$ 维的特征映射向量。${d^{\prime}\times d}$ 大小的矩阵 ${P}$ 可以表示为大小为 ${1\times 1\times d^{\prime}}$ 的 ${d}$ 个卷积核。它将前卷积层 ${W^{\prime}}$ 的 ${d^{\prime}}$ 维的特征映射重新卷积成 ${d}$ 维的输出，这样分解得到的两层卷积层的输出与原有的卷积层输出是相同的。</p>
 <p>注意到矩阵 ${M}$ 的分解方法 ${M=PQ^{T}}$ 可以是任意的。这不会影响公式(3)计算的 ${y}$ 的值。一种简单的分解方法是特征值分解方法(SVD)，即: ${M=U_{d^{\prime}}S_{d^{\prime}}V_{d^{\prime}}^{T}}$，其中 ${U_{d^{\prime}}}$ 和 ${V_{d^{\prime}}}$ 是 ${d\times d^{\prime}}$ 大小的列特征向量组成的矩阵， ${S_{d^{\prime}}}$ 是 ${d^{\prime} \times d^{\prime}}$ 的对角矩阵。那么我们就可以得到 ${P}$ 和 ${Q}$ 的公式： ${P=U_{d^{\prime}}S^{1/2}_{d^{\prime}}}$ 和 ${Q=V_{d^{\prime}}S^{1/2}_{d^{\prime}}}$。</p>
@@ -129,42 +151,51 @@
 </blockquote>
 </blockquote>
 <p>以上的线性分解过程翻自原文3.1小节，为了理解略有改动，图为原文的Fig1。</p>
-<p><strong>理解</strong>  </p>
+<p><strong>理解</strong></p>
 <ol>
-<li><p>低秩假设的合理性</p>
+<li>
+<p>低秩假设的合理性</p>
 <blockquote>
 <p>卷积元素是线性的，因此有矩阵乘法的秩的公式：</p>
 <p>$${rank(Wx) \leq \min (rank(W), rank(x)) }$$</p>
 <p>由公式(1)和以上的式子，我们可以很容易得到：输出 $y$ 的低秩性源于输入 $x$ 的低秩性和卷积核 $W$ 的低秩性。由于卷积的特性，相邻的输入 ${x}$ 有重叠的部分，而且当步长为1时，对大小为 ${k \times k \times c}$ 的卷积核而言，最大重叠率为 ${\frac{k-1}{k}}$，这表明了不同区域的输入 ${x}$ 之间的信息的冗余。而且，对有意义的图像而言，它总是具有低秩性，这表明了 ${x}$ 本身的信息冗余。从卷积核的角度来说，对某些简单的卷积核而言，它具有的形式也是低秩的。</p>
 </blockquote>
 </li>
-<li><p>低秩假设和层分解的关系？</p>
+<li>
+<p>低秩假设和层分解的关系？</p>
 <blockquote>
 <p>这一点已经在该节开头的假设部分提出。但是令人非常感兴趣的是它是如何和通道维度的分解相关联的？我觉得这一点是由他们对 $x$ 的展开形式、卷积核的形式和公式的形式决定的。</p>
 </blockquote>
 </li>
-<li><p>引申和扩展，除了卷积输出的低秩性，能否利用输入和卷积核的低秩性提出新的方法？</p>
+<li>
+<p>引申和扩展，除了卷积输出的低秩性，能否利用输入和卷积核的低秩性提出新的方法？</p>
 <blockquote>
 <p>输入 $x$ 的低秩性是由其表示的实际意义决定，但是对它的近似可能并不会那么有效，主要原因是这种近似是由输入决定的，而输入的多样性对于模型本身是未知的。这将导致：(i)不同的输入近似的效果是由输入本身决定的，我们很难控制加速应有的效果。(ii)不同的输入有其自己的近似过程，这表示很难有一种固定的近似方法对所有输入有效，这种近似过程的计算是在test过程完成的，视<code>feature map</code>的大小会增加test的时间。</p>
 </blockquote>
 </li>
-<li><p>引申：  </p>
+<li>
+<p>引申：<br />
+<strong>输入</strong>的低秩性:</p>
 </li>
 </ol>
-<p><strong>输入</strong>的低秩性:  </p>
-<p>我们考虑总体的公式，而非单个输入 $x$ ，我们使用 $x_{1}, x_{2}, \ldots, x_{m}$ 表示卷积过程一张图片的所有输入（$m$的具体大小与卷积核的大小、步长等有关，它的计算公式将在之后给出），并记 $X = (x_{1}, x_{2}, \ldots, x_{m})$ 其中 $x_{i}$ 如前述的公式也展开成大小为 $(k^{2}c+1) \times 1$ 的列向量。使用前述的相同定义 ${W \in \mathbf{R}^{d \times (k^{2} + 1)}}$ 表示卷积核，则<code>feature map</code>可以由以下公式计算得到：  </p>
-<p>$${<br>    y = WX<br>}$$  </p>
-<p>其中 $y$ 是大小为 $d \times m$ 的<code>feature map</code>。 记 $X^{\prime}$ 是 $X$ 的降维后的结果， $X^{\prime}$ 的大小为 ${(k^{2}c+1) \times t}$，其中 ${t \leq m}$，并且有从 ${X^{\prime}}$ 恢复至 ${X}$ 的变换：${X = X^{\prime}M}$，则上式就可以变成：  </p>
-<p>$${<br>    y = W X^{\prime} M<br>}$$  </p>
+<p>我们考虑总体的公式，而非单个输入 $x$ ，我们使用 $x_{1}, x_{2}, \ldots, x_{m}$ 表示卷积过程一张图片的所有输入（$m$的具体大小与卷积核的大小、步长等有关，它的计算公式将在之后给出），并记 $X = (x_{1}, x_{2}, \ldots, x_{m})$ 其中 $x_{i}$ 如前述的公式也展开成大小为 $(k^{2}c+1) \times 1$ 的列向量。使用前述的相同定义 ${W \in \mathbf{R}^{d \times (k^{2} + 1)}}$ 表示卷积核，则<code>feature map</code>可以由以下公式计算得到：</p>
+<p>$${<br />
+y = WX<br />
+}$$</p>
+<p>其中 $y$ 是大小为 $d \times m$ 的<code>feature map</code>。 记 $X^{\prime}$ 是 $X$ 的降维后的结果， $X^{\prime}$ 的大小为 ${(k^{2}c+1) \times t}$，其中 ${t \leq m}$，并且有从 ${X^{\prime}}$ 恢复至 ${X}$ 的变换：${X = X^{\prime}M}$，则上式就可以变成：</p>
+<p>$${<br />
+y = W X^{\prime} M<br />
+}$$</p>
 <p>该式子的意义是将原有的 ${X}$ 低秩近似成 ${X^{\prime}}$， 它将减少卷积的运算，而 ${M}$ 是将卷积得到的输出恢复填充到原有的大小。不考虑 ${M}$ 的与运算时间，那么卷积计算将减少到原有的${t/m}$。</p>
 <p>未完待续$\ldots$</p>
-<h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><hr>
+<h2 id="参考文献"><a class="markdownIt-Anchor" href="#参考文献"></a> 参考文献</h2>
+<hr />
 <p>[1] Xiangyu Zhang, Jianhua Zou, Kaiming He, Jian Sun,  “Accelerating Very Deep Convolutional Networks for Classification and Detection”    arXiv:1505.06798</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="mercurixito.github.io/2019/05/26/RP-DNN-acc1/" data-id="ck7ygs2jp0005bguc98sug07y" class="article-share-link">Share</a>
+      <a data-url="mercurixito.github.io/2019/05/26/RP-DNN-acc1/" data-id="ck96vk963000458uchg5y1g4i" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Paper-Reading/" rel="tag">Paper Reading</a></li></ul>
@@ -201,7 +232,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">标签</h3>
     <div class="widget">
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Disentangled-Representation-Learning/" rel="tag">Disentangled Representation Learning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GAN/" rel="tag">GAN</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linear-Algebra/" rel="tag">Linear Algebra</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mathematic/" rel="tag">Mathematic</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Paper-Reading/" rel="tag">Paper Reading</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Probability/" rel="tag">Probability</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/disentanglement/" rel="tag">disentanglement</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/metrics/" rel="tag">metrics</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/resources/" rel="tag">resources</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9D%82%E8%B0%88/" rel="tag">杂谈</a></li></ul>
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Disentangled-Representation-Learning/" rel="tag">Disentangled Representation Learning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GAN/" rel="tag">GAN</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linear-Algebra/" rel="tag">Linear Algebra</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mathematic/" rel="tag">Mathematic</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Paper-Reading/" rel="tag">Paper Reading</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Probability/" rel="tag">Probability</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/disentanglement/" rel="tag">disentanglement</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/metrics/" rel="tag">metrics</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/resources/" rel="tag">resources</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/unsupervised-gan-controlling/" rel="tag">unsupervised gan controlling</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9D%82%E8%B0%88/" rel="tag">杂谈</a></li></ul>
     </div>
   </div>
 
@@ -211,7 +242,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">标签云</h3>
     <div class="widget tagcloud">
-      <a href="/tags/Disentangled-Representation-Learning/" style="font-size: 10px;">Disentangled Representation Learning</a> <a href="/tags/GAN/" style="font-size: 20px;">GAN</a> <a href="/tags/Linear-Algebra/" style="font-size: 10px;">Linear Algebra</a> <a href="/tags/Mathematic/" style="font-size: 13.33px;">Mathematic</a> <a href="/tags/Paper-Reading/" style="font-size: 16.67px;">Paper Reading</a> <a href="/tags/Probability/" style="font-size: 10px;">Probability</a> <a href="/tags/disentanglement/" style="font-size: 10px;">disentanglement</a> <a href="/tags/metrics/" style="font-size: 13.33px;">metrics</a> <a href="/tags/resources/" style="font-size: 13.33px;">resources</a> <a href="/tags/%E6%9D%82%E8%B0%88/" style="font-size: 13.33px;">杂谈</a>
+      <a href="/tags/Disentangled-Representation-Learning/" style="font-size: 10px;">Disentangled Representation Learning</a> <a href="/tags/GAN/" style="font-size: 20px;">GAN</a> <a href="/tags/Linear-Algebra/" style="font-size: 10px;">Linear Algebra</a> <a href="/tags/Mathematic/" style="font-size: 12.5px;">Mathematic</a> <a href="/tags/Paper-Reading/" style="font-size: 17.5px;">Paper Reading</a> <a href="/tags/Probability/" style="font-size: 10px;">Probability</a> <a href="/tags/disentanglement/" style="font-size: 10px;">disentanglement</a> <a href="/tags/metrics/" style="font-size: 12.5px;">metrics</a> <a href="/tags/resources/" style="font-size: 12.5px;">resources</a> <a href="/tags/unsupervised-gan-controlling/" style="font-size: 15px;">unsupervised gan controlling</a> <a href="/tags/%E6%9D%82%E8%B0%88/" style="font-size: 15px;">杂谈</a>
     </div>
   </div>
 
@@ -233,23 +264,23 @@
       <ul>
         
           <li>
+            <a href="/2020/04/19/Talk-need2/">Talk-need2</a>
+          </li>
+        
+          <li>
+            <a href="/2020/04/17/RP-controlling/">论文研读：Controlling generative models with continuous factors of variations</a>
+          </li>
+        
+          <li>
+            <a href="/2020/04/10/RP-GANalyse/">论文研读： GANalyze: Toward visual definitions of cognitive image properties.</a>
+          </li>
+        
+          <li>
             <a href="/2020/04/03/RP-InterFaceGAN/">论文研读：InterFaceGAN</a>
           </li>
         
           <li>
             <a href="/2020/03/31/RP-GANs1/">论文略读： SGAN(Stacked GAN)</a>
-          </li>
-        
-          <li>
-            <a href="/2020/03/30/Resources-GAN/">Resources： GAN</a>
-          </li>
-        
-          <li>
-            <a href="/2020/03/30/Resources-Disentangled-Representation-Learning/">Resources： Disentangled Representation Learning</a>
-          </li>
-        
-          <li>
-            <a href="/2020/03/27/RP-steerability/">论文研读： on the steerabilty of generative adversarial networks</a>
           </li>
         
       </ul>

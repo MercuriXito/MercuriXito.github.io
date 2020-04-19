@@ -2,17 +2,36 @@
 <html>
 <head>
   <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
-  
+<!--   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0-rc.1/dist/katex.min.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.10.0-rc.1/dist/katex.min.js"></script> -->
+
+  <!-- Default Mathjax Support -->
+  <script type="text/x-mathjax-config">
+     MathJax.Hub.Config({"HTML-CSS": { preferredFont: "TeX", availableFonts: ["STIX","TeX"], linebreaks: { automatic:true }, EqnChunk: (MathJax.Hub.Browser.isMobile ? 10 : 50) },
+          tex2jax: { inlineMath: [ ["$", "$"], ["\\(","\\)"] ], processEscapes: true, ignoreClass: "tex2jax_ignore|dno",skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']},
+          TeX: {  noUndefined: { attributes: { mathcolor: "red", mathbackground: "#FFEEEE", mathsize: "90%" } }, Macros: { href: "{}" } },
+          messageStyle: "none"
+      }); 
+  </script>
+  <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+          var all = MathJax.Hub.getAllJax(), i;
+          for(i=0; i < all.length; i += 1) {
+              all[i].SourceElement().parentNode.className += ' has-jax';
+          }
+      });
+  </script>
+  <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 
   
   <title>数学:KL散度 | Hako</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="KL divergence(KL 散度)KL散度(Kullback-Leibler (KL) divergence)通常用来衡量两个单独的概率分布的差异，设对于同一随机变量的两个概率分布为${P(x)}$和${Q(x)}$，则它们的KL散度定义为： $${    D_{KL}(p \vert \vert q) &#x3D; \mathbb{E}_{x\sim P} \left[ \log P(x) - \l">
+  <meta name="description" content="KL divergence(KL 散度) KL散度(Kullback-Leibler (KL) divergence)通常用来衡量两个单独的概率分布的差异，设对于同一随机变量的两个概率分布为${P(x)}$和${Q(x)}$，则它们的KL散度定义为： $${ D_{KL}(p \vert \vert q) &#x3D; \mathbb{E}_{x\sim P} \left[ \log P(x) - \lo">
 <meta property="og:type" content="article">
 <meta property="og:title" content="数学:KL散度">
 <meta property="og:url" content="mercurixito.github.io/2019/10/14/KL-Divergenece1/index.html">
 <meta property="og:site_name" content="Hako">
-<meta property="og:description" content="KL divergence(KL 散度)KL散度(Kullback-Leibler (KL) divergence)通常用来衡量两个单独的概率分布的差异，设对于同一随机变量的两个概率分布为${P(x)}$和${Q(x)}$，则它们的KL散度定义为： $${    D_{KL}(p \vert \vert q) &#x3D; \mathbb{E}_{x\sim P} \left[ \log P(x) - \l">
+<meta property="og:description" content="KL divergence(KL 散度) KL散度(Kullback-Leibler (KL) divergence)通常用来衡量两个单独的概率分布的差异，设对于同一随机变量的两个概率分布为${P(x)}$和${Q(x)}$，则它们的KL散度定义为： $${ D_{KL}(p \vert \vert q) &#x3D; \mathbb{E}_{x\sim P} \left[ \log P(x) - \lo">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="/images/2019-10-14/distributionp.png">
 <meta property="og:image" content="/images/2019-10-14/KL3dplot.png">
@@ -96,8 +115,11 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="KL-divergence-KL-散度"><a href="#KL-divergence-KL-散度" class="headerlink" title="KL divergence(KL 散度)"></a>KL divergence(KL 散度)</h2><p>KL散度(Kullback-Leibler (KL) divergence)通常用来<strong>衡量两个单独的概率分布的差异</strong>，设对于同一随机变量的两个概率分布为${P(x)}$和${Q(x)}$，则它们的KL散度定义为：</p>
-<p>$${<br>    D_{KL}(p \vert \vert q) = \mathbb{E}_{x\sim P} \left[ \log P(x) - \log Q(x) \right]<br>}$$</p>
+        <h2 id="kl-divergencekl-散度"><a class="markdownIt-Anchor" href="#kl-divergencekl-散度"></a> KL divergence(KL 散度)</h2>
+<p>KL散度(Kullback-Leibler (KL) divergence)通常用来<strong>衡量两个单独的概率分布的差异</strong>，设对于同一随机变量的两个概率分布为${P(x)}$和${Q(x)}$，则它们的KL散度定义为：</p>
+<p>$${<br />
+D_{KL}(p \vert \vert q) = \mathbb{E}_{x\sim P} \left[ \log P(x) - \log Q(x) \right]<br />
+}$$</p>
 <p>KL散度具有的性质有：</p>
 <ul>
 <li><strong>非负</strong>：要使得KL散度为0，当且仅当${P(x)}$和${Q(x)}$是在离散型变量的情况下是相同的分布，或者在连续型变量的情况下是“几乎处处”相同的[1]。</li>
@@ -105,79 +127,189 @@
 </ul>
 <p>本文将从三个角度分析KL散度的非对称性：直观看法，理论说明，计算实验。</p>
 <a id="more"></a>
-
-<h2 id="KL散度的非对称性"><a href="#KL散度的非对称性" class="headerlink" title="KL散度的非对称性"></a>KL散度的非对称性</h2><h3 id="直观看法"><a href="#直观看法" class="headerlink" title="直观看法"></a>直观看法</h3><hr>
+<h2 id="kl散度的非对称性"><a class="markdownIt-Anchor" href="#kl散度的非对称性"></a> KL散度的非对称性</h2>
+<h3 id="直观看法"><a class="markdownIt-Anchor" href="#直观看法"></a> 直观看法</h3>
+<hr />
 <p>假设在问题中，我们已知某种分布${P(x)}$，我们希望使用分布${Q(x)}$来近似${P(x)}$。在这里我们为了说明问题的简便性，我们假定${P(x)}$为由两个高斯分布混合得到的高斯混合模型，而${Q(x)}$为高斯分布，两种KL散度定义为：</p>
-<p>$${<br>      D_{KL}(p \vert \vert q) = \mathbb{E}_{x\sim P} \left[ \log P(x) - \log Q(x) \right]<br>}$$</p>
-<p>$${<br>    D_{KL}(q \vert \vert p) = \mathbb{E}_{x\sim Q} \left[ \log Q(x) - \log P(x) \right]<br>}$$</p>
+<p>$${<br />
+D_{KL}(p \vert \vert q) = \mathbb{E}_{x\sim P} \left[ \log P(x) - \log Q(x) \right]<br />
+}$$</p>
+<p>$${<br />
+D_{KL}(q \vert \vert p) = \mathbb{E}_{x\sim Q} \left[ \log Q(x) - \log P(x) \right]<br />
+}$$</p>
 <p>KL散度描述了在已知的分布上，函数${\log P(x) - \log Q(x)}$的期望。已知的高斯混合分布模型具有两个峰，优化KL散度，${Q(x)}$只有单峰，它就必须要在这两个峰上的值偏小，并且还要保证中间的单峰和${P(x)}$偏差不会太大，所以<strong>它会模糊地将多个峰聚合在一起</strong>，并且贴合${P(x)}$，也就是单个高斯分布的${\sigma^{2}}$会偏大。</p>
 <p>而逆KL散度描述了在未知的分布上，函数${\log Q(x) - \log P(x)}$的期望。${Q(x)}$仅有单峰，它必须贴合某个峰，而在另外一个峰的值足够的小（这样它在另一个峰的期望会很小），所以<strong>它会选择单个峰</strong>，并且使得${\sigma^{2}}$偏小。</p>
 <p>下面我们将从理论和数值实验上对KL散度的非对称性做进一步的说明。</p>
-<h3 id="理论说明"><a href="#理论说明" class="headerlink" title="理论说明"></a>理论说明</h3><hr>
+<h3 id="理论说明"><a class="markdownIt-Anchor" href="#理论说明"></a> 理论说明</h3>
+<hr />
 <p>假设混合高斯分布模型由两个单高斯条件分布按概率${p_{1},p_{2}}$混合而成</p>
 <p>两个单高斯条件分布为：</p>
-<p>$${ X_{1} \sim \mathcal{N}(\mu_{1}, \sigma_{1}^{2}) }$$<br>$${X_{2} \sim \mathcal{N}(\mu_{2}, \sigma_{2}^{2}) }$$</p>
+<p>$${ X_{1} \sim \mathcal{N}(\mu_{1}, \sigma_{1}^{2}) }$$<br />
+$${X_{2} \sim \mathcal{N}(\mu_{2}, \sigma_{2}^{2}) }$$</p>
 <p>假设它们的概率密度函数分别为${p_{1}(x)}$和${p_{2}(x)}$，则混合高斯模型的概率密度函数可以表示为：</p>
 <p>$${p(x) = p_{1}p_{1}(x) + p_{2}p_{2}(x) }$$</p>
-<p>该混合高斯模型是给定的，参数${p_{1},p_{2},\mu_{1},\mu_{2},\sigma_{1}^{2},\sigma_{2}^{2}}$都是已知的<br>常数。</p>
-<p>现在使用单高斯分布模型来近似${p(x)}$，假设它的均值和方差为${\mu}$和${\sigma^{2}}$，它的<br>概率密度函数为：</p>
-<p>$${<br>  q(x) = \frac{1}{\sqrt{2 \pi} \sigma} e^{\left(- \frac{(x-\mu)^{2}}{2\sigma^{2}}\right)}<br>}$$</p>
-<h4 id="KL散度的情况下"><a href="#KL散度的情况下" class="headerlink" title="KL散度的情况下"></a>KL散度的情况下</h4><p>(1) 在第一种KL散度${D_{KL}\left(p \vert \vert q\right)}$作为衡量单高斯分布模型拟合<br>混合高斯分布模型的近似程度的的情况下。</p>
-<p>$${<br>    \begin{aligned}<br>      D_{KL}(p \vert \vert q) &amp;= \mathbb{E}_{x \sim p} \left[ \log p(x) - \log q(x) \right] \\<br>      &amp;= \int \left[ \log p(x) - \log q(x) \right] p(x) dx \\<br>      &amp;= \int \left[ \log p(x) \right] p(x) dx - \int \left[ \log q(x) \right] p(x) dx \\<br>  \end{aligned}<br>}$$</p>
+<p>该混合高斯模型是给定的，参数${p_{1},p_{2},\mu_{1},\mu_{2},\sigma_{1}^{2},\sigma_{2}^{2}}$都是已知的<br />
+常数。</p>
+<p>现在使用单高斯分布模型来近似${p(x)}$，假设它的均值和方差为${\mu}$和${\sigma^{2}}$，它的<br />
+概率密度函数为：</p>
+<p>$${<br />
+q(x) = \frac{1}{\sqrt{2 \pi} \sigma} e^{\left(- \frac{(x-\mu)^{2}}{2\sigma^{2}}\right)}<br />
+}$$</p>
+<h4 id="kl散度的情况下"><a class="markdownIt-Anchor" href="#kl散度的情况下"></a> KL散度的情况下</h4>
+<p>(1) 在第一种KL散度${D_{KL}\left(p \vert \vert q\right)}$作为衡量单高斯分布模型拟合<br />
+混合高斯分布模型的近似程度的的情况下。</p>
+<p>$${<br />
+\begin{aligned}<br />
+D_{KL}(p \vert \vert q) &amp;= \mathbb{E}_{x \sim p} \left[ \log p(x) - \log q(x) \right] \<br />
+&amp;= \int \left[ \log p(x) - \log q(x) \right] p(x) dx \<br />
+&amp;= \int \left[ \log p(x) \right] p(x) dx - \int \left[ \log q(x) \right] p(x) dx \<br />
+\end{aligned}<br />
+}$$</p>
 <p>上式的左项为常数，要使得${D_{KL}}$最小，右项要取得最大值，令右项为${L}$。</p>
-<p>$${<br>    \begin{aligned}<br>      L &amp;= \int \left[ \log q(x) \right] p(x) dx  \\<br>      &amp;= \int \log \left( \frac{1}{\sqrt{2 \pi} \sigma} e^{\left(- \frac{(x-\mu)^{2}}{2\sigma^{2}}\right)} \right)<br>      p(x) dx \\<br>      &amp;= \int \left( -\log \sqrt{2 \pi} - \log \sigma - \frac{1}{2\sigma^{2}} (x-\mu)^{2} \right) p(x) dx \\<br>      &amp;= -\log \sqrt{2 \pi} - \log \sigma - \frac{1}{2\sigma^{2}} \int (x - \mu)^{2} p(x) dx \\<br>  \end{aligned}<br>}$$</p>
+<p>$${<br />
+\begin{aligned}<br />
+L &amp;= \int \left[ \log q(x) \right] p(x) dx  \<br />
+&amp;= \int \log \left( \frac{1}{\sqrt{2 \pi} \sigma} e^{\left(- \frac{(x-\mu)^{2}}{2\sigma^{2}}\right)} \right)<br />
+p(x) dx \<br />
+&amp;= \int \left( -\log \sqrt{2 \pi} - \log \sigma - \frac{1}{2\sigma^{2}} (x-\mu)^{2} \right) p(x) dx \<br />
+&amp;= -\log \sqrt{2 \pi} - \log \sigma - \frac{1}{2\sigma^{2}} \int (x - \mu)^{2} p(x) dx \<br />
+\end{aligned}<br />
+}$$</p>
 <p>令${T = \int (x - \mu)^{2} p(x) dx}$，${L}$要取得最大值，${T}$要取得最小值。</p>
-<p>$${<br>    \begin{aligned}<br>      T &amp;= \int \left( x^{2} - 2\mu x + \mu^{2} \right) p(x) dx \\<br>        &amp;= \int x^{2} p(x) dx - 2\mu \int x p(x) dx + \mu^{2} \int p(x) dx \\<br>  \end{aligned}<br>}$$</p>
+<p>$${<br />
+\begin{aligned}<br />
+T &amp;= \int \left( x^{2} - 2\mu x + \mu^{2} \right) p(x) dx \<br />
+&amp;= \int x^{2} p(x) dx - 2\mu \int x p(x) dx + \mu^{2} \int p(x) dx \<br />
+\end{aligned}<br />
+}$$</p>
 <p>则${L}$对${\mu}$的导数为：</p>
-<p>$${<br>  \begin{aligned}<br>      \frac{\partial L}{\partial \mu} &amp;= \frac{\partial L}{\partial T} \frac{\partial T}{\partial \mu} \\<br>      &amp;= -\frac{1}{2\sigma^{2}}\left(2\mu - 2\int x p(x)dx \right) = 0<br>  \end{aligned}<br>}$$</p>
+<p>$${<br />
+\begin{aligned}<br />
+\frac{\partial L}{\partial \mu} &amp;= \frac{\partial L}{\partial T} \frac{\partial T}{\partial \mu} \<br />
+&amp;= -\frac{1}{2\sigma^{2}}\left(2\mu - 2\int x p(x)dx \right) = 0<br />
+\end{aligned}<br />
+}$$</p>
 <p>求得最优解${\mu_0}$:</p>
-<p>$${<br>  \mu_{0} = \int x p(x) dx = p_{1} \int x p_{1}(x) dx + p_{2} \int x p_{2}(x) dx = p_{1}\mu_{1} + p_{2}\mu_{2}<br>}$$</p>
+<p>$${<br />
+\mu_{0} = \int x p(x) dx = p_{1} \int x p_{1}(x) dx + p_{2} \int x p_{2}(x) dx = p_{1}\mu_{1} + p_{2}\mu_{2}<br />
+}$$</p>
 <p>此时${T}$取得最小值，</p>
 <p>而${L}$对${\sigma}$的导数为：</p>
-<p>$${<br>  \begin{aligned}<br>      \frac{\partial L}{\partial \sigma} &amp;= - \frac{1}{\sigma} + \frac{T}{\sigma^{3}} \\<br>      &amp;= \frac{1}{\sigma} \left( \frac{T}{\sigma^{2}} - 1 \right) = 0<br>  \end{aligned}<br>}$$</p>
+<p>$${<br />
+\begin{aligned}<br />
+\frac{\partial L}{\partial \sigma} &amp;= - \frac{1}{\sigma} + \frac{T}{\sigma^{3}} \<br />
+&amp;= \frac{1}{\sigma} \left( \frac{T}{\sigma^{2}} - 1 \right) = 0<br />
+\end{aligned}<br />
+}$$</p>
 <p>得最优解${\sigma_{0}}$：</p>
-<p>$${<br>  \begin{aligned}<br>      \sigma_{0}^{2} &amp;= T \\<br>      &amp;=  p_{1} \int x^{2} p_{1}(x)dx + p_{2} \int x^{2} p_{2}(x) dx - 2 \mu_{0}^{2} + \mu_{0}^{2} \\<br>      &amp;= p_{1} (\sigma_{1}^{2} + \mu_{1}^{2}) + p_{2}(\sigma_{2}^{2} + \mu_{2}^{2}) - (p_{1}\mu_{1} + p_{2}\mu_{2})^{2}<br>  \end{aligned}<br>}$$</p>
-<p>可以看到当取得最优解的时候，${\mu_{0}}$是混合高斯模型的两个条件分布模型的均值的期望，而且<br>${ \mu_{1} \leq \mu_{0} = p_{1}\mu_{1} + p_{2}\mu_{2} \leq \mu_{2} }$，说明此时的最佳<br>拟合的单高斯分布选择是将混合高斯模型的多个峰值聚合起来。</p>
-<h4 id="逆KL散度情况下"><a href="#逆KL散度情况下" class="headerlink" title="逆KL散度情况下"></a>逆KL散度情况下</h4><p>(2) 在第二种KL散度${D_{KL}(q \vert \vert p)}$作为衡量单高斯分布模型拟合混合高<br>斯分布模型的近似程度的的情况下。</p>
-<p>$${<br>  \begin{aligned}<br>      D_{KL}(q\vert \vert p) &amp;= \mathbb{E}_{x \sim q}\left[ \log q(x) - \log p(x) \right] \\<br>      &amp;= \int \left[ \log q(x) - \log p(x)  \right] q(x) dx \\<br>      &amp;= \int \left( \log q(x) \right) q(x) dx - \int \left( \log p(x) \right) q(x) dx \\<br>  \end{aligned}<br>}$$</p>
-<p>令${A = \int \left( \log q(x) \right) q(x) dx}$，${B = \int \left( \log p(x) \right) q(x) dx }$，要使得<br>${D_{KL}(q \vert \vert p)}$取得最小值，${A}$要取得最大值，${B}$要取得最小值。</p>
-<p>$${<br>  \begin{aligned}<br>      A &amp;= \int \left( \log q(x) \right) q(x) dx \\<br>      &amp;= \int - \log \sqrt{2\pi} -\log \sigma - \frac{(x-\mu)^{2}}{2\sigma^{2}} q(x) dx \\<br>      &amp;= -\log \sqrt{2\pi} - \log \sigma - \frac{1}{2\sigma^{2}} \int (x-\mu)^{2} q(x) dx \\<br>      &amp;= -\log \sqrt{2\pi} - \log \sigma - \frac{1}{2}<br>  \end{aligned}<br>}$$</p>
+<p>$${<br />
+\begin{aligned}<br />
+\sigma_{0}^{2} &amp;= T \<br />
+&amp;=  p_{1} \int x^{2} p_{1}(x)dx + p_{2} \int x^{2} p_{2}(x) dx - 2 \mu_{0}^{2} + \mu_{0}^{2} \<br />
+&amp;= p_{1} (\sigma_{1}^{2} + \mu_{1}^{2}) + p_{2}(\sigma_{2}^{2} + \mu_{2}^{2}) - (p_{1}\mu_{1} + p_{2}\mu_{2})^{2}<br />
+\end{aligned}<br />
+}$$</p>
+<p>可以看到当取得最优解的时候，${\mu_{0}}$是混合高斯模型的两个条件分布模型的均值的期望，而且<br />
+${ \mu_{1} \leq \mu_{0} = p_{1}\mu_{1} + p_{2}\mu_{2} \leq \mu_{2} }$，说明此时的最佳<br />
+拟合的单高斯分布选择是将混合高斯模型的多个峰值聚合起来。</p>
+<h4 id="逆kl散度情况下"><a class="markdownIt-Anchor" href="#逆kl散度情况下"></a> 逆KL散度情况下</h4>
+<p>(2) 在第二种KL散度${D_{KL}(q \vert \vert p)}$作为衡量单高斯分布模型拟合混合高<br />
+斯分布模型的近似程度的的情况下。</p>
+<p>$${<br />
+\begin{aligned}<br />
+D_{KL}(q\vert \vert p) &amp;= \mathbb{E}_{x \sim q}\left[ \log q(x) - \log p(x) \right] \<br />
+&amp;= \int \left[ \log q(x) - \log p(x)  \right] q(x) dx \<br />
+&amp;= \int \left( \log q(x) \right) q(x) dx - \int \left( \log p(x) \right) q(x) dx \<br />
+\end{aligned}<br />
+}$$</p>
+<p>令${A = \int \left( \log q(x) \right) q(x) dx}$，${B = \int \left( \log p(x) \right) q(x) dx }$，要使得<br />
+${D_{KL}(q \vert \vert p)}$取得最小值，${A}$要取得最大值，${B}$要取得最小值。</p>
+<p>$${<br />
+\begin{aligned}<br />
+A &amp;= \int \left( \log q(x) \right) q(x) dx \<br />
+&amp;= \int - \log \sqrt{2\pi} -\log \sigma - \frac{(x-\mu)^{2}}{2\sigma^{2}} q(x) dx \<br />
+&amp;= -\log \sqrt{2\pi} - \log \sigma - \frac{1}{2\sigma^{2}} \int (x-\mu)^{2} q(x) dx \<br />
+&amp;= -\log \sqrt{2\pi} - \log \sigma - \frac{1}{2}<br />
+\end{aligned}<br />
+}$$</p>
 <p>可以看到${A}$的取值和${\mu}$无关。</p>
-<p>$${<br>    \begin{aligned}<br>        B &amp;= \int (\log p(x))q(x) dx \\<br>        &amp;= \int \log \left[ p_{1}p_{1}(x) + p_{2}p_{2}(x) \right] q(x) dx \\<br>        &amp;= \int \log \left[ p_{1}p_{1}(x) \right] q(x) dx + \int \log \left[ 1 + \frac{p_{2}p_{2}(x)}{p_{1}p_{1}(x)} \right] q(x) dx \\<br>    \end{aligned}<br>}$$</p>
+<p>$${<br />
+\begin{aligned}<br />
+B &amp;= \int (\log p(x))q(x) dx \<br />
+&amp;= \int \log \left[ p_{1}p_{1}(x) + p_{2}p_{2}(x) \right] q(x) dx \<br />
+&amp;= \int \log \left[ p_{1}p_{1}(x) \right] q(x) dx + \int \log \left[ 1 + \frac{p_{2}p_{2}(x)}{p_{1}p_{1}(x)} \right] q(x) dx \<br />
+\end{aligned}<br />
+}$$</p>
 <p>令${B_{1} = \int \log \left[ p_{1}p_{1}(x) \right] q(x) dx }$，${B_{2} = \int \log \left[ 1 + \frac{p_{2}p_{2}(x)}{p_{1}p_{1}(x)} \right] q(x) dx}$</p>
-<p>$${<br>  \begin{aligned}<br>      B_{1} &amp;= \log p_{1} + \int \left[ \log p_{1}(x) \right] q(x) dx \\<br>      &amp;= \log p_{1} - \log\left( \sqrt(2\pi)\right) - \log \sigma_{1} - \frac{1}{2\sigma_{1}^{2}} \int (x - \mu_{1})^{2} q(x) dx\\<br>      &amp;= \log p_{1} - \log\left( \sqrt(2\pi)\right) - \log \sigma_{1} - \frac{1}{2\sigma_{1}^{2}} \left( \mu^{2} + \sigma^{2} -2\mu_{1}\mu + \mu_{1}^{2} \right)<br>  \end{aligned}<br>}$$</p>
+<p>$${<br />
+\begin{aligned}<br />
+B_{1} &amp;= \log p_{1} + \int \left[ \log p_{1}(x) \right] q(x) dx \<br />
+&amp;= \log p_{1} - \log\left( \sqrt(2\pi)\right) - \log \sigma_{1} - \frac{1}{2\sigma_{1}^{2}} \int (x - \mu_{1})^{2} q(x) dx\<br />
+&amp;= \log p_{1} - \log\left( \sqrt(2\pi)\right) - \log \sigma_{1} - \frac{1}{2\sigma_{1}^{2}} \left( \mu^{2} + \sigma^{2} -2\mu_{1}\mu + \mu_{1}^{2} \right)<br />
+\end{aligned}<br />
+}$$</p>
 <p>${B_{1}}$是关于${\mu}$的二次函数，当${\mu = \mu_{1}}$时，${B_{1}}$取得最大值。</p>
-<p>$${<br>  \begin{aligned}<br>      B_{2} &amp;= \int \log \left[ 1 + \frac{p_{2}p_{2}(x)}{p_{1}p_{1}(x)} \right] q(x) dx \\<br>      &amp;&lt; \int{\frac{p_{2}p_{2}(x)}{p_{1}p_{1}(x)} q(x) dx} \\<br>      &amp;= \frac{p_{2}}{p_{1}} \int \frac{ \frac{1}{\sigma_{2}} e^{-\frac{(x - \mu_{2})^{2}}{2\sigma_{2}^{2}}} }{ \frac{1}{\sigma_{1}}<br>      e^{-\frac{(x-\mu_{1})^{2}}{2\sigma_{1}^{2}}} } \frac{1}{\sqrt{2\pi}\sigma} e^{-\frac{(x-\mu)^{2}}{2\sigma^{2}}} dx \\<br>      &amp;= \frac{p_{2}\sigma_{1}}{p_{1}\sigma_{2}} \frac{1}{\sqrt{2\pi}\sigma_{1}} \int e^{\frac{(x-\mu_{1})^{2}}{2\sigma_{1}^{2}}<br>       - \frac{(x-\mu_{2})^{2}}{2\sigma_{2}^{2}} - \frac{(x-\mu)^{2}}{2\sigma^{2}} } dx \\<br>  \end{aligned}<br>}$$</p>
+<p>$${<br />
+\begin{aligned}<br />
+B_{2} &amp;= \int \log \left[ 1 + \frac{p_{2}p_{2}(x)}{p_{1}p_{1}(x)} \right] q(x) dx \<br />
+&amp;&lt; \int{\frac{p_{2}p_{2}(x)}{p_{1}p_{1}(x)} q(x) dx} \<br />
+&amp;= \frac{p_{2}}{p_{1}} \int \frac{ \frac{1}{\sigma_{2}} e^{-\frac{(x - \mu_{2})^{2}}{2\sigma_{2}^{2}}} }{ \frac{1}{\sigma_{1}}<br />
+e^{-\frac{(x-\mu_{1})^{2}}{2\sigma_{1}^{2}}} } \frac{1}{\sqrt{2\pi}\sigma} e^{-\frac{(x-\mu)^{2}}{2\sigma^{2}}} dx \<br />
+&amp;= \frac{p_{2}\sigma_{1}}{p_{1}\sigma_{2}} \frac{1}{\sqrt{2\pi}\sigma_{1}} \int e^{\frac{(x-\mu_{1})^{2}}{2\sigma_{1}^{2}}<br />
+- \frac{(x-\mu_{2})^{2}}{2\sigma_{2}^{2}} - \frac{(x-\mu)^{2}}{2\sigma^{2}} } dx \<br />
+\end{aligned}<br />
+}$$</p>
 <p>如果我们取使得${B_{1}}$为最大值的${\mu = \mu_{1}}$，并使得${\sigma = \sigma_{1}}$，此时</p>
-<p>$${<br>  \begin{aligned}<br>      B_{2} &amp;&lt; \frac{p_{2}\sigma_{1}}{p_{1}\sigma_{2}} \frac{1}{\sqrt{2\pi}\sigma_{1}} \int e^{- \frac{(x-\mu_{2})^{2}}{2\sigma_{2}^{2}}} \\<br>      &amp;= \frac{p_{2}\sigma_{1}}{p_{1}\sigma_{2}} \frac{1}{\sqrt{2\pi}\sigma_{1}} \sqrt{2\pi}\sigma_{2} \int p_{2}(x) dx \\<br>      &amp;= \frac{p_{2}}{p_{1}} \\<br>  \end{aligned}<br>}$$</p>
-<p>即此时有${B_{2} &lt; \frac{p_{2}}{p_{1}}}$，如果${p_{2} \ll p_{1}}$，那么${B_{2}}$接近于0，我们就可以忽略该项，那<br>我们选取${\mu = \mu_{1}}$就是最优值。</p>
+<p>$${<br />
+\begin{aligned}<br />
+B_{2} &amp;&lt; \frac{p_{2}\sigma_{1}}{p_{1}\sigma_{2}} \frac{1}{\sqrt{2\pi}\sigma_{1}} \int e^{- \frac{(x-\mu_{2})^{2}}{2\sigma_{2}^{2}}} \<br />
+&amp;= \frac{p_{2}\sigma_{1}}{p_{1}\sigma_{2}} \frac{1}{\sqrt{2\pi}\sigma_{1}} \sqrt{2\pi}\sigma_{2} \int p_{2}(x) dx \<br />
+&amp;= \frac{p_{2}}{p_{1}} \<br />
+\end{aligned}<br />
+}$$</p>
+<p>即此时有${B_{2} &lt; \frac{p_{2}}{p_{1}}}$，如果${p_{2} \ll p_{1}}$，那么${B_{2}}$接近于0，我们就可以忽略该项，那<br />
+我们选取${\mu = \mu_{1}}$就是最优值。</p>
 <p>同理如果我们在得到${B}$推导的最后一步，将${B}$拆解为：</p>
-<p>$${<br>  \begin{aligned}<br>      B &amp;= \int \log \left[ p_{2}p_{2}(x) \right] q(x) dx + \int \log \left[ 1 + \frac{p_{1}p_{1}(x)}{p_{2}p_{2}(x)} \right] q(x) dx \\<br>      &amp;= B_{1}’ + B_{2}’<br>  \end{aligned}<br>}$$</p>
+<p>$${<br />
+\begin{aligned}<br />
+B &amp;= \int \log \left[ p_{2}p_{2}(x) \right] q(x) dx + \int \log \left[ 1 + \frac{p_{1}p_{1}(x)}{p_{2}p_{2}(x)} \right] q(x) dx \<br />
+&amp;= B_{1}’ + B_{2}’<br />
+\end{aligned}<br />
+}$$</p>
 <p>我们可以得到，当${p_{1} \ll p_{2}}$时，我们选取${\mu = \mu_{2}}$就是最优解。</p>
-<p>而这两种拆分的方式只是依据${p_{1},p_{2}}$的大小而定，它们是等价的，我们假定当${p_{2} &lt; p_{1}}$时使用第一种拆分方式，<br>当${p_{1} &lt; p_{2}}$时使用第二种拆分方式，并令它们的比值为${k}$，那么当${p_{1} = p_{2}}$时，${k}$取得最大值为1。<br>也就是说${B_{2} \le 1}$，它总是可忽略的。</p>
+<p>而这两种拆分的方式只是依据${p_{1},p_{2}}$的大小而定，它们是等价的，我们假定当${p_{2} &lt; p_{1}}$时使用第一种拆分方式，<br />
+当${p_{1} &lt; p_{2}}$时使用第二种拆分方式，并令它们的比值为${k}$，那么当${p_{1} = p_{2}}$时，${k}$取得最大值为1。<br />
+也就是说${B_{2} \le 1}$，它总是可忽略的。</p>
 <p>综上所述，使用第二种KL散度作为作为衡量单高斯分布模型拟合混合高斯分布模型的近似程度的情况下，单个高斯分布模型会倾向于偏向${p}$更大的混合概率模型中的单峰。</p>
-<h3 id="计算实验"><a href="#计算实验" class="headerlink" title="计算实验"></a>计算实验</h3><hr>
+<h3 id="计算实验"><a class="markdownIt-Anchor" href="#计算实验"></a> 计算实验</h3>
+<hr />
 <p>我们使用数值模拟的方法求解给定的混合高斯模型的单个高斯模型近似的${\mu}$和${\sigma^{2}}$的最优解。</p>
 <p>给定混合高斯模型${X = p_{1}X_{1} + p_{2}X_{2}}$。</p>
 <p>其中${p_{1} = 0.6, p_{2} = 0.4, X_{1} \sim \mathcal{N}(-3, 2), X_{2} \sim \mathcal{N}(2,1)}$</p>
 <p>概率密度函数如下图所示。</p>
-<p><img src="/images/2019-10-14/distributionp.png" alt="混合高斯模型概率密度函数图像"></p>
-<h4 id="KL散度情况下"><a href="#KL散度情况下" class="headerlink" title="KL散度情况下"></a>KL散度情况下</h4><p>使用KL散度作为衡量单高斯分布模型拟合混合高斯分布模型的近似程度的情况下</p>
-<p>下图给出了KL散度和不同${\sigma^{2},\mu}$取值的二元函数的图像，<br>我们发现该二元函数比较平滑。</p>
-<p><img src="/images/2019-10-14/KL3dplot.png" alt="KL散度和不同${\sigma^{2},\mu}$取值的二元函数的图像"></p>
+<p><img src="/images/2019-10-14/distributionp.png" alt="混合高斯模型概率密度函数图像" /></p>
+<h4 id="kl散度情况下"><a class="markdownIt-Anchor" href="#kl散度情况下"></a> KL散度情况下</h4>
+<p>使用KL散度作为衡量单高斯分布模型拟合混合高斯分布模型的近似程度的情况下</p>
+<p>下图给出了KL散度和不同${\sigma^{2},\mu}$取值的二元函数的图像，<br />
+我们发现该二元函数比较平滑。</p>
+<p><img src="/images/2019-10-14/KL3dplot.png" alt="KL散度和不同${\sigma^{2},\mu}$取值的二元函数的图像" /></p>
 <p>给定初始值${\mu=1,\sigma^{2}=1}$使用梯度下降公式迭代求得</p>
-<p>最优解为：${\mu = -0.99966166, \sigma^{2} = 6.45287537}$。<br>这与我们计算得到的${\mu = p_{1}\mu_{1} + p_{2}\mu_{2}}$的公式吻合。</p>
-<p>我们画出得到的最佳的高斯分布的图像如下图所示，单个的高斯分布模型模糊地将<br>混合高斯模型的几个峰模糊地聚合了起来。</p>
-<p><img src="/images/2019-10-14/KLbest.png" alt="KL散度下最佳单个高斯分布模型"></p>
-<h4 id="逆KL散度情况下-1"><a href="#逆KL散度情况下-1" class="headerlink" title="逆KL散度情况下"></a>逆KL散度情况下</h4><p>使用逆KL散度作为衡量单高斯分布模型拟合混合高斯分布模型的近似程度的的情况下</p>
-<p>下图给出了逆KL散度和不同${\sigma^{2},\mu}$取值的二元函数的图像，<br>同样的我们发现该二元函数也比较平滑。</p>
-<p><img src="/images/2019-10-14/RKL3dplot.png" alt="KL散度与不同的${\sigma^{2}}$和${\mu}$取值的关系"></p>
+<p>最优解为：${\mu = -0.99966166, \sigma^{2} = 6.45287537}$。<br />
+这与我们计算得到的${\mu = p_{1}\mu_{1} + p_{2}\mu_{2}}$的公式吻合。</p>
+<p>我们画出得到的最佳的高斯分布的图像如下图所示，单个的高斯分布模型模糊地将<br />
+混合高斯模型的几个峰模糊地聚合了起来。</p>
+<p><img src="/images/2019-10-14/KLbest.png" alt="KL散度下最佳单个高斯分布模型" /></p>
+<h4 id="逆kl散度情况下-2"><a class="markdownIt-Anchor" href="#逆kl散度情况下-2"></a> 逆KL散度情况下</h4>
+<p>使用逆KL散度作为衡量单高斯分布模型拟合混合高斯分布模型的近似程度的的情况下</p>
+<p>下图给出了逆KL散度和不同${\sigma^{2},\mu}$取值的二元函数的图像，<br />
+同样的我们发现该二元函数也比较平滑。</p>
+<p><img src="/images/2019-10-14/RKL3dplot.png" alt="KL散度与不同的${\sigma^{2}}$和${\mu}$取值的关系" /></p>
 <p>给定初始值${\mu=-1,\sigma^{2}=1}$使用梯度下降公式迭代求得</p>
 <p>最优解为：${\mu = -2.98863212, \sigma^{2} = 1.87676299}$，这也与我们理论推导的结论相吻合。</p>
 <p>此时得到的单个高斯分布模型的图像如下图所示，我们看到该高斯分布会选择概率比较大的峰拟合。</p>
-<p><img src="/images/2019-10-14/RKLbest.png" alt="逆KL散度下最佳的单个高斯分布模型"></p>
+<p><img src="/images/2019-10-14/RKLbest.png" alt="逆KL散度下最佳的单个高斯分布模型" /></p>
 <p>实验的代码将发布在<a href="https://github.com/MercuriXito/PlayGround4Experiment/tree/master/KL-divergence-experiment" target="_blank" rel="noopener">我的github</a>上。</p>
-<p>实验细节：  </p>
+<p>实验细节：</p>
 <ul>
 <li>使用Simpson公式计算KL散度中连续性变量的期望的积分，而且在我们给定的高斯分布下，处于区间${[-20,20]}$之外的值的概率密度是非常小的，所以我们将积分的上下限替换为20和-20，而不是正负无穷。</li>
 <li>我们使用梯度下降法求解最优的参数。</li>
@@ -187,7 +319,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="mercurixito.github.io/2019/10/14/KL-Divergenece1/" data-id="ck7ygs2jq0006bguch7n294qx" class="article-share-link">Share</a>
+      <a data-url="mercurixito.github.io/2019/10/14/KL-Divergenece1/" data-id="ck96vk962000358uc98208ksb" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Mathematic/" rel="tag">Mathematic</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Probability/" rel="tag">Probability</a></li></ul>
@@ -229,7 +361,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">标签</h3>
     <div class="widget">
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Disentangled-Representation-Learning/" rel="tag">Disentangled Representation Learning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GAN/" rel="tag">GAN</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linear-Algebra/" rel="tag">Linear Algebra</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mathematic/" rel="tag">Mathematic</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Paper-Reading/" rel="tag">Paper Reading</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Probability/" rel="tag">Probability</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/disentanglement/" rel="tag">disentanglement</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/metrics/" rel="tag">metrics</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/resources/" rel="tag">resources</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9D%82%E8%B0%88/" rel="tag">杂谈</a></li></ul>
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Disentangled-Representation-Learning/" rel="tag">Disentangled Representation Learning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GAN/" rel="tag">GAN</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linear-Algebra/" rel="tag">Linear Algebra</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mathematic/" rel="tag">Mathematic</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Paper-Reading/" rel="tag">Paper Reading</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Probability/" rel="tag">Probability</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/disentanglement/" rel="tag">disentanglement</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/metrics/" rel="tag">metrics</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/resources/" rel="tag">resources</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/unsupervised-gan-controlling/" rel="tag">unsupervised gan controlling</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9D%82%E8%B0%88/" rel="tag">杂谈</a></li></ul>
     </div>
   </div>
 
@@ -239,7 +371,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">标签云</h3>
     <div class="widget tagcloud">
-      <a href="/tags/Disentangled-Representation-Learning/" style="font-size: 10px;">Disentangled Representation Learning</a> <a href="/tags/GAN/" style="font-size: 20px;">GAN</a> <a href="/tags/Linear-Algebra/" style="font-size: 10px;">Linear Algebra</a> <a href="/tags/Mathematic/" style="font-size: 13.33px;">Mathematic</a> <a href="/tags/Paper-Reading/" style="font-size: 16.67px;">Paper Reading</a> <a href="/tags/Probability/" style="font-size: 10px;">Probability</a> <a href="/tags/disentanglement/" style="font-size: 10px;">disentanglement</a> <a href="/tags/metrics/" style="font-size: 13.33px;">metrics</a> <a href="/tags/resources/" style="font-size: 13.33px;">resources</a> <a href="/tags/%E6%9D%82%E8%B0%88/" style="font-size: 13.33px;">杂谈</a>
+      <a href="/tags/Disentangled-Representation-Learning/" style="font-size: 10px;">Disentangled Representation Learning</a> <a href="/tags/GAN/" style="font-size: 20px;">GAN</a> <a href="/tags/Linear-Algebra/" style="font-size: 10px;">Linear Algebra</a> <a href="/tags/Mathematic/" style="font-size: 12.5px;">Mathematic</a> <a href="/tags/Paper-Reading/" style="font-size: 17.5px;">Paper Reading</a> <a href="/tags/Probability/" style="font-size: 10px;">Probability</a> <a href="/tags/disentanglement/" style="font-size: 10px;">disentanglement</a> <a href="/tags/metrics/" style="font-size: 12.5px;">metrics</a> <a href="/tags/resources/" style="font-size: 12.5px;">resources</a> <a href="/tags/unsupervised-gan-controlling/" style="font-size: 15px;">unsupervised gan controlling</a> <a href="/tags/%E6%9D%82%E8%B0%88/" style="font-size: 15px;">杂谈</a>
     </div>
   </div>
 
@@ -261,23 +393,23 @@
       <ul>
         
           <li>
+            <a href="/2020/04/19/Talk-need2/">Talk-need2</a>
+          </li>
+        
+          <li>
+            <a href="/2020/04/17/RP-controlling/">论文研读：Controlling generative models with continuous factors of variations</a>
+          </li>
+        
+          <li>
+            <a href="/2020/04/10/RP-GANalyse/">论文研读： GANalyze: Toward visual definitions of cognitive image properties.</a>
+          </li>
+        
+          <li>
             <a href="/2020/04/03/RP-InterFaceGAN/">论文研读：InterFaceGAN</a>
           </li>
         
           <li>
             <a href="/2020/03/31/RP-GANs1/">论文略读： SGAN(Stacked GAN)</a>
-          </li>
-        
-          <li>
-            <a href="/2020/03/30/Resources-GAN/">Resources： GAN</a>
-          </li>
-        
-          <li>
-            <a href="/2020/03/30/Resources-Disentangled-Representation-Learning/">Resources： Disentangled Representation Learning</a>
-          </li>
-        
-          <li>
-            <a href="/2020/03/27/RP-steerability/">论文研读： on the steerabilty of generative adversarial networks</a>
           </li>
         
       </ul>

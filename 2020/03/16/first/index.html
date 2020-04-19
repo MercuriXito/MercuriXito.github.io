@@ -2,20 +2,39 @@
 <html>
 <head>
   <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
-  
+<!--   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0-rc.1/dist/katex.min.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.10.0-rc.1/dist/katex.min.js"></script> -->
+
+  <!-- Default Mathjax Support -->
+  <script type="text/x-mathjax-config">
+     MathJax.Hub.Config({"HTML-CSS": { preferredFont: "TeX", availableFonts: ["STIX","TeX"], linebreaks: { automatic:true }, EqnChunk: (MathJax.Hub.Browser.isMobile ? 10 : 50) },
+          tex2jax: { inlineMath: [ ["$", "$"], ["\\(","\\)"] ], processEscapes: true, ignoreClass: "tex2jax_ignore|dno",skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']},
+          TeX: {  noUndefined: { attributes: { mathcolor: "red", mathbackground: "#FFEEEE", mathsize: "90%" } }, Macros: { href: "{}" } },
+          messageStyle: "none"
+      }); 
+  </script>
+  <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+          var all = MathJax.Hub.getAllJax(), i;
+          for(i=0; i < all.length; i += 1) {
+              all[i].SourceElement().parentNode.className += ' has-jax';
+          }
+      });
+  </script>
+  <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 
   
   <title>First Post | Hako</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="First post of blogsRecently I am gonna migrate my blog to hexo, and I am gonna explore hexo with more intersting things, from the start, I may just use the default hexo theme – landscape. Still, the f">
+  <meta name="description" content="First post of blogs Recently I am gonna migrate my blog to hexo, and I am gonna explore hexo with more intersting things, from the start, I may just use the default hexo theme – landscape. Still, the">
 <meta property="og:type" content="article">
 <meta property="og:title" content="First Post">
 <meta property="og:url" content="mercurixito.github.io/2020/03/16/first/index.html">
 <meta property="og:site_name" content="Hako">
-<meta property="og:description" content="First post of blogsRecently I am gonna migrate my blog to hexo, and I am gonna explore hexo with more intersting things, from the start, I may just use the default hexo theme – landscape. Still, the f">
+<meta property="og:description" content="First post of blogs Recently I am gonna migrate my blog to hexo, and I am gonna explore hexo with more intersting things, from the start, I may just use the default hexo theme – landscape. Still, the">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2020-03-16T13:52:05.000Z">
-<meta property="article:modified_time" content="2020-03-18T14:35:02.814Z">
+<meta property="article:modified_time" content="2020-04-19T07:52:20.822Z">
 <meta property="article:author" content="Victor Chen">
 <meta property="article:tag" content="杂谈">
 <meta name="twitter:card" content="summary">
@@ -89,74 +108,85 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="First-post-of-blogs"><a href="#First-post-of-blogs" class="headerlink" title="First post of blogs"></a>First post of blogs</h2><p>Recently I am gonna migrate my blog to hexo, and I am gonna explore hexo with more intersting things, from the start, I may just use the default hexo theme – <code>landscape</code>.</p>
+        <h2 id="first-post-of-blogs"><a class="markdownIt-Anchor" href="#first-post-of-blogs"></a> First post of blogs</h2>
+<p>Recently I am gonna migrate my blog to hexo, and I am gonna explore hexo with more intersting things, from the start, I may just use the default hexo theme – <code>landscape</code>.</p>
 <p>Still, the first things I should do is to make <code>Mathjax</code> work compatibly with <code>Hexo</code>. Let’s take the equations below for an example.</p>
-<p>$$<br>    G^{*} = \arg \min_{G} \max_{D} \left[ \mathbb{E}_{x \sim p_{data}}<br>    (\log D(x)) + \mathbb{E_{z \sim p_{z}}} \log( 1 - D(G(z))) \right]<br>$$</p>
+<p>$$<br />
+G^{*} = \arg \min_{G} \max_{D} \left[ \mathbb{E}_{x \sim p_{data}}<br />
+(\log D(x)) + \mathbb{E_{z \sim p_{z}}} \log( 1 - D(G(z))) \right]<br />
+$$</p>
+<p><strong>The following steps are based on <code>hexo-markdown-rendered</code> render and mind I have changed it to <code>hexo-renderer-markdown-it-plus</code>, So it would be out of date.</strong></p>
 <a id="more"></a>
-
-<h2 id="Tips-for-using-Mathjax-in-Hexo"><a href="#Tips-for-using-Mathjax-in-Hexo" class="headerlink" title="Tips for using Mathjax in Hexo"></a>Tips for using Mathjax in Hexo</h2><p>Use <a href="https://github.com/hexojs/hexo-math" target="_blank" rel="noopener">hexo-math</a> plugins for convenience. </p>
+<h2 id="tips-for-using-mathjax-in-hexo"><a class="markdownIt-Anchor" href="#tips-for-using-mathjax-in-hexo"></a> Tips for using Mathjax in Hexo</h2>
+<p>Use <a href="https://github.com/hexojs/hexo-math" target="_blank" rel="noopener">hexo-math</a> plugins for convenience.</p>
 <p>Several Steps:</p>
 <ol>
-<li><p><code>npm install hexo-math --save</code> to download it.</p>
+<li>
+<p><code>npm install hexo-math --save</code> to download it.</p>
 </li>
-<li><p>No need <code>hexo math install</code> for <code>hexo-math</code> newer than 1.0.6.</p>
+<li>
+<p>No need <code>hexo math install</code> for <code>hexo-math</code> newer than 1.0.6.</p>
 </li>
-<li><p>Specify the configuration in <code>_config.yml</code> using <code>Mathjax</code>：</p>
+<li>
+<p>Specify the configuration in <code>_config.yml</code> using <code>Mathjax</code>：</p>
 </li>
 </ol>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"># MathJax Support</span><br><span class="line">math:</span><br><span class="line">  engine: &#39;mathjax&#39;</span><br><span class="line">  mathjax:</span><br><span class="line">    src: https:&#x2F;&#x2F;cdnjs.cloudflare.com&#x2F;ajax&#x2F;libs&#x2F;mathjax&#x2F;2.7.1&#x2F;MathJax.js</span><br><span class="line">    config: </span><br><span class="line">      # MathJax config</span><br><span class="line">      tex2jax:</span><br><span class="line">        inlineMath: [ [&#39;$&#39;,&#39;$&#39;], [&quot;\\(&quot;,&quot;\\)&quot;] ]</span><br><span class="line">        skipTags: [&#39;script&#39;, &#39;noscript&#39;, &#39;style&#39;, &#39;textarea&#39;, &#39;pre&#39;, &#39;code&#39;]</span><br><span class="line">        processEscapes: true</span><br><span class="line">      TeX:</span><br><span class="line">        equationNumbers:</span><br><span class="line">          autoNumber: &quot;AMS&quot;</span><br><span class="line">      extensions: [&quot;tex2jax.js&quot;]</span><br><span class="line">      jax: [&quot;input&#x2F;TeX&quot;, &quot;output&#x2F;HTML-CSS&quot;]</span><br></pre></td></tr></table></figure>
-
 <ol start="4">
 <li>Make sure that every post that you want to use <code>Mathjax</code> with the header:</li>
 </ol>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mathjax: true</span><br></pre></td></tr></table></figure>
-
-<p>And the whole things will be down! But we would discuss later about how to deal with<br>compatability between <code>Mathjax</code> and Markdown parser. Because you have to use <code>\</code> to<br>convert <code>_</code> or <code>*</code> to avoid parse the equation errorly. </p>
-<h2 id="Discuss-Later"><a href="#Discuss-Later" class="headerlink" title="Discuss Later"></a>Discuss Later</h2><p>We will modify the <code>marked.js</code> file to escape from parsing some codes in equations, such as:</p>
+<p>And the whole things will be down! But we would discuss later about how to deal with<br />
+compatability between <code>Mathjax</code> and Markdown parser. Because you have to use <code>\</code> to<br />
+convert <code>_</code> or <code>*</code> to avoid parse the equation errorly.</p>
+<h2 id="discuss-later"><a class="markdownIt-Anchor" href="#discuss-later"></a> Discuss Later</h2>
+<p>We will modify the <code>marked.js</code> file to escape from parsing some codes in equations, such as:</p>
 <ul>
 <li>two <code>_</code> in equations would be parsed as <code>&lt;em&gt;&lt;/em&gt;</code></li>
 <li><code>\{</code>,<code>\\</code>,<code>\}</code> would not be parsed.</li>
 </ul>
 <p>Let’s take the equations below as an example.</p>
-<p>$$<br>    G^{*} = \arg \min_{G} \max_{D} \left\{ \mathbb{E}_{x \sim p_{data}}<br>    (\log D(x)) + \mathbb{E_{z \sim p_{z}}} \log( 1 - D(G(z))) \right\}<br>$$</p>
+<p>$$<br />
+G^{*} = \arg \min_{G} \max_{D} \left{ \mathbb{E}_{x \sim p_{data}}<br />
+(\log D(x)) + \mathbb{E_{z \sim p_{z}}} \log( 1 - D(G(z))) \right}<br />
+$$</p>
 <p>Most ways on web I searched have already out of date because hexo-render-marked has updated its regluar expression to parse <code>em</code> and <code>escape</code>. And I simply updated the ways below:</p>
 <ul>
 <li>modify <code>escape</code> in <code>inline</code> to:</li>
 </ul>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">escape: &#x2F;^\\([!&quot;#$%&amp;&#39;()*+,\-.&#x2F;:;&lt;&#x3D;&gt;?@\[\]^_&#96;|~])&#x2F;, &#x2F;&#x2F; \&#123; \&#125; \\</span><br></pre></td></tr></table></figure>
-
 <ul>
 <li>modify <code>em</code> in <code>inline</code> to:</li>
 </ul>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">em: &#x2F;^\*([^\s*&lt;\[])\*(?!\*)|^\*([^\s&lt;&quot;][\s\S]*[?^\s\*])\*(?!\*|[^\spunctuation])|^\*([^\s*&quot;&lt;\[][\s\S]*?[^\s])\*(?!\*)&#x2F;,</span><br></pre></td></tr></table></figure>
-
 <ul>
 <li>modify <code>br</code> in <code>inline</code> to:</li>
 </ul>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">br: &#x2F;^( &#123;2,&#125;)\n(?!\s*$)&#x2F;,</span><br></pre></td></tr></table></figure>
-
-<p>Use <code>hexo clean</code> to clean the cache and restart the server, things will be fine! :) </p>
+<p>Use <code>hexo clean</code> to clean the cache and restart the server, things will be fine! 😃</p>
 <p><strong>Note</strong>:</p>
 <ul>
 <li>the version of <code>marked</code> I tested is <code>0.7.0</code>.</li>
-<li>After the modification, some of the features may not be used:<ul>
-<li><code>\\</code> for a new line </li>
+<li>After the modification, some of the features may not be used:
+<ul>
+<li><code>\\</code> for a new line</li>
 <li>double <code>_</code> for italic (use double <code>*</code> instead).</li>
 </ul>
 </li>
 </ul>
-<h2 id="Other-Modification"><a href="#Other-Modification" class="headerlink" title="Other Modification"></a>Other Modification</h2><p>With The clear theme <code>landscape</code>, I feel much better. Further modification would be adapted. </p>
+<h2 id="other-modification"><a class="markdownIt-Anchor" href="#other-modification"></a> Other Modification</h2>
+<p>With The clear theme <code>landscape</code>, I feel much better. Further modification would be adapted.</p>
 <p>A bunch of features that I would need further:</p>
 <ul>
-<li><input disabled="" type="checkbox"> Content index of each post.</li>
-<li><input disabled="" type="checkbox"> Much fluently compatible with original <code>LaTeX</code> codes, so I can transfer between them easily. </li>
-<li><input disabled="" type="checkbox"> Self-introduction item in the side bars.</li>
+<li>[ ] Content index of each post.</li>
+<li>[ ] Much fluently compatible with original <code>LaTeX</code> codes, so I can transfer between them easily.</li>
+<li>[ ] Self-introduction item in the side bars.</li>
 </ul>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="mercurixito.github.io/2020/03/16/first/" data-id="ck7ygs2jo0004bgucgak9bpw6" class="article-share-link">Share</a>
+      <a data-url="mercurixito.github.io/2020/03/16/first/" data-id="ck96vk96o000q58uc6efr5d96" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%9D%82%E8%B0%88/" rel="tag">杂谈</a></li></ul>
@@ -198,7 +228,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">标签</h3>
     <div class="widget">
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Disentangled-Representation-Learning/" rel="tag">Disentangled Representation Learning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GAN/" rel="tag">GAN</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linear-Algebra/" rel="tag">Linear Algebra</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mathematic/" rel="tag">Mathematic</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Paper-Reading/" rel="tag">Paper Reading</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Probability/" rel="tag">Probability</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/disentanglement/" rel="tag">disentanglement</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/metrics/" rel="tag">metrics</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/resources/" rel="tag">resources</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9D%82%E8%B0%88/" rel="tag">杂谈</a></li></ul>
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Disentangled-Representation-Learning/" rel="tag">Disentangled Representation Learning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GAN/" rel="tag">GAN</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linear-Algebra/" rel="tag">Linear Algebra</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mathematic/" rel="tag">Mathematic</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Paper-Reading/" rel="tag">Paper Reading</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Probability/" rel="tag">Probability</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/disentanglement/" rel="tag">disentanglement</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/metrics/" rel="tag">metrics</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/resources/" rel="tag">resources</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/unsupervised-gan-controlling/" rel="tag">unsupervised gan controlling</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9D%82%E8%B0%88/" rel="tag">杂谈</a></li></ul>
     </div>
   </div>
 
@@ -208,7 +238,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">标签云</h3>
     <div class="widget tagcloud">
-      <a href="/tags/Disentangled-Representation-Learning/" style="font-size: 10px;">Disentangled Representation Learning</a> <a href="/tags/GAN/" style="font-size: 20px;">GAN</a> <a href="/tags/Linear-Algebra/" style="font-size: 10px;">Linear Algebra</a> <a href="/tags/Mathematic/" style="font-size: 13.33px;">Mathematic</a> <a href="/tags/Paper-Reading/" style="font-size: 16.67px;">Paper Reading</a> <a href="/tags/Probability/" style="font-size: 10px;">Probability</a> <a href="/tags/disentanglement/" style="font-size: 10px;">disentanglement</a> <a href="/tags/metrics/" style="font-size: 13.33px;">metrics</a> <a href="/tags/resources/" style="font-size: 13.33px;">resources</a> <a href="/tags/%E6%9D%82%E8%B0%88/" style="font-size: 13.33px;">杂谈</a>
+      <a href="/tags/Disentangled-Representation-Learning/" style="font-size: 10px;">Disentangled Representation Learning</a> <a href="/tags/GAN/" style="font-size: 20px;">GAN</a> <a href="/tags/Linear-Algebra/" style="font-size: 10px;">Linear Algebra</a> <a href="/tags/Mathematic/" style="font-size: 12.5px;">Mathematic</a> <a href="/tags/Paper-Reading/" style="font-size: 17.5px;">Paper Reading</a> <a href="/tags/Probability/" style="font-size: 10px;">Probability</a> <a href="/tags/disentanglement/" style="font-size: 10px;">disentanglement</a> <a href="/tags/metrics/" style="font-size: 12.5px;">metrics</a> <a href="/tags/resources/" style="font-size: 12.5px;">resources</a> <a href="/tags/unsupervised-gan-controlling/" style="font-size: 15px;">unsupervised gan controlling</a> <a href="/tags/%E6%9D%82%E8%B0%88/" style="font-size: 15px;">杂谈</a>
     </div>
   </div>
 
@@ -230,23 +260,23 @@
       <ul>
         
           <li>
+            <a href="/2020/04/19/Talk-need2/">Talk-need2</a>
+          </li>
+        
+          <li>
+            <a href="/2020/04/17/RP-controlling/">论文研读：Controlling generative models with continuous factors of variations</a>
+          </li>
+        
+          <li>
+            <a href="/2020/04/10/RP-GANalyse/">论文研读： GANalyze: Toward visual definitions of cognitive image properties.</a>
+          </li>
+        
+          <li>
             <a href="/2020/04/03/RP-InterFaceGAN/">论文研读：InterFaceGAN</a>
           </li>
         
           <li>
             <a href="/2020/03/31/RP-GANs1/">论文略读： SGAN(Stacked GAN)</a>
-          </li>
-        
-          <li>
-            <a href="/2020/03/30/Resources-GAN/">Resources： GAN</a>
-          </li>
-        
-          <li>
-            <a href="/2020/03/30/Resources-Disentangled-Representation-Learning/">Resources： Disentangled Representation Learning</a>
-          </li>
-        
-          <li>
-            <a href="/2020/03/27/RP-steerability/">论文研读： on the steerabilty of generative adversarial networks</a>
           </li>
         
       </ul>

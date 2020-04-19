@@ -2,20 +2,39 @@
 <html>
 <head>
   <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
-  
+<!--   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0-rc.1/dist/katex.min.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.10.0-rc.1/dist/katex.min.js"></script> -->
+
+  <!-- Default Mathjax Support -->
+  <script type="text/x-mathjax-config">
+     MathJax.Hub.Config({"HTML-CSS": { preferredFont: "TeX", availableFonts: ["STIX","TeX"], linebreaks: { automatic:true }, EqnChunk: (MathJax.Hub.Browser.isMobile ? 10 : 50) },
+          tex2jax: { inlineMath: [ ["$", "$"], ["\\(","\\)"] ], processEscapes: true, ignoreClass: "tex2jax_ignore|dno",skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']},
+          TeX: {  noUndefined: { attributes: { mathcolor: "red", mathbackground: "#FFEEEE", mathsize: "90%" } }, Macros: { href: "{}" } },
+          messageStyle: "none"
+      }); 
+  </script>
+  <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+          var all = MathJax.Hub.getAllJax(), i;
+          for(i=0; i < all.length; i += 1) {
+              all[i].SourceElement().parentNode.className += ' has-jax';
+          }
+      });
+  </script>
+  <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 
   
   <title>Resources： Disentangled Representation Learning | Hako</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Introduction领域Disentangled Representation Learning的相关资料：包含论文、tutorial等。 Papers InfoGAN: Interpretable Representation Learning by Information Maximizing Generative Adversarial Nets. [paper] ${\beta}$-G">
+  <meta name="description" content="Introduction 领域Disentangled Representation Learning的相关资料：包含论文、tutorial等。  Papers  InfoGAN: Interpretable Representation Learning by Information Maximizing Generative Adversarial Nets. [paper] ${\beta">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Resources： Disentangled Representation Learning">
 <meta property="og:url" content="mercurixito.github.io/2020/03/30/Resources-Disentangled-Representation-Learning/index.html">
 <meta property="og:site_name" content="Hako">
-<meta property="og:description" content="Introduction领域Disentangled Representation Learning的相关资料：包含论文、tutorial等。 Papers InfoGAN: Interpretable Representation Learning by Information Maximizing Generative Adversarial Nets. [paper] ${\beta}$-G">
+<meta property="og:description" content="Introduction 领域Disentangled Representation Learning的相关资料：包含论文、tutorial等。  Papers  InfoGAN: Interpretable Representation Learning by Information Maximizing Generative Adversarial Nets. [paper] ${\beta">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2020-03-30T02:53:39.000Z">
-<meta property="article:modified_time" content="2020-03-30T15:19:32.433Z">
+<meta property="article:modified_time" content="2020-04-19T06:56:55.654Z">
 <meta property="article:author" content="Victor Chen">
 <meta property="article:tag" content="Disentangled Representation Learning">
 <meta property="article:tag" content="resources">
@@ -90,41 +109,64 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><p>领域<code>Disentangled Representation Learning</code>的相关资料：包含论文、tutorial等。</p>
-<h2 id="Papers"><a href="#Papers" class="headerlink" title="Papers"></a>Papers</h2><ul>
+        <h2 id="introduction"><a class="markdownIt-Anchor" href="#introduction"></a> Introduction</h2>
+<p>领域<code>Disentangled Representation Learning</code>的相关资料：包含论文、tutorial等。</p>
+<h2 id="papers"><a class="markdownIt-Anchor" href="#papers"></a> Papers</h2>
+<ul>
 <li>InfoGAN: Interpretable Representation Learning by Information Maximizing Generative Adversarial Nets. <a href="https://arxiv.org/abs/1606.03657" target="_blank" rel="noopener">[paper]</a></li>
 <li>${\beta}$-GAN: Learning Basic Visual Concepts with a Constrained Variational Framework. <a href="https://openreview.net/forum?id=Sy2fzU9gl" target="_blank" rel="noopener">[paper]</a> <a href="https://github.com/sootlasten/beta-vae" target="_blank" rel="noopener">[codes]</a></li>
 </ul>
 <a id="more"></a>
-
-<h2 id="Unsorted-papers"><a href="#Unsorted-papers" class="headerlink" title="Unsorted papers"></a>Unsorted papers</h2><p>我认为和<code>Disentangled Representation Learning</code>有关的papers：</p>
+<h2 id="unsorted-papers"><a class="markdownIt-Anchor" href="#unsorted-papers"></a> Unsorted papers</h2>
+<p>我认为和<code>Disentangled Representation Learning</code>有关的papers：</p>
 <ul>
-<li><p>On the “steerability” of generative adversarial networks. <a href="https://arxiv.org/abs/1907.07171" target="_blank" rel="noopener">[paper]</a> <a href="https://ali-design.github.io/gan_steerability/" target="_blank" rel="noopener">[codes]</a></p>
+<li>
+<p>On the “steerability” of generative adversarial networks. <a href="https://arxiv.org/abs/1907.07171" target="_blank" rel="noopener">[paper]</a> <a href="https://ali-design.github.io/gan_steerability/" target="_blank" rel="noopener">[codes]</a></p>
 </li>
-<li><p>Interpreting the Latent Space of GANs for Semantic Face Editing. <a href="https://arxiv.org/abs/1907.10786" target="_blank" rel="noopener">[paper]</a> <a href="https://shenyujun.github.io/InterFaceGAN/" target="_blank" rel="noopener">[codes]</a></p>
+<li>
+<p>Interpreting the Latent Space of GANs for Semantic Face Editing. <a href="https://arxiv.org/abs/1907.10786" target="_blank" rel="noopener">[paper]</a> <a href="https://shenyujun.github.io/InterFaceGAN/" target="_blank" rel="noopener">[codes]</a></p>
+</li>
+<li>
+<p>GANalyze: Toward Visual Definitions of Cognitive Image Properties. <a href="http://openaccess.thecvf.com/content_ICCV_2019/html/Goetschalckx_GANalyze_Toward_Visual_Definitions_of_Cognitive_Image_Properties_ICCV_2019_paper.html" target="_blank" rel="noopener">[paper]</a> <a href="http://ganalyze.csail.mit.edu/" target="_blank" rel="noopener">[project page]</a> <a href="http://ganalyze.csail.mit.edu/" target="_blank" rel="noopener">[codes]</a></p>
+</li>
+<li>
+<p>Controlling Generative Modesl with Continuous Factors of Variations. <a href="https://openreview.net/forum?id=H1laeJrKDB" target="_blank" rel="noopener">[paper]</a> <a href="https://github.com/AntoinePlumerault/Controlling-generative-models-with-continuous-factors-of-variations" target="_blank" rel="noopener">[codes]</a></p>
 </li>
 </ul>
-<h2 id="Other-resources"><a href="#Other-resources" class="headerlink" title="Other resources"></a>Other resources</h2><ul>
-<li><p><a href="https://sites.google.com/view/disentanglenips2017" target="_blank" rel="noopener">NIPs 2017 Workshop: Learning Disentangled Representations:<br>from Perception to Control</a></p>
+<h2 id="other-resources"><a class="markdownIt-Anchor" href="#other-resources"></a> Other resources</h2>
+<ul>
+<li>
+<p><a href="https://sites.google.com/view/disentanglenips2017" target="_blank" rel="noopener">NIPs 2017 Workshop: Learning Disentangled Representations:<br />
+from Perception to Control</a></p>
 </li>
-<li><p><a href="https://github.com/sootlasten/disentangled-representation-papers" target="_blank" rel="noopener">List of papers about disentangled representations</a></p>
+<li>
+<p><a href="https://github.com/sootlasten/disentangled-representation-papers" target="_blank" rel="noopener">List of papers about disentangled representations</a></p>
 </li>
 </ul>
-<h2 id="Other"><a href="#Other" class="headerlink" title="Other"></a>Other</h2><p>简述 InfoGAN。</p>
+<h2 id="other"><a class="markdownIt-Anchor" href="#other"></a> Other</h2>
+<p>简述 InfoGAN。</p>
 <p>latent space 由noise${z}$和 latent codes ${c}$组成，通过生成器得到${G(z,c)}$。</p>
 <p>如果不加限制，${G}$容易忽略${c}$的影响，idea是计算互信息量：${I(c,G(z,c))}$。</p>
-<p>$${<br>    I(c, G(z,c)) = H(c) - H(c \vert G(c,z))<br>}$$</p>
+<p>$${<br />
+I(c, G(z,c)) = H© - H(c \vert G(c,z))<br />
+}$$</p>
 <p>互信息量的含义是：已知${G(c,z)}$的情况下${c}$的信息量（信息熵）和未知时的信息量减少的多少。我们希望，对任意一张生成图片，它很明显具有某种latent code编码的特性，也就是使得${H(c \vert G(c,z))}$尽可能小，所以要互信息量大。</p>
 <p>如何将互信息量加入训练？先验分布${P(c \vert x)}$难以计算，使用<code>Variational Information Maximization</code>的方法用另一个${Q(c \vert x)}$得到它的下界：</p>
-<p>$${<br>    I(c, G(z,c)) \geq \mathbb{E}_{x \sim G(z,c)}\left[<br>    \mathbb{E}_{c^{\prime} \sim P(c \vert x)\left[ Q(c^{\prime} \vert x) \right]}\right] + H(c) = L_{1}(G,Q)<br>}$$</p>
-<p>当${P = Q}$时取等号，而且${I(c, G(z,c))}$取最小值。给定${c}$的分布不变，${H(c)}$为固定的常数，只需要优化加号的左项。</p>
+<p>$${<br />
+I(c, G(z,c)) \geq \mathbb{E}_{x \sim G(z,c)}\left[<br />
+\mathbb{E}_{c^{\prime} \sim P(c \vert x)\left[ Q(c^{\prime} \vert x) \right]}\right] + H© = L_{1}(G,Q)<br />
+}$$</p>
+<p>当${P = Q}$时取等号，而且${I(c, G(z,c))}$取最小值。给定${c}$的分布不变，${H©}$为固定的常数，只需要优化加号的左项。</p>
 <p>整个Loss：</p>
-<p>$${<br>    \min_{G, Q} \min_{D} V(G,D) - \lambda L_{1}(G,Q)<br>}$$</p>
+<p>$${<br />
+\min_{G, Q} \min_{D} V(G,D) - \lambda L_{1}(G,Q)<br />
+}$$</p>
 <p><strong>实现</strong></p>
 <p>${D}$和classifier权重共享，除了最后一层不同。${D}$输出binary结果。classifier对每一个控制的${c_{i}}$，如果${c_{i}}$是离散的变量（给定的分布也是离散的），通过softmax得到${Q(c_{i} \vert x)}$。如果${c_{i}}$是连续的变量（给定的分布也是连续的），直接把${Q(c_{i} \vert x)}$看成一个可分解的高斯变换，<strong>也就是输出两个数表示均值和方差</strong>。</p>
 <p><strong>实现的Codes</strong></p>
 <ul>
-<li><a href="https://github.com/Natsu6767/InfoGAN-PyTorch" target="_blank" rel="noopener">pytorch-infoGAN</a><ul>
+<li><a href="https://github.com/Natsu6767/InfoGAN-PyTorch" target="_blank" rel="noopener">pytorch-infoGAN</a>
+<ul>
 <li>对每个离散变量使用随机的one_hot变量，对每个连续的变量使用随机的[-1,1]的变量。然后将它们concat。</li>
 </ul>
 </li>
@@ -133,7 +175,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="mercurixito.github.io/2020/03/30/Resources-Disentangled-Representation-Learning/" data-id="ck8elkv67000048ucc5g15v8u" class="article-share-link">Share</a>
+      <a data-url="mercurixito.github.io/2020/03/30/Resources-Disentangled-Representation-Learning/" data-id="ck96vk96i000f58uc23s5gt47" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Disentangled-Representation-Learning/" rel="tag">Disentangled Representation Learning</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/resources/" rel="tag">resources</a></li></ul>
@@ -175,7 +217,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">标签</h3>
     <div class="widget">
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Disentangled-Representation-Learning/" rel="tag">Disentangled Representation Learning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GAN/" rel="tag">GAN</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linear-Algebra/" rel="tag">Linear Algebra</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mathematic/" rel="tag">Mathematic</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Paper-Reading/" rel="tag">Paper Reading</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Probability/" rel="tag">Probability</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/disentanglement/" rel="tag">disentanglement</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/metrics/" rel="tag">metrics</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/resources/" rel="tag">resources</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9D%82%E8%B0%88/" rel="tag">杂谈</a></li></ul>
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Disentangled-Representation-Learning/" rel="tag">Disentangled Representation Learning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GAN/" rel="tag">GAN</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linear-Algebra/" rel="tag">Linear Algebra</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mathematic/" rel="tag">Mathematic</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Paper-Reading/" rel="tag">Paper Reading</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Probability/" rel="tag">Probability</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/disentanglement/" rel="tag">disentanglement</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/metrics/" rel="tag">metrics</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/resources/" rel="tag">resources</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/unsupervised-gan-controlling/" rel="tag">unsupervised gan controlling</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9D%82%E8%B0%88/" rel="tag">杂谈</a></li></ul>
     </div>
   </div>
 
@@ -185,7 +227,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">标签云</h3>
     <div class="widget tagcloud">
-      <a href="/tags/Disentangled-Representation-Learning/" style="font-size: 10px;">Disentangled Representation Learning</a> <a href="/tags/GAN/" style="font-size: 20px;">GAN</a> <a href="/tags/Linear-Algebra/" style="font-size: 10px;">Linear Algebra</a> <a href="/tags/Mathematic/" style="font-size: 13.33px;">Mathematic</a> <a href="/tags/Paper-Reading/" style="font-size: 16.67px;">Paper Reading</a> <a href="/tags/Probability/" style="font-size: 10px;">Probability</a> <a href="/tags/disentanglement/" style="font-size: 10px;">disentanglement</a> <a href="/tags/metrics/" style="font-size: 13.33px;">metrics</a> <a href="/tags/resources/" style="font-size: 13.33px;">resources</a> <a href="/tags/%E6%9D%82%E8%B0%88/" style="font-size: 13.33px;">杂谈</a>
+      <a href="/tags/Disentangled-Representation-Learning/" style="font-size: 10px;">Disentangled Representation Learning</a> <a href="/tags/GAN/" style="font-size: 20px;">GAN</a> <a href="/tags/Linear-Algebra/" style="font-size: 10px;">Linear Algebra</a> <a href="/tags/Mathematic/" style="font-size: 12.5px;">Mathematic</a> <a href="/tags/Paper-Reading/" style="font-size: 17.5px;">Paper Reading</a> <a href="/tags/Probability/" style="font-size: 10px;">Probability</a> <a href="/tags/disentanglement/" style="font-size: 10px;">disentanglement</a> <a href="/tags/metrics/" style="font-size: 12.5px;">metrics</a> <a href="/tags/resources/" style="font-size: 12.5px;">resources</a> <a href="/tags/unsupervised-gan-controlling/" style="font-size: 15px;">unsupervised gan controlling</a> <a href="/tags/%E6%9D%82%E8%B0%88/" style="font-size: 15px;">杂谈</a>
     </div>
   </div>
 
@@ -207,23 +249,23 @@
       <ul>
         
           <li>
+            <a href="/2020/04/19/Talk-need2/">Talk-need2</a>
+          </li>
+        
+          <li>
+            <a href="/2020/04/17/RP-controlling/">论文研读：Controlling generative models with continuous factors of variations</a>
+          </li>
+        
+          <li>
+            <a href="/2020/04/10/RP-GANalyse/">论文研读： GANalyze: Toward visual definitions of cognitive image properties.</a>
+          </li>
+        
+          <li>
             <a href="/2020/04/03/RP-InterFaceGAN/">论文研读：InterFaceGAN</a>
           </li>
         
           <li>
             <a href="/2020/03/31/RP-GANs1/">论文略读： SGAN(Stacked GAN)</a>
-          </li>
-        
-          <li>
-            <a href="/2020/03/30/Resources-GAN/">Resources： GAN</a>
-          </li>
-        
-          <li>
-            <a href="/2020/03/30/Resources-Disentangled-Representation-Learning/">Resources： Disentangled Representation Learning</a>
-          </li>
-        
-          <li>
-            <a href="/2020/03/27/RP-steerability/">论文研读： on the steerabilty of generative adversarial networks</a>
           </li>
         
       </ul>
