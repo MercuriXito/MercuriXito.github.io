@@ -2,11 +2,11 @@
 <html>
 <head>
   <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
-<!--   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0-rc.1/dist/katex.min.css">
-  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.10.0-rc.1/dist/katex.min.js"></script> -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq" crossorigin="anonymous">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js" integrity="sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz" crossorigin="anonymous"></script>
 
   <!-- Default Mathjax Support -->
-  <script type="text/x-mathjax-config">
+<!--   <script type="text/x-mathjax-config">
      MathJax.Hub.Config({"HTML-CSS": { preferredFont: "TeX", availableFonts: ["STIX","TeX"], linebreaks: { automatic:true }, EqnChunk: (MathJax.Hub.Browser.isMobile ? 10 : 50) },
           tex2jax: { inlineMath: [ ["$", "$"], ["\\(","\\)"] ], processEscapes: true, ignoreClass: "tex2jax_ignore|dno",skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']},
           TeX: {  noUndefined: { attributes: { mathcolor: "red", mathbackground: "#FFEEEE", mathsize: "90%" } }, Macros: { href: "{}" } },
@@ -21,7 +21,7 @@
           }
       });
   </script>
-  <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
 
   
   <title>Hako</title>
@@ -114,6 +114,7 @@
 <li><a href="#steps">Steps</a>
 <ul>
 <li><a href="#change-2020-04-19">Change - 2020-04-19</a></li>
+<li><a href="#change-2020-04-21">Change - 2020-04-21</a></li>
 </ul>
 </li>
 </ul>
@@ -126,7 +127,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="mercurixito.github.io/2020/04/19/Talk-need2/" data-id="ck96vk96n000o58uc5wsq1kmw" class="article-share-link">Share</a>
+      <a data-url="mercurixito.github.io/2020/04/19/Talk-need2/" data-id="ck9a3zza0000os0uc3tth6ve4" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%9D%82%E8%B0%88/" rel="tag">杂谈</a></li></ul>
@@ -162,7 +163,13 @@
       
         <p>本文针对&quot;Controlling generative models with continuous factors of variations&quot;[1] 一文学习。</p>
 <h3 id="problem"><a class="markdownIt-Anchor" href="#problem"></a> problem</h3>
-<p>本文和之前阅读的论文问题也差不多：针对<strong>连续</strong>的变换${T}$，<strong>在latent space上寻找方向${\vec{u}}$，使得生成的图像是原图像经过${T}$变换后的图像</strong>。</p>
+<p>本文和之前阅读的论文问题也差不多：针对<strong>连续</strong>的变换<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>T</mi></mrow><annotation encoding="application/x-tex">{T}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.13889em;">T</span></span></span></span></span>，<strong>在latent space上寻找方向<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mover accent="true"><mi>u</mi><mo>⃗</mo></mover></mrow><annotation encoding="application/x-tex">{\vec{u}}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.714em;vertical-align:0em;"></span><span class="mord"><span class="mord accent"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.714em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathdefault">u</span></span></span><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="accent-body" style="left:-0.20772em;"><span class="overlay" style="height:0.714em;width:0.471em;"><svg width='0.471em' height='0.714em' style='width:0.471em' viewBox='0 0 471 714' preserveAspectRatio='xMinYMin'><path d='M377 20c0-5.333 1.833-10 5.5-14S391 0 397 0c4.667 0 8.667 1.667 12 5
+3.333 2.667 6.667 9 10 19 6.667 24.667 20.333 43.667 41 57 7.333 4.667 11
+10.667 11 18 0 6-1 10-3 12s-6.667 5-14 9c-28.667 14.667-53.667 35.667-75 63
+-1.333 1.333-3.167 3.5-5.5 6.5s-4 4.833-5 5.5c-1 .667-2.5 1.333-4.5 2s-4.333 1
+-7 1c-4.667 0-9.167-1.833-13.5-5.5S337 184 337 178c0-12.667 15.667-32.333 47-59
+H213l-171-1c-8.667-6-13-12.333-13-19 0-4.667 4.333-11.333 13-20h359
+c-16-25.333-24-45-24-59z'/></svg></span></span></span></span></span></span></span></span></span></span></span>，使得生成的图像是原图像经过<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>T</mi></mrow><annotation encoding="application/x-tex">{T}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.13889em;">T</span></span></span></span></span>变换后的图像</strong>。</p>
 <p>是一种无监督（或者自监督）的控制GAN生成图像的方法。</p>
         
           <p class="article-more-link">
@@ -172,7 +179,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="mercurixito.github.io/2020/04/17/RP-controlling/" data-id="ck96vk96g000c58ucbihg1c1y" class="article-share-link">Share</a>
+      <a data-url="mercurixito.github.io/2020/04/17/RP-controlling/" data-id="ck9a3zz9l000cs0ucfd9645my" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/GAN/" rel="tag">GAN</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Paper-Reading/" rel="tag">Paper Reading</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/unsupervised-gan-controlling/" rel="tag">unsupervised gan controlling</a></li></ul>
@@ -207,7 +214,7 @@
     <div class="article-entry" itemprop="articleBody">
       
         <h3 id="problems"><a class="markdownIt-Anchor" href="#problems"></a> Problems</h3>
-<p>本文研究的问题是：在GAN的latent space上操作${z}$，使得Generator生成的图像的Memorability 对应地进行变化。Image Memorability：人的感觉上记住一张图像的可能性。</p>
+<p>本文研究的问题是：在GAN的latent space上操作<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>z</mi></mrow><annotation encoding="application/x-tex">{z}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.04398em;">z</span></span></span></span></span>，使得Generator生成的图像的Memorability 对应地进行变化。Image Memorability：人的感觉上记住一张图像的可能性。</p>
 <p><ul class="markdownIt-TOC">
 <li>
 <ul>
@@ -230,7 +237,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="mercurixito.github.io/2020/04/10/RP-GANalyse/" data-id="ck96vk96c000758ucfzgx40xp" class="article-share-link">Share</a>
+      <a data-url="mercurixito.github.io/2020/04/10/RP-GANalyse/" data-id="ck9a3zz980005s0uch956gr4m" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/GAN/" rel="tag">GAN</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Paper-Reading/" rel="tag">Paper Reading</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/unsupervised-gan-controlling/" rel="tag">unsupervised gan controlling</a></li></ul>
@@ -281,7 +288,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="mercurixito.github.io/2020/04/03/RP-InterFaceGAN/" data-id="ck96vk96d000858uc5ykx57t7" class="article-share-link">Share</a>
+      <a data-url="mercurixito.github.io/2020/04/03/RP-InterFaceGAN/" data-id="ck9a3zz9e0008s0uc0kam6u1y" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/GAN/" rel="tag">GAN</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Paper-Reading/" rel="tag">Paper Reading</a></li></ul>
@@ -328,7 +335,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="mercurixito.github.io/2020/03/31/RP-GANs1/" data-id="ck96vk96a000558uca9lbgfya" class="article-share-link">Share</a>
+      <a data-url="mercurixito.github.io/2020/03/31/RP-GANs1/" data-id="ck9a3zz9c0007s0ucc692d9ts" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/GAN/" rel="tag">GAN</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Paper-Reading/" rel="tag">Paper Reading</a></li></ul>
@@ -368,7 +375,7 @@
 <hr />
 <h3 id="uncoditional-gans"><a class="markdownIt-Anchor" href="#uncoditional-gans"></a> Uncoditional GANs</h3>
 <hr />
-<p>Unconditional GAN 是最原始的GAN的任务，对目标的图片的分布建模，学习映射${z \to x}$。</p>
+<p>Unconditional GAN 是最原始的GAN的任务，对目标的图片的分布建模，学习映射<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>z</mi><mo>→</mo><mi>x</mi></mrow><annotation encoding="application/x-tex">{z \to x}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.04398em;">z</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">→</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mord mathdefault">x</span></span></span></span></span>。</p>
 <ul>
 <li>Generative Adversarial Nets. ( GAN )</li>
 <li>Deep Generative Image Models using a Laplacian Pyramid of Adversarial Networks ( LPGAN )</li>
@@ -385,7 +392,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="mercurixito.github.io/2020/03/30/Resources-GAN/" data-id="ck96vk96k000i58ucfcff77qj" class="article-share-link">Share</a>
+      <a data-url="mercurixito.github.io/2020/03/30/Resources-GAN/" data-id="ck9a3zz9t000is0ucfqr1fmvf" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/GAN/" rel="tag">GAN</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/resources/" rel="tag">resources</a></li></ul>
@@ -424,7 +431,7 @@
 <h2 id="papers"><a class="markdownIt-Anchor" href="#papers"></a> Papers</h2>
 <ul>
 <li>InfoGAN: Interpretable Representation Learning by Information Maximizing Generative Adversarial Nets. <a href="https://arxiv.org/abs/1606.03657" target="_blank" rel="noopener">[paper]</a></li>
-<li>${\beta}$-GAN: Learning Basic Visual Concepts with a Constrained Variational Framework. <a href="https://openreview.net/forum?id=Sy2fzU9gl" target="_blank" rel="noopener">[paper]</a> <a href="https://github.com/sootlasten/beta-vae" target="_blank" rel="noopener">[codes]</a></li>
+<li><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>β</mi></mrow><annotation encoding="application/x-tex">{\beta}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.05278em;">β</span></span></span></span></span>-GAN: Learning Basic Visual Concepts with a Constrained Variational Framework. <a href="https://openreview.net/forum?id=Sy2fzU9gl" target="_blank" rel="noopener">[paper]</a> <a href="https://github.com/sootlasten/beta-vae" target="_blank" rel="noopener">[codes]</a></li>
 </ul>
         
           <p class="article-more-link">
@@ -434,7 +441,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="mercurixito.github.io/2020/03/30/Resources-Disentangled-Representation-Learning/" data-id="ck96vk96i000f58uc23s5gt47" class="article-share-link">Share</a>
+      <a data-url="mercurixito.github.io/2020/03/30/Resources-Disentangled-Representation-Learning/" data-id="ck9a3zz9q000gs0uce4nhgbj0" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Disentangled-Representation-Learning/" rel="tag">Disentangled Representation Learning</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/resources/" rel="tag">resources</a></li></ul>
@@ -470,7 +477,7 @@
       
         <p>本文是对&quot;on the steerabilty of generative adversarial networks&quot;[2]一文的学习。</p>
 <h3 id="introduction"><a class="markdownIt-Anchor" href="#introduction"></a> Introduction</h3>
-<p>研究的问题阐述：对latent space的隐变量${z}$进行移动得到${z^{\ast}}$，使得GAN生成的图片${G(z^{\ast})}$是原来生成的图片${G(z)}$通过某种变换之后得到的图片，本文提出了线性和非线性两种移动方法。<br />
+<p>研究的问题阐述：对latent space的隐变量<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>z</mi></mrow><annotation encoding="application/x-tex">{z}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.04398em;">z</span></span></span></span></span>进行移动得到<span class="katex"><span class="katex-mathml"><math><semantics><mrow><msup><mi>z</mi><mo>∗</mo></msup></mrow><annotation encoding="application/x-tex">{z^{\ast}}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.688696em;vertical-align:0em;"></span><span class="mord"><span class="mord"><span class="mord mathdefault" style="margin-right:0.04398em;">z</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.688696em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">∗</span></span></span></span></span></span></span></span></span></span></span></span></span>，使得GAN生成的图片<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>G</mi><mo stretchy="false">(</mo><msup><mi>z</mi><mo>∗</mo></msup><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">{G(z^{\ast})}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathdefault">G</span><span class="mopen">(</span><span class="mord"><span class="mord mathdefault" style="margin-right:0.04398em;">z</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.688696em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">∗</span></span></span></span></span></span></span></span></span><span class="mclose">)</span></span></span></span></span>是原来生成的图片<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>G</mi><mo stretchy="false">(</mo><mi>z</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">{G(z)}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathdefault">G</span><span class="mopen">(</span><span class="mord mathdefault" style="margin-right:0.04398em;">z</span><span class="mclose">)</span></span></span></span></span>通过某种变换之后得到的图片，本文提出了线性和非线性两种移动方法。<br />
 本文研究的变换包括：</p>
 <ul>
 <li>颜色变换。</li>
@@ -481,7 +488,7 @@
 <h3 id="methods"><a class="markdownIt-Anchor" href="#methods"></a> Methods</h3>
 <p>主要包含三个部分的内容：</p>
 <ol>
-<li>构造 ${z^{\ast}}$ 的方法，分为线性和非线性两种。</li>
+<li>构造 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><msup><mi>z</mi><mo>∗</mo></msup></mrow><annotation encoding="application/x-tex">{z^{\ast}}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.688696em;vertical-align:0em;"></span><span class="mord"><span class="mord"><span class="mord mathdefault" style="margin-right:0.04398em;">z</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.688696em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">∗</span></span></span></span></span></span></span></span></span></span></span></span></span> 的方法，分为线性和非线性两种。</li>
 <li>对生成图像的变换效果量化。</li>
 <li>提出两种降低该方法的限制的方法。</li>
 </ol>
@@ -493,7 +500,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="mercurixito.github.io/2020/03/27/RP-steerability/" data-id="ck96vk96j000g58uc8sok97lw" class="article-share-link">Share</a>
+      <a data-url="mercurixito.github.io/2020/03/27/RP-steerability/" data-id="ck9a3zz9o000fs0ucadp6doha" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/GAN/" rel="tag">GAN</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Paper-Reading/" rel="tag">Paper Reading</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/disentanglement/" rel="tag">disentanglement</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/unsupervised-gan-controlling/" rel="tag">unsupervised gan controlling</a></li></ul>
@@ -531,7 +538,7 @@
 <h2 id="need-new-features"><a class="markdownIt-Anchor" href="#need-new-features"></a> Need new features</h2>
 <ul>
 <li>
-<p>[x] 公式中的${*}$不能正常解析，还是需要一个办法，其实最好的办法就是对<code>$</code>,<code>$$</code>符号内的行间和行内公式不进行markdown的解析，but why can’t we do that？</p>
+<p>[x] 公式中的<span class='katex-error' title='ParseError: KaTeX parse error: Undefined control sequence: \* at position 2: {\̲*̲}'>{\*}</span>不能正常解析，还是需要一个办法，其实最好的办法就是对<code>$</code>,<code>$$</code>符号内的行间和行内公式不进行markdown的解析，but why can’t we do that？</p>
 <p>使用<code>\ast</code>替代。</p>
 </li>
 <li>
@@ -553,7 +560,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="mercurixito.github.io/2020/03/26/Talk-need1/" data-id="ck96vk96m000n58uch1i3f4aa" class="article-share-link">Share</a>
+      <a data-url="mercurixito.github.io/2020/03/26/Talk-need1/" data-id="ck9a3zz9y000ns0uc35jt51m7" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%9D%82%E8%B0%88/" rel="tag">杂谈</a></li></ul>
@@ -603,7 +610,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="mercurixito.github.io/2020/03/20/GAN-metrics2/" data-id="ck96vk95z000158uc8u2t8pyb" class="article-share-link">Share</a>
+      <a data-url="mercurixito.github.io/2020/03/20/GAN-metrics2/" data-id="ck9a3zz8x0001s0uc8qmh7jo5" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/GAN/" rel="tag">GAN</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/metrics/" rel="tag">metrics</a></li></ul>
@@ -731,7 +738,7 @@
 
   </div><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
 <script type="text/x-mathjax-config">
-  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}},"extensions":["tex2jax.js"],"jax":["input/TeX","output/HTML-CSS"]});
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
 </script>
 
 <script type="text/x-mathjax-config">
