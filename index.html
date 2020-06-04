@@ -110,6 +110,12 @@
         <h2 id="preface"><a class="markdownIt-Anchor" href="#preface"></a> Preface</h2>
 <p>A Paper A day Keep the Doctor Away。 今天的文章是：</p>
 <p>Understanding disentangling in β-VAE. (NIPS2017) <a href="https://arxiv.org/abs/1804.03599" target="_blank" rel="noopener">[paper]</a></p>
+<p>本文从Information BottleNeck的角度分析了beta-VAE的ELBO，第一项为图像重建的q<br />
+(z|x)的BottleNeck，KL项为X和Z的互信息量。<strong>优化KL项，使得Z和X的互信息量减小，阻<br />
+碍了图像重建</strong>。除此之外，作者认为<strong>beta-VAE会根据KL项限制（BottleNeck的容量）<br />
+按对重建贡献大小的顺序学习不同的generative factors</strong>。由此，作者提出<strong>限制<br />
+BottleNeck的容量从小到大的训练方法修改了beta-VAE的ELBO，使得模型可以按对重建<br />
+贡献大小顺序逐渐学习不同的generative factors的Disentangled表示</strong>。</p>
 <p>本文主要围绕的问题有：</p>
 <ul>
 <li>用<code>Information BottleNeck</code>的角度解释<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>β</mi></mrow><annotation encoding="application/x-tex">{\beta}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.05278em;">β</span></span></span></span></span>-VAE为什么可以学习到Disentanlged表示，和<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>β</mi></mrow><annotation encoding="application/x-tex">{\beta}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.05278em;">β</span></span></span></span></span>起到的tradeoff。</li>
