@@ -105,23 +105,19 @@
 
       </header>
     
+    <div class="article-new-date">
+	<span> 
+	  发布时间: <time datetime="2020-06-04T07:18:50.000Z" itemprop="datePublished">2020-06-04</time>
+	   | 
+	  最近更新: <time datetime="2020-06-06T08:42:26.537Z" itemprop="datePublished">2020-06-06</time>
+  	</span>
+</div>
     <div class="article-entry" itemprop="articleBody">
       
         <h2 id="preface"><a class="markdownIt-Anchor" href="#preface"></a> Preface</h2>
 <p>A Paper A day Keep the Doctor Away。 今天的文章是：</p>
 <p>Understanding disentangling in β-VAE. (NIPS2017) <a href="https://arxiv.org/abs/1804.03599" target="_blank" rel="noopener">[paper]</a></p>
-<p>本文从Information BottleNeck的角度分析了beta-VAE的ELBO，第一项为图像重建的q<br />
-(z|x)的BottleNeck，KL项为X和Z的互信息量。<strong>优化KL项，使得Z和X的互信息量减小，阻<br />
-碍了图像重建</strong>。除此之外，作者认为<strong>beta-VAE会根据KL项限制（BottleNeck的容量）<br />
-按对重建贡献大小的顺序学习不同的generative factors</strong>。由此，作者提出<strong>限制<br />
-BottleNeck的容量从小到大的训练方法修改了beta-VAE的ELBO，使得模型可以按对重建<br />
-贡献大小顺序逐渐学习不同的generative factors的Disentangled表示</strong>。</p>
-<p>本文主要围绕的问题有：</p>
-<ul>
-<li>用<code>Information BottleNeck</code>的角度解释<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>β</mi></mrow><annotation encoding="application/x-tex">{\beta}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.05278em;">β</span></span></span></span></span>-VAE为什么可以学习到Disentanlged表示，和<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>β</mi></mrow><annotation encoding="application/x-tex">{\beta}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.05278em;">β</span></span></span></span></span>起到的tradeoff。</li>
-<li>为什么<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>β</mi></mrow><annotation encoding="application/x-tex">{\beta}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.05278em;">β</span></span></span></span></span>-VAE可以学习到对应真实factor的不同维度的表示?</li>
-<li>通过提升latent bottleneck的编码容量，改进<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>β</mi></mrow><annotation encoding="application/x-tex">{\beta}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.05278em;">β</span></span></span></span></span>-VAE。</li>
-</ul>
+<p>本文从Information BottleNeck的角度分析了beta-VAE的ELBO，第一项为图像重建的<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>q</mi><mo stretchy="false">(</mo><mi>z</mi><mi mathvariant="normal">∣</mi><mi>x</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">{q(z|x)}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.03588em;">q</span><span class="mopen">(</span><span class="mord mathdefault" style="margin-right:0.04398em;">z</span><span class="mord">∣</span><span class="mord mathdefault">x</span><span class="mclose">)</span></span></span></span></span>的BottleNeck，KL项为X和Z的互信息量。<strong>优化KL项，使得Z和X的互信息量减小，阻碍了图像重建</strong>。除此之外，作者认为<strong>beta-VAE会根据KL项限制（BottleNeck的容量）按对重建贡献大小的顺序学习不同的generative factors</strong>。由此，作者提出<strong>限制BottleNeck的容量从小到大的训练方法修改了beta-VAE的ELBO，使得模型可以按对重建贡献大小顺序逐渐学习不同的generative factors的Disentangled表示</strong>。</p>
         
           <p class="article-more-link">
             <a href="/2020/06/04/RP-0604-Understanding-betaVAE/#more">Read More</a>
@@ -162,6 +158,13 @@ BottleNeck的容量从小到大的训练方法修改了beta-VAE的ELBO，使得�
 
       </header>
     
+    <div class="article-new-date">
+	<span> 
+	  发布时间: <time datetime="2020-06-04T02:23:00.000Z" itemprop="datePublished">2020-06-04</time>
+	   | 
+	  最近更新: <time datetime="2020-06-04T02:24:25.694Z" itemprop="datePublished">2020-06-04</time>
+  	</span>
+</div>
     <div class="article-entry" itemprop="articleBody">
       
         <p>DL 中信息论的有关公式和内容：</p>
@@ -201,6 +204,13 @@ BottleNeck的容量从小到大的训练方法修改了beta-VAE的ELBO，使得�
 
       </header>
     
+    <div class="article-new-date">
+	<span> 
+	  发布时间: <time datetime="2020-06-03T06:09:25.000Z" itemprop="datePublished">2020-06-03</time>
+	   | 
+	  最近更新: <time datetime="2020-06-06T06:47:20.592Z" itemprop="datePublished">2020-06-06</time>
+  	</span>
+</div>
     <div class="article-entry" itemprop="articleBody">
       
         <h2 id="preface"><a class="markdownIt-Anchor" href="#preface"></a> Preface</h2>
@@ -258,6 +268,13 @@ BottleNeck的容量从小到大的训练方法修改了beta-VAE的ELBO，使得�
 
       </header>
     
+    <div class="article-new-date">
+	<span> 
+	  发布时间: <time datetime="2020-05-08T02:43:43.000Z" itemprop="datePublished">2020-05-08</time>
+	   | 
+	  最近更新: <time datetime="2020-05-10T08:09:58.529Z" itemprop="datePublished">2020-05-10</time>
+  	</span>
+</div>
     <div class="article-entry" itemprop="articleBody">
       
         <p>本周阅读的是&quot;Isolating Sources of Disentanglement in VAEs&quot;。</p>
@@ -302,6 +319,13 @@ BottleNeck的容量从小到大的训练方法修改了beta-VAE的ELBO，使得�
 
       </header>
     
+    <div class="article-new-date">
+	<span> 
+	  发布时间: <time datetime="2020-05-05T14:43:07.000Z" itemprop="datePublished">2020-05-05</time>
+	   | 
+	  最近更新: <time datetime="2020-05-14T02:20:50.403Z" itemprop="datePublished">2020-05-14</time>
+  	</span>
+</div>
     <div class="article-entry" itemprop="articleBody">
       
         <h2 id="vae"><a class="markdownIt-Anchor" href="#vae"></a> VAE</h2>
@@ -352,6 +376,13 @@ BottleNeck的容量从小到大的训练方法修改了beta-VAE的ELBO，使得�
 
       </header>
     
+    <div class="article-new-date">
+	<span> 
+	  发布时间: <time datetime="2020-05-01T08:46:30.000Z" itemprop="datePublished">2020-05-01</time>
+	   | 
+	  最近更新: <time datetime="2020-05-10T02:45:02.242Z" itemprop="datePublished">2020-05-10</time>
+  	</span>
+</div>
     <div class="article-entry" itemprop="articleBody">
       
         <p>本周阅读的是&quot;<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>β</mi></mrow><annotation encoding="application/x-tex">{\beta}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.05278em;">β</span></span></span></span></span>-VAE:Learning Basic Visual Concepts with a constrained variational framework&quot;。</p>
@@ -396,6 +427,13 @@ BottleNeck的容量从小到大的训练方法修改了beta-VAE的ELBO，使得�
 
       </header>
     
+    <div class="article-new-date">
+	<span> 
+	  发布时间: <time datetime="2020-04-26T15:26:42.000Z" itemprop="datePublished">2020-04-26</time>
+	   | 
+	  最近更新: <time datetime="2020-05-07T08:49:20.181Z" itemprop="datePublished">2020-05-07</time>
+  	</span>
+</div>
     <div class="article-entry" itemprop="articleBody">
       
         <p>最近阅读的文章围绕的主题是：<strong>对pre-trained的GAN，通过在隐空间移动原始的隐编码，完成原图像的某种操作。</strong></p>
@@ -446,6 +484,13 @@ BottleNeck的容量从小到大的训练方法修改了beta-VAE的ELBO，使得�
 
       </header>
     
+    <div class="article-new-date">
+	<span> 
+	  发布时间: <time datetime="2020-04-24T08:46:18.000Z" itemprop="datePublished">2020-04-24</time>
+	   | 
+	  最近更新: <time datetime="2020-05-10T01:45:00.534Z" itemprop="datePublished">2020-05-10</time>
+  	</span>
+</div>
     <div class="article-entry" itemprop="articleBody">
       
         <p>本周阅读的文献是：“GANSpace： Discovering Intrepretable GAN controls”。</p>
@@ -484,12 +529,19 @@ BottleNeck的容量从小到大的训练方法修改了beta-VAE的ELBO，使得�
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2020/04/19/Talk-need2/">Talk-need2</a>
+      <a class="article-title" href="/2020/04/19/Talk-need2/">博客修改记录</a>
     </h1>
   
 
       </header>
     
+    <div class="article-new-date">
+	<span> 
+	  发布时间: <time datetime="2020-04-19T07:53:52.000Z" itemprop="datePublished">2020-04-19</time>
+	   | 
+	  最近更新: <time datetime="2020-06-06T09:10:44.887Z" itemprop="datePublished">2020-06-06</time>
+  	</span>
+</div>
     <div class="article-entry" itemprop="articleBody">
       
         <h2 id="need-of-my-blog"><a class="markdownIt-Anchor" href="#need-of-my-blog"></a> Need of my blog</h2>
@@ -500,6 +552,7 @@ BottleNeck的容量从小到大的训练方法修改了beta-VAE的ELBO，使得�
 <ul>
 <li><a href="#change-2020-04-19">Change - 2020-04-19</a></li>
 <li><a href="#change-2020-04-21">Change - 2020-04-21</a></li>
+<li><a href="#change-2020-06-06">Change - 2020-06-06</a></li>
 </ul>
 </li>
 </ul>
@@ -544,6 +597,13 @@ BottleNeck的容量从小到大的训练方法修改了beta-VAE的ELBO，使得�
 
       </header>
     
+    <div class="article-new-date">
+	<span> 
+	  发布时间: <time datetime="2020-04-17T09:17:11.000Z" itemprop="datePublished">2020-04-17</time>
+	   | 
+	  最近更新: <time datetime="2020-04-21T16:11:31.210Z" itemprop="datePublished">2020-04-22</time>
+  	</span>
+</div>
     <div class="article-entry" itemprop="articleBody">
       
         <p>本文针对&quot;Controlling generative models with continuous factors of variations&quot;[1] 一文学习。</p>
@@ -586,6 +646,37 @@ c-16-25.333-24-45-24-59z'/></svg></span></span></span></span></span></span></spa
 </section>
         
           <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最近更新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2020/04/19/Talk-need2/">博客修改记录</a>
+          </li>
+        
+          <li>
+            <a href="/2020/06/04/RP-0604-Understanding-betaVAE/">每日文章： Understanding disentangling in β-VAE</a>
+          </li>
+        
+          <li>
+            <a href="/2020/06/03/RP-0603-DreamingToDistill/">每日文章： Dreaming to Distill</a>
+          </li>
+        
+          <li>
+            <a href="/2020/06/04/Math-IM1/">Basic Information Theory</a>
+          </li>
+        
+          <li>
+            <a href="/2020/03/31/RP-GANs1/">论文略读： SGAN(Stacked GAN), InfoGAN</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
   
     
 

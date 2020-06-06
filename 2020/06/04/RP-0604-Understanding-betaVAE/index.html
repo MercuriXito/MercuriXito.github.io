@@ -26,16 +26,16 @@
   
   <title>每日文章： Understanding disentangling in β-VAE | Hako</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Preface A Paper A day Keep the Doctor Away。 今天的文章是： Understanding disentangling in β-VAE. (NIPS2017) [paper] 本文从Information BottleNeck的角度分析了beta-VAE的ELBO，第一项为图像重建的q (z|x)的BottleNeck，KL项为X和Z的互信息量。优化KL">
+  <meta name="description" content="Preface A Paper A day Keep the Doctor Away。 今天的文章是： Understanding disentangling in β-VAE. (NIPS2017) [paper] 本文从Information BottleNeck的角度分析了beta-VAE的ELBO，第一项为图像重建的q(z∣x){q(z|x)}q(z∣x)的BottleNeck，KL项为">
 <meta property="og:type" content="article">
 <meta property="og:title" content="每日文章： Understanding disentangling in β-VAE">
 <meta property="og:url" content="mercurixito.github.io/2020/06/04/RP-0604-Understanding-betaVAE/index.html">
 <meta property="og:site_name" content="Hako">
-<meta property="og:description" content="Preface A Paper A day Keep the Doctor Away。 今天的文章是： Understanding disentangling in β-VAE. (NIPS2017) [paper] 本文从Information BottleNeck的角度分析了beta-VAE的ELBO，第一项为图像重建的q (z|x)的BottleNeck，KL项为X和Z的互信息量。优化KL">
+<meta property="og:description" content="Preface A Paper A day Keep the Doctor Away。 今天的文章是： Understanding disentangling in β-VAE. (NIPS2017) [paper] 本文从Information BottleNeck的角度分析了beta-VAE的ELBO，第一项为图像重建的q(z∣x){q(z|x)}q(z∣x)的BottleNeck，KL项为">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="/images/2020-06-04/dSprites-Factors.png">
 <meta property="article:published_time" content="2020-06-04T07:18:50.000Z">
-<meta property="article:modified_time" content="2020-06-04T13:14:16.298Z">
+<meta property="article:modified_time" content="2020-06-06T08:42:26.537Z">
 <meta property="article:author" content="Victor Chen">
 <meta property="article:tag" content="APAD">
 <meta property="article:tag" content="Disentangled Representation Learning">
@@ -110,24 +110,26 @@
 
       </header>
     
+    <div class="article-new-date">
+	<span> 
+	  发布时间: <time datetime="2020-06-04T07:18:50.000Z" itemprop="datePublished">2020-06-04</time>
+	   | 
+	  最近更新: <time datetime="2020-06-06T08:42:26.537Z" itemprop="datePublished">2020-06-06</time>
+  	</span>
+</div>
     <div class="article-entry" itemprop="articleBody">
       
         <h2 id="preface"><a class="markdownIt-Anchor" href="#preface"></a> Preface</h2>
 <p>A Paper A day Keep the Doctor Away。 今天的文章是：</p>
 <p>Understanding disentangling in β-VAE. (NIPS2017) <a href="https://arxiv.org/abs/1804.03599" target="_blank" rel="noopener">[paper]</a></p>
-<p>本文从Information BottleNeck的角度分析了beta-VAE的ELBO，第一项为图像重建的q<br />
-(z|x)的BottleNeck，KL项为X和Z的互信息量。<strong>优化KL项，使得Z和X的互信息量减小，阻<br />
-碍了图像重建</strong>。除此之外，作者认为<strong>beta-VAE会根据KL项限制（BottleNeck的容量）<br />
-按对重建贡献大小的顺序学习不同的generative factors</strong>。由此，作者提出<strong>限制<br />
-BottleNeck的容量从小到大的训练方法修改了beta-VAE的ELBO，使得模型可以按对重建<br />
-贡献大小顺序逐渐学习不同的generative factors的Disentangled表示</strong>。</p>
+<p>本文从Information BottleNeck的角度分析了beta-VAE的ELBO，第一项为图像重建的<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>q</mi><mo stretchy="false">(</mo><mi>z</mi><mi mathvariant="normal">∣</mi><mi>x</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">{q(z|x)}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.03588em;">q</span><span class="mopen">(</span><span class="mord mathdefault" style="margin-right:0.04398em;">z</span><span class="mord">∣</span><span class="mord mathdefault">x</span><span class="mclose">)</span></span></span></span></span>的BottleNeck，KL项为X和Z的互信息量。<strong>优化KL项，使得Z和X的互信息量减小，阻碍了图像重建</strong>。除此之外，作者认为<strong>beta-VAE会根据KL项限制（BottleNeck的容量）按对重建贡献大小的顺序学习不同的generative factors</strong>。由此，作者提出<strong>限制BottleNeck的容量从小到大的训练方法修改了beta-VAE的ELBO，使得模型可以按对重建贡献大小顺序逐渐学习不同的generative factors的Disentangled表示</strong>。</p>
+<a id="more"></a>
 <p>本文主要围绕的问题有：</p>
 <ul>
 <li>用<code>Information BottleNeck</code>的角度解释<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>β</mi></mrow><annotation encoding="application/x-tex">{\beta}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.05278em;">β</span></span></span></span></span>-VAE为什么可以学习到Disentanlged表示，和<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>β</mi></mrow><annotation encoding="application/x-tex">{\beta}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.05278em;">β</span></span></span></span></span>起到的tradeoff。</li>
 <li>为什么<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>β</mi></mrow><annotation encoding="application/x-tex">{\beta}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.05278em;">β</span></span></span></span></span>-VAE可以学习到对应真实factor的不同维度的表示?</li>
 <li>通过提升latent bottleneck的编码容量，改进<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>β</mi></mrow><annotation encoding="application/x-tex">{\beta}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.05278em;">β</span></span></span></span></span>-VAE。</li>
 </ul>
-<a id="more"></a>
 <h2 id="main-contents"><a class="markdownIt-Anchor" href="#main-contents"></a> Main Contents</h2>
 <hr />
 <h3 id="information-bottleneck-角度解释"><a class="markdownIt-Anchor" href="#information-bottleneck-角度解释"></a> Information BottleNeck 角度解释</h3>
@@ -196,6 +198,37 @@ BottleNeck的容量从小到大的训练方法修改了beta-VAE的ELBO，使得�
 </section>
         
           <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最近更新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2020/04/19/Talk-need2/">博客修改记录</a>
+          </li>
+        
+          <li>
+            <a href="/2020/06/04/RP-0604-Understanding-betaVAE/">每日文章： Understanding disentangling in β-VAE</a>
+          </li>
+        
+          <li>
+            <a href="/2020/06/03/RP-0603-DreamingToDistill/">每日文章： Dreaming to Distill</a>
+          </li>
+        
+          <li>
+            <a href="/2020/06/04/Math-IM1/">Basic Information Theory</a>
+          </li>
+        
+          <li>
+            <a href="/2020/03/31/RP-GANs1/">论文略读： SGAN(Stacked GAN), InfoGAN</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
   
     
 
