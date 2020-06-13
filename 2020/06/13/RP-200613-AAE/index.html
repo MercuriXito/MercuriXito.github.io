@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq" crossorigin="anonymous">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js" integrity="sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz" crossorigin="anonymous"></script>
+
+  <!-- Default Mathjax Support -->
+<!--   <script type="text/x-mathjax-config">
+     MathJax.Hub.Config({"HTML-CSS": { preferredFont: "TeX", availableFonts: ["STIX","TeX"], linebreaks: { automatic:true }, EqnChunk: (MathJax.Hub.Browser.isMobile ? 10 : 50) },
+          tex2jax: { inlineMath: [ ["$", "$"], ["\\(","\\)"] ], processEscapes: true, ignoreClass: "tex2jax_ignore|dno",skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']},
+          TeX: {  noUndefined: { attributes: { mathcolor: "red", mathbackground: "#FFEEEE", mathsize: "90%" } }, Macros: { href: "{}" } },
+          messageStyle: "none"
+      }); 
+  </script>
+  <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+          var all = MathJax.Hub.getAllJax(), i;
+          for(i=0; i < all.length; i += 1) {
+              all[i].SourceElement().parentNode.className += ' has-jax';
+          }
+      });
+  </script>
+  <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
+
+  
+  <title>每日文章： Adversarial AutoEncoders | Hako</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Preface A Paper A Day Keep the Doctor Away. 今天的文章是： Adversarial AutoEncoders. [paper] 本文就是有名的AAE模型，对AutoEncoder加入Adversarial Regularization，将它变成了生成模型。本文借鉴了VAE的思路扩展AutoEncoder，同时借鉴GAN的思路促使合计后验q(z){q(z">
+<meta property="og:type" content="article">
+<meta property="og:title" content="每日文章： Adversarial AutoEncoders">
+<meta property="og:url" content="mercurixito.github.io/2020/06/13/RP-200613-AAE/index.html">
+<meta property="og:site_name" content="Hako">
+<meta property="og:description" content="Preface A Paper A Day Keep the Doctor Away. 今天的文章是： Adversarial AutoEncoders. [paper] 本文就是有名的AAE模型，对AutoEncoder加入Adversarial Regularization，将它变成了生成模型。本文借鉴了VAE的思路扩展AutoEncoder，同时借鉴GAN的思路促使合计后验q(z){q(z">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="/images/2020-06-13/AAE_basic_note.jpg">
+<meta property="og:image" content="/images/2020-06-13/AAE_supervised_label_condition.png">
+<meta property="og:image" content="/images/2020-06-13/AAE_semi_supervised_latent_regularization.png">
+<meta property="og:image" content="/images/2020-06-13/AAE_semi_supervised_classification_note.png">
+<meta property="og:image" content="/images/2020-06-13/AAE_demensional_reduction.png">
+<meta property="article:published_time" content="2020-06-13T07:17:31.000Z">
+<meta property="article:modified_time" content="2020-06-13T07:17:31.626Z">
+<meta property="article:author" content="Victor Chen">
+<meta property="article:tag" content="APAD">
+<meta property="article:tag" content="GAN">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="/images/2020-06-13/AAE_basic_note.jpg">
+  
+    <link rel="alternate" href="/atom.xml" title="Hako" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 4.2.0"><!-- hexo-inject:begin --><!-- hexo-inject:end --></head>
+
+<body>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hako</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="mercurixito.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-RP-200613-AAE" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/06/13/RP-200613-AAE/" class="article-date">
+  <time datetime="2020-06-13T07:17:31.000Z" itemprop="datePublished">2020-06-13</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      每日文章： Adversarial AutoEncoders
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-new-date">
+	<span> 
+	  发布时间: <time datetime="2020-06-13T07:17:31.000Z" itemprop="datePublished">2020-06-13</time>
+	   | 
+	  最近更新: <time datetime="2020-06-13T07:17:31.626Z" itemprop="datePublished">2020-06-13</time>
+  	</span>
+</div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="preface"><a class="markdownIt-Anchor" href="#preface"></a> Preface</h2>
+<p>A Paper A Day Keep the Doctor Away. 今天的文章是：</p>
+<p>Adversarial AutoEncoders. <a href="https://arxiv.org/abs/1511.05644" target="_blank" rel="noopener">[paper]</a></p>
+<p>本文就是有名的AAE模型，对AutoEncoder加入Adversarial Regularization，将它变成了生成模型。本文借鉴了VAE的思路扩展AutoEncoder，同时借鉴GAN的思路促使合计后验<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>q</mi><mo stretchy="false">(</mo><mi>z</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">{q(z)}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.03588em;">q</span><span class="mopen">(</span><span class="mord mathdefault" style="margin-right:0.04398em;">z</span><span class="mclose">)</span></span></span></span></span>和期望先验<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>p</mi><mo stretchy="false">(</mo><mi>z</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">{p(z)}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathdefault">p</span><span class="mopen">(</span><span class="mord mathdefault" style="margin-right:0.04398em;">z</span><span class="mclose">)</span></span></span></span></span>的prior match。</p>
+<a id="more"></a>
+<h2 id="main-contents"><a class="markdownIt-Anchor" href="#main-contents"></a> Main Contents</h2>
+<hr />
+<h3 id="notion"><a class="markdownIt-Anchor" href="#notion"></a> Notion</h3>
+<p>先定义下说明的符号：</p>
+<p><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>p</mi><mo stretchy="false">(</mo><mi>z</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">{p(z)}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathdefault">p</span><span class="mopen">(</span><span class="mord mathdefault" style="margin-right:0.04398em;">z</span><span class="mclose">)</span></span></span></span></span>: desired prior。<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>q</mi><mo stretchy="false">(</mo><mi>z</mi><mi mathvariant="normal">∣</mi><mi>x</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">{q(z | x)}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.03588em;">q</span><span class="mopen">(</span><span class="mord mathdefault" style="margin-right:0.04398em;">z</span><span class="mord">∣</span><span class="mord mathdefault">x</span><span class="mclose">)</span></span></span></span></span>: encoding distribution。<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>p</mi><mo stretchy="false">(</mo><mi>x</mi><mi mathvariant="normal">∣</mi><mi>z</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">{p(x | z)}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathdefault">p</span><span class="mopen">(</span><span class="mord mathdefault">x</span><span class="mord">∣</span><span class="mord mathdefault" style="margin-right:0.04398em;">z</span><span class="mclose">)</span></span></span></span></span>: decoding distribution。<span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>p</mi><mi>d</mi></msub><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">{p_d(x)}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord"><span class="mord mathdefault">p</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.33610799999999996em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">d</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord mathdefault">x</span><span class="mclose">)</span></span></span></span></span>: data distribution。<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>p</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">{p(x)}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathdefault">p</span><span class="mopen">(</span><span class="mord mathdefault">x</span><span class="mclose">)</span></span></span></span></span>: model distribution。<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>q</mi><mo stretchy="false">(</mo><mi>z</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">{q(z)}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.03588em;">q</span><span class="mopen">(</span><span class="mord mathdefault" style="margin-right:0.04398em;">z</span><span class="mclose">)</span></span></span></span></span>: aggregate posterior（合计后验），<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>q</mi><mo stretchy="false">(</mo><mi>z</mi><mo stretchy="false">)</mo><mo>=</mo><msub><mo>∫</mo><mi>x</mi></msub><mi>q</mi><mo stretchy="false">(</mo><mi>z</mi><mi mathvariant="normal">∣</mi><mi>x</mi><mo stretchy="false">)</mo><msub><mi>p</mi><mi>d</mi></msub><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mi>d</mi><mi>x</mi></mrow><annotation encoding="application/x-tex">{q(z) = \int_{x} q(z | x) p_d(x) dx}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.1608200000000002em;vertical-align:-0.35582em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.03588em;">q</span><span class="mopen">(</span><span class="mord mathdefault" style="margin-right:0.04398em;">z</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mop"><span class="mop op-symbol small-op" style="margin-right:0.19445em;position:relative;top:-0.0005599999999999772em;">∫</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:-0.05442800000000003em;"><span style="top:-2.34418em;margin-left:-0.19445em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">x</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.35582em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault" style="margin-right:0.03588em;">q</span><span class="mopen">(</span><span class="mord mathdefault" style="margin-right:0.04398em;">z</span><span class="mord">∣</span><span class="mord mathdefault">x</span><span class="mclose">)</span><span class="mord"><span class="mord mathdefault">p</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.33610799999999996em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">d</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord mathdefault">x</span><span class="mclose">)</span><span class="mord mathdefault">d</span><span class="mord mathdefault">x</span></span></span></span></span></p>
+<h3 id="basic-model"><a class="markdownIt-Anchor" href="#basic-model"></a> Basic Model</h3>
+<p>基本的AAE模型如下：</p>
+<p>图1中<strong>灰色线包括的区域是一个标准的AutoEncoder结构</strong>，Encoder对所有的输入<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>x</mi></mrow><annotation encoding="application/x-tex">{x}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord"><span class="mord mathdefault">x</span></span></span></span></span>可以得到隐编码的合计后验<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>q</mi><mo stretchy="false">(</mo><mi>z</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">{q(z)}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.03588em;">q</span><span class="mopen">(</span><span class="mord mathdefault" style="margin-right:0.04398em;">z</span><span class="mclose">)</span></span></span></span></span>。而图中<strong>红色线包括的区域就是一个GAN</strong>，Generator就是AutoEncoder的Encoder，而<strong>Discriminator负责鉴别样本（隐编码）是来自于推断的合计后验<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>q</mi><mo stretchy="false">(</mo><mi>z</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">{q(z)}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.03588em;">q</span><span class="mopen">(</span><span class="mord mathdefault" style="margin-right:0.04398em;">z</span><span class="mclose">)</span></span></span></span></span>（负样本）还是给定的先验<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>p</mi><mo stretchy="false">(</mo><mi>z</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">{p(z)}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathdefault">p</span><span class="mopen">(</span><span class="mord mathdefault" style="margin-right:0.04398em;">z</span><span class="mclose">)</span></span></span></span></span>（正样本），目的是优化<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mtext>JS</mtext><mrow><mo fence="true">(</mo><mi>q</mi><mo stretchy="false">(</mo><mi>z</mi><mo stretchy="false">)</mo><mi mathvariant="normal">∥</mi><mi>p</mi><mo stretchy="false">(</mo><mi>z</mi><mo stretchy="false">)</mo><mo fence="true">)</mo></mrow></mrow><annotation encoding="application/x-tex">{\text{JS}\left( q(z) \| p(z) \right)}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord text"><span class="mord">JS</span></span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="minner"><span class="mopen delimcenter" style="top:0em;">(</span><span class="mord mathdefault" style="margin-right:0.03588em;">q</span><span class="mopen">(</span><span class="mord mathdefault" style="margin-right:0.04398em;">z</span><span class="mclose">)</span><span class="mord">∥</span><span class="mord mathdefault">p</span><span class="mopen">(</span><span class="mord mathdefault" style="margin-right:0.04398em;">z</span><span class="mclose">)</span><span class="mclose delimcenter" style="top:0em;">)</span></span></span></span></span></span></strong>。</p>
+<p><img src="/images/2020-06-13/AAE_basic_note.jpg" alt="图1 Basic AAE Model" /></p>
+<p>整体模型训练分为两个阶段：(1) reconstruction phase； (2) regularization phase。 其实就是分别训练AutoEncoder和GAN。GAN的训练又分为先训练D，再训练G。</p>
+<h4 id="choices-of-encoder"><a class="markdownIt-Anchor" href="#choices-of-encoder"></a> Choices of Encoder</h4>
+<p>Encoder的选择有三种方式：</p>
+<p>(1) <strong>Deterministic</strong>: 原始Encoder，此时<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>q</mi><mo stretchy="false">(</mo><mi>z</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">{q(z)}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.03588em;">q</span><span class="mopen">(</span><span class="mord mathdefault" style="margin-right:0.04398em;">z</span><span class="mclose">)</span></span></span></span></span>的随机性来源于<span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>p</mi><mi>d</mi></msub><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">{p_d(x)}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord"><span class="mord mathdefault">p</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.33610799999999996em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">d</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord mathdefault">x</span><span class="mclose">)</span></span></span></span></span>。</p>
+<p>(2) <strong>Gaussian Posterior</strong>: 和VAE一样，<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>q</mi><mo stretchy="false">(</mo><mi>z</mi><mi mathvariant="normal">∣</mi><mi>x</mi><mo stretchy="false">)</mo><mo>=</mo><mi mathvariant="script">N</mi><mo stretchy="false">(</mo><mi>z</mi><mo separator="true">;</mo><mi>μ</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mo separator="true">,</mo><mi>σ</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">{q(z | x) = \mathcal{N}(z; \mu(x), \sigma(x))}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.03588em;">q</span><span class="mopen">(</span><span class="mord mathdefault" style="margin-right:0.04398em;">z</span><span class="mord">∣</span><span class="mord mathdefault">x</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mord"><span class="mord mathcal" style="margin-right:0.14736em;">N</span></span><span class="mopen">(</span><span class="mord mathdefault" style="margin-right:0.04398em;">z</span><span class="mpunct">;</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault">μ</span><span class="mopen">(</span><span class="mord mathdefault">x</span><span class="mclose">)</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault" style="margin-right:0.03588em;">σ</span><span class="mopen">(</span><span class="mord mathdefault">x</span><span class="mclose">)</span><span class="mclose">)</span></span></span></span></span>，同时训练时使用重参数化，此时<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>q</mi><mo stretchy="false">(</mo><mi>z</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">{q(z)}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.03588em;">q</span><span class="mopen">(</span><span class="mord mathdefault" style="margin-right:0.04398em;">z</span><span class="mclose">)</span></span></span></span></span>的随机性来源于<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>q</mi><mo stretchy="false">(</mo><mi>z</mi><mi mathvariant="normal">∣</mi><mi>x</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">{q(z | x)}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.03588em;">q</span><span class="mopen">(</span><span class="mord mathdefault" style="margin-right:0.04398em;">z</span><span class="mord">∣</span><span class="mord mathdefault">x</span><span class="mclose">)</span></span></span></span></span>的采样和<span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>p</mi><mi>d</mi></msub><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">{p_d(x)}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord"><span class="mord mathdefault">p</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.33610799999999996em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">d</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord mathdefault">x</span><span class="mclose">)</span></span></span></span></span></p>
+<p>(3) <strong>Universal approximator Posterior</strong>:</p>
+<h4 id="intuition"><a class="markdownIt-Anchor" href="#intuition"></a> Intuition</h4>
+<p>从一个直观的角度理解AAE：AutoEncoder已经可以做图像的编码、解码（生成），但是我们无法知道AutoEncoder编码的<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>q</mi><mo stretchy="false">(</mo><mi>z</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">{q(z)}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.03588em;">q</span><span class="mopen">(</span><span class="mord mathdefault" style="margin-right:0.04398em;">z</span><span class="mclose">)</span></span></span></span></span>（AE不关心这一点），也很难从中采样。AAE就是希望使得<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>q</mi><mo stretchy="false">(</mo><mi>z</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">{q(z)}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.03588em;">q</span><span class="mopen">(</span><span class="mord mathdefault" style="margin-right:0.04398em;">z</span><span class="mclose">)</span></span></span></span></span>的形式接近一个期望的<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>p</mi><mo stretchy="false">(</mo><mi>z</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">{p(z)}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathdefault">p</span><span class="mopen">(</span><span class="mord mathdefault" style="margin-right:0.04398em;">z</span><span class="mclose">)</span></span></span></span></span>，好让我们可以在<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>p</mi><mo stretchy="false">(</mo><mi>z</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">{p(z)}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathdefault">p</span><span class="mopen">(</span><span class="mord mathdefault" style="margin-right:0.04398em;">z</span><span class="mclose">)</span></span></span></span></span>中采样，使用解码器生成图像。</p>
+<p>从和VAE的关系上说，VAE的ELBO的相反数为：</p>
+<p class='katex-block'><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mtable rowspacing="0.24999999999999992em" columnalign="right left" columnspacing="0em"><mtr><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow><msub><mi mathvariant="double-struck">E</mi><mrow><mi>x</mi><mo>∼</mo><msub><mi>p</mi><mi>d</mi></msub><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></msub><mrow><mo fence="true">[</mo><mo>−</mo><mi>log</mi><mo>⁡</mo><mi>p</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mo fence="true">]</mo></mrow></mrow></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow><mrow></mrow><mo>≤</mo><mo>−</mo><msub><mi mathvariant="double-struck">E</mi><mrow><msub><mi>p</mi><mi>d</mi></msub><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></msub><mrow><mo fence="true">[</mo><msub><mi mathvariant="double-struck">E</mi><mrow><mi>z</mi><mo>∼</mo><mi>q</mi><mo stretchy="false">(</mo><mi>z</mi><mi mathvariant="normal">∣</mi><mi>x</mi><mo stretchy="false">)</mo></mrow></msub><mrow><mo fence="true">[</mo><mi>l</mi><mi>o</mi><mi>g</mi><mi>p</mi><mo stretchy="false">(</mo><mi>x</mi><mi mathvariant="normal">∣</mi><mi>z</mi><mo stretchy="false">)</mo><mo fence="true">]</mo></mrow><mo>+</mo><mtext>KL</mtext><mrow><mo fence="true">(</mo><mi>q</mi><mo stretchy="false">(</mo><mi>z</mi><mi mathvariant="normal">∣</mi><mi>x</mi><mo stretchy="false">)</mo><mi mathvariant="normal">∥</mi><mi>p</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mo fence="true">)</mo></mrow><mo fence="true">]</mo></mrow></mrow></mstyle></mtd></mtr><mtr><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow></mrow></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow><mrow></mrow><mo>=</mo><mo>−</mo><msub><mi mathvariant="double-struck">E</mi><mrow><msub><mi>p</mi><mi>d</mi></msub><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></msub><msub><mi mathvariant="double-struck">E</mi><mrow><mi>z</mi><mo>∼</mo><mi>q</mi><mo stretchy="false">(</mo><mi>z</mi><mi mathvariant="normal">∣</mi><mi>x</mi><mo stretchy="false">)</mo></mrow></msub><mrow><mo fence="true">[</mo><mi>l</mi><mi>o</mi><mi>g</mi><mi>p</mi><mo stretchy="false">(</mo><mi>x</mi><mi mathvariant="normal">∣</mi><mi>z</mi><mo stretchy="false">)</mo><mo fence="true">]</mo></mrow><mo>−</mo><msub><mi mathvariant="double-struck">E</mi><mrow><msub><mi>p</mi><mi>d</mi></msub><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></msub><mrow><mo fence="true">[</mo><mi>H</mi><mo stretchy="false">(</mo><mi>q</mi><mo stretchy="false">(</mo><mi>z</mi><mi mathvariant="normal">∣</mi><mi>x</mi><mo stretchy="false">)</mo><mo stretchy="false">)</mo><mo fence="true">]</mo></mrow><mo>+</mo><msub><mi mathvariant="double-struck">E</mi><mrow><mi>q</mi><mo stretchy="false">(</mo><mi>z</mi><mo stretchy="false">)</mo></mrow></msub><mrow><mo fence="true">[</mo><mo>−</mo><mi>log</mi><mo>⁡</mo><mi>p</mi><mo stretchy="false">(</mo><mi>z</mi><mo stretchy="false">)</mo><mo fence="true">]</mo></mrow></mrow></mstyle></mtd></mtr><mtr><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow></mrow></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow><mrow></mrow><mo>=</mo><mtext>Rec</mtext><mo>−</mo><mtext>Entropy</mtext><mo>+</mo><mtext>CorssEntropy</mtext><mo stretchy="false">(</mo><mi>q</mi><mo stretchy="false">(</mo><mi>z</mi><mo stretchy="false">)</mo><mi mathvariant="normal">∥</mi><mi>p</mi><mo stretchy="false">(</mo><mi>z</mi><mo stretchy="false">)</mo><mo stretchy="false">)</mo></mrow></mstyle></mtd></mtr></mtable><annotation encoding="application/x-tex">{
+\begin{aligned}
+    \mathbb{E}_{x \sim p_d(x)}\left[ -\log p(x) \right] &amp;\leq - \mathbb{E}_{p_d(x)} \left[ \mathbb{E}_{z \sim q(z|x)} \left[ log p(x | z) \right] + \text{KL}\left(q(z | x) \| p(x) \right) \right] \\
+    &amp;=  - \mathbb{E}_{p_d(x)} \mathbb{E}_{z \sim q(z|x)} \left[ log p(x | z) \right] - \mathbb{E}_{p_d(x)}\left[ H(q(z|x)) \right] + \mathbb{E}_{q(z)}\left[ - \log p(z) \right] \\
+    &amp;= \text{Rec} - \text{Entropy} + \text{CorssEntropy}(q(z) \| p(z)) \\
+\end{aligned}
+}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:4.51em;vertical-align:-2.005em;"></span><span class="mord"><span class="mord"><span class="mtable"><span class="col-align-r"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:2.5050000000000003em;"><span style="top:-4.655em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"><span class="mord"><span class="mord mathbb">E</span></span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.34480000000000005em;"><span style="top:-2.5198em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">x</span><span class="mrel mtight">∼</span><span class="mord mtight"><span class="mord mathdefault mtight">p</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3448em;"><span style="top:-2.3487714285714287em;margin-left:0em;margin-right:0.07142857142857144em;"><span class="pstrut" style="height:2.5em;"></span><span class="sizing reset-size3 size1 mtight"><span class="mord mathdefault mtight">d</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15122857142857138em;"><span></span></span></span></span></span></span><span class="mopen mtight">(</span><span class="mord mathdefault mtight">x</span><span class="mclose mtight">)</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.3551999999999999em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="minner"><span class="mopen delimcenter" style="top:0em;">[</span><span class="mord">−</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mop">lo<span style="margin-right:0.01389em;">g</span></span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault">p</span><span class="mopen">(</span><span class="mord mathdefault">x</span><span class="mclose">)</span><span class="mclose delimcenter" style="top:0em;">]</span></span></span></span><span style="top:-3.155em;"><span class="pstrut" style="height:3em;"></span><span class="mord"></span></span><span style="top:-1.6550000000000002em;"><span class="pstrut" style="height:3em;"></span><span class="mord"></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:2.005em;"><span></span></span></span></span></span><span class="col-align-l"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:2.5050000000000003em;"><span style="top:-4.655em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">≤</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mord">−</span><span class="mord"><span class="mord"><span class="mord mathbb">E</span></span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.34480000000000005em;"><span style="top:-2.5198em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight"><span class="mord mathdefault mtight">p</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3448em;"><span style="top:-2.3487714285714287em;margin-left:0em;margin-right:0.07142857142857144em;"><span class="pstrut" style="height:2.5em;"></span><span class="sizing reset-size3 size1 mtight"><span class="mord mathdefault mtight">d</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15122857142857138em;"><span></span></span></span></span></span></span><span class="mopen mtight">(</span><span class="mord mathdefault mtight">x</span><span class="mclose mtight">)</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.3551999999999999em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="minner"><span class="mopen delimcenter" style="top:0em;"><span class="delimsizing size1">[</span></span><span class="mord"><span class="mord"><span class="mord mathbb">E</span></span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.34480000000000005em;"><span style="top:-2.5198em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight" style="margin-right:0.04398em;">z</span><span class="mrel mtight">∼</span><span class="mord mathdefault mtight" style="margin-right:0.03588em;">q</span><span class="mopen mtight">(</span><span class="mord mathdefault mtight" style="margin-right:0.04398em;">z</span><span class="mord mtight">∣</span><span class="mord mathdefault mtight">x</span><span class="mclose mtight">)</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.3551999999999999em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="minner"><span class="mopen delimcenter" style="top:0em;">[</span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mord mathdefault">o</span><span class="mord mathdefault" style="margin-right:0.03588em;">g</span><span class="mord mathdefault">p</span><span class="mopen">(</span><span class="mord mathdefault">x</span><span class="mord">∣</span><span class="mord mathdefault" style="margin-right:0.04398em;">z</span><span class="mclose">)</span><span class="mclose delimcenter" style="top:0em;">]</span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mord text"><span class="mord">KL</span></span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="minner"><span class="mopen delimcenter" style="top:0em;">(</span><span class="mord mathdefault" style="margin-right:0.03588em;">q</span><span class="mopen">(</span><span class="mord mathdefault" style="margin-right:0.04398em;">z</span><span class="mord">∣</span><span class="mord mathdefault">x</span><span class="mclose">)</span><span class="mord">∥</span><span class="mord mathdefault">p</span><span class="mopen">(</span><span class="mord mathdefault">x</span><span class="mclose">)</span><span class="mclose delimcenter" style="top:0em;">)</span></span><span class="mclose delimcenter" style="top:0em;"><span class="delimsizing size1">]</span></span></span></span></span><span style="top:-3.155em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mord">−</span><span class="mord"><span class="mord"><span class="mord mathbb">E</span></span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.34480000000000005em;"><span style="top:-2.5198em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight"><span class="mord mathdefault mtight">p</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3448em;"><span style="top:-2.3487714285714287em;margin-left:0em;margin-right:0.07142857142857144em;"><span class="pstrut" style="height:2.5em;"></span><span class="sizing reset-size3 size1 mtight"><span class="mord mathdefault mtight">d</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15122857142857138em;"><span></span></span></span></span></span></span><span class="mopen mtight">(</span><span class="mord mathdefault mtight">x</span><span class="mclose mtight">)</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.3551999999999999em;"><span></span></span></span></span></span></span><span class="mord"><span class="mord"><span class="mord mathbb">E</span></span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.34480000000000005em;"><span style="top:-2.5198em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight" style="margin-right:0.04398em;">z</span><span class="mrel mtight">∼</span><span class="mord mathdefault mtight" style="margin-right:0.03588em;">q</span><span class="mopen mtight">(</span><span class="mord mathdefault mtight" style="margin-right:0.04398em;">z</span><span class="mord mtight">∣</span><span class="mord mathdefault mtight">x</span><span class="mclose mtight">)</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.3551999999999999em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="minner"><span class="mopen delimcenter" style="top:0em;">[</span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mord mathdefault">o</span><span class="mord mathdefault" style="margin-right:0.03588em;">g</span><span class="mord mathdefault">p</span><span class="mopen">(</span><span class="mord mathdefault">x</span><span class="mord">∣</span><span class="mord mathdefault" style="margin-right:0.04398em;">z</span><span class="mclose">)</span><span class="mclose delimcenter" style="top:0em;">]</span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mord"><span class="mord"><span class="mord mathbb">E</span></span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.34480000000000005em;"><span style="top:-2.5198em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight"><span class="mord mathdefault mtight">p</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3448em;"><span style="top:-2.3487714285714287em;margin-left:0em;margin-right:0.07142857142857144em;"><span class="pstrut" style="height:2.5em;"></span><span class="sizing reset-size3 size1 mtight"><span class="mord mathdefault mtight">d</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15122857142857138em;"><span></span></span></span></span></span></span><span class="mopen mtight">(</span><span class="mord mathdefault mtight">x</span><span class="mclose mtight">)</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.3551999999999999em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="minner"><span class="mopen delimcenter" style="top:0em;">[</span><span class="mord mathdefault" style="margin-right:0.08125em;">H</span><span class="mopen">(</span><span class="mord mathdefault" style="margin-right:0.03588em;">q</span><span class="mopen">(</span><span class="mord mathdefault" style="margin-right:0.04398em;">z</span><span class="mord">∣</span><span class="mord mathdefault">x</span><span class="mclose">)</span><span class="mclose">)</span><span class="mclose delimcenter" style="top:0em;">]</span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mord"><span class="mord"><span class="mord mathbb">E</span></span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.34480000000000005em;"><span style="top:-2.5198em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight" style="margin-right:0.03588em;">q</span><span class="mopen mtight">(</span><span class="mord mathdefault mtight" style="margin-right:0.04398em;">z</span><span class="mclose mtight">)</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.3551999999999999em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="minner"><span class="mopen delimcenter" style="top:0em;">[</span><span class="mord">−</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mop">lo<span style="margin-right:0.01389em;">g</span></span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault">p</span><span class="mopen">(</span><span class="mord mathdefault" style="margin-right:0.04398em;">z</span><span class="mclose">)</span><span class="mclose delimcenter" style="top:0em;">]</span></span></span></span><span style="top:-1.6550000000000002em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mord text"><span class="mord">Rec</span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mord text"><span class="mord">Entropy</span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mord text"><span class="mord">CorssEntropy</span></span><span class="mopen">(</span><span class="mord mathdefault" style="margin-right:0.03588em;">q</span><span class="mopen">(</span><span class="mord mathdefault" style="margin-right:0.04398em;">z</span><span class="mclose">)</span><span class="mord">∥</span><span class="mord mathdefault">p</span><span class="mopen">(</span><span class="mord mathdefault" style="margin-right:0.04398em;">z</span><span class="mclose">)</span><span class="mclose">)</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:2.005em;"><span></span></span></span></span></span></span></span></span></span></span></span></span></p>
+<p>AAE的作用其实就是将上述分解的后两项替换成了另外一个促进<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>q</mi><mo stretchy="false">(</mo><mi>z</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">{q(z)}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.03588em;">q</span><span class="mopen">(</span><span class="mord mathdefault" style="margin-right:0.04398em;">z</span><span class="mclose">)</span></span></span></span></span>匹配<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>p</mi><mo stretchy="false">(</mo><mi>z</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">{p(z)}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathdefault">p</span><span class="mopen">(</span><span class="mord mathdefault" style="margin-right:0.04398em;">z</span><span class="mclose">)</span></span></span></span></span>的形式，用adversarial tranining优化二者的JS距离。</p>
+<h3 id="adaptive-models"><a class="markdownIt-Anchor" href="#adaptive-models"></a> Adaptive Models</h3>
+<p>作者针对不同任务和监督信息对AAE进行扩展。</p>
+<h4 id="fully-supervised"><a class="markdownIt-Anchor" href="#fully-supervised"></a> Fully Supervised</h4>
+<p>在有监督信息（labels）的情况，扩展：</p>
+<p><strong>1. Label-Conditional Generation</strong></p>
+<p>Conditional版本的AAE，和CGAN，CVAE的目的一样，可以控制生成的图像类别，而且是fully-supervised。</p>
+<p><img src="/images/2020-06-13/AAE_supervised_label_condition.png" alt="图2：Label-Conditional AAE" /></p>
+<p>思路是将监督的label信息单独输入Decoder(Generator)中，而Encoder的<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>q</mi><mo stretchy="false">(</mo><mi>z</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">{q(z)}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.03588em;">q</span><span class="mopen">(</span><span class="mord mathdefault" style="margin-right:0.04398em;">z</span><span class="mclose">)</span></span></span></span></span>仅编码和label信息独立的其他信息（称为Style）。GAN的部分不变。</p>
+<h4 id="semi-supervised"><a class="markdownIt-Anchor" href="#semi-supervised"></a> Semi-Supervised</h4>
+<p>半监督下，扩展：</p>
+<p><strong>1. Incorporating Label Information</strong></p>
+<p>目的是，使得Latent space的编码和label对齐，对隐表示进行正则化：使用十个2-D混合高斯作为先验，使得每一个高斯可以对应一个class的编码。</p>
+<p><img src="/images/2020-06-13/AAE_semi_supervised_latent_regularization.png" alt="图3：Label-Align latent space AAE" /></p>
+<p>思路是将监督信息（onehot）单独输入Discriminator中，使得Discriminator可以针对不同的class判别<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>q</mi><mo stretchy="false">(</mo><mi>z</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">{q(z)}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.03588em;">q</span><span class="mopen">(</span><span class="mord mathdefault" style="margin-right:0.04398em;">z</span><span class="mclose">)</span></span></span></span></span>和<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>p</mi><mo stretchy="false">(</mo><mi>z</mi><mi mathvariant="normal">∣</mi><mi>y</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">{p(z|y)}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathdefault">p</span><span class="mopen">(</span><span class="mord mathdefault" style="margin-right:0.04398em;">z</span><span class="mord">∣</span><span class="mord mathdefault" style="margin-right:0.03588em;">y</span><span class="mclose">)</span></span></span></span></span>的距离。AutoEncoder的部分不变。</p>
+<p>除此之外，作者还将无标注类作为独立的一类，希望对于该类，Discriminator会针对整体分布进行判别。</p>
+<p>训练时，使用正样本（采样自<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>p</mi><mo stretchy="false">(</mo><mi>z</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">{p(z)}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathdefault">p</span><span class="mopen">(</span><span class="mord mathdefault" style="margin-right:0.04398em;">z</span><span class="mclose">)</span></span></span></span></span>）训练时，将采样的mixture component的编号onehot后输入。使用负样本（来自AutoEncoder）训练时，使用 label。</p>
+<p><strong>注意：该方法和上节的模型不同，本节的模型注重的是促进模型隐编码的结构。不过具体怎么个不同可能还需要数学上的分析。</strong></p>
+<p><strong>2. Semi-Supervised AAE</strong></p>
+<p>将AAE扩展到Semi-supervised Learning，通过已有的标注label，模型预测未标注的label，提高分类准确性。</p>
+<p><img src="/images/2020-06-13/AAE_semi_supervised_classification_note.png" alt="图4：semi-supervised AAE" /></p>
+<p>模型的思路是：希望从图像中学习到class编码信息，假定隐编码中的<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>y</mi></mrow><annotation encoding="application/x-tex">{y}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.625em;vertical-align:-0.19444em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.03588em;">y</span></span></span></span></span>编码class信息，它的先验服从一个范畴分布(Categorical Distribution)，而其余的<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>z</mi></mrow><annotation encoding="application/x-tex">{z}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.04398em;">z</span></span></span></span></span>先验服从标准高斯，编码其余的Style信息。</p>
+<p>引入<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>q</mi><mo stretchy="false">(</mo><mi>y</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">{q(y)}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.03588em;">q</span><span class="mopen">(</span><span class="mord mathdefault" style="margin-right:0.03588em;">y</span><span class="mclose">)</span></span></span></span></span>编码的学习，模型就必须引入另一对GAN优化<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>q</mi><mo stretchy="false">(</mo><mi>y</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">{q(y)}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.03588em;">q</span><span class="mopen">(</span><span class="mord mathdefault" style="margin-right:0.03588em;">y</span><span class="mclose">)</span></span></span></span></span>和<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>p</mi><mo stretchy="false">(</mo><mi>y</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">{p(y)}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathdefault">p</span><span class="mopen">(</span><span class="mord mathdefault" style="margin-right:0.03588em;">y</span><span class="mclose">)</span></span></span></span></span>的距离，即途中黄线围绕区域。</p>
+<p>模型训练分为三个阶段：（1）reconstruction phase：训练AutoEncoder； （2）regularization phase：分别对两个GAN训练；（3）semi-supervisd classification phase：利用有标注的数据，单独训练Encoder的y输出，该部分是Categorical GAN的Generator部分，也可以看成分类器。</p>
+<h4 id="unsupervised"><a class="markdownIt-Anchor" href="#unsupervised"></a> Unsupervised</h4>
+<p><strong>1. Unsupvervised Clustering</strong></p>
+<p>针对的是图像中离散数据、连续数据的Disentangled隐表示学习的问题。</p>
+<p>模型和图4一样，图4的模型已经可以分别建模离散和连续的隐分量。只是去除了训练的 semi-supervised classification阶段。</p>
+<h4 id="dimensionality-reduction"><a class="markdownIt-Anchor" href="#dimensionality-reduction"></a> Dimensionality Reduction</h4>
+<p>针对高维数据的降维任务，用于高维数据的可视化。 本身AutoEncoder也可以做，但是无正则化的AutoEncoder会遭遇“fracture”问题：将流形上靠近的图像映射到隐空间差异很大的区域，也就是相似图像在隐空间的编码却不相近。</p>
+<p><img src="/images/2020-06-13/AAE_demensional_reduction.png" alt="图5：Dimensionality Reduction AAe" /></p>
+<p>更具体点，任务是将<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>m</mi></mrow><annotation encoding="application/x-tex">{m}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord"><span class="mord mathdefault">m</span></span></span></span></span>类的样本降至<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>n</mi></mrow><annotation encoding="application/x-tex">{n}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord"><span class="mord mathdefault">n</span></span></span></span></span>类，方便可视化。</p>
+<p>设计模型如图5，欲降至<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>n</mi></mrow><annotation encoding="application/x-tex">{n}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord"><span class="mord mathdefault">n</span></span></span></span></span>维，最终的表示由<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>n</mi></mrow><annotation encoding="application/x-tex">{n}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord"><span class="mord mathdefault">n</span></span></span></span></span>维的cluster head和<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>n</mi></mrow><annotation encoding="application/x-tex">{n}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord"><span class="mord mathdefault">n</span></span></span></span></span>维的隐编码相加而成。 cluster head是<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>m</mi></mrow><annotation encoding="application/x-tex">{m}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord"><span class="mord mathdefault">m</span></span></span></span></span>维的onehot输出<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>y</mi></mrow><annotation encoding="application/x-tex">{y}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.625em;vertical-align:-0.19444em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.03588em;">y</span></span></span></span></span>乘以一个矩阵<span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>W</mi><mi>c</mi></msub></mrow><annotation encoding="application/x-tex">{W_c}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.83333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord"><span class="mord mathdefault" style="margin-right:0.13889em;">W</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:-0.13889em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">c</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span></span>得到，<span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>W</mi><mi>c</mi></msub></mrow><annotation encoding="application/x-tex">{W_c}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.83333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord"><span class="mord mathdefault" style="margin-right:0.13889em;">W</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:-0.13889em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">c</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span></span>也是可学习的参数。</p>
+<p>除此之外，作者还加入了一个额外的cost function惩罚任意两个cluster head的欧式距离。</p>
+<h2 id="总结"><a class="markdownIt-Anchor" href="#总结"></a> 总结</h2>
+<p>总的来说，<strong>AAE引入对抗训练使得达到prior match效果，扩展了VAE的先验分布形式，并且避免了intractable问题</strong>。VAE的先验分布修改要重新修改重参数化等，比较麻烦，而AAE像是提供了一个framework。不过不可避免的是，AAE肯定比VAE难训练，毕竟加入了GAN嘛。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="mercurixito.github.io/2020/06/13/RP-200613-AAE/" data-id="ckbdb57jh00006ouc3blw519p" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/APAD/" rel="tag">APAD</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/GAN/" rel="tag">GAN</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2020/06/11/RP-200611-HFVAE/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">每日文章： Structured Disentangled Representations</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最近更新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2020/06/13/RP-200613-AAE/">每日文章： Adversarial AutoEncoders</a>
+          </li>
+        
+          <li>
+            <a href="/2020/03/30/Resources-Disentangled-Representation-Learning/">Resources： Disentangled Representation Learning</a>
+          </li>
+        
+          <li>
+            <a href="/2020/06/11/RP-200611-HFVAE/">每日文章： Structured Disentangled Representations</a>
+          </li>
+        
+          <li>
+            <a href="/2020/06/07/RP-200607-JointVAE/">每日文章： Learning Disentangled Joint Continuous and Discrete Representations</a>
+          </li>
+        
+          <li>
+            <a href="/2020/06/06/RP-200606-challenging/">每日文章： Challenging Common Assumptions in the Unsupervised Learning of Disentangled Representations</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/APAD/" rel="tag">APAD</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Disentangled-Representation-Learning/" rel="tag">Disentangled Representation Learning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GAN/" rel="tag">GAN</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linear-Algebra/" rel="tag">Linear Algebra</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mathematic/" rel="tag">Mathematic</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Paper-Reading/" rel="tag">Paper Reading</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Probability/" rel="tag">Probability</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VAE/" rel="tag">VAE</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/disentanglement/" rel="tag">disentanglement</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/information-theory/" rel="tag">information theory</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mathematics/" rel="tag">mathematics</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/metrics/" rel="tag">metrics</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/resources/" rel="tag">resources</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/topic-sorted/" rel="tag">topic sorted</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/unsupervised-gan-controlling/" rel="tag">unsupervised gan controlling</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9D%82%E8%B0%88/" rel="tag">杂谈</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/APAD/" style="font-size: 15.71px;">APAD</a> <a href="/tags/Disentangled-Representation-Learning/" style="font-size: 17.14px;">Disentangled Representation Learning</a> <a href="/tags/GAN/" style="font-size: 20px;">GAN</a> <a href="/tags/Linear-Algebra/" style="font-size: 10px;">Linear Algebra</a> <a href="/tags/Mathematic/" style="font-size: 11.43px;">Mathematic</a> <a href="/tags/Paper-Reading/" style="font-size: 18.57px;">Paper Reading</a> <a href="/tags/Probability/" style="font-size: 10px;">Probability</a> <a href="/tags/VAE/" style="font-size: 15.71px;">VAE</a> <a href="/tags/disentanglement/" style="font-size: 10px;">disentanglement</a> <a href="/tags/information-theory/" style="font-size: 10px;">information theory</a> <a href="/tags/mathematics/" style="font-size: 10px;">mathematics</a> <a href="/tags/metrics/" style="font-size: 11.43px;">metrics</a> <a href="/tags/resources/" style="font-size: 12.86px;">resources</a> <a href="/tags/topic-sorted/" style="font-size: 11.43px;">topic sorted</a> <a href="/tags/unsupervised-gan-controlling/" style="font-size: 14.29px;">unsupervised gan controlling</a> <a href="/tags/%E6%9D%82%E8%B0%88/" style="font-size: 12.86px;">杂谈</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/06/">六月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/05/">五月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">四月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">三月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">二月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">十月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">九月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">五月 2019</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2020/06/13/RP-200613-AAE/">每日文章： Adversarial AutoEncoders</a>
+          </li>
+        
+          <li>
+            <a href="/2020/06/11/RP-200611-HFVAE/">每日文章： Structured Disentangled Representations</a>
+          </li>
+        
+          <li>
+            <a href="/2020/06/07/RP-200607-JointVAE/">每日文章： Learning Disentangled Joint Continuous and Discrete Representations</a>
+          </li>
+        
+          <li>
+            <a href="/2020/06/06/RP-200606-challenging/">每日文章： Challenging Common Assumptions in the Unsupervised Learning of Disentangled Representations</a>
+          </li>
+        
+          <li>
+            <a href="/2020/06/04/RP-0604-Understanding-betaVAE/">每日文章： Understanding disentangling in β-VAE</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2020 Victor Chen<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a><br>
+      banner image from <a href="https://www.pixiv.net/artworks/80036479" target="_blank">This</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+</body>
+</html>

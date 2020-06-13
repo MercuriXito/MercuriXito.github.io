@@ -521,6 +521,17 @@ body {
 .article-date {
   float: left;
 }
+.article-new-date {
+  width: 90%;
+  text-align: center;
+  padding: 20px 0;
+  margin: 0 5%;
+  color: #808080;
+  border-bottom: dashed;
+}
+.article-new-date time {
+  color: #000;
+}
 .article-category {
   float: left;
   line-height: 1em;
@@ -566,7 +577,7 @@ a.article-title:hover {
 .article-entry p,
 .article-entry table {
   line-height: 1.8em;
-  margin: 2em 0;
+  margin: 1em 0;
 }
 .article-entry h1,
 .article-entry h2,
@@ -1334,7 +1345,7 @@ pre .javascript .function {
 }
 .widget ul,
 .widget ol {
-  list-style: none;
+  list-style: inside;
   margin: 0;
 }
 .widget ul ul,

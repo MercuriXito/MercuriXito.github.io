@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq" crossorigin="anonymous">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js" integrity="sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz" crossorigin="anonymous"></script>
+
+  <!-- Default Mathjax Support -->
+<!--   <script type="text/x-mathjax-config">
+     MathJax.Hub.Config({"HTML-CSS": { preferredFont: "TeX", availableFonts: ["STIX","TeX"], linebreaks: { automatic:true }, EqnChunk: (MathJax.Hub.Browser.isMobile ? 10 : 50) },
+          tex2jax: { inlineMath: [ ["$", "$"], ["\\(","\\)"] ], processEscapes: true, ignoreClass: "tex2jax_ignore|dno",skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']},
+          TeX: {  noUndefined: { attributes: { mathcolor: "red", mathbackground: "#FFEEEE", mathsize: "90%" } }, Macros: { href: "{}" } },
+          messageStyle: "none"
+      }); 
+  </script>
+  <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+          var all = MathJax.Hub.getAllJax(), i;
+          for(i=0; i < all.length; i += 1) {
+              all[i].SourceElement().parentNode.className += ' has-jax';
+          }
+      });
+  </script>
+  <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
+
+  
+  <title>每日文章： Challenging Common Assumptions in the Unsupervised Learning of Disentangled Representations | Hako</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Preface A Paper A Day Keep the Doctor Away. 今天的文章是： Challenging Common Assumptions in the Unsupervised Learning of Disentangled Representations. (ICML2019) [paper] [实验代码] 本文对当时现有的几个效果比较好的无监督的解纠缠表示学习的">
+<meta property="og:type" content="article">
+<meta property="og:title" content="每日文章： Challenging Common Assumptions in the Unsupervised Learning of Disentangled Representations">
+<meta property="og:url" content="mercurixito.github.io/2020/06/06/RP-200606-challenging/index.html">
+<meta property="og:site_name" content="Hako">
+<meta property="og:description" content="Preface A Paper A Day Keep the Doctor Away. 今天的文章是： Challenging Common Assumptions in the Unsupervised Learning of Disentangled Representations. (ICML2019) [paper] [实验代码] 本文对当时现有的几个效果比较好的无监督的解纠缠表示学习的">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-06-06T15:43:57.000Z">
+<meta property="article:modified_time" content="2020-06-06T15:53:20.817Z">
+<meta property="article:author" content="Victor Chen">
+<meta property="article:tag" content="APAD">
+<meta property="article:tag" content="Disentangled Representation Learning">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Hako" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 4.2.0"><!-- hexo-inject:begin --><!-- hexo-inject:end --></head>
+
+<body>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hako</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="mercurixito.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-RP-200606-challenging" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/06/06/RP-200606-challenging/" class="article-date">
+  <time datetime="2020-06-06T15:43:57.000Z" itemprop="datePublished">2020-06-06</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      每日文章： Challenging Common Assumptions in the Unsupervised Learning of Disentangled Representations
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-new-date">
+	<span> 
+	  发布时间: <time datetime="2020-06-06T15:43:57.000Z" itemprop="datePublished">2020-06-06</time>
+	   | 
+	  最近更新: <time datetime="2020-06-06T15:53:20.817Z" itemprop="datePublished">2020-06-06</time>
+  	</span>
+</div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="preface"><a class="markdownIt-Anchor" href="#preface"></a> Preface</h2>
+<p>A Paper A Day Keep the Doctor Away. 今天的文章是：</p>
+<p>Challenging Common Assumptions in the Unsupervised Learning of Disentangled Representations. (ICML2019) <a href="https://arxiv.org/abs/1811.12359" target="_blank" rel="noopener">[paper]</a> <a href="https://github.com/google-research/disentanglement_lib" target="_blank" rel="noopener">[实验代码]</a></p>
+<p>本文对当时现有的几个效果比较好的无监督的解纠缠表示学习的模型进行评测，并给Unsupervised的方法“泼了盆凉水”。</p>
+<a id="more"></a>
+<h2 id="main-contents"><a class="markdownIt-Anchor" href="#main-contents"></a> Main Contents</h2>
+<hr />
+<h3 id="impossible-learning"><a class="markdownIt-Anchor" href="#impossible-learning"></a> Impossible Learning</h3>
+<h3 id="experiment"><a class="markdownIt-Anchor" href="#experiment"></a> Experiment</h3>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="mercurixito.github.io/2020/06/06/RP-200606-challenging/" data-id="ckb3tdmgi0004x4ucdmzqh5v8" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/APAD/" rel="tag">APAD</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Disentangled-Representation-Learning/" rel="tag">Disentangled Representation Learning</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2020/06/07/RP-200607-JointVAE/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          每日文章： Learning Disentangled Joint Continuous and Discrete Representations
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2020/06/04/RP-0604-Understanding-betaVAE/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">每日文章： Understanding disentangling in β-VAE</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最近更新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2020/06/13/RP-200613-AAE/">每日文章： Adversarial AutoEncoders</a>
+          </li>
+        
+          <li>
+            <a href="/2020/03/30/Resources-Disentangled-Representation-Learning/">Resources： Disentangled Representation Learning</a>
+          </li>
+        
+          <li>
+            <a href="/2020/06/11/RP-200611-HFVAE/">每日文章： Structured Disentangled Representations</a>
+          </li>
+        
+          <li>
+            <a href="/2020/06/07/RP-200607-JointVAE/">每日文章： Learning Disentangled Joint Continuous and Discrete Representations</a>
+          </li>
+        
+          <li>
+            <a href="/2020/06/06/RP-200606-challenging/">每日文章： Challenging Common Assumptions in the Unsupervised Learning of Disentangled Representations</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/APAD/" rel="tag">APAD</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Disentangled-Representation-Learning/" rel="tag">Disentangled Representation Learning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GAN/" rel="tag">GAN</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linear-Algebra/" rel="tag">Linear Algebra</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mathematic/" rel="tag">Mathematic</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Paper-Reading/" rel="tag">Paper Reading</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Probability/" rel="tag">Probability</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VAE/" rel="tag">VAE</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/disentanglement/" rel="tag">disentanglement</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/information-theory/" rel="tag">information theory</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mathematics/" rel="tag">mathematics</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/metrics/" rel="tag">metrics</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/resources/" rel="tag">resources</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/topic-sorted/" rel="tag">topic sorted</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/unsupervised-gan-controlling/" rel="tag">unsupervised gan controlling</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9D%82%E8%B0%88/" rel="tag">杂谈</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/APAD/" style="font-size: 15.71px;">APAD</a> <a href="/tags/Disentangled-Representation-Learning/" style="font-size: 17.14px;">Disentangled Representation Learning</a> <a href="/tags/GAN/" style="font-size: 20px;">GAN</a> <a href="/tags/Linear-Algebra/" style="font-size: 10px;">Linear Algebra</a> <a href="/tags/Mathematic/" style="font-size: 11.43px;">Mathematic</a> <a href="/tags/Paper-Reading/" style="font-size: 18.57px;">Paper Reading</a> <a href="/tags/Probability/" style="font-size: 10px;">Probability</a> <a href="/tags/VAE/" style="font-size: 15.71px;">VAE</a> <a href="/tags/disentanglement/" style="font-size: 10px;">disentanglement</a> <a href="/tags/information-theory/" style="font-size: 10px;">information theory</a> <a href="/tags/mathematics/" style="font-size: 10px;">mathematics</a> <a href="/tags/metrics/" style="font-size: 11.43px;">metrics</a> <a href="/tags/resources/" style="font-size: 12.86px;">resources</a> <a href="/tags/topic-sorted/" style="font-size: 11.43px;">topic sorted</a> <a href="/tags/unsupervised-gan-controlling/" style="font-size: 14.29px;">unsupervised gan controlling</a> <a href="/tags/%E6%9D%82%E8%B0%88/" style="font-size: 12.86px;">杂谈</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/06/">六月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/05/">五月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">四月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">三月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">二月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">十月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">九月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">五月 2019</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2020/06/13/RP-200613-AAE/">每日文章： Adversarial AutoEncoders</a>
+          </li>
+        
+          <li>
+            <a href="/2020/06/11/RP-200611-HFVAE/">每日文章： Structured Disentangled Representations</a>
+          </li>
+        
+          <li>
+            <a href="/2020/06/07/RP-200607-JointVAE/">每日文章： Learning Disentangled Joint Continuous and Discrete Representations</a>
+          </li>
+        
+          <li>
+            <a href="/2020/06/06/RP-200606-challenging/">每日文章： Challenging Common Assumptions in the Unsupervised Learning of Disentangled Representations</a>
+          </li>
+        
+          <li>
+            <a href="/2020/06/04/RP-0604-Understanding-betaVAE/">每日文章： Understanding disentangling in β-VAE</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2020 Victor Chen<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a><br>
+      banner image from <a href="https://www.pixiv.net/artworks/80036479" target="_blank">This</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+</body>
+</html>
