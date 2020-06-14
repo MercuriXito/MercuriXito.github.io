@@ -34,7 +34,7 @@
 <meta property="og:description" content="Introduction 领域解纠缠表示学习（Disentangled Representation Learning）的相关资料：包含论文、tutorial等。 这里我主要关注无监督的解纠缠表示学习方法，无监督方法中进展比较大的还是VAE类方法，而且VAE的理论基础比较厚实，也有GAN类方法，GAN和VAE结合的方法。 老的方法还有 ICA，不过我现在还没怎么涉及。 同时，VAE类方法解纠缠表">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2020-03-30T02:53:39.000Z">
-<meta property="article:modified_time" content="2020-06-13T07:16:07.716Z">
+<meta property="article:modified_time" content="2020-06-14T09:29:46.628Z">
 <meta property="article:author" content="Victor Chen">
 <meta property="article:tag" content="Disentangled Representation Learning">
 <meta property="article:tag" content="topic sorted">
@@ -112,7 +112,7 @@
 	<span> 
 	  发布时间: <time datetime="2020-03-30T02:53:39.000Z" itemprop="datePublished">2020-03-30</time>
 	   | 
-	  最近更新: <time datetime="2020-06-13T07:16:07.716Z" itemprop="datePublished">2020-06-13</time>
+	  最近更新: <time datetime="2020-06-14T09:29:46.628Z" itemprop="datePublished">2020-06-14</time>
   	</span>
 </div>
     <div class="article-entry" itemprop="articleBody">
@@ -123,42 +123,63 @@
 <p>同时，VAE类方法解纠缠表示学习和VAE的后验坍缩有千丝万缕的联系，有研究从VAE的变分下界损失中认为解纠缠和隐变量的丰富使用可能需要trade-off。近期会对二者进行调研。</p>
 <p>解纠缠表示学习的意义、下游任务： 待了解，可用于强化学习。</p>
 <a id="more"></a>
+<h2 id="领域总结"><a class="markdownIt-Anchor" href="#领域总结"></a> 领域总结</h2>
+<p>Unsupervised Disentangled Representation Learning的研究主要集中在VAE类方法，近年来的趋势有：</p>
+<ul>
+<li><strong>ELBO修改</strong>：在VAE、<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>β</mi></mrow><annotation encoding="application/x-tex">{\beta}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.05278em;">β</span></span></span></span></span>-VAE的基础上，构建更加适合Disentangled表示学习的ELBO，不过类似的方法已经有较为公认的方法：<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>q</mi><mo stretchy="false">(</mo><mi>z</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">{q(z)}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.03588em;">q</span><span class="mopen">(</span><span class="mord mathdefault" style="margin-right:0.04398em;">z</span><span class="mclose">)</span></span></span></span></span>和<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>p</mi><mo stretchy="false">(</mo><mi>z</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">{p(z)}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathdefault">p</span><span class="mopen">(</span><span class="mord mathdefault" style="margin-right:0.04398em;">z</span><span class="mclose">)</span></span></span></span></span>的prior match。代表作：<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>β</mi></mrow><annotation encoding="application/x-tex">{\beta}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.05278em;">β</span></span></span></span></span>-TCVAE，FactorVAE等。</li>
+<li><strong>prior修改</strong>：先验<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>p</mi><mo stretchy="false">(</mo><mi>z</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">{p(z)}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathdefault">p</span><span class="mopen">(</span><span class="mord mathdefault" style="margin-right:0.04398em;">z</span><span class="mclose">)</span></span></span></span></span>形式更改，先验自学习： VampVAE，BF-VAE等。</li>
+<li><strong>隐空间的结构的假设</strong>：
+<ul>
+<li>区分连续变量和离散变量： JointVAE等。</li>
+<li>有用变量和无用变量： BF-VAE等。</li>
+<li>变量关联性： HF-VAE, CausalVAE。</li>
+</ul>
+</li>
+<li>其他方法：
+<ul>
+<li>GAN 融合： AAE等。</li>
+<li><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>β</mi></mrow><annotation encoding="application/x-tex">{\beta}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.05278em;">β</span></span></span></span></span>调节： ControlVAE。</li>
+</ul>
+</li>
+</ul>
 <h2 id="papers"><a class="markdownIt-Anchor" href="#papers"></a> Papers</h2>
 <h3 id="2020"><a class="markdownIt-Anchor" href="#2020"></a> 2020</h3>
 <ul>
-<li>CausalVAE: Structured Causal Disentanglement in Variational Autoencoder.  <a href="https://arxiv.org/abs/2004.08697" target="_blank" rel="noopener">[paper]</a>. 引入因果推理。</li>
-<li>Controllable Variational Autoencoder. <a href="https://arxiv.org/abs/2004.05988" target="_blank" rel="noopener">[paper]</a>. 引入PI控制器利用反馈动态调节超参数<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>β</mi></mrow><annotation encoding="application/x-tex">{\beta}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.05278em;">β</span></span></span></span></span>。</li>
+<li>CausalVAE: Structured Causal Disentanglement in Variational Autoencoder.  <a href="https://arxiv.org/abs/2004.08697" target="_blank" rel="noopener">[paper]</a>. <a href="">[Notes]</a> 引入因果推理。 (<strong>CausalVAE</strong>)</li>
+<li>Controllable Variational Autoencoder. <a href="https://arxiv.org/abs/2004.05988" target="_blank" rel="noopener">[paper]</a>. <a href="">[Notes]</a> 引入PI控制器利用反馈动态调节超参数<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>β</mi></mrow><annotation encoding="application/x-tex">{\beta}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.05278em;">β</span></span></span></span></span>。 (<strong>ControlVAE</strong>)</li>
 <li>q-VAE for Disentangled Representation Learning and Latent Dynamical Systems. <a href="https://arxiv.org/abs/2003.01852" target="_blank" rel="noopener">[paper]</a></li>
 </ul>
 <h3 id="2019"><a class="markdownIt-Anchor" href="#2019"></a> 2019</h3>
 <ul>
-<li>Bayes-Factor-VAE: Hierarchical Bayesian Deep Auto-Encoder Models for Factor Disentanglement. (ICCV2019 Oral) <a href="http://openaccess.thecvf.com/content_ICCV_2019/html/Kim_Bayes-Factor-VAE_Hierarchical_Bayesian_Deep_Auto-Encoder_Models_for_Factor_Disentanglement_ICCV_2019_paper.html" target="_blank" rel="noopener">[paper]</a> <a href="http://seqamlab.com/2019/10/08/bayes-factor-vae-iccv19-presentation-slides-video/" target="_blank" rel="noopener">[slide&amp;video]</a> <a href="https://seqam-lab.github.io/BFVAE/" target="_blank" rel="noopener">[codes]</a></li>
-<li>Relevance Factor VAE: Learning and Identifying Disentangled Factors.</li>
-<li></li>
+<li>Bayes-Factor-VAE: Hierarchical Bayesian Deep Auto-Encoder Models for Factor Disentanglement. (ICCV2019 Oral) <a href="http://openaccess.thecvf.com/content_ICCV_2019/html/Kim_Bayes-Factor-VAE_Hierarchical_Bayesian_Deep_Auto-Encoder_Models_for_Factor_Disentanglement_ICCV_2019_paper.html" target="_blank" rel="noopener">[paper]</a> <a href="http://seqamlab.com/2019/10/08/bayes-factor-vae-iccv19-presentation-slides-video/" target="_blank" rel="noopener">[slide&amp;video]</a> <a href="https://seqam-lab.github.io/BFVAE/" target="_blank" rel="noopener">[codes]</a> <a href="">[Notes]</a> (<strong>BF-VAE</strong>)</li>
+<li>Relevance Factor VAE: Learning and Identifying Disentangled Factors. <a href="https://arxiv.org/abs/1902.01568" target="_blank" rel="noopener">[paper]</a> <a href="https://mercurixito.github.io/2020/06/14/RP-200614-RFVAE/">[Notes]</a> (<strong>RF-VAE</strong>)</li>
 </ul>
 <h3 id="2018"><a class="markdownIt-Anchor" href="#2018"></a> 2018</h3>
 <ul>
 <li>Towards a Definition of Disentangled Representations. <a href="https://arxiv.org/pdf/1812.02230.pdf" target="_blank" rel="noopener">[paper]</a></li>
-<li>Understanding disentangling in <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>β</mi></mrow><annotation encoding="application/x-tex">{\beta}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.05278em;">β</span></span></span></span></span>-VAE. <a href="https://arxiv.org/abs/1804.03599" target="_blank" rel="noopener">[paper]</a></li>
-<li>Rethinking Style and Content Disentanglement in Variational AutoEncoders. <a href="">[paper]</a>  (ICLR2018 workshop).</li>
-<li>Isolating Sources of Disentanglement in VAEs. <a href="https://arxiv.org/abs/1802.04942" target="_blank" rel="noopener">[paper]</a> (ICLR 2018 Oral). <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>β</mi></mrow><annotation encoding="application/x-tex">{\beta}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.05278em;">β</span></span></span></span></span>-TCVAE + MIG Metric.</li>
-<li>Challenging Common Assumptions in the Unsupervised Learning of<br />
-Disentangled Representations. <a href="https://arxiv.org/abs/1811.12359" target="_blank" rel="noopener">[paper]</a></li>
+<li>Understanding disentangling in <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>β</mi></mrow><annotation encoding="application/x-tex">{\beta}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.05278em;">β</span></span></span></span></span>-VAE. <a href="https://arxiv.org/abs/1804.03599" target="_blank" rel="noopener">[paper]</a> <a href="https://mercurixito.github.io/2020/06/04/RP-0604-Understanding-betaVAE/">[Notes]</a> (<strong>AnnealVAE</strong>)</li>
+<li>Isolating Sources of Disentanglement in VAEs. <a href="https://arxiv.org/abs/1802.04942" target="_blank" rel="noopener">[paper]</a> <a href="https://mercurixito.github.io/2020/05/08/RP-TCVAE/">[Notes]</a> (ICLR 2018 Oral). (<strong><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>β</mi></mrow><annotation encoding="application/x-tex">{\beta}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.05278em;">β</span></span></span></span></span>-TCVAE + MIG Metric</strong>).</li>
+<li>Challenging Common Assumptions in the Unsupervised Learning of Disentangled Representations. <a href="https://arxiv.org/abs/1811.12359" target="_blank" rel="noopener">[paper]</a> <a href="https://mercurixito.github.io/2020/06/06/RP-200606-challenging/">[Notes]</a></li>
 <li>A framework for the quantitative evaluation of disentangled representations. <a href="https://openreview.net/forum?id=By-7dz-AZ&amp;noteId=By-7dz-AZ" target="_blank" rel="noopener">[paper]</a> (ICLR 2018).</li>
-<li>Disentangling by factorising. <a href="https://arxiv.org/abs/1802.05983" target="_blank" rel="noopener">[paper]</a> (ICML 2018). FactorVAE + FactorVAE Metric（改进<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>β</mi></mrow><annotation encoding="application/x-tex">{\beta}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.05278em;">β</span></span></span></span></span>-VAE Metric）</li>
-<li>Learning Disentangled Joint Continuous and Discrete Representations (<strong>JointVAE</strong>). (NIPS2018). <a href="">[paper]</a></li>
-<li>Variation inference of disentangled latent concepts from unlabeled observations.</li>
-<li>VAE with a VampPrior.</li>
+<li>Disentangling by factorising. <a href="https://arxiv.org/abs/1802.05983" target="_blank" rel="noopener">[paper]</a> <a href="">[Notes]</a> (ICML 2018).(<strong>FactorVAE + FactorVAE Metric</strong>)（改进<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>β</mi></mrow><annotation encoding="application/x-tex">{\beta}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.05278em;">β</span></span></span></span></span>-VAE Metric）</li>
+<li>Learning Disentangled Joint Continuous and Discrete Representations (<strong>JointVAE</strong>). (NIPS2018). <a href="http://papers.nips.cc/paper/7351-learning-disentangled-joint-continuous-and-discrete-representations" target="_blank" rel="noopener">[paper]</a> <a href="https://github.com/Schlumberger/joint-vae" target="_blank" rel="noopener">[codes]</a> <a href="https://mercurixito.github.io/2020/06/07/RP-200607-JointVAE/">[Notes]</a></li>
+<li>Hyperprior induced unsupervised disentanglement of latent representations. <a href="https://www.aaai.org/ojs/index.php/AAAI/article/view/4185" target="_blank" rel="noopener">[paper]</a></li>
+<li>Disentangling the independently controllable factors of variation by interacting with the world. <a href="https://arxiv.org/abs/1802.09484" target="_blank" rel="noopener">[paper]</a></li>
+<li>Structured Disentangled Representations. <a href="https://arxiv.org/abs/1804.02086" target="_blank" rel="noopener">[paper]</a> <a href="https://mercurixito.github.io/2020/06/11/RP-200611-HFVAE/">[Notes]</a> (<strong>HF-VAE</strong>)</li>
+<li>Disentangling Disentanglement in Variational Autoencoders. <a href="https://arxiv.org/abs/1812.02833" target="_blank" rel="noopener">[paper]</a> <a href="">[Notes]</a> (ICML2019)</li>
 </ul>
 <h2 id="2017"><a class="markdownIt-Anchor" href="#2017"></a> 2017</h2>
 <ul>
-<li>Learning independent features with adversarial nets for non-linear ICA.</li>
+<li>Variation inference of disentangled latent concepts from unlabeled observations. <a href="https://arxiv.org/abs/1711.00848" target="_blank" rel="noopener">[paper]</a></li>
+<li>VAE with a VampPrior. <a href="https://arxiv.org/abs/1705.07120" target="_blank" rel="noopener">[paper]</a></li>
+<li>Learning independent features with adversarial nets for non-linear ICA. <a href="https://arxiv.org/abs/1710.05050" target="_blank" rel="noopener">[paper]</a></li>
 </ul>
 <h3 id="2016"><a class="markdownIt-Anchor" href="#2016"></a> 2016</h3>
 <ul>
 <li>InfoGAN: Interpretable Representation Learning by Information Maximizing Generative Adversarial Nets. <a href="https://arxiv.org/abs/1606.03657" target="_blank" rel="noopener">[paper]</a></li>
-<li><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>β</mi></mrow><annotation encoding="application/x-tex">{\beta}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.05278em;">β</span></span></span></span></span>-VAE: Learning Basic Visual Concepts with a Constrained Variational Framework. <a href="https://openreview.net/forum?id=Sy2fzU9gl" target="_blank" rel="noopener">[paper]</a> <a href="https://github.com/sootlasten/beta-vae" target="_blank" rel="noopener">[codes]</a></li>
-<li>Disentangling factors of variation in deep representations using adversarial training.</li>
+<li><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>β</mi></mrow><annotation encoding="application/x-tex">{\beta}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.05278em;">β</span></span></span></span></span>-VAE: Learning Basic Visual Concepts with a Constrained Variational Framework. <a href="https://openreview.net/forum?id=Sy2fzU9gl" target="_blank" rel="noopener">[paper]</a> <a href="https://github.com/sootlasten/beta-vae" target="_blank" rel="noopener">[codes]</a> <a href="https://mercurixito.github.io/2020/05/01/RP-betaVAE/">[Notes]</a></li>
+<li>Disentangling factors of variation in deep representations using adversarial training. <a href="http://papers.nips.cc/paper/6051-disentangling-factors-of-variation-in-deep-representation-using-adversarial-training" target="_blank" rel="noopener">[paper]</a></li>
+<li>Adversarial Autoencoders. <a href="https://arxiv.org/abs/1511.05644" target="_blank" rel="noopener">[paper]</a> <a href="https://mercurixito.github.io/2020/06/13/RP-200613-AAE/">[Notes]</a> (<strong>AAE</strong>)</li>
 </ul>
 <h3 id="2012"><a class="markdownIt-Anchor" href="#2012"></a> 2012</h3>
 <ul>
@@ -216,7 +237,7 @@ Disentangled Representations. <a href="https://arxiv.org/abs/1811.12359" target=
       <ul>
         
           <li>
-            <a href="/2020/06/13/RP-200613-AAE/">每日文章： Adversarial AutoEncoders</a>
+            <a href="/2020/06/14/RP-200614-RFVAE/">每日文章： Relevance Factor VAE： Learning and Identifying Disentangled Factors.</a>
           </li>
         
           <li>
@@ -224,15 +245,15 @@ Disentangled Representations. <a href="https://arxiv.org/abs/1811.12359" target=
           </li>
         
           <li>
+            <a href="/2020/05/05/Resources-VAE/">Resources： VAE</a>
+          </li>
+        
+          <li>
+            <a href="/2020/06/13/RP-200613-AAE/">每日文章： Adversarial AutoEncoders</a>
+          </li>
+        
+          <li>
             <a href="/2020/06/11/RP-200611-HFVAE/">每日文章： Structured Disentangled Representations</a>
-          </li>
-        
-          <li>
-            <a href="/2020/06/07/RP-200607-JointVAE/">每日文章： Learning Disentangled Joint Continuous and Discrete Representations</a>
-          </li>
-        
-          <li>
-            <a href="/2020/06/06/RP-200606-challenging/">每日文章： Challenging Common Assumptions in the Unsupervised Learning of Disentangled Representations</a>
           </li>
         
       </ul>
@@ -279,6 +300,10 @@ Disentangled Representations. <a href="https://arxiv.org/abs/1811.12359" target=
       <ul>
         
           <li>
+            <a href="/2020/06/14/RP-200614-RFVAE/">每日文章： Relevance Factor VAE： Learning and Identifying Disentangled Factors.</a>
+          </li>
+        
+          <li>
             <a href="/2020/06/13/RP-200613-AAE/">每日文章： Adversarial AutoEncoders</a>
           </li>
         
@@ -292,10 +317,6 @@ Disentangled Representations. <a href="https://arxiv.org/abs/1811.12359" target=
         
           <li>
             <a href="/2020/06/06/RP-200606-challenging/">每日文章： Challenging Common Assumptions in the Unsupervised Learning of Disentangled Representations</a>
-          </li>
-        
-          <li>
-            <a href="/2020/06/04/RP-0604-Understanding-betaVAE/">每日文章： Understanding disentangling in β-VAE</a>
           </li>
         
       </ul>
