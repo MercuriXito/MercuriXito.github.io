@@ -85,6 +85,57 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-RP-TCVAE" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/05/08/RP-TCVAE/" class="article-date">
+  <time datetime="2020-05-08T02:43:43.000Z" itemprop="datePublished">2020-05-08</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/05/08/RP-TCVAE/">论文阅读： Isolating Sources of Disentanglement in VAEs</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-new-date">
+	<span> 
+	  发布时间: <time datetime="2020-05-08T02:43:43.000Z" itemprop="datePublished">2020-05-08</time>
+	   | 
+	  最近更新: <time datetime="2020-05-10T08:09:58.529Z" itemprop="datePublished">2020-05-10</time>
+  	</span>
+</div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>本周阅读的是&quot;Isolating Sources of Disentanglement in VAEs&quot;。</p>
+<p>本文是一篇典型的探索VAE损失函数，促进模型的Disentangled Representation的文章。这类文章的套路是：从损失函数的KL项中<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>q</mi><mo stretchy="false">(</mo><mi>z</mi><mi mathvariant="normal">∣</mi><mi>x</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">{q(z | x)}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.03588em;">q</span><span class="mopen">(</span><span class="mord mathdefault" style="margin-right:0.04398em;">z</span><span class="mord">∣</span><span class="mord mathdefault">x</span><span class="mclose">)</span></span></span></span></span>贴合的分布形式出发，提出一种直觉上看起来合理的损失函数形式，在几个ToyDataset上报告看起来还不错的结果就完事。本文对KL项的分解借鉴了几篇之前的文献，比较可取，同时比较符合直观感受，而且近似计算上下了很大的功夫，对比实验也比较详实。公式看的我比较辛苦。。。。</p>
+        
+          <p class="article-more-link">
+            <a href="/2020/05/08/RP-TCVAE/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="mercurixito.github.io/2020/05/08/RP-TCVAE/" data-id="ckb3tdmhp001ax4uc33xx0nko" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Disentangled-Representation-Learning/" rel="tag">Disentangled Representation Learning</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Paper-Reading/" rel="tag">Paper Reading</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/VAE/" rel="tag">VAE</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-Resources-VAE" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2020/05/05/Resources-VAE/" class="article-date">
@@ -598,75 +649,11 @@ c-16-25.333-24-45-24-59z'/></svg></span></span></span></span></span></span></spa
 
 
   
-    <article id="post-Resources-GAN" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2020/03/30/Resources-GAN/" class="article-date">
-  <time datetime="2020-03-30T03:44:20.000Z" itemprop="datePublished">2020-03-30</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/03/30/Resources-GAN/">Resources： GAN</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-new-date">
-	<span> 
-	  发布时间: <time datetime="2020-03-30T03:44:20.000Z" itemprop="datePublished">2020-03-30</time>
-	   | 
-	  最近更新: <time datetime="2020-05-07T08:49:45.189Z" itemprop="datePublished">2020-05-07</time>
-  	</span>
-</div>
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="introduction"><a class="markdownIt-Anchor" href="#introduction"></a> Introduction</h2>
-<p><code>GAN</code>大领域内的资料整理，会逐渐地更新划分成多个小领域，可能有多个papers包含在不同的领域中。</p>
-<h2 id="papers"><a class="markdownIt-Anchor" href="#papers"></a> Papers</h2>
-<hr />
-<h3 id="uncoditional-gans"><a class="markdownIt-Anchor" href="#uncoditional-gans"></a> Uncoditional GANs</h3>
-<hr />
-<p>Unconditional GAN 是最原始的GAN的任务，对目标的图片的分布建模，学习映射<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>z</mi><mo>→</mo><mi>x</mi></mrow><annotation encoding="application/x-tex">{z \to x}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.04398em;">z</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">→</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mord mathdefault">x</span></span></span></span></span>。</p>
-<ul>
-<li>Generative Adversarial Nets. ( GAN )</li>
-<li>Deep Generative Image Models using a Laplacian Pyramid of Adversarial Networks ( LPGAN )</li>
-<li>Unsupervised Representation Learning with Deep Convolutional Generative Adversarial Networks. ( DCGAN )</li>
-<li>Progressive Growing of GANs for Improved Quality, Stability and Variation. ( PG-GAN )</li>
-<li>A Style-Based Generator Architecture for Generative Adversarial Networks. ( Style-GAN )</li>
-<li>Analyzing and Improving the Image Quality of StyleGAN. ( Style-GAN2 )</li>
-</ul>
-        
-          <p class="article-more-link">
-            <a href="/2020/03/30/Resources-GAN/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="mercurixito.github.io/2020/03/30/Resources-GAN/" data-id="ckb3tdmi0001nx4uc8fu00tow" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/GAN/" rel="tag">GAN</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/resources/" rel="tag">resources</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
 
 
   <nav id="page-nav">
     
-    <a class="extend prev" rel="prev" href="/">&amp;laquo; 上一页</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/3/">下一页 &amp;raquo;</a>
+    <a class="extend prev" rel="prev" href="/">&amp;laquo; 上一页</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/3/">下一页 &amp;raquo;</a>
   </nav>
 
 </section>
@@ -680,23 +667,23 @@ c-16-25.333-24-45-24-59z'/></svg></span></span></span></span></span></span></spa
       <ul>
         
           <li>
+            <a href="/2020/03/30/Resources-Disentangled-Representation-Learning/">Resources： Disentangled Representation Learning</a>
+          </li>
+        
+          <li>
+            <a href="/2020/06/17/RP-200617-CHyVAE/">每日文章：Hyperprior Induced Unsupervised Disentanglement of Latent Representations</a>
+          </li>
+        
+          <li>
+            <a href="/2020/06/19/RP-200620-Chanllenge/">Weekly Paper： Challenging Common Assumptions in the Unsupervised Learning of Disentangled Representations</a>
+          </li>
+        
+          <li>
             <a href="/2020/06/18/RP-200618-DIP-VAE/">每日文章：Variational Inference of Disentangled Latent Concepts from Unlabeled Observations</a>
           </li>
         
           <li>
             <a href="/2020/06/14/RP-200614-RFVAE/">每日文章： Relevance Factor VAE： Learning and Identifying Disentangled Factors.</a>
-          </li>
-        
-          <li>
-            <a href="/2020/03/30/Resources-Disentangled-Representation-Learning/">Resources： Disentangled Representation Learning</a>
-          </li>
-        
-          <li>
-            <a href="/2020/05/05/Resources-VAE/">Resources： VAE</a>
-          </li>
-        
-          <li>
-            <a href="/2020/06/13/RP-200613-AAE/">每日文章： Adversarial AutoEncoders</a>
           </li>
         
       </ul>
@@ -721,7 +708,7 @@ c-16-25.333-24-45-24-59z'/></svg></span></span></span></span></span></span></spa
   <div class="widget-wrap">
     <h3 class="widget-title">标签云</h3>
     <div class="widget tagcloud">
-      <a href="/tags/APAD/" style="font-size: 16.67px;">APAD</a> <a href="/tags/Disentangled-Representation-Learning/" style="font-size: 18.33px;">Disentangled Representation Learning</a> <a href="/tags/GAN/" style="font-size: 20px;">GAN</a> <a href="/tags/Linear-Algebra/" style="font-size: 10px;">Linear Algebra</a> <a href="/tags/Mathematic/" style="font-size: 11.67px;">Mathematic</a> <a href="/tags/Paper-Reading/" style="font-size: 18.33px;">Paper Reading</a> <a href="/tags/Probability/" style="font-size: 10px;">Probability</a> <a href="/tags/VAE/" style="font-size: 16.67px;">VAE</a> <a href="/tags/disentanglement/" style="font-size: 10px;">disentanglement</a> <a href="/tags/information-theory/" style="font-size: 10px;">information theory</a> <a href="/tags/mathematics/" style="font-size: 10px;">mathematics</a> <a href="/tags/metrics/" style="font-size: 11.67px;">metrics</a> <a href="/tags/resources/" style="font-size: 13.33px;">resources</a> <a href="/tags/topic-sorted/" style="font-size: 11.67px;">topic sorted</a> <a href="/tags/unsupervised-gan-controlling/" style="font-size: 15px;">unsupervised gan controlling</a> <a href="/tags/%E6%9D%82%E8%B0%88/" style="font-size: 13.33px;">杂谈</a>
+      <a href="/tags/APAD/" style="font-size: 15.71px;">APAD</a> <a href="/tags/Disentangled-Representation-Learning/" style="font-size: 18.57px;">Disentangled Representation Learning</a> <a href="/tags/GAN/" style="font-size: 20px;">GAN</a> <a href="/tags/Linear-Algebra/" style="font-size: 10px;">Linear Algebra</a> <a href="/tags/Mathematic/" style="font-size: 11.43px;">Mathematic</a> <a href="/tags/Paper-Reading/" style="font-size: 17.14px;">Paper Reading</a> <a href="/tags/Probability/" style="font-size: 10px;">Probability</a> <a href="/tags/VAE/" style="font-size: 18.57px;">VAE</a> <a href="/tags/disentanglement/" style="font-size: 10px;">disentanglement</a> <a href="/tags/information-theory/" style="font-size: 10px;">information theory</a> <a href="/tags/mathematics/" style="font-size: 10px;">mathematics</a> <a href="/tags/metrics/" style="font-size: 11.43px;">metrics</a> <a href="/tags/resources/" style="font-size: 12.86px;">resources</a> <a href="/tags/topic-sorted/" style="font-size: 11.43px;">topic sorted</a> <a href="/tags/unsupervised-gan-controlling/" style="font-size: 14.29px;">unsupervised gan controlling</a> <a href="/tags/%E6%9D%82%E8%B0%88/" style="font-size: 12.86px;">杂谈</a>
     </div>
   </div>
 
@@ -743,7 +730,15 @@ c-16-25.333-24-45-24-59z'/></svg></span></span></span></span></span></span></spa
       <ul>
         
           <li>
+            <a href="/2020/06/19/RP-200620-Chanllenge/">Weekly Paper： Challenging Common Assumptions in the Unsupervised Learning of Disentangled Representations</a>
+          </li>
+        
+          <li>
             <a href="/2020/06/18/RP-200618-DIP-VAE/">每日文章：Variational Inference of Disentangled Latent Concepts from Unlabeled Observations</a>
+          </li>
+        
+          <li>
+            <a href="/2020/06/17/RP-200617-CHyVAE/">每日文章：Hyperprior Induced Unsupervised Disentanglement of Latent Representations</a>
           </li>
         
           <li>
@@ -752,14 +747,6 @@ c-16-25.333-24-45-24-59z'/></svg></span></span></span></span></span></span></spa
         
           <li>
             <a href="/2020/06/13/RP-200613-AAE/">每日文章： Adversarial AutoEncoders</a>
-          </li>
-        
-          <li>
-            <a href="/2020/06/11/RP-200611-HFVAE/">每日文章： Structured Disentangled Representations</a>
-          </li>
-        
-          <li>
-            <a href="/2020/06/07/RP-200607-JointVAE/">每日文章： Learning Disentangled Joint Continuous and Discrete Representations</a>
           </li>
         
       </ul>

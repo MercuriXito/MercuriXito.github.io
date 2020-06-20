@@ -24,20 +24,16 @@
   <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
 
   
-  <title>每日文章： Challenging Common Assumptions in the Unsupervised Learning of Disentangled Representations | Hako</title>
+  <title>Hako</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Preface A Paper A Day Keep the Doctor Away. 今天的文章是： Challenging Common Assumptions in the Unsupervised Learning of Disentangled Representations. (ICML2019) [paper] [实验代码] 本文对当时现有的几个效果比较好的无监督的解纠缠表示学习的">
-<meta property="og:type" content="article">
-<meta property="og:title" content="每日文章： Challenging Common Assumptions in the Unsupervised Learning of Disentangled Representations">
-<meta property="og:url" content="mercurixito.github.io/2020/06/06/RP-200606-challenging/index.html">
+  <meta name="description" content="無様だ">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Hako">
+<meta property="og:url" content="mercurixito.github.io/page/4/index.html">
 <meta property="og:site_name" content="Hako">
-<meta property="og:description" content="Preface A Paper A Day Keep the Doctor Away. 今天的文章是： Challenging Common Assumptions in the Unsupervised Learning of Disentangled Representations. (ICML2019) [paper] [实验代码] 本文对当时现有的几个效果比较好的无监督的解纠缠表示学习的">
+<meta property="og:description" content="無様だ">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2020-06-06T15:43:57.000Z">
-<meta property="article:modified_time" content="2020-06-06T15:53:20.817Z">
 <meta property="article:author" content="Victor Chen">
-<meta property="article:tag" content="APAD">
-<meta property="article:tag" content="Disentangled Representation Learning">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternate" href="/atom.xml" title="Hako" type="application/atom+xml">
@@ -87,10 +83,12 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main"><article id="post-RP-200606-challenging" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main">
+  
+    <article id="post-RP-DNN-acc1" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2020/06/06/RP-200606-challenging/" class="article-date">
-  <time datetime="2020-06-06T15:43:57.000Z" itemprop="datePublished">2020-06-06</time>
+    <a href="/2019/05/26/RP-DNN-acc1/" class="article-date">
+  <time datetime="2019-05-26T08:48:31.000Z" itemprop="datePublished">2019-05-26</time>
 </a>
     
   </div>
@@ -100,8 +98,8 @@
       <header class="article-header">
         
   
-    <h1 class="article-title" itemprop="name">
-      每日文章： Challenging Common Assumptions in the Unsupervised Learning of Disentangled Representations
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/05/26/RP-DNN-acc1/">论文研读(1.1)：超深层网络加速</a>
     </h1>
   
 
@@ -109,56 +107,43 @@
     
     <div class="article-new-date">
 	<span> 
-	  发布时间: <time datetime="2020-06-06T15:43:57.000Z" itemprop="datePublished">2020-06-06</time>
+	  发布时间: <time datetime="2019-05-26T08:48:31.000Z" itemprop="datePublished">2019-05-26</time>
 	   | 
-	  最近更新: <time datetime="2020-06-06T15:53:20.817Z" itemprop="datePublished">2020-06-06</time>
+	  最近更新: <time datetime="2020-03-17T08:49:44.197Z" itemprop="datePublished">2020-03-17</time>
   	</span>
 </div>
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="preface"><a class="markdownIt-Anchor" href="#preface"></a> Preface</h2>
-<p>A Paper A Day Keep the Doctor Away. 今天的文章是：</p>
-<p>Challenging Common Assumptions in the Unsupervised Learning of Disentangled Representations. (ICML2019) <a href="https://arxiv.org/abs/1811.12359" target="_blank" rel="noopener">[paper]</a> <a href="https://github.com/google-research/disentanglement_lib" target="_blank" rel="noopener">[实验代码]</a></p>
-<p>本文对当时现有的几个效果比较好的无监督的解纠缠表示学习的模型进行评测，并给Unsupervised的方法“泼了盆凉水”。</p>
-<a id="more"></a>
-<h2 id="main-contents"><a class="markdownIt-Anchor" href="#main-contents"></a> Main Contents</h2>
+        <h2 id="前言"><a class="markdownIt-Anchor" href="#前言"></a> 前言</h2>
 <hr />
-<h3 id="impossible-learning"><a class="markdownIt-Anchor" href="#impossible-learning"></a> Impossible Learning</h3>
-<h3 id="experiment"><a class="markdownIt-Anchor" href="#experiment"></a> Experiment</h3>
-
+<p>深入DL领域读论文是必不可少的工作(其实我还有别的原因)，本意是开个好头吧，然后主要是学习最新的思想，开拓下自己的眼界。我觉得论文研读主要是从翻译、理解、算法实现、实验几个方面下手。</p>
+<p>最近研读的是<a href="https://arxiv.org/abs/1505.06798" target="_blank" rel="noopener">Accelerating Very Deep Convolutional Networks for Classfication and Dectection</a>，作者主要对“超深层网络”(文中对SPP-10和VGG-16两种模型进行了实验)通过通道维度上的分解，达到加速的目的，并且提出了优化算法，显著降低了由于低秩分解带来的损失。</p>
+        
+          <p class="article-more-link">
+            <a href="/2019/05/26/RP-DNN-acc1/#more">Read More</a>
+          </p>
+        
       
     </div>
     <footer class="article-footer">
-      <a data-url="mercurixito.github.io/2020/06/06/RP-200606-challenging/" data-id="ckb3tdmgi0004x4ucdmzqh5v8" class="article-share-link">Share</a>
+      <a data-url="mercurixito.github.io/2019/05/26/RP-DNN-acc1/" data-id="ckb3tdmgk0007x4ucenjq64wr" class="article-share-link">Share</a>
       
       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/APAD/" rel="tag">APAD</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Disentangled-Representation-Learning/" rel="tag">Disentangled Representation Learning</a></li></ul>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Paper-Reading/" rel="tag">Paper Reading</a></li></ul>
 
     </footer>
   </div>
   
-    
-<nav id="article-nav">
-  
-    <a href="/2020/06/07/RP-200607-JointVAE/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
-        
-          每日文章： Learning Disentangled Joint Continuous and Discrete Representations
-        
-      </div>
-    </a>
-  
-  
-    <a href="/2020/06/04/RP-0604-Understanding-betaVAE/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">每日文章： Understanding disentangling in β-VAE</div>
-    </a>
-  
-</nav>
+</article>
+
 
   
-</article>
+
+
+  <nav id="page-nav">
+    
+    <a class="extend prev" rel="prev" href="/page/3/">&amp;laquo; 上一页</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span>
+  </nav>
 
 </section>
         
@@ -171,23 +156,23 @@
       <ul>
         
           <li>
+            <a href="/2020/03/30/Resources-Disentangled-Representation-Learning/">Resources： Disentangled Representation Learning</a>
+          </li>
+        
+          <li>
+            <a href="/2020/06/17/RP-200617-CHyVAE/">每日文章：Hyperprior Induced Unsupervised Disentanglement of Latent Representations</a>
+          </li>
+        
+          <li>
+            <a href="/2020/06/19/RP-200620-Chanllenge/">Weekly Paper： Challenging Common Assumptions in the Unsupervised Learning of Disentangled Representations</a>
+          </li>
+        
+          <li>
             <a href="/2020/06/18/RP-200618-DIP-VAE/">每日文章：Variational Inference of Disentangled Latent Concepts from Unlabeled Observations</a>
           </li>
         
           <li>
             <a href="/2020/06/14/RP-200614-RFVAE/">每日文章： Relevance Factor VAE： Learning and Identifying Disentangled Factors.</a>
-          </li>
-        
-          <li>
-            <a href="/2020/03/30/Resources-Disentangled-Representation-Learning/">Resources： Disentangled Representation Learning</a>
-          </li>
-        
-          <li>
-            <a href="/2020/05/05/Resources-VAE/">Resources： VAE</a>
-          </li>
-        
-          <li>
-            <a href="/2020/06/13/RP-200613-AAE/">每日文章： Adversarial AutoEncoders</a>
           </li>
         
       </ul>
@@ -212,7 +197,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">标签云</h3>
     <div class="widget tagcloud">
-      <a href="/tags/APAD/" style="font-size: 16.67px;">APAD</a> <a href="/tags/Disentangled-Representation-Learning/" style="font-size: 18.33px;">Disentangled Representation Learning</a> <a href="/tags/GAN/" style="font-size: 20px;">GAN</a> <a href="/tags/Linear-Algebra/" style="font-size: 10px;">Linear Algebra</a> <a href="/tags/Mathematic/" style="font-size: 11.67px;">Mathematic</a> <a href="/tags/Paper-Reading/" style="font-size: 18.33px;">Paper Reading</a> <a href="/tags/Probability/" style="font-size: 10px;">Probability</a> <a href="/tags/VAE/" style="font-size: 16.67px;">VAE</a> <a href="/tags/disentanglement/" style="font-size: 10px;">disentanglement</a> <a href="/tags/information-theory/" style="font-size: 10px;">information theory</a> <a href="/tags/mathematics/" style="font-size: 10px;">mathematics</a> <a href="/tags/metrics/" style="font-size: 11.67px;">metrics</a> <a href="/tags/resources/" style="font-size: 13.33px;">resources</a> <a href="/tags/topic-sorted/" style="font-size: 11.67px;">topic sorted</a> <a href="/tags/unsupervised-gan-controlling/" style="font-size: 15px;">unsupervised gan controlling</a> <a href="/tags/%E6%9D%82%E8%B0%88/" style="font-size: 13.33px;">杂谈</a>
+      <a href="/tags/APAD/" style="font-size: 15.71px;">APAD</a> <a href="/tags/Disentangled-Representation-Learning/" style="font-size: 18.57px;">Disentangled Representation Learning</a> <a href="/tags/GAN/" style="font-size: 20px;">GAN</a> <a href="/tags/Linear-Algebra/" style="font-size: 10px;">Linear Algebra</a> <a href="/tags/Mathematic/" style="font-size: 11.43px;">Mathematic</a> <a href="/tags/Paper-Reading/" style="font-size: 17.14px;">Paper Reading</a> <a href="/tags/Probability/" style="font-size: 10px;">Probability</a> <a href="/tags/VAE/" style="font-size: 18.57px;">VAE</a> <a href="/tags/disentanglement/" style="font-size: 10px;">disentanglement</a> <a href="/tags/information-theory/" style="font-size: 10px;">information theory</a> <a href="/tags/mathematics/" style="font-size: 10px;">mathematics</a> <a href="/tags/metrics/" style="font-size: 11.43px;">metrics</a> <a href="/tags/resources/" style="font-size: 12.86px;">resources</a> <a href="/tags/topic-sorted/" style="font-size: 11.43px;">topic sorted</a> <a href="/tags/unsupervised-gan-controlling/" style="font-size: 14.29px;">unsupervised gan controlling</a> <a href="/tags/%E6%9D%82%E8%B0%88/" style="font-size: 12.86px;">杂谈</a>
     </div>
   </div>
 
@@ -234,7 +219,15 @@
       <ul>
         
           <li>
+            <a href="/2020/06/19/RP-200620-Chanllenge/">Weekly Paper： Challenging Common Assumptions in the Unsupervised Learning of Disentangled Representations</a>
+          </li>
+        
+          <li>
             <a href="/2020/06/18/RP-200618-DIP-VAE/">每日文章：Variational Inference of Disentangled Latent Concepts from Unlabeled Observations</a>
+          </li>
+        
+          <li>
+            <a href="/2020/06/17/RP-200617-CHyVAE/">每日文章：Hyperprior Induced Unsupervised Disentanglement of Latent Representations</a>
           </li>
         
           <li>
@@ -243,14 +236,6 @@
         
           <li>
             <a href="/2020/06/13/RP-200613-AAE/">每日文章： Adversarial AutoEncoders</a>
-          </li>
-        
-          <li>
-            <a href="/2020/06/11/RP-200611-HFVAE/">每日文章： Structured Disentangled Representations</a>
-          </li>
-        
-          <li>
-            <a href="/2020/06/07/RP-200607-JointVAE/">每日文章： Learning Disentangled Joint Continuous and Discrete Representations</a>
           </li>
         
       </ul>
