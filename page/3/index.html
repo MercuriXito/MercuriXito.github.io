@@ -85,6 +85,64 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-RP-InterFaceGAN" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/04/03/RP-InterFaceGAN/" class="article-date">
+  <time datetime="2020-04-03T09:16:24.000Z" itemprop="datePublished">2020-04-03</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/04/03/RP-InterFaceGAN/">论文研读：InterFaceGAN</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-new-date">
+	<span> 
+	  发布时间: <time datetime="2020-04-03T09:16:24.000Z" itemprop="datePublished">2020-04-03</time>
+	   | 
+	  最近更新: <time datetime="2020-04-19T08:56:39.709Z" itemprop="datePublished">2020-04-19</time>
+  	</span>
+</div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>本文是对&quot;Interpreting the Latent Space of GANs for Semantic Face Editing. <a href="https://arxiv.org/abs/1907.10786" target="_blank" rel="noopener">[paper]</a> <a href="https://shenyujun.github.io/InterFaceGAN/" target="_blank" rel="noopener">[codes]</a>&quot;[2]一文的学习。</p>
+<h3 id="introduction"><a class="markdownIt-Anchor" href="#introduction"></a> Introduction</h3>
+<hr />
+<p>本文研究的问题是：在latent space上修改输入噪声，操作GAN生成的图像不同语义。<br />
+本文的工作都基于以下假设：</p>
+<p><strong>Assumption 1</strong>:</p>
+<blockquote>
+<p>单个语义图像对应的图片在latent space上线性可分。</p>
+</blockquote>
+        
+          <p class="article-more-link">
+            <a href="/2020/04/03/RP-InterFaceGAN/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="mercurixito.github.io/2020/04/03/RP-InterFaceGAN/" data-id="ckb3tdmi6001ux4uc5h7wdy92" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/GAN/" rel="tag">GAN</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Paper-Reading/" rel="tag">Paper Reading</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-RP-GANs1" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2020/03/31/RP-GANs1/" class="article-date">
@@ -626,66 +684,6 @@
 
 
   
-    <article id="post-KL-Divergenece1" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2019/10/14/KL-Divergenece1/" class="article-date">
-  <time datetime="2019-10-14T08:32:46.000Z" itemprop="datePublished">2019-10-14</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/10/14/KL-Divergenece1/">数学:KL散度</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-new-date">
-	<span> 
-	  发布时间: <time datetime="2019-10-14T08:32:46.000Z" itemprop="datePublished">2019-10-14</time>
-	   | 
-	  最近更新: <time datetime="2020-03-17T08:40:10.935Z" itemprop="datePublished">2020-03-17</time>
-  	</span>
-</div>
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="kl-divergencekl-散度"><a class="markdownIt-Anchor" href="#kl-divergencekl-散度"></a> KL divergence(KL 散度)</h2>
-<p>KL散度(Kullback-Leibler (KL) divergence)通常用来<strong>衡量两个单独的概率分布的差异</strong>，设对于同一随机变量的两个概率分布为<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>P</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">{P(x)}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.13889em;">P</span><span class="mopen">(</span><span class="mord mathdefault">x</span><span class="mclose">)</span></span></span></span></span>和<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>Q</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">{Q(x)}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathdefault">Q</span><span class="mopen">(</span><span class="mord mathdefault">x</span><span class="mclose">)</span></span></span></span></span>，则它们的KL散度定义为：</p>
-<p class='katex-block'><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>D</mi><mrow><mi>K</mi><mi>L</mi></mrow></msub><mo stretchy="false">(</mo><mi>p</mi><mi mathvariant="normal">∣</mi><mi mathvariant="normal">∣</mi><mi>q</mi><mo stretchy="false">)</mo><mo>=</mo><msub><mi mathvariant="double-struck">E</mi><mrow><mi>x</mi><mo>∼</mo><mi>P</mi></mrow></msub><mrow><mo fence="true">[</mo><mi>log</mi><mo>⁡</mo><mi>P</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mo>−</mo><mi>log</mi><mo>⁡</mo><mi>Q</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mo fence="true">]</mo></mrow></mrow><annotation encoding="application/x-tex">{
-    D_{KL}(p \vert \vert q) = \mathbb{E}_{x\sim P} \left[ \log P(x) - \log Q(x) \right]
-}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord"><span class="mord mathdefault" style="margin-right:0.02778em;">D</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.32833099999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.02778em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight" style="margin-right:0.07153em;">K</span><span class="mord mathdefault mtight">L</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord mathdefault">p</span><span class="mord">∣</span><span class="mord">∣</span><span class="mord mathdefault" style="margin-right:0.03588em;">q</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mord"><span class="mord"><span class="mord mathbb">E</span></span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.32833099999999993em;"><span style="top:-2.5500000000000003em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">x</span><span class="mrel mtight">∼</span><span class="mord mathdefault mtight" style="margin-right:0.13889em;">P</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="minner"><span class="mopen delimcenter" style="top:0em;">[</span><span class="mop">lo<span style="margin-right:0.01389em;">g</span></span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault" style="margin-right:0.13889em;">P</span><span class="mopen">(</span><span class="mord mathdefault">x</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mop">lo<span style="margin-right:0.01389em;">g</span></span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault">Q</span><span class="mopen">(</span><span class="mord mathdefault">x</span><span class="mclose">)</span><span class="mclose delimcenter" style="top:0em;">]</span></span></span></span></span></span></span></p>
-<p>KL散度具有的性质有：</p>
-<ul>
-<li><strong>非负</strong>：要使得KL散度为0，当且仅当<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>P</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">{P(x)}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.13889em;">P</span><span class="mopen">(</span><span class="mord mathdefault">x</span><span class="mclose">)</span></span></span></span></span>和<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>Q</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">{Q(x)}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathdefault">Q</span><span class="mopen">(</span><span class="mord mathdefault">x</span><span class="mclose">)</span></span></span></span></span>是在离散型变量的情况下是相同的分布，或者在连续型变量的情况下是“几乎处处”相同的[1]。</li>
-<li><strong>非对称</strong>：对某些<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>P</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">{P(x)}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.13889em;">P</span><span class="mopen">(</span><span class="mord mathdefault">x</span><span class="mclose">)</span></span></span></span></span>和<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>Q</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">{Q(x)}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathdefault">Q</span><span class="mopen">(</span><span class="mord mathdefault">x</span><span class="mclose">)</span></span></span></span></span>，KL散度和逆KL散度通常并不相等，也就是<span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>D</mi><mrow><mi>K</mi><mi>L</mi></mrow></msub><mo stretchy="false">(</mo><mi>P</mi><mi mathvariant="normal">∣</mi><mi mathvariant="normal">∣</mi><mi>Q</mi><mo stretchy="false">)</mo><mi mathvariant="normal">≠</mi><msub><mi>D</mi><mrow><mi>K</mi><mi>L</mi></mrow></msub><mo stretchy="false">(</mo><mi>Q</mi><mi mathvariant="normal">∣</mi><mi mathvariant="normal">∣</mi><mi>P</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">{D_{KL}(P\vert\vert Q) \neq D_{KL}(Q \vert \vert P)}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord"><span class="mord mathdefault" style="margin-right:0.02778em;">D</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.32833099999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.02778em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight" style="margin-right:0.07153em;">K</span><span class="mord mathdefault mtight">L</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord mathdefault" style="margin-right:0.13889em;">P</span><span class="mord">∣</span><span class="mord">∣</span><span class="mord mathdefault">Q</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel"><span class="mrel"><span class="mord"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.69444em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="rlap"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="inner"><span class="mrel"></span></span><span class="fix"></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.19444em;"><span></span></span></span></span></span></span><span class="mrel">=</span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.02778em;">D</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.32833099999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.02778em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight" style="margin-right:0.07153em;">K</span><span class="mord mathdefault mtight">L</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord mathdefault">Q</span><span class="mord">∣</span><span class="mord">∣</span><span class="mord mathdefault" style="margin-right:0.13889em;">P</span><span class="mclose">)</span></span></span></span></span>。</li>
-</ul>
-<p>本文将从三个角度分析KL散度的非对称性：直观看法，理论说明，计算实验。</p>
-        
-          <p class="article-more-link">
-            <a href="/2019/10/14/KL-Divergenece1/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="mercurixito.github.io/2019/10/14/KL-Divergenece1/" data-id="ckb3tdmgj0005x4ucddob15de" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Mathematic/" rel="tag">Mathematic</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Probability/" rel="tag">Probability</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
 
 
   <nav id="page-nav">
@@ -704,6 +702,10 @@
       <ul>
         
           <li>
+            <a href="/2020/06/26/RP-200626-FewLabels/">Weekly Paper： Disentangling Factors of Variatons Using Few Labels</a>
+          </li>
+        
+          <li>
             <a href="/2020/06/21/RP-200621-ALAE/">每日文章： Adversarial Latent Autoencoders</a>
           </li>
         
@@ -717,10 +719,6 @@
         
           <li>
             <a href="/2020/06/19/RP-200620-Chanllenge/">Weekly Paper： Challenging Common Assumptions in the Unsupervised Learning of Disentangled Representations</a>
-          </li>
-        
-          <li>
-            <a href="/2020/06/18/RP-200618-DIP-VAE/">每日文章：Variational Inference of Disentangled Latent Concepts from Unlabeled Observations</a>
           </li>
         
       </ul>
@@ -767,6 +765,10 @@
       <ul>
         
           <li>
+            <a href="/2020/06/26/RP-200626-FewLabels/">Weekly Paper： Disentangling Factors of Variatons Using Few Labels</a>
+          </li>
+        
+          <li>
             <a href="/2020/06/21/RP-200621-ALAE/">每日文章： Adversarial Latent Autoencoders</a>
           </li>
         
@@ -780,10 +782,6 @@
         
           <li>
             <a href="/2020/06/17/RP-200617-CHyVAE/">每日文章：Hyperprior Induced Unsupervised Disentanglement of Latent Representations</a>
-          </li>
-        
-          <li>
-            <a href="/2020/06/14/RP-200614-RFVAE/">每日文章： Relevance Factor VAE： Learning and Identifying Disentangled Factors.</a>
           </li>
         
       </ul>
