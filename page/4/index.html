@@ -85,6 +85,184 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-GAN-metrics1" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/03/19/GAN-metrics1/" class="article-date">
+  <time datetime="2020-03-19T07:34:44.000Z" itemprop="datePublished">2020-03-19</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/03/19/GAN-metrics1/">GAN metrics (1)</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-new-date">
+	<span> 
+	  发布时间: <time datetime="2020-03-19T07:34:44.000Z" itemprop="datePublished">2020-03-19</time>
+	   | 
+	  最近更新: <time datetime="2020-03-19T09:54:23.026Z" itemprop="datePublished">2020-03-19</time>
+  	</span>
+</div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="前言"><a class="markdownIt-Anchor" href="#前言"></a> 前言</h2>
+<p>本文主要总结下不同领域下 GAN 的 评估方法：</p>
+<ul>
+<li>Inception Score(IS)</li>
+<li>FID (Frechet Inception Distance)</li>
+</ul>
+<p>这两个算是最常用的。</p>
+        
+          <p class="article-more-link">
+            <a href="/2020/03/19/GAN-metrics1/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="mercurixito.github.io/2020/03/19/GAN-metrics1/" data-id="ckb3tdmgl0008x4uchvn748x3" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/GAN/" rel="tag">GAN</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/metrics/" rel="tag">metrics</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-first" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/03/16/first/" class="article-date">
+  <time datetime="2020-03-16T13:52:05.000Z" itemprop="datePublished">2020-03-16</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/03/16/first/">First Post</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-new-date">
+	<span> 
+	  发布时间: <time datetime="2020-03-16T13:52:05.000Z" itemprop="datePublished">2020-03-16</time>
+	   | 
+	  最近更新: <time datetime="2020-04-19T07:52:20.822Z" itemprop="datePublished">2020-04-19</time>
+  	</span>
+</div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="first-post-of-blogs"><a class="markdownIt-Anchor" href="#first-post-of-blogs"></a> First post of blogs</h2>
+<p>Recently I am gonna migrate my blog to hexo, and I am gonna explore hexo with more intersting things, from the start, I may just use the default hexo theme – <code>landscape</code>.</p>
+<p>Still, the first things I should do is to make <code>Mathjax</code> work compatibly with <code>Hexo</code>. Let’s take the equations below for an example.</p>
+<p class='katex-block'><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><msup><mi>G</mi><mo>∗</mo></msup><mo>=</mo><mi>arg</mi><mo>⁡</mo><munder><mo><mi>min</mi><mo>⁡</mo></mo><mi>G</mi></munder><mi>max</mi><mo>⁡</mo><mi mathvariant="normal">_</mi><mi>D</mi><mrow><mo fence="true">[</mo><mi mathvariant="double-struck">E</mi><mi mathvariant="normal">_</mi><mrow><mi>x</mi><mo>∼</mo><mi>p</mi><mi mathvariant="normal">_</mi><mrow><mi>d</mi><mi>a</mi><mi>t</mi><mi>a</mi></mrow></mrow><mo stretchy="false">(</mo><mi>log</mi><mo>⁡</mo><mi>D</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mo stretchy="false">)</mo><mo>+</mo><mrow><mi mathvariant="double-struck">E</mi><mi mathvariant="normal">_</mi><mrow><mi>z</mi><mo>∼</mo><mi>p</mi><mi mathvariant="normal">_</mi><mi>z</mi></mrow></mrow><mi>log</mi><mo>⁡</mo><mo stretchy="false">(</mo><mn>1</mn><mo>−</mo><mi>D</mi><mo stretchy="false">(</mo><mi>G</mi><mo stretchy="false">(</mo><mi>z</mi><mo stretchy="false">)</mo><mo stretchy="false">)</mo><mo stretchy="false">)</mo><mo fence="true">]</mo></mrow></mrow><annotation encoding="application/x-tex">	G^{*} = \arg \min_{G} \max\_{D} \left[ \mathbb{E}\_{x \sim p\_{data}} 
+	(\log D(x)) + \mathbb{E\_{z \sim p\_{z}}} \log( 1 - D(G(z))) \right]
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.738696em;vertical-align:0em;"></span><span class="mord"><span class="mord mathdefault">G</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.738696em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">∗</span></span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1.594331em;vertical-align:-0.744331em;"></span><span class="mop">ar<span style="margin-right:0.01389em;">g</span></span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mop op-limits"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.66786em;"><span style="top:-2.055669em;margin-left:0em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">G</span></span></span></span><span style="top:-2.7em;"><span class="pstrut" style="height:2.7em;"></span><span><span class="mop">min</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.744331em;"><span></span></span></span></span></span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mop">max</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord" style="margin-right:0.02778em;">_</span><span class="mord"><span class="mord mathdefault" style="margin-right:0.02778em;">D</span></span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="minner"><span class="mopen delimcenter" style="top:0em;"><span class="delimsizing size1">[</span></span><span class="mord"><span class="mord mathbb">E</span></span><span class="mord" style="margin-right:0.02778em;">_</span><span class="mord"><span class="mord mathdefault">x</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">∼</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mord mathdefault">p</span><span class="mord" style="margin-right:0.02778em;">_</span><span class="mord"><span class="mord mathdefault">d</span><span class="mord mathdefault">a</span><span class="mord mathdefault">t</span><span class="mord mathdefault">a</span></span></span><span class="mopen">(</span><span class="mop">lo<span style="margin-right:0.01389em;">g</span></span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault" style="margin-right:0.02778em;">D</span><span class="mopen">(</span><span class="mord mathdefault">x</span><span class="mclose">)</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mord"><span class="mord mathbb">E</span><span class="mord" style="margin-right:0.02778em;">_</span><span class="mord"><span class="mord mathdefault" style="margin-right:0.04398em;">z</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">∼</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mord mathdefault">p</span><span class="mord" style="margin-right:0.02778em;">_</span><span class="mord"><span class="mord mathdefault" style="margin-right:0.04398em;">z</span></span></span></span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mop">lo<span style="margin-right:0.01389em;">g</span></span><span class="mopen">(</span><span class="mord">1</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mord mathdefault" style="margin-right:0.02778em;">D</span><span class="mopen">(</span><span class="mord mathdefault">G</span><span class="mopen">(</span><span class="mord mathdefault" style="margin-right:0.04398em;">z</span><span class="mclose">)</span><span class="mclose">)</span><span class="mclose">)</span><span class="mclose delimcenter" style="top:0em;"><span class="delimsizing size1">]</span></span></span></span></span></span></span></p>
+<p><strong>The following steps are based on <code>hexo-markdown-rendered</code> render and mind I have changed it to <code>hexo-renderer-markdown-it-plus</code>, So it would be out of date.</strong></p>
+        
+          <p class="article-more-link">
+            <a href="/2020/03/16/first/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="mercurixito.github.io/2020/03/16/first/" data-id="ckb3tdmib0024x4uc0w91hliz" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%9D%82%E8%B0%88/" rel="tag">杂谈</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-RP-WGAN" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/02/07/RP-WGAN/" class="article-date">
+  <time datetime="2020-02-07T08:41:13.000Z" itemprop="datePublished">2020-02-07</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/02/07/RP-WGAN/">论文研读：WGAN</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-new-date">
+	<span> 
+	  发布时间: <time datetime="2020-02-07T08:41:13.000Z" itemprop="datePublished">2020-02-07</time>
+	   | 
+	  最近更新: <time datetime="2020-03-17T08:46:50.636Z" itemprop="datePublished">2020-03-17</time>
+  	</span>
+</div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="introduction"><a class="markdownIt-Anchor" href="#introduction"></a> Introduction</h2>
+<ol>
+<li>
+<p>生成式模型的目的：学习目标的分布（比如图像的分布）</p>
+<p>通常的做法：</p>
+<p>给定一类分布的族<span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>P</mi><mi mathvariant="normal">Θ</mi></msub></mrow><annotation encoding="application/x-tex">{P_{\Theta}}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.83333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord"><span class="mord mathdefault" style="margin-right:0.13889em;">P</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.32833099999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.13889em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">Θ</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span></span>，在这类族中，寻找最优的参数，使得可以逼近真实分布<span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>P</mi><mi>τ</mi></msub></mrow><annotation encoding="application/x-tex">{P_{\tau}}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.83333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord"><span class="mord mathdefault" style="margin-right:0.13889em;">P</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:-0.13889em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight" style="margin-right:0.1132em;">τ</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span></span>，通常的做法是 MLE，并且MLE正好和最小化<span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>P</mi><mi mathvariant="normal">Θ</mi></msub></mrow><annotation encoding="application/x-tex">{P_{\Theta}}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.83333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord"><span class="mord mathdefault" style="margin-right:0.13889em;">P</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.32833099999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.13889em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">Θ</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span></span>和<span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>P</mi><mi>τ</mi></msub></mrow><annotation encoding="application/x-tex">{P_{\tau}}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.83333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord"><span class="mord mathdefault" style="margin-right:0.13889em;">P</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:-0.13889em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight" style="margin-right:0.1132em;">τ</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span></span>的KL距离等价。</p>
+<p><strong>问题是</strong>：这类函数族<span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>P</mi><mi mathvariant="normal">Θ</mi></msub></mrow><annotation encoding="application/x-tex">{P_{\Theta}}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.83333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord"><span class="mord mathdefault" style="margin-right:0.13889em;">P</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.32833099999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.13889em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">Θ</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span></span>和<span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>P</mi><mi>τ</mi></msub></mrow><annotation encoding="application/x-tex">{P_{\tau}}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.83333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord"><span class="mord mathdefault" style="margin-right:0.13889em;">P</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:-0.13889em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight" style="margin-right:0.1132em;">τ</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span></span>可能没有多大的交集，所以通常会选择<span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>P</mi><mi mathvariant="normal">Θ</mi></msub></mrow><annotation encoding="application/x-tex">{P_{\Theta}}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.83333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord"><span class="mord mathdefault" style="margin-right:0.13889em;">P</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.32833099999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.13889em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">Θ</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span></span>为高斯分布，能够尽可能多地涵盖分布。</p>
+</li>
+<li>
+<p>Modern way:</p>
+<p>现在一般的做法是：给定一个随机的噪声<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>Z</mi></mrow><annotation encoding="application/x-tex">{Z}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.07153em;">Z</span></span></span></span></span>，寻找一个分布的映射函数<span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>f</mi><mi>W</mi></msub></mrow><annotation encoding="application/x-tex">{f_{W}}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mord"><span class="mord"><span class="mord mathdefault" style="margin-right:0.10764em;">f</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.32833099999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.10764em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight" style="margin-right:0.13889em;">W</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span></span>，将<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>Z</mi></mrow><annotation encoding="application/x-tex">{Z}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.07153em;">Z</span></span></span></span></span>映射到分布<span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>P</mi><mi>g</mi></msub></mrow><annotation encoding="application/x-tex">{P_{g}}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.969438em;vertical-align:-0.286108em;"></span><span class="mord"><span class="mord"><span class="mord mathdefault" style="margin-right:0.13889em;">P</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.15139200000000003em;"><span style="top:-2.5500000000000003em;margin-left:-0.13889em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight" style="margin-right:0.03588em;">g</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.286108em;"><span></span></span></span></span></span></span></span></span></span></span>，使得<span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>P</mi><mi>g</mi></msub></mrow><annotation encoding="application/x-tex">{P_{g}}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.969438em;vertical-align:-0.286108em;"></span><span class="mord"><span class="mord"><span class="mord mathdefault" style="margin-right:0.13889em;">P</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.15139200000000003em;"><span style="top:-2.5500000000000003em;margin-left:-0.13889em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight" style="margin-right:0.03588em;">g</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.286108em;"><span></span></span></span></span></span></span></span></span></span></span>和<span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>P</mi><mi>r</mi></msub></mrow><annotation encoding="application/x-tex">{P_{r}}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.83333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord"><span class="mord mathdefault" style="margin-right:0.13889em;">P</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:-0.13889em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight" style="margin-right:0.02778em;">r</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span></span>接近，已有的这方面的工作包括：</p>
+<ul>
+<li>VAE（变分自编码器）</li>
+<li>GAN</li>
+</ul>
+</li>
+</ol>
+        
+          <p class="article-more-link">
+            <a href="/2020/02/07/RP-WGAN/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="mercurixito.github.io/2020/02/07/RP-WGAN/" data-id="ckb3tdmhs001bx4uc5t40fcse" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/GAN/" rel="tag">GAN</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Paper-Reading/" rel="tag">Paper Reading</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-KL-Divergenece1" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2019/10/14/KL-Divergenece1/" class="article-date">
@@ -268,23 +446,23 @@
       <ul>
         
           <li>
+            <a href="/2020/07/17/Stereo-200717/">基于双目视觉的景深估计</a>
+          </li>
+        
+          <li>
+            <a href="/2020/07/17/SPM-200717/">基于BoW特征的图像分类(1)</a>
+          </li>
+        
+          <li>
+            <a href="/2020/07/17/SPM2-200717/">基于BoW特征的图像分类(2) —— 空间金字塔匹配</a>
+          </li>
+        
+          <li>
             <a href="/2020/06/26/RP-200626-FewLabels/">Weekly Paper： Disentangling Factors of Variatons Using Few Labels</a>
           </li>
         
           <li>
             <a href="/2020/06/21/RP-200621-ALAE/">每日文章： Adversarial Latent Autoencoders</a>
-          </li>
-        
-          <li>
-            <a href="/2020/03/30/Resources-Disentangled-Representation-Learning/">Resources： Disentangled Representation Learning</a>
-          </li>
-        
-          <li>
-            <a href="/2020/06/17/RP-200617-CHyVAE/">每日文章：Hyperprior Induced Unsupervised Disentanglement of Latent Representations</a>
-          </li>
-        
-          <li>
-            <a href="/2020/06/19/RP-200620-Chanllenge/">Weekly Paper： Challenging Common Assumptions in the Unsupervised Learning of Disentangled Representations</a>
           </li>
         
       </ul>
@@ -299,7 +477,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">标签</h3>
     <div class="widget">
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/APAD/" rel="tag">APAD</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/AutoEncoder/" rel="tag">AutoEncoder</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Disentangled-Representation-Learning/" rel="tag">Disentangled Representation Learning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GAN/" rel="tag">GAN</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linear-Algebra/" rel="tag">Linear Algebra</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mathematic/" rel="tag">Mathematic</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Paper-Reading/" rel="tag">Paper Reading</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Probability/" rel="tag">Probability</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VAE/" rel="tag">VAE</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/disentanglement/" rel="tag">disentanglement</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/information-theory/" rel="tag">information theory</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mathematics/" rel="tag">mathematics</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/metrics/" rel="tag">metrics</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/resources/" rel="tag">resources</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/topic-sorted/" rel="tag">topic sorted</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/unsupervised-gan-controlling/" rel="tag">unsupervised gan controlling</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9D%82%E8%B0%88/" rel="tag">杂谈</a></li></ul>
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/APAD/" rel="tag">APAD</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/AutoEncoder/" rel="tag">AutoEncoder</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Disentangled-Representation-Learning/" rel="tag">Disentangled Representation Learning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GAN/" rel="tag">GAN</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linear-Algebra/" rel="tag">Linear Algebra</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mathematic/" rel="tag">Mathematic</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Object-Detection/" rel="tag">Object Detection</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Paper-Reading/" rel="tag">Paper Reading</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Probability/" rel="tag">Probability</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spatial-Pyramid-Matching/" rel="tag">Spatial Pyramid Matching</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VAE/" rel="tag">VAE</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/disentanglement/" rel="tag">disentanglement</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/information-theory/" rel="tag">information theory</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mathematics/" rel="tag">mathematics</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/metrics/" rel="tag">metrics</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/resources/" rel="tag">resources</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/topic-sorted/" rel="tag">topic sorted</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/two-frame-stereo/" rel="tag">two-frame stereo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/unsupervised-gan-controlling/" rel="tag">unsupervised gan controlling</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9D%82%E8%B0%88/" rel="tag">杂谈</a></li></ul>
     </div>
   </div>
 
@@ -309,7 +487,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">标签云</h3>
     <div class="widget tagcloud">
-      <a href="/tags/APAD/" style="font-size: 16.67px;">APAD</a> <a href="/tags/AutoEncoder/" style="font-size: 10px;">AutoEncoder</a> <a href="/tags/Disentangled-Representation-Learning/" style="font-size: 18.33px;">Disentangled Representation Learning</a> <a href="/tags/GAN/" style="font-size: 20px;">GAN</a> <a href="/tags/Linear-Algebra/" style="font-size: 10px;">Linear Algebra</a> <a href="/tags/Mathematic/" style="font-size: 11.67px;">Mathematic</a> <a href="/tags/Paper-Reading/" style="font-size: 16.67px;">Paper Reading</a> <a href="/tags/Probability/" style="font-size: 10px;">Probability</a> <a href="/tags/VAE/" style="font-size: 18.33px;">VAE</a> <a href="/tags/disentanglement/" style="font-size: 11.67px;">disentanglement</a> <a href="/tags/information-theory/" style="font-size: 10px;">information theory</a> <a href="/tags/mathematics/" style="font-size: 10px;">mathematics</a> <a href="/tags/metrics/" style="font-size: 11.67px;">metrics</a> <a href="/tags/resources/" style="font-size: 13.33px;">resources</a> <a href="/tags/topic-sorted/" style="font-size: 11.67px;">topic sorted</a> <a href="/tags/unsupervised-gan-controlling/" style="font-size: 15px;">unsupervised gan controlling</a> <a href="/tags/%E6%9D%82%E8%B0%88/" style="font-size: 13.33px;">杂谈</a>
+      <a href="/tags/APAD/" style="font-size: 16.67px;">APAD</a> <a href="/tags/AutoEncoder/" style="font-size: 10px;">AutoEncoder</a> <a href="/tags/Disentangled-Representation-Learning/" style="font-size: 18.33px;">Disentangled Representation Learning</a> <a href="/tags/GAN/" style="font-size: 20px;">GAN</a> <a href="/tags/Linear-Algebra/" style="font-size: 10px;">Linear Algebra</a> <a href="/tags/Mathematic/" style="font-size: 11.67px;">Mathematic</a> <a href="/tags/Object-Detection/" style="font-size: 11.67px;">Object Detection</a> <a href="/tags/Paper-Reading/" style="font-size: 16.67px;">Paper Reading</a> <a href="/tags/Probability/" style="font-size: 10px;">Probability</a> <a href="/tags/Spatial-Pyramid-Matching/" style="font-size: 10px;">Spatial Pyramid Matching</a> <a href="/tags/VAE/" style="font-size: 18.33px;">VAE</a> <a href="/tags/disentanglement/" style="font-size: 11.67px;">disentanglement</a> <a href="/tags/information-theory/" style="font-size: 10px;">information theory</a> <a href="/tags/mathematics/" style="font-size: 10px;">mathematics</a> <a href="/tags/metrics/" style="font-size: 11.67px;">metrics</a> <a href="/tags/resources/" style="font-size: 13.33px;">resources</a> <a href="/tags/topic-sorted/" style="font-size: 11.67px;">topic sorted</a> <a href="/tags/two-frame-stereo/" style="font-size: 10px;">two-frame stereo</a> <a href="/tags/unsupervised-gan-controlling/" style="font-size: 15px;">unsupervised gan controlling</a> <a href="/tags/%E6%9D%82%E8%B0%88/" style="font-size: 13.33px;">杂谈</a>
     </div>
   </div>
 
@@ -318,7 +496,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">归档</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/06/">六月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/05/">五月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">四月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">三月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">二月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">十月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">九月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">五月 2019</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/07/">七月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/06/">六月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/05/">五月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">四月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">三月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">二月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">十月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">九月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">五月 2019</a></li></ul>
     </div>
   </div>
 
@@ -331,23 +509,23 @@
       <ul>
         
           <li>
+            <a href="/2020/07/17/SPM2-200717/">基于BoW特征的图像分类(2) —— 空间金字塔匹配</a>
+          </li>
+        
+          <li>
+            <a href="/2020/07/17/Stereo-200717/">基于双目视觉的景深估计</a>
+          </li>
+        
+          <li>
+            <a href="/2020/07/17/SPM-200717/">基于BoW特征的图像分类(1)</a>
+          </li>
+        
+          <li>
             <a href="/2020/06/26/RP-200626-FewLabels/">Weekly Paper： Disentangling Factors of Variatons Using Few Labels</a>
           </li>
         
           <li>
             <a href="/2020/06/21/RP-200621-ALAE/">每日文章： Adversarial Latent Autoencoders</a>
-          </li>
-        
-          <li>
-            <a href="/2020/06/19/RP-200620-Chanllenge/">Weekly Paper： Challenging Common Assumptions in the Unsupervised Learning of Disentangled Representations</a>
-          </li>
-        
-          <li>
-            <a href="/2020/06/18/RP-200618-DIP-VAE/">每日文章：Variational Inference of Disentangled Latent Concepts from Unlabeled Observations</a>
-          </li>
-        
-          <li>
-            <a href="/2020/06/17/RP-200617-CHyVAE/">每日文章：Hyperprior Induced Unsupervised Disentanglement of Latent Representations</a>
           </li>
         
       </ul>
