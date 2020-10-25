@@ -1,32 +1,32 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq" crossorigin="anonymous">
-  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js" integrity="sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz" crossorigin="anonymous"></script>
+    
 
-  <!-- Default Mathjax Support -->
-<!--   <script type="text/x-mathjax-config">
-     MathJax.Hub.Config({"HTML-CSS": { preferredFont: "TeX", availableFonts: ["STIX","TeX"], linebreaks: { automatic:true }, EqnChunk: (MathJax.Hub.Browser.isMobile ? 10 : 50) },
-          tex2jax: { inlineMath: [ ["$", "$"], ["\\(","\\)"] ], processEscapes: true, ignoreClass: "tex2jax_ignore|dno",skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']},
-          TeX: {  noUndefined: { attributes: { mathcolor: "red", mathbackground: "#FFEEEE", mathsize: "90%" } }, Macros: { href: "{}" } },
-          messageStyle: "none"
-      }); 
-  </script>
-  <script type="text/x-mathjax-config">
-      MathJax.Hub.Queue(function() {
-          var all = MathJax.Hub.getAllJax(), i;
-          for(i=0; i < all.length; i += 1) {
-              all[i].SourceElement().parentNode.className += ' has-jax';
-          }
-      });
-  </script>
-  <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
+    
 
-  
-  <title>Hako</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="無様だ">
+    
+
+
+
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
+    <!-- for katex render -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css" integrity="sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3+Aro6EYUG4+cU+KJWu/X" crossorigin="anonymous">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.js" integrity="sha384-g7c+Jr9ZivxKLnZTDUhnkOnsh30B4H0rpLUpJ4jAIKs4fnJI+sEnkvrMWph2EDg4" crossorigin="anonymous"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/contrib/auto-render.min.js" integrity="sha384-mll67QQFJfxn0IYznZYonOWZ644AWYC+Pt2cHqMaRhXVrursRwvLnLaebdGIlYNa" crossorigin="anonymous"
+        onload="renderMathInElement(document.body);"></script>
+    
+    
+    
+    
+    <title>Hako</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="">
+    <meta name="description" content="無様だ">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Hako">
 <meta property="og:url" content="mercurixito.github.io/page/4/index.html">
@@ -35,85 +35,372 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="article:author" content="Victor Chen">
 <meta name="twitter:card" content="summary">
-  
-    <link rel="alternate" href="/atom.xml" title="Hako" type="application/atom+xml">
-  
-  
-    <link rel="icon" href="/favicon.png">
-  
-  
-    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
-  
-  
-<link rel="stylesheet" href="/css/style.css">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
 
 <meta name="generator" content="Hexo 4.2.0"><!-- hexo-inject:begin --><!-- hexo-inject:end --></head>
 
 <body>
-  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div id="container">
-    <div id="wrap">
-      <header id="header">
-  <div id="banner"></div>
-  <div id="header-outer" class="outer">
-    <div id="header-title" class="inner">
-      <h1 id="logo-wrap">
-        <a href="/" id="logo">Hako</a>
-      </h1>
-      
-    </div>
-    <div id="header-inner" class="inner">
-      <nav id="main-nav">
-        <a id="main-nav-toggle" class="nav-icon"></a>
-        
-          <a class="main-nav-link" href="/">Home</a>
-        
-          <a class="main-nav-link" href="/archives">Archives</a>
-        
-      </nav>
-      <nav id="sub-nav">
-        
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
-        
-        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
-      </nav>
-      <div id="search-form-wrap">
-        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="mercurixito.github.io"></form>
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><div id="loading" class="active"></div>
+
+    <aside id="menu"  >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/sun.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/nero.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Victor Chen</h5>
+          <a href="mailto:victor_tochen@foxmail.com" title="victor_tochen@foxmail.com" class="mail">victor_tochen@foxmail.com</a>
+        </hgroup>
       </div>
     </div>
-  </div>
-</header>
-      <div class="outer">
-        <section id="main">
-  
-    <article id="post-GAN-metrics1" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2020/03/19/GAN-metrics1/" class="article-date">
-  <time datetime="2020-03-19T07:34:44.000Z" itemprop="datePublished">2020-03-19</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
         
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/MercuriXito" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">Hako</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header index-header", style="background-image: url(/img/sakura.png)">
+
+    <div class="container fade-scale">
+        <h1 class="title">Hako</h1>
+        <h5 class="subtitle">
+            
+                
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+<div class="container body-wrap">
+
+    <ul class="post-list">
+    
+        <li class="post-list-item fade">
+            <article id="post-Resources-Disentangled-Representation-Learning"
+  class="article-card article-type-post" itemprop="blogPost">
+
+    <div class="post-meta">
+        <time class="post-time" title="2020-03-30 10:53:39" datetime="2020-03-30T02:53:39.000Z"  itemprop="datePublished">2020-03-30</time>
+
+        
+
+
+    </div>
+
+    
+
+
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/03/19/GAN-metrics1/">GAN metrics (1)</a>
-    </h1>
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/2020/03/30/Resources-Disentangled-Representation-Learning/">Resources： Disentangled Representation Learning</a>
+    </h3>
   
 
-      </header>
+
+
+
+    <div class="post-content" id="post-content" itemprop="postContent">
+
     
-    <div class="article-new-date">
-	<span> 
-	  发布时间: <time datetime="2020-03-19T07:34:44.000Z" itemprop="datePublished">2020-03-19</time>
-	   | 
-	  最近更新: <time datetime="2020-03-19T09:54:23.026Z" itemprop="datePublished">2020-03-19</time>
-  	</span>
-</div>
-    <div class="article-entry" itemprop="articleBody">
-      
+        <h2 id="introduction"><a class="markdownIt-Anchor" href="#introduction"></a> Introduction</h2>
+<p>领域<code>解纠缠表示学习</code>（<code>Disentangled Representation Learning</code>）的相关资料：包含论文、tutorial等。</p>
+<p>主要的分类： (1) 使用方法： GAN, VAE 等; (2) 监督类型: 无监督、半监督(弱监督，使用 group-paired 的样本)。</p>
+    
+
+        <a href="/2020/03/30/Resources-Disentangled-Representation-Learning/" class="post-more waves-effect waves-button">
+            阅读全文…
+        </a>
+    </div>
+    
+    <div class="post-footer">
+        
+	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Disentangled-Representation-Learning/" rel="tag">Disentangled Representation Learning</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/resources/" rel="tag">resources</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/topic-sorted/" rel="tag">topic sorted</a></li></ul>
+
+    </div>
+    
+</article>
+
+        </li>
+    
+        <li class="post-list-item fade">
+            <article id="post-RP-steerability"
+  class="article-card article-type-post" itemprop="blogPost">
+
+    <div class="post-meta">
+        <time class="post-time" title="2020-03-27 10:37:02" datetime="2020-03-27T02:37:02.000Z"  itemprop="datePublished">2020-03-27</time>
+
+        
+
+
+    </div>
+
+    
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/2020/03/27/RP-steerability/">论文研读： on the steerabilty of generative adversarial networks</a>
+    </h3>
+  
+
+
+
+
+    <div class="post-content" id="post-content" itemprop="postContent">
+
+    
+        <p>本文是对&quot;on the steerabilty of generative adversarial networks&quot;[2]一文的学习。</p>
+<h3 id="introduction"><a class="markdownIt-Anchor" href="#introduction"></a> Introduction</h3>
+<p>研究的问题阐述：对latent space的隐变量<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>z</mi></mrow><annotation encoding="application/x-tex">{z}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.04398em;">z</span></span></span></span></span>进行移动得到<span class="katex"><span class="katex-mathml"><math><semantics><mrow><msup><mi>z</mi><mo>∗</mo></msup></mrow><annotation encoding="application/x-tex">{z^{\ast}}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.688696em;vertical-align:0em;"></span><span class="mord"><span class="mord"><span class="mord mathdefault" style="margin-right:0.04398em;">z</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.688696em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">∗</span></span></span></span></span></span></span></span></span></span></span></span></span>，使得GAN生成的图片<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>G</mi><mo stretchy="false">(</mo><msup><mi>z</mi><mo>∗</mo></msup><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">{G(z^{\ast})}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathdefault">G</span><span class="mopen">(</span><span class="mord"><span class="mord mathdefault" style="margin-right:0.04398em;">z</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.688696em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">∗</span></span></span></span></span></span></span></span></span><span class="mclose">)</span></span></span></span></span>是原来生成的图片<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>G</mi><mo stretchy="false">(</mo><mi>z</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">{G(z)}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathdefault">G</span><span class="mopen">(</span><span class="mord mathdefault" style="margin-right:0.04398em;">z</span><span class="mclose">)</span></span></span></span></span>通过某种变换之后得到的图片，本文提出了线性和非线性两种移动方法。<br />
+本文研究的变换包括：</p>
+<ul>
+<li>颜色变换。</li>
+<li>目标物体的放大和缩小。</li>
+<li>左右上下移动。</li>
+<li>旋转变化。</li>
+</ul>
+<h3 id="methods"><a class="markdownIt-Anchor" href="#methods"></a> Methods</h3>
+<p>主要包含三个部分的内容：</p>
+<ol>
+<li>构造 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><msup><mi>z</mi><mo>∗</mo></msup></mrow><annotation encoding="application/x-tex">{z^{\ast}}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.688696em;vertical-align:0em;"></span><span class="mord"><span class="mord"><span class="mord mathdefault" style="margin-right:0.04398em;">z</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.688696em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">∗</span></span></span></span></span></span></span></span></span></span></span></span></span> 的方法，分为线性和非线性两种。</li>
+<li>对生成图像的变换效果量化。</li>
+<li>提出两种降低该方法的限制的方法。</li>
+</ol>
+    
+
+        <a href="/2020/03/27/RP-steerability/" class="post-more waves-effect waves-button">
+            阅读全文…
+        </a>
+    </div>
+    
+    <div class="post-footer">
+        
+	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/GAN/" rel="tag">GAN</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Paper-Reading/" rel="tag">Paper Reading</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/disentanglement/" rel="tag">disentanglement</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/unsupervised-gan-controlling/" rel="tag">unsupervised gan controlling</a></li></ul>
+
+    </div>
+    
+</article>
+
+        </li>
+    
+        <li class="post-list-item fade">
+            <article id="post-Talk-need1"
+  class="article-card article-type-post" itemprop="blogPost">
+
+    <div class="post-meta">
+        <time class="post-time" title="2020-03-26 11:02:06" datetime="2020-03-26T03:02:06.000Z"  itemprop="datePublished">2020-03-26</time>
+
+        
+
+
+    </div>
+
+    
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/2020/03/26/Talk-need1/">What I need in my blog?</a>
+    </h3>
+  
+
+
+
+
+    <div class="post-content" id="post-content" itemprop="postContent">
+
+    
+        <p>记录下对blog的需求，确实有很多不方便的地方。。。</p>
+<h2 id="need-new-features"><a class="markdownIt-Anchor" href="#need-new-features"></a> Need new features</h2>
+<ul>
+<li>
+<p>[x] 公式中的<span class='katex-error' title='ParseError: KaTeX parse error: Undefined control sequence: \* at position 2: {\̲*̲}'>{\*}</span>不能正常解析，还是需要一个办法，其实最好的办法就是对<code>$</code>,<code>$$</code>符号内的行间和行内公式不进行markdown的解析，but why can’t we do that？</p>
+<p>使用<code>\ast</code>替代。</p>
+</li>
+<li>
+<p>[ ] <code>markdown</code>本身的语法是行末两个以上空格、或者空行换行，为什么<code>hexo-render-marked</code>只要文本换行就显示换行呢？</p>
+</li>
+<li>
+<p>[ ] 我终于认识到我对<code>LaTeX</code>和<code>Markdown</code>的差异的关键在<strong>缩进，尤其是首行缩进</strong>。</p>
+</li>
+<li>
+<p>[ ] 公示里的双大括号<code>\{\{</code>,<code>\}\}</code>会被误认为是标记的变量名，造成解析错误。</p>
+</li>
+</ul>
+<p>可能最终还是要走向<code>LaTeX</code>记录笔记的道路了，可惜blog不支持，所以找了相关的<code>LaTeX2Markdown</code>的项目。</p>
+    
+
+        <a href="/2020/03/26/Talk-need1/" class="post-more waves-effect waves-button">
+            阅读全文…
+        </a>
+    </div>
+    
+    <div class="post-footer">
+        
+	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%9D%82%E8%B0%88/" rel="tag">杂谈</a></li></ul>
+
+    </div>
+    
+</article>
+
+        </li>
+    
+        <li class="post-list-item fade">
+            <article id="post-GAN-metrics2"
+  class="article-card article-type-post" itemprop="blogPost">
+
+    <div class="post-meta">
+        <time class="post-time" title="2020-03-20 16:43:52" datetime="2020-03-20T08:43:52.000Z"  itemprop="datePublished">2020-03-20</time>
+
+        
+
+
+    </div>
+
+    
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/2020/03/20/GAN-metrics2/">GAN metrics (2)</a>
+    </h3>
+  
+
+
+
+
+    <div class="post-content" id="post-content" itemprop="postContent">
+
+    
+        <h2 id="前言"><a class="markdownIt-Anchor" href="#前言"></a> 前言</h2>
+<p>本文主要讨论用于衡量图片质量的常用方法和用于评估 GAN 效果的方法。</p>
+<ul>
+<li><code>MSE</code></li>
+<li><code>PSNR</code></li>
+<li><code>SSIM</code>[1]</li>
+<li><code>MS-SSIM</code>[2]</li>
+</ul>
+    
+
+        <a href="/2020/03/20/GAN-metrics2/" class="post-more waves-effect waves-button">
+            阅读全文…
+        </a>
+    </div>
+    
+    <div class="post-footer">
+        
+	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/GAN/" rel="tag">GAN</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/metrics/" rel="tag">metrics</a></li></ul>
+
+    </div>
+    
+</article>
+
+        </li>
+    
+        <li class="post-list-item fade">
+            <article id="post-GAN-metrics1"
+  class="article-card article-type-post" itemprop="blogPost">
+
+    <div class="post-meta">
+        <time class="post-time" title="2020-03-19 15:34:44" datetime="2020-03-19T07:34:44.000Z"  itemprop="datePublished">2020-03-19</time>
+
+        
+
+
+    </div>
+
+    
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/2020/03/19/GAN-metrics1/">GAN metrics (1)</a>
+    </h3>
+  
+
+
+
+
+    <div class="post-content" id="post-content" itemprop="postContent">
+
+    
         <h2 id="前言"><a class="markdownIt-Anchor" href="#前言"></a> 前言</h2>
 <p>本文主要总结下不同领域下 GAN 的 评估方法：</p>
 <ul>
@@ -121,55 +408,50 @@
 <li>FID (Frechet Inception Distance)</li>
 </ul>
 <p>这两个算是最常用的。</p>
-        
-          <p class="article-more-link">
-            <a href="/2020/03/19/GAN-metrics1/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="mercurixito.github.io/2020/03/19/GAN-metrics1/" data-id="ckb3tdmgl0008x4uchvn748x3" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/GAN/" rel="tag">GAN</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/metrics/" rel="tag">metrics</a></li></ul>
+    
 
-    </footer>
-  </div>
-  
+        <a href="/2020/03/19/GAN-metrics1/" class="post-more waves-effect waves-button">
+            阅读全文…
+        </a>
+    </div>
+    
+    <div class="post-footer">
+        
+	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/GAN/" rel="tag">GAN</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/metrics/" rel="tag">metrics</a></li></ul>
+
+    </div>
+    
 </article>
 
+        </li>
+    
+        <li class="post-list-item fade">
+            <article id="post-first"
+  class="article-card article-type-post" itemprop="blogPost">
 
-  
-    <article id="post-first" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2020/03/16/first/" class="article-date">
-  <time datetime="2020-03-16T13:52:05.000Z" itemprop="datePublished">2020-03-16</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
+    <div class="post-meta">
+        <time class="post-time" title="2020-03-16 21:52:05" datetime="2020-03-16T13:52:05.000Z"  itemprop="datePublished">2020-03-16</time>
+
         
+
+
+    </div>
+
+    
+
+
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/03/16/first/">First Post</a>
-    </h1>
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/2020/03/16/first/">First Post</a>
+    </h3>
   
 
-      </header>
+
+
+
+    <div class="post-content" id="post-content" itemprop="postContent">
+
     
-    <div class="article-new-date">
-	<span> 
-	  发布时间: <time datetime="2020-03-16T13:52:05.000Z" itemprop="datePublished">2020-03-16</time>
-	   | 
-	  最近更新: <time datetime="2020-04-19T07:52:20.822Z" itemprop="datePublished">2020-04-19</time>
-  	</span>
-</div>
-    <div class="article-entry" itemprop="articleBody">
-      
         <h2 id="first-post-of-blogs"><a class="markdownIt-Anchor" href="#first-post-of-blogs"></a> First post of blogs</h2>
 <p>Recently I am gonna migrate my blog to hexo, and I am gonna explore hexo with more intersting things, from the start, I may just use the default hexo theme – <code>landscape</code>.</p>
 <p>Still, the first things I should do is to make <code>Mathjax</code> work compatibly with <code>Hexo</code>. Let’s take the equations below for an example.</p>
@@ -177,55 +459,50 @@
 	(\log D(x)) + \mathbb{E\_{z \sim p\_{z}}} \log( 1 - D(G(z))) \right]
 </annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.738696em;vertical-align:0em;"></span><span class="mord"><span class="mord mathdefault">G</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.738696em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">∗</span></span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1.594331em;vertical-align:-0.744331em;"></span><span class="mop">ar<span style="margin-right:0.01389em;">g</span></span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mop op-limits"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.66786em;"><span style="top:-2.055669em;margin-left:0em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">G</span></span></span></span><span style="top:-2.7em;"><span class="pstrut" style="height:2.7em;"></span><span><span class="mop">min</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.744331em;"><span></span></span></span></span></span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mop">max</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord" style="margin-right:0.02778em;">_</span><span class="mord"><span class="mord mathdefault" style="margin-right:0.02778em;">D</span></span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="minner"><span class="mopen delimcenter" style="top:0em;"><span class="delimsizing size1">[</span></span><span class="mord"><span class="mord mathbb">E</span></span><span class="mord" style="margin-right:0.02778em;">_</span><span class="mord"><span class="mord mathdefault">x</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">∼</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mord mathdefault">p</span><span class="mord" style="margin-right:0.02778em;">_</span><span class="mord"><span class="mord mathdefault">d</span><span class="mord mathdefault">a</span><span class="mord mathdefault">t</span><span class="mord mathdefault">a</span></span></span><span class="mopen">(</span><span class="mop">lo<span style="margin-right:0.01389em;">g</span></span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault" style="margin-right:0.02778em;">D</span><span class="mopen">(</span><span class="mord mathdefault">x</span><span class="mclose">)</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mord"><span class="mord mathbb">E</span><span class="mord" style="margin-right:0.02778em;">_</span><span class="mord"><span class="mord mathdefault" style="margin-right:0.04398em;">z</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">∼</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mord mathdefault">p</span><span class="mord" style="margin-right:0.02778em;">_</span><span class="mord"><span class="mord mathdefault" style="margin-right:0.04398em;">z</span></span></span></span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mop">lo<span style="margin-right:0.01389em;">g</span></span><span class="mopen">(</span><span class="mord">1</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mord mathdefault" style="margin-right:0.02778em;">D</span><span class="mopen">(</span><span class="mord mathdefault">G</span><span class="mopen">(</span><span class="mord mathdefault" style="margin-right:0.04398em;">z</span><span class="mclose">)</span><span class="mclose">)</span><span class="mclose">)</span><span class="mclose delimcenter" style="top:0em;"><span class="delimsizing size1">]</span></span></span></span></span></span></span></p>
 <p><strong>The following steps are based on <code>hexo-markdown-rendered</code> render and mind I have changed it to <code>hexo-renderer-markdown-it-plus</code>, So it would be out of date.</strong></p>
-        
-          <p class="article-more-link">
-            <a href="/2020/03/16/first/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="mercurixito.github.io/2020/03/16/first/" data-id="ckb3tdmib0024x4uc0w91hliz" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%9D%82%E8%B0%88/" rel="tag">杂谈</a></li></ul>
+    
 
-    </footer>
-  </div>
-  
+        <a href="/2020/03/16/first/" class="post-more waves-effect waves-button">
+            阅读全文…
+        </a>
+    </div>
+    
+    <div class="post-footer">
+        
+	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%9D%82%E8%B0%88/" rel="tag">杂谈</a></li></ul>
+
+    </div>
+    
 </article>
 
+        </li>
+    
+        <li class="post-list-item fade">
+            <article id="post-RP-WGAN"
+  class="article-card article-type-post" itemprop="blogPost">
 
-  
-    <article id="post-RP-WGAN" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2020/02/07/RP-WGAN/" class="article-date">
-  <time datetime="2020-02-07T08:41:13.000Z" itemprop="datePublished">2020-02-07</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
+    <div class="post-meta">
+        <time class="post-time" title="2020-02-07 16:41:13" datetime="2020-02-07T08:41:13.000Z"  itemprop="datePublished">2020-02-07</time>
+
         
+
+
+    </div>
+
+    
+
+
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/02/07/RP-WGAN/">论文研读：WGAN</a>
-    </h1>
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/2020/02/07/RP-WGAN/">论文研读：WGAN</a>
+    </h3>
   
 
-      </header>
+
+
+
+    <div class="post-content" id="post-content" itemprop="postContent">
+
     
-    <div class="article-new-date">
-	<span> 
-	  发布时间: <time datetime="2020-02-07T08:41:13.000Z" itemprop="datePublished">2020-02-07</time>
-	   | 
-	  最近更新: <time datetime="2020-03-17T08:46:50.636Z" itemprop="datePublished">2020-03-17</time>
-  	</span>
-</div>
-    <div class="article-entry" itemprop="articleBody">
-      
         <h2 id="introduction"><a class="markdownIt-Anchor" href="#introduction"></a> Introduction</h2>
 <ol>
 <li>
@@ -243,55 +520,50 @@
 </ul>
 </li>
 </ol>
-        
-          <p class="article-more-link">
-            <a href="/2020/02/07/RP-WGAN/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="mercurixito.github.io/2020/02/07/RP-WGAN/" data-id="ckb3tdmhs001bx4uc5t40fcse" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/GAN/" rel="tag">GAN</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Paper-Reading/" rel="tag">Paper Reading</a></li></ul>
+    
 
-    </footer>
-  </div>
-  
+        <a href="/2020/02/07/RP-WGAN/" class="post-more waves-effect waves-button">
+            阅读全文…
+        </a>
+    </div>
+    
+    <div class="post-footer">
+        
+	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/GAN/" rel="tag">GAN</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Paper-Reading/" rel="tag">Paper Reading</a></li></ul>
+
+    </div>
+    
 </article>
 
+        </li>
+    
+        <li class="post-list-item fade">
+            <article id="post-KL-Divergenece1"
+  class="article-card article-type-post" itemprop="blogPost">
 
-  
-    <article id="post-KL-Divergenece1" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2019/10/14/KL-Divergenece1/" class="article-date">
-  <time datetime="2019-10-14T08:32:46.000Z" itemprop="datePublished">2019-10-14</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
+    <div class="post-meta">
+        <time class="post-time" title="2019-10-14 16:32:46" datetime="2019-10-14T08:32:46.000Z"  itemprop="datePublished">2019-10-14</time>
+
         
+
+
+    </div>
+
+    
+
+
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/10/14/KL-Divergenece1/">数学:KL散度</a>
-    </h1>
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/2019/10/14/KL-Divergenece1/">数学:KL散度</a>
+    </h3>
   
 
-      </header>
+
+
+
+    <div class="post-content" id="post-content" itemprop="postContent">
+
     
-    <div class="article-new-date">
-	<span> 
-	  发布时间: <time datetime="2019-10-14T08:32:46.000Z" itemprop="datePublished">2019-10-14</time>
-	   | 
-	  最近更新: <time datetime="2020-03-17T08:40:10.935Z" itemprop="datePublished">2020-03-17</time>
-  	</span>
-</div>
-    <div class="article-entry" itemprop="articleBody">
-      
         <h2 id="kl-divergencekl-散度"><a class="markdownIt-Anchor" href="#kl-divergencekl-散度"></a> KL divergence(KL 散度)</h2>
 <p>KL散度(Kullback-Leibler (KL) divergence)通常用来<strong>衡量两个单独的概率分布的差异</strong>，设对于同一随机变量的两个概率分布为<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>P</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">{P(x)}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.13889em;">P</span><span class="mopen">(</span><span class="mord mathdefault">x</span><span class="mclose">)</span></span></span></span></span>和<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>Q</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">{Q(x)}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathdefault">Q</span><span class="mopen">(</span><span class="mord mathdefault">x</span><span class="mclose">)</span></span></span></span></span>，则它们的KL散度定义为：</p>
 <p class='katex-block'><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>D</mi><mrow><mi>K</mi><mi>L</mi></mrow></msub><mo stretchy="false">(</mo><mi>p</mi><mi mathvariant="normal">∣</mi><mi mathvariant="normal">∣</mi><mi>q</mi><mo stretchy="false">)</mo><mo>=</mo><msub><mi mathvariant="double-struck">E</mi><mrow><mi>x</mi><mo>∼</mo><mi>P</mi></mrow></msub><mrow><mo fence="true">[</mo><mi>log</mi><mo>⁡</mo><mi>P</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mo>−</mo><mi>log</mi><mo>⁡</mo><mi>Q</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mo fence="true">]</mo></mrow></mrow><annotation encoding="application/x-tex">{
@@ -303,277 +575,228 @@
 <li><strong>非对称</strong>：对某些<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>P</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">{P(x)}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.13889em;">P</span><span class="mopen">(</span><span class="mord mathdefault">x</span><span class="mclose">)</span></span></span></span></span>和<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>Q</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">{Q(x)}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathdefault">Q</span><span class="mopen">(</span><span class="mord mathdefault">x</span><span class="mclose">)</span></span></span></span></span>，KL散度和逆KL散度通常并不相等，也就是<span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>D</mi><mrow><mi>K</mi><mi>L</mi></mrow></msub><mo stretchy="false">(</mo><mi>P</mi><mi mathvariant="normal">∣</mi><mi mathvariant="normal">∣</mi><mi>Q</mi><mo stretchy="false">)</mo><mi mathvariant="normal">≠</mi><msub><mi>D</mi><mrow><mi>K</mi><mi>L</mi></mrow></msub><mo stretchy="false">(</mo><mi>Q</mi><mi mathvariant="normal">∣</mi><mi mathvariant="normal">∣</mi><mi>P</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">{D_{KL}(P\vert\vert Q) \neq D_{KL}(Q \vert \vert P)}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord"><span class="mord mathdefault" style="margin-right:0.02778em;">D</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.32833099999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.02778em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight" style="margin-right:0.07153em;">K</span><span class="mord mathdefault mtight">L</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord mathdefault" style="margin-right:0.13889em;">P</span><span class="mord">∣</span><span class="mord">∣</span><span class="mord mathdefault">Q</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel"><span class="mrel"><span class="mord"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.69444em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="rlap"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="inner"><span class="mrel"></span></span><span class="fix"></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.19444em;"><span></span></span></span></span></span></span><span class="mrel">=</span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.02778em;">D</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.32833099999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.02778em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight" style="margin-right:0.07153em;">K</span><span class="mord mathdefault mtight">L</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord mathdefault">Q</span><span class="mord">∣</span><span class="mord">∣</span><span class="mord mathdefault" style="margin-right:0.13889em;">P</span><span class="mclose">)</span></span></span></span></span>。</li>
 </ul>
 <p>本文将从三个角度分析KL散度的非对称性：直观看法，理论说明，计算实验。</p>
-        
-          <p class="article-more-link">
-            <a href="/2019/10/14/KL-Divergenece1/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="mercurixito.github.io/2019/10/14/KL-Divergenece1/" data-id="ckb3tdmgj0005x4ucddob15de" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Mathematic/" rel="tag">Mathematic</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Probability/" rel="tag">Probability</a></li></ul>
+    
 
-    </footer>
-  </div>
-  
+        <a href="/2019/10/14/KL-Divergenece1/" class="post-more waves-effect waves-button">
+            阅读全文…
+        </a>
+    </div>
+    
+    <div class="post-footer">
+        
+	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Mathematic/" rel="tag">Mathematic</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Probability/" rel="tag">Probability</a></li></ul>
+
+    </div>
+    
 </article>
 
+        </li>
+    
+        <li class="post-list-item fade">
+            <article id="post-Singular-Value-Decomposition"
+  class="article-card article-type-post" itemprop="blogPost">
 
-  
-    <article id="post-Singular-Value-Decomposition" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2019/09/23/Singular-Value-Decomposition/" class="article-date">
-  <time datetime="2019-09-23T08:05:33.000Z" itemprop="datePublished">2019-09-23</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
+    <div class="post-meta">
+        <time class="post-time" title="2019-09-23 16:05:33" datetime="2019-09-23T08:05:33.000Z"  itemprop="datePublished">2019-09-23</time>
+
         
+
+
+    </div>
+
+    
+
+
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/09/23/Singular-Value-Decomposition/">数学：SVD分解[1]——原理</a>
-    </h1>
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/2019/09/23/Singular-Value-Decomposition/">数学：SVD分解[1]——原理</a>
+    </h3>
   
 
-      </header>
+
+
+
+    <div class="post-content" id="post-content" itemprop="postContent">
+
     
-    <div class="article-new-date">
-	<span> 
-	  发布时间: <time datetime="2019-09-23T08:05:33.000Z" itemprop="datePublished">2019-09-23</time>
-	   | 
-	  最近更新: <time datetime="2020-03-17T08:28:08.809Z" itemprop="datePublished">2020-03-17</time>
-  	</span>
-</div>
-    <div class="article-entry" itemprop="articleBody">
-      
         <h2 id="preface-前言"><a class="markdownIt-Anchor" href="#preface-前言"></a> Preface 前言</h2>
 <p><code>SVD (Singular Value Decomposition)</code> 在机器学习等其他领域有着非常广泛的应用，本文主要是受到计算机图像学课和以前看到的材料的启发，希望对<code>SVD</code>有更深入的了解。</p>
 <p>相关的pdf资料可以参见<a href="https://github.com/MercuriXito/BUAA-Gradudate-Lessons/blob/master/2019%20autumn/computer%20graphic/lesson%202/2018_Lecture02-SVD.pdf" target="_blank" rel="noopener">我<code>github</code>上的记录</a>。本文行文基本上是对它的翻译和理解。</p>
-        
-          <p class="article-more-link">
-            <a href="/2019/09/23/Singular-Value-Decomposition/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="mercurixito.github.io/2019/09/23/Singular-Value-Decomposition/" data-id="ckb3tdmia0022x4ucejy7d28h" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linear-Algebra/" rel="tag">Linear Algebra</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Mathematic/" rel="tag">Mathematic</a></li></ul>
+    
 
-    </footer>
-  </div>
-  
+        <a href="/2019/09/23/Singular-Value-Decomposition/" class="post-more waves-effect waves-button">
+            阅读全文…
+        </a>
+    </div>
+    
+    <div class="post-footer">
+        
+	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linear-Algebra/" rel="tag">Linear Algebra</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Mathematic/" rel="tag">Mathematic</a></li></ul>
+
+    </div>
+    
 </article>
 
+        </li>
+    
+        <li class="post-list-item fade">
+            <article id="post-RP-DNN-acc1"
+  class="article-card article-type-post" itemprop="blogPost">
 
-  
-    <article id="post-RP-DNN-acc1" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2019/05/26/RP-DNN-acc1/" class="article-date">
-  <time datetime="2019-05-26T08:48:31.000Z" itemprop="datePublished">2019-05-26</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
+    <div class="post-meta">
+        <time class="post-time" title="2019-05-26 16:48:31" datetime="2019-05-26T08:48:31.000Z"  itemprop="datePublished">2019-05-26</time>
+
         
+
+
+    </div>
+
+    
+
+
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/05/26/RP-DNN-acc1/">论文研读(1.1)：超深层网络加速</a>
-    </h1>
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/2019/05/26/RP-DNN-acc1/">论文研读(1.1)：超深层网络加速</a>
+    </h3>
   
 
-      </header>
+
+
+
+    <div class="post-content" id="post-content" itemprop="postContent">
+
     
-    <div class="article-new-date">
-	<span> 
-	  发布时间: <time datetime="2019-05-26T08:48:31.000Z" itemprop="datePublished">2019-05-26</time>
-	   | 
-	  最近更新: <time datetime="2020-03-17T08:49:44.197Z" itemprop="datePublished">2020-03-17</time>
-  	</span>
-</div>
-    <div class="article-entry" itemprop="articleBody">
-      
         <h2 id="前言"><a class="markdownIt-Anchor" href="#前言"></a> 前言</h2>
 <hr />
 <p>深入DL领域读论文是必不可少的工作(其实我还有别的原因)，本意是开个好头吧，然后主要是学习最新的思想，开拓下自己的眼界。我觉得论文研读主要是从翻译、理解、算法实现、实验几个方面下手。</p>
 <p>最近研读的是<a href="https://arxiv.org/abs/1505.06798" target="_blank" rel="noopener">Accelerating Very Deep Convolutional Networks for Classfication and Dectection</a>，作者主要对“超深层网络”(文中对SPP-10和VGG-16两种模型进行了实验)通过通道维度上的分解，达到加速的目的，并且提出了优化算法，显著降低了由于低秩分解带来的损失。</p>
-        
-          <p class="article-more-link">
-            <a href="/2019/05/26/RP-DNN-acc1/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="mercurixito.github.io/2019/05/26/RP-DNN-acc1/" data-id="ckb3tdmgk0007x4ucenjq64wr" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Paper-Reading/" rel="tag">Paper Reading</a></li></ul>
+    
 
-    </footer>
-  </div>
-  
+        <a href="/2019/05/26/RP-DNN-acc1/" class="post-more waves-effect waves-button">
+            阅读全文…
+        </a>
+    </div>
+    
+    <div class="post-footer">
+        
+	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Paper-Reading/" rel="tag">Paper Reading</a></li></ul>
+
+    </div>
+    
 </article>
 
-
-  
-
-
-  <nav id="page-nav">
+        </li>
     
-    <a class="extend prev" rel="prev" href="/page/3/">&amp;laquo; 上一页</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span>
-  </nav>
+    </ul>
 
-</section>
-        
-          <aside id="sidebar">
-  
     
-  <div class="widget-wrap">
-    <h3 class="widget-title">最近更新文章</h3>
-    <div class="widget">
-      <ul>
-        
-          <li>
-            <a href="/2020/07/17/Stereo-200717/">基于双目视觉的景深估计</a>
-          </li>
-        
-          <li>
-            <a href="/2020/07/17/SPM-200717/">基于BoW特征的图像分类(1)</a>
-          </li>
-        
-          <li>
-            <a href="/2020/07/17/SPM2-200717/">基于BoW特征的图像分类(2) —— 空间金字塔匹配</a>
-          </li>
-        
-          <li>
-            <a href="/2020/06/26/RP-200626-FewLabels/">Weekly Paper： Disentangling Factors of Variatons Using Few Labels</a>
-          </li>
-        
-          <li>
-            <a href="/2020/06/21/RP-200621-ALAE/">每日文章： Adversarial Latent Autoencoders</a>
-          </li>
-        
-      </ul>
+<nav id="page-nav">
+    <div class="inner">
+    <a class="extend prev" rel="prev" href="/page/3/">上一页</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span>
     </div>
-  </div>
-
-  
-    
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">标签</h3>
-    <div class="widget">
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/APAD/" rel="tag">APAD</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/AutoEncoder/" rel="tag">AutoEncoder</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Disentangled-Representation-Learning/" rel="tag">Disentangled Representation Learning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GAN/" rel="tag">GAN</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linear-Algebra/" rel="tag">Linear Algebra</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mathematic/" rel="tag">Mathematic</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Object-Detection/" rel="tag">Object Detection</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Paper-Reading/" rel="tag">Paper Reading</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Probability/" rel="tag">Probability</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spatial-Pyramid-Matching/" rel="tag">Spatial Pyramid Matching</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VAE/" rel="tag">VAE</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/disentanglement/" rel="tag">disentanglement</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/information-theory/" rel="tag">information theory</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mathematics/" rel="tag">mathematics</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/metrics/" rel="tag">metrics</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/resources/" rel="tag">resources</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/topic-sorted/" rel="tag">topic sorted</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/two-frame-stereo/" rel="tag">two-frame stereo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/unsupervised-gan-controlling/" rel="tag">unsupervised gan controlling</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9D%82%E8%B0%88/" rel="tag">杂谈</a></li></ul>
-    </div>
-  </div>
-
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">标签云</h3>
-    <div class="widget tagcloud">
-      <a href="/tags/APAD/" style="font-size: 16.67px;">APAD</a> <a href="/tags/AutoEncoder/" style="font-size: 10px;">AutoEncoder</a> <a href="/tags/Disentangled-Representation-Learning/" style="font-size: 18.33px;">Disentangled Representation Learning</a> <a href="/tags/GAN/" style="font-size: 20px;">GAN</a> <a href="/tags/Linear-Algebra/" style="font-size: 10px;">Linear Algebra</a> <a href="/tags/Mathematic/" style="font-size: 11.67px;">Mathematic</a> <a href="/tags/Object-Detection/" style="font-size: 11.67px;">Object Detection</a> <a href="/tags/Paper-Reading/" style="font-size: 16.67px;">Paper Reading</a> <a href="/tags/Probability/" style="font-size: 10px;">Probability</a> <a href="/tags/Spatial-Pyramid-Matching/" style="font-size: 10px;">Spatial Pyramid Matching</a> <a href="/tags/VAE/" style="font-size: 18.33px;">VAE</a> <a href="/tags/disentanglement/" style="font-size: 11.67px;">disentanglement</a> <a href="/tags/information-theory/" style="font-size: 10px;">information theory</a> <a href="/tags/mathematics/" style="font-size: 10px;">mathematics</a> <a href="/tags/metrics/" style="font-size: 11.67px;">metrics</a> <a href="/tags/resources/" style="font-size: 13.33px;">resources</a> <a href="/tags/topic-sorted/" style="font-size: 11.67px;">topic sorted</a> <a href="/tags/two-frame-stereo/" style="font-size: 10px;">two-frame stereo</a> <a href="/tags/unsupervised-gan-controlling/" style="font-size: 15px;">unsupervised gan controlling</a> <a href="/tags/%E6%9D%82%E8%B0%88/" style="font-size: 13.33px;">杂谈</a>
-    </div>
-  </div>
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">归档</h3>
-    <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/07/">七月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/06/">六月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/05/">五月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">四月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">三月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">二月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">十月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">九月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">五月 2019</a></li></ul>
-    </div>
-  </div>
-
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">最新文章</h3>
-    <div class="widget">
-      <ul>
-        
-          <li>
-            <a href="/2020/07/17/SPM2-200717/">基于BoW特征的图像分类(2) —— 空间金字塔匹配</a>
-          </li>
-        
-          <li>
-            <a href="/2020/07/17/Stereo-200717/">基于双目视觉的景深估计</a>
-          </li>
-        
-          <li>
-            <a href="/2020/07/17/SPM-200717/">基于BoW特征的图像分类(1)</a>
-          </li>
-        
-          <li>
-            <a href="/2020/06/26/RP-200626-FewLabels/">Weekly Paper： Disentangling Factors of Variatons Using Few Labels</a>
-          </li>
-        
-          <li>
-            <a href="/2020/06/21/RP-200621-ALAE/">每日文章： Adversarial Latent Autoencoders</a>
-          </li>
-        
-      </ul>
-    </div>
-  </div>
-
-  
-</aside>
-        
-      </div>
-      <footer id="footer">
-  
-  <div class="outer">
-    <div id="footer-info" class="inner">
-      &copy; 2020 Victor Chen<br>
-      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a><br>
-      banner image from <a href="https://www.pixiv.net/artworks/80036479" target="_blank">This</a>
-    </div>
-  </div>
-</footer>
-    </div>
-    <nav id="mobile-nav">
-  
-    <a href="/" class="mobile-nav-link">Home</a>
-  
-    <a href="/archives" class="mobile-nav-link">Archives</a>
-  
 </nav>
-    
-
-<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
 
 
-  
-<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+</div>
 
-  
-<script src="/fancybox/jquery.fancybox.pack.js"></script>
+        <footer class="footer">
+    <div class="top">
+        
+
+        <p>
+            
+            <span>博客内容遵循 <a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>Victor Chen &copy; 2020</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=mercurixito.github.io/page/4/&title=Hako&pic=mercurixito.github.io/img/nero.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=mercurixito.github.io/page/4/&title=Hako&source=無様だ" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=mercurixito.github.io/page/4/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=Hako&url=mercurixito.github.io/page/4/&via=mercurixito.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=mercurixito.github.io/page/4/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=mercurixito.github.io/page/4/" alt="微信分享二维码">
+</div>
 
 
 
 
-<script src="/js/script.js"></script>
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
 
 
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
 
 
-  </div><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
 <script type="text/x-mathjax-config">
   MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
 </script>
@@ -591,5 +814,15 @@
 </script>
 <!-- End: Injected MathJax -->
 <!-- hexo-inject:end -->
+
+
+
+
+
+
+
+
+
+
 </body>
 </html>

@@ -1,135 +1,200 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq" crossorigin="anonymous">
-  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js" integrity="sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz" crossorigin="anonymous"></script>
+    
 
-  <!-- Default Mathjax Support -->
-<!--   <script type="text/x-mathjax-config">
-     MathJax.Hub.Config({"HTML-CSS": { preferredFont: "TeX", availableFonts: ["STIX","TeX"], linebreaks: { automatic:true }, EqnChunk: (MathJax.Hub.Browser.isMobile ? 10 : 50) },
-          tex2jax: { inlineMath: [ ["$", "$"], ["\\(","\\)"] ], processEscapes: true, ignoreClass: "tex2jax_ignore|dno",skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']},
-          TeX: {  noUndefined: { attributes: { mathcolor: "red", mathbackground: "#FFEEEE", mathsize: "90%" } }, Macros: { href: "{}" } },
-          messageStyle: "none"
-      }); 
-  </script>
-  <script type="text/x-mathjax-config">
-      MathJax.Hub.Queue(function() {
-          var all = MathJax.Hub.getAllJax(), i;
-          for(i=0; i < all.length; i += 1) {
-              all[i].SourceElement().parentNode.className += ' has-jax';
-          }
-      });
-  </script>
-  <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
+    
 
-  
-  <title>论文研读：InterFaceGAN | Hako</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="本文是对&quot;Interpreting the Latent Space of GANs for Semantic Face Editing. [paper] [codes]&quot;[2]一文的学习。  Introduction  本文研究的问题是：在latent space上修改输入噪声，操作GAN生成的图像不同语义。 本文的工作都基于以下假设： Assumption 1:  单个语义">
+    
+
+
+
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
+    <!-- for katex render -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css" integrity="sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3+Aro6EYUG4+cU+KJWu/X" crossorigin="anonymous">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.js" integrity="sha384-g7c+Jr9ZivxKLnZTDUhnkOnsh30B4H0rpLUpJ4jAIKs4fnJI+sEnkvrMWph2EDg4" crossorigin="anonymous"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/contrib/auto-render.min.js" integrity="sha384-mll67QQFJfxn0IYznZYonOWZ644AWYC+Pt2cHqMaRhXVrursRwvLnLaebdGIlYNa" crossorigin="anonymous"
+        onload="renderMathInElement(document.body);"></script>
+    
+    
+    
+    
+    <title>论文研读：InterFaceGAN | Hako</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="GAN,Paper Reading">
+    <meta name="description" content="本文是对&quot;Interpreting the Latent Space of GANs for Semantic Face Editing. [paper] [codes]&quot;[2]一文的学习。  Introduction  本文研究的问题是：在latent space上修改输入噪声，操作GAN生成的图像不同语义。 本文的工作都基于以下假设： Assumption 1:  对任意一">
 <meta property="og:type" content="article">
 <meta property="og:title" content="论文研读：InterFaceGAN">
 <meta property="og:url" content="mercurixito.github.io/2020/04/03/RP-InterFaceGAN/index.html">
 <meta property="og:site_name" content="Hako">
-<meta property="og:description" content="本文是对&quot;Interpreting the Latent Space of GANs for Semantic Face Editing. [paper] [codes]&quot;[2]一文的学习。  Introduction  本文研究的问题是：在latent space上修改输入噪声，操作GAN生成的图像不同语义。 本文的工作都基于以下假设： Assumption 1:  单个语义">
+<meta property="og:description" content="本文是对&quot;Interpreting the Latent Space of GANs for Semantic Face Editing. [paper] [codes]&quot;[2]一文的学习。  Introduction  本文研究的问题是：在latent space上修改输入噪声，操作GAN生成的图像不同语义。 本文的工作都基于以下假设： Assumption 1:  对任意一">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="/images/2020-04-03/interfacegan_cond_mani1.png">
 <meta property="og:image" content="/images/2020-04-03/interfacegan_cond_mani2.png">
-<meta property="og:image" content="/images/2020-04-03/interfacegan_cond_mani3.png">
-<meta property="og:image" content="/images/2020-04-03/interfacegan_cond_mani3.png">
 <meta property="article:published_time" content="2020-04-03T09:16:24.000Z">
-<meta property="article:modified_time" content="2020-04-19T08:56:39.709Z">
+<meta property="article:modified_time" content="2020-07-28T10:13:36.528Z">
 <meta property="article:author" content="Victor Chen">
-<meta property="article:tag" content="Paper Reading">
 <meta property="article:tag" content="GAN">
+<meta property="article:tag" content="Paper Reading">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="/images/2020-04-03/interfacegan_cond_mani1.png">
-  
-    <link rel="alternate" href="/atom.xml" title="Hako" type="application/atom+xml">
-  
-  
-    <link rel="icon" href="/favicon.png">
-  
-  
-    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
-  
-  
-<link rel="stylesheet" href="/css/style.css">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
 
 <meta name="generator" content="Hexo 4.2.0"><!-- hexo-inject:begin --><!-- hexo-inject:end --></head>
 
 <body>
-  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div id="container">
-    <div id="wrap">
-      <header id="header">
-  <div id="banner"></div>
-  <div id="header-outer" class="outer">
-    <div id="header-title" class="inner">
-      <h1 id="logo-wrap">
-        <a href="/" id="logo">Hako</a>
-      </h1>
-      
-    </div>
-    <div id="header-inner" class="inner">
-      <nav id="main-nav">
-        <a id="main-nav-toggle" class="nav-icon"></a>
-        
-          <a class="main-nav-link" href="/">Home</a>
-        
-          <a class="main-nav-link" href="/archives">Archives</a>
-        
-      </nav>
-      <nav id="sub-nav">
-        
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
-        
-        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
-      </nav>
-      <div id="search-form-wrap">
-        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="mercurixito.github.io"></form>
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/sun.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/nero.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Victor Chen</h5>
+          <a href="mailto:victor_tochen@foxmail.com" title="victor_tochen@foxmail.com" class="mail">victor_tochen@foxmail.com</a>
+        </hgroup>
       </div>
     </div>
-  </div>
-</header>
-      <div class="outer">
-        <section id="main"><article id="post-RP-InterFaceGAN" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2020/04/03/RP-InterFaceGAN/" class="article-date">
-  <time datetime="2020-04-03T09:16:24.000Z" itemprop="datePublished">2020-04-03</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
         
-  
-    <h1 class="article-title" itemprop="name">
-      论文研读：InterFaceGAN
-    </h1>
-  
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/MercuriXito" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
 
-      </header>
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">论文研读：InterFaceGAN</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header", style="background-image: url(/img/sakura.png)">
+
+    <div class="container fade-scale">
+        <h1 class="title">论文研读：InterFaceGAN</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2020-04-03T09:16:24.000Z" itemprop="datePublished" class="page-time">
+  2020-04-03
+</time>
+
+
+            
+        </h5>
+    </div>
+
     
-    <div class="article-new-date">
-	<span> 
-	  发布时间: <time datetime="2020-04-03T09:16:24.000Z" itemprop="datePublished">2020-04-03</time>
-	   | 
-	  最近更新: <time datetime="2020-04-19T08:56:39.709Z" itemprop="datePublished">2020-04-19</time>
-  	</span>
-</div>
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>本文是对&quot;Interpreting the Latent Space of GANs for Semantic Face Editing. <a href="https://arxiv.org/abs/1907.10786" target="_blank" rel="noopener">[paper]</a> <a href="https://shenyujun.github.io/InterFaceGAN/" target="_blank" rel="noopener">[codes]</a>&quot;[2]一文的学习。</p>
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#introduction"><span class="post-toc-number">1.</span> <span class="post-toc-text"> Introduction</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#framework"><span class="post-toc-number">2.</span> <span class="post-toc-text"> FrameWork</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#single-semantic"><span class="post-toc-number">2.1.</span> <span class="post-toc-text"> Single Semantic</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#multiple-semantic"><span class="post-toc-number">2.2.</span> <span class="post-toc-text"> Multiple Semantic</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#manipulation"><span class="post-toc-number">2.3.</span> <span class="post-toc-text"> Manipulation</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#experiments"><span class="post-toc-number">3.</span> <span class="post-toc-text"> Experiments</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#implementation-details"><span class="post-toc-number">4.</span> <span class="post-toc-text"> Implementation Details</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#质疑"><span class="post-toc-number">5.</span> <span class="post-toc-text"> 质疑</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#评价和启发"><span class="post-toc-number">6.</span> <span class="post-toc-text"> 评价和启发</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#reference"><span class="post-toc-number"></span> <span class="post-toc-text"> Reference</span></a>
+        </nav>
+    </aside>
+
+
+<article id="post-RP-InterFaceGAN"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">论文研读：InterFaceGAN</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2020-04-03 17:16:24" datetime="2020-04-03T09:16:24.000Z"  itemprop="datePublished">2020-04-03</time>
+
+            
+
+
+            
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <p>本文是对&quot;Interpreting the Latent Space of GANs for Semantic Face Editing. <a href="https://arxiv.org/abs/1907.10786" target="_blank" rel="noopener">[paper]</a> <a href="https://shenyujun.github.io/InterFaceGAN/" target="_blank" rel="noopener">[codes]</a>&quot;[2]一文的学习。</p>
 <h3 id="introduction"><a class="markdownIt-Anchor" href="#introduction"></a> Introduction</h3>
 <hr />
 <p>本文研究的问题是：在latent space上修改输入噪声，操作GAN生成的图像不同语义。<br />
 本文的工作都基于以下假设：</p>
 <p><strong>Assumption 1</strong>:</p>
 <blockquote>
-<p>单个语义图像对应的图片在latent space上线性可分。</p>
+<p>对任意一维线性变化的语义，存在 latant space 上的分类超平面可以分离他们的极端值。</p>
 </blockquote>
+<p><strong>基于原文的意思，这个假设应该是最合理的。</strong></p>
 <a id="more"></a>
 <h3 id="framework"><a class="markdownIt-Anchor" href="#framework"></a> FrameWork</h3>
 <hr />
@@ -183,8 +248,20 @@ c-8,0,-12,-0.7,-12,-2z M1001 80H400000v40H1014z'/></svg></span></span></span><sp
 <p><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>α</mi><mo>&gt;</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">{\alpha &gt; 0}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68354em;vertical-align:-0.0391em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.0037em;">α</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">&gt;</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mord">0</span></span></span></span></span>增强语义性，<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>α</mi><mo>&lt;</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">{\alpha &lt; 0}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68354em;vertical-align:-0.0391em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.0037em;">α</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">&lt;</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mord">0</span></span></span></span></span>减弱甚至更改语义性。</p>
 <p>除此之外，作者提出了对多个entangled的属性操作的方法（Conditional Manipulation）。</p>
 <p><strong>Conditional Manipulation:</strong> 假设两个语义属性s1,s2是entangled的，它们分别对应法向量<span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi mathvariant="bold">n</mi><mn>1</mn></msub><mo separator="true">,</mo><msub><mi mathvariant="bold">n</mi><mn>2</mn></msub></mrow><annotation encoding="application/x-tex">{\mathbf{n}_{1},\mathbf{n}_{2}}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.63888em;vertical-align:-0.19444em;"></span><span class="mord"><span class="mord"><span class="mord"><span class="mord mathbf">n</span></span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">1</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord"><span class="mord"><span class="mord mathbf">n</span></span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">2</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span></span>，此时要使得改变语义属性s1，而不改变s2，可以沿着<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi mathvariant="bold">w</mi><mo>=</mo><msub><mi mathvariant="bold">n</mi><mn>1</mn></msub><mo>−</mo><mo stretchy="false">(</mo><msubsup><mi mathvariant="bold">n</mi><mn>1</mn><mi>T</mi></msubsup><msub><mi mathvariant="bold">n</mi><mn>2</mn></msub><mo stretchy="false">)</mo><msub><mi mathvariant="bold">n</mi><mn>2</mn></msub></mrow><annotation encoding="application/x-tex">{\mathbf{w} = \mathbf{n}_{1} - (\mathbf{n}^{T}_{1}\mathbf{n}_{2})\mathbf{n}_{2}}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.0913309999999998em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord"><span class="mord mathbf" style="margin-right:0.01597em;">w</span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mord"><span class="mord"><span class="mord mathbf">n</span></span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">1</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mopen">(</span><span class="mord"><span class="mord"><span class="mord mathbf">n</span></span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.8413309999999999em;"><span style="top:-2.4518920000000004em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">1</span></span></span></span><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight" style="margin-right:0.13889em;">T</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.24810799999999997em;"><span></span></span></span></span></span></span><span class="mord"><span class="mord"><span class="mord mathbf">n</span></span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">2</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mclose">)</span><span class="mord"><span class="mord"><span class="mord mathbf">n</span></span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">2</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span></span>移动，如图12所示。</p>
-<p><img src="/images/2020-04-03/interfacegan_cond_mani1.png" alt="Conditional Manipulation在子空间的直观解释" /></p>
-<p><img src="/images/2020-04-03/interfacegan_cond_mani2.png" alt="Conditional Manipulation在二维视角下的直观解释" /></p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/images/2020-04-03/interfacegan_cond_mani1.png" alt="Conditional Manipulation在子空间的直观解释" title="">
+                </div>
+                <div class="image-caption">Conditional Manipulation在子空间的直观解释</div>
+            </figure>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/images/2020-04-03/interfacegan_cond_mani2.png" alt="Conditional Manipulation在二维视角下的直观解释" title="">
+                </div>
+                <div class="image-caption">Conditional Manipulation在二维视角下的直观解释</div>
+            </figure>
 <p>可以看到<span class="katex"><span class="katex-mathml"><math><semantics><mrow><msup><mi mathvariant="bold">w</mi><mi>T</mi></msup><msub><mi mathvariant="bold">n</mi><mn mathvariant="bold">2</mn></msub><mo>=</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">{ {\mathbf{w} }^{T}\mathbf{n_{2}} = 0}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.991331em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord"><span class="mord"><span class="mord"><span class="mord mathbf" style="margin-right:0.01597em;">w</span></span></span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8413309999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight" style="margin-right:0.13889em;">T</span></span></span></span></span></span></span></span></span><span class="mord"><span class="mord"><span class="mord mathbf">n</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathbf mtight">2</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mord">0</span></span></span></span></span>，也沿着<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi mathvariant="bold">w</mi></mrow><annotation encoding="application/x-tex">{\mathbf{w}}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.44444em;vertical-align:0em;"></span><span class="mord"><span class="mord"><span class="mord mathbf" style="margin-right:0.01597em;">w</span></span></span></span></span></span>方向移动就是沿着<span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi mathvariant="bold">n</mi><mn mathvariant="bold">2</mn></msub></mrow><annotation encoding="application/x-tex">{\mathbf{ {n}_{2}}}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.59444em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord"><span class="mord"><span class="mord"><span class="mord mathbf">n</span></span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathbf mtight">2</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span></span></span>的超平面平行的方向，穿过<span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi mathvariant="bold">n</mi><mn mathvariant="bold">1</mn></msub></mrow><annotation encoding="application/x-tex">{\mathbf{ {n}_{1}}}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.59444em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord"><span class="mord"><span class="mord"><span class="mord mathbf">n</span></span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathbf mtight">1</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span></span></span>的超平面。</p>
 <p>对多个entangled的属性而要只改变其中一个，作者提出用相同的方法：减去所有其他entangled属性的法向量。(<strong>注：这里作者原文为&quot;If there is more than one attribute to be conditioned on, we just subtract the projection from the primal direction onto the plane that is constructed by all conditioned directions.&quot;我觉得没有说的很清楚，猜测应该是和两个属性entangled的方法一致。</strong>)</p>
 <p><strong>Real Image Manipulation:</strong> 作者进一步扩展到真实图片的编辑，只要将真实图片通过某种方法映射到latent space上，再移动，最后再通过GAN生成即可。</p>
@@ -234,10 +311,8 @@ representation，所以效果好的本身可能是由于StyleGAN本身已经很�
 <ol start="3">
 <li>Conditional Manipulation存在的问题</li>
 </ol>
-<p>如果根据线性假设1，那么如果存在超过两个以上的语义属性是entangled的，变化限度不限的情况下，不可能存在方向<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>w</mi></mrow><annotation encoding="application/x-tex">{w}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.02691em;">w</span></span></span></span></span>，使得沿着<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>w</mi></mrow><annotation encoding="application/x-tex">{w}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.02691em;">w</span></span></span></span></span>改变<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>z</mi></mrow><annotation encoding="application/x-tex">{z}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.04398em;">z</span></span></span></span></span>只改变一个语义属性，而保留其他语义属性不变。而且作者没有过多地对超过两个以上entangled的语义属性做实验（仅在Fig8中展示了一个三个属性entangled的结果），这是一个不足的地方。</p>
-<p><img src="/images/2020-04-03/interfacegan_cond_mani3.png" alt="图3. 三种entangled属性情况1：这种情况下不可能使得只有一种属性改变" /></p>
-<p><img src="/images/2020-04-03/interfacegan_cond_mani3.png" alt="三种entangled属性情况2：这种情况下如果限制变化的限度可以使得只有一种属性改变" /></p>
-<p>图3,4简单展示了两种三个属性entangled的情况。在图3的情况下，要操作<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>z</mi></mrow><annotation encoding="application/x-tex">{z}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.04398em;">z</span></span></span></span></span>按某个方向移动跨越超平面<span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>H</mi><mn>1</mn></msub></mrow><annotation encoding="application/x-tex">{H_1}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.83333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord"><span class="mord mathdefault" style="margin-right:0.08125em;">H</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.08125em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span></span>，必须穿过<span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>H</mi><mn>2</mn></msub></mrow><annotation encoding="application/x-tex">{H_2}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.83333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord"><span class="mord mathdefault" style="margin-right:0.08125em;">H</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.08125em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span></span>或<span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>H</mi><mn>3</mn></msub></mrow><annotation encoding="application/x-tex">{H_3}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.83333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord"><span class="mord mathdefault" style="margin-right:0.08125em;">H</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.08125em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">3</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span></span>，引起<span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>n</mi><mn>2</mn></msub></mrow><annotation encoding="application/x-tex">{n_2}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.58056em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord"><span class="mord mathdefault">n</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span></span>或<span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>n</mi><mn>3</mn></msub></mrow><annotation encoding="application/x-tex">{n_3}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.58056em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord"><span class="mord mathdefault">n</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">3</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span></span>代表的语义属性的变化。在图4的情况下，虽然操作<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>z</mi></mrow><annotation encoding="application/x-tex">{z}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.04398em;">z</span></span></span></span></span>的移动方向必不可免会和超平面相交，但是只要控制变化限度，就可以达到只改变<span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>n</mi><mn>1</mn></msub></mrow><annotation encoding="application/x-tex">{n_1}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.58056em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord"><span class="mord mathdefault">n</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span></span>对应的语义属性。</p>
+<p><s>如果根据线性假设1，那么如果存在超过两个以上的语义属性是entangled的，变化限度不限的情况下，不可能存在方向<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>w</mi></mrow><annotation encoding="application/x-tex">{w}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.02691em;">w</span></span></span></span></span>，使得沿着<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>w</mi></mrow><annotation encoding="application/x-tex">{w}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.02691em;">w</span></span></span></span></span>改变<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>z</mi></mrow><annotation encoding="application/x-tex">{z}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.04398em;">z</span></span></span></span></span>只改变一个语义属性，而保留其他语义属性不变。而且作者没有过多地对超过两个以上entangled的语义属性做实验（仅在Fig8中展示了一个三个属性entangled的结果），这是一个不足的地方。</s></p>
+<p>原来我提出的<strong>关于Disentangled方法无效的说法是错误的</strong>，给出的例子是在二维空间中引入三种属性的法向量，但是这样存在维度的entangled。但是这也说明需要<span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>d</mi><mi>z</mi></msub></mrow><annotation encoding="application/x-tex">{d_z}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.84444em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord"><span class="mord mathdefault">d</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight" style="margin-right:0.04398em;">z</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span></span>要大于desired的属性的数量才能保证可以disentangle。</p>
 <p>除此之外如果两个属性非常相关，那么需要比较大的距离移动才能改变一个语义属性，同时保持另一个不变。但是过大的距离又可能导致图片失真。</p>
 <p>所以Conditional Manipulation方法需要进一步的改进。</p>
 <ol start="4">
@@ -251,206 +326,251 @@ representation，所以效果好的本身可能是由于StyleGAN本身已经很�
 <h2 id="reference"><a class="markdownIt-Anchor" href="#reference"></a> Reference</h2>
 <hr />
 <ol>
-<li>
-<p>Tero Karras, Timo Aila, Samuli Laine and Jaakko Lehtinen. <strong>Progressive growing of GANs for improved quality, stability, and variation</strong>. 2018</p>
-</li>
-<li>
-<p>Yujun Shen, Jinjin Gu, Xiaoou Tang and Bolei Zhou. <strong>Interpreting the Latent Space of GANs for Semantic Face Editing</strong>. 2019</p>
-</li>
-<li>
-<p>Tero Karras, Samuli Laine and Timo Aila. <strong>A style-based generator architecture for generative adversarial networks</strong>. 2019</p>
-</li>
+<li>Tero Karras, Timo Aila, Samuli Laine and Jaakko Lehtinen. <strong>Progressive growing of GANs for improved quality, stability, and variation</strong>. 2018…</li>
+<li>Yujun Shen, Jinjin Gu, Xiaoou Tang and Bolei Zhou. <strong>Interpreting the Latent Space of GANs for Semantic Face Editing</strong>. 2019.</li>
+<li>Tero Karras, Samuli Laine and Timo Aila. <strong>A style-based generator architecture for generative adversarial networks</strong>. 2019.</li>
 </ol>
 
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="mercurixito.github.io/2020/04/03/RP-InterFaceGAN/" data-id="ckb3tdmi6001ux4uc5h7wdy92" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/GAN/" rel="tag">GAN</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Paper-Reading/" rel="tag">Paper Reading</a></li></ul>
+        </div>
 
-    </footer>
-  </div>
-  
+        <blockquote class="post-copyright">
     
-<nav id="article-nav">
-  
-    <a href="/2020/04/10/RP-GANalyse/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
+    <div class="content">
         
-          论文研读： GANalyze: Toward visual definitions of cognitive image properties.
+<span class="post-time">
+    最后更新时间：<time datetime="2020-07-28T10:13:36.528Z" itemprop="dateUpdated">2020-07-28 18:13:36</time>
+</span><br>
+
+
         
-      </div>
+        这里可以写作者留言，标签和 hexo 中所有变量及辅助函数等均可调用，示例：<a href="/2020/04/03/RP-InterFaceGAN/" target="_blank" rel="external">mercurixito.github.io/2020/04/03/RP-InterFaceGAN/</a>
+        
+    </div>
+    
+    <footer>
+        <a href="mercurixito.github.io">
+            <img src="/img/nero.jpg" alt="Victor Chen">
+            Victor Chen
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/GAN/" rel="tag">GAN</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Paper-Reading/" rel="tag">Paper Reading</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=mercurixito.github.io/2020/04/03/RP-InterFaceGAN/&title=《论文研读：InterFaceGAN》 — Hako&pic=mercurixito.github.io/img/nero.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=mercurixito.github.io/2020/04/03/RP-InterFaceGAN/&title=《论文研读：InterFaceGAN》 — Hako&source=本文是对&quot;Interpreting the Latent Space of GANs for Semantic Face Editing. [p..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=mercurixito.github.io/2020/04/03/RP-InterFaceGAN/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《论文研读：InterFaceGAN》 — Hako&url=mercurixito.github.io/2020/04/03/RP-InterFaceGAN/&via=mercurixito.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=mercurixito.github.io/2020/04/03/RP-InterFaceGAN/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
     </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
   
+    <div class="waves-block waves-effect prev">
+      <a href="/2020/04/10/RP-GANalyse/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">论文研读： GANalyze: Toward visual definitions of cognitive image properties.</h4>
+      </a>
+    </div>
   
-    <a href="/2020/03/31/RP-GANs1/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">论文略读： SGAN(Stacked GAN), InfoGAN</div>
-    </a>
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2020/03/31/RP-GANs1/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">论文略读： SGAN(Stacked GAN), InfoGAN</h4>
+      </a>
+    </div>
   
 </nav>
 
-  
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 </article>
 
-</section>
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
         
-          <aside id="sidebar">
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">最近更新文章</h3>
-    <div class="widget">
-      <ul>
-        
-          <li>
-            <a href="/2020/07/17/Stereo-200717/">基于双目视觉的景深估计</a>
-          </li>
-        
-          <li>
-            <a href="/2020/07/17/SPM-200717/">基于BoW特征的图像分类(1)</a>
-          </li>
-        
-          <li>
-            <a href="/2020/07/17/SPM2-200717/">基于BoW特征的图像分类(2) —— 空间金字塔匹配</a>
-          </li>
-        
-          <li>
-            <a href="/2020/06/26/RP-200626-FewLabels/">Weekly Paper： Disentangling Factors of Variatons Using Few Labels</a>
-          </li>
-        
-          <li>
-            <a href="/2020/06/21/RP-200621-ALAE/">每日文章： Adversarial Latent Autoencoders</a>
-          </li>
-        
-      </ul>
+
+        <p>
+            
+            <span>博客内容遵循 <a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
     </div>
-  </div>
-
-  
-    
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">标签</h3>
-    <div class="widget">
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/APAD/" rel="tag">APAD</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/AutoEncoder/" rel="tag">AutoEncoder</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Disentangled-Representation-Learning/" rel="tag">Disentangled Representation Learning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GAN/" rel="tag">GAN</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linear-Algebra/" rel="tag">Linear Algebra</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mathematic/" rel="tag">Mathematic</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Object-Detection/" rel="tag">Object Detection</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Paper-Reading/" rel="tag">Paper Reading</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Probability/" rel="tag">Probability</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spatial-Pyramid-Matching/" rel="tag">Spatial Pyramid Matching</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VAE/" rel="tag">VAE</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/disentanglement/" rel="tag">disentanglement</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/information-theory/" rel="tag">information theory</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mathematics/" rel="tag">mathematics</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/metrics/" rel="tag">metrics</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/resources/" rel="tag">resources</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/topic-sorted/" rel="tag">topic sorted</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/two-frame-stereo/" rel="tag">two-frame stereo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/unsupervised-gan-controlling/" rel="tag">unsupervised gan controlling</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9D%82%E8%B0%88/" rel="tag">杂谈</a></li></ul>
+    <div class="bottom">
+        <p><span>Victor Chen &copy; 2020</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
     </div>
-  </div>
-
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">标签云</h3>
-    <div class="widget tagcloud">
-      <a href="/tags/APAD/" style="font-size: 16.67px;">APAD</a> <a href="/tags/AutoEncoder/" style="font-size: 10px;">AutoEncoder</a> <a href="/tags/Disentangled-Representation-Learning/" style="font-size: 18.33px;">Disentangled Representation Learning</a> <a href="/tags/GAN/" style="font-size: 20px;">GAN</a> <a href="/tags/Linear-Algebra/" style="font-size: 10px;">Linear Algebra</a> <a href="/tags/Mathematic/" style="font-size: 11.67px;">Mathematic</a> <a href="/tags/Object-Detection/" style="font-size: 11.67px;">Object Detection</a> <a href="/tags/Paper-Reading/" style="font-size: 16.67px;">Paper Reading</a> <a href="/tags/Probability/" style="font-size: 10px;">Probability</a> <a href="/tags/Spatial-Pyramid-Matching/" style="font-size: 10px;">Spatial Pyramid Matching</a> <a href="/tags/VAE/" style="font-size: 18.33px;">VAE</a> <a href="/tags/disentanglement/" style="font-size: 11.67px;">disentanglement</a> <a href="/tags/information-theory/" style="font-size: 10px;">information theory</a> <a href="/tags/mathematics/" style="font-size: 10px;">mathematics</a> <a href="/tags/metrics/" style="font-size: 11.67px;">metrics</a> <a href="/tags/resources/" style="font-size: 13.33px;">resources</a> <a href="/tags/topic-sorted/" style="font-size: 11.67px;">topic sorted</a> <a href="/tags/two-frame-stereo/" style="font-size: 10px;">two-frame stereo</a> <a href="/tags/unsupervised-gan-controlling/" style="font-size: 15px;">unsupervised gan controlling</a> <a href="/tags/%E6%9D%82%E8%B0%88/" style="font-size: 13.33px;">杂谈</a>
-    </div>
-  </div>
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">归档</h3>
-    <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/07/">七月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/06/">六月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/05/">五月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">四月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">三月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">二月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">十月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">九月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">五月 2019</a></li></ul>
-    </div>
-  </div>
-
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">最新文章</h3>
-    <div class="widget">
-      <ul>
-        
-          <li>
-            <a href="/2020/07/17/SPM2-200717/">基于BoW特征的图像分类(2) —— 空间金字塔匹配</a>
-          </li>
-        
-          <li>
-            <a href="/2020/07/17/Stereo-200717/">基于双目视觉的景深估计</a>
-          </li>
-        
-          <li>
-            <a href="/2020/07/17/SPM-200717/">基于BoW特征的图像分类(1)</a>
-          </li>
-        
-          <li>
-            <a href="/2020/06/26/RP-200626-FewLabels/">Weekly Paper： Disentangling Factors of Variatons Using Few Labels</a>
-          </li>
-        
-          <li>
-            <a href="/2020/06/21/RP-200621-ALAE/">每日文章： Adversarial Latent Autoencoders</a>
-          </li>
-        
-      </ul>
-    </div>
-  </div>
-
-  
-</aside>
-        
-      </div>
-      <footer id="footer">
-  
-  <div class="outer">
-    <div id="footer-info" class="inner">
-      &copy; 2020 Victor Chen<br>
-      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a><br>
-      banner image from <a href="https://www.pixiv.net/artworks/80036479" target="_blank">This</a>
-    </div>
-  </div>
 </footer>
-    </div>
-    <nav id="mobile-nav">
-  
-    <a href="/" class="mobile-nav-link">Home</a>
-  
-    <a href="/archives" class="mobile-nav-link">Archives</a>
-  
-</nav>
-    
 
-<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
-
-
-  
-<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
-
-  
-<script src="/fancybox/jquery.fancybox.pack.js"></script>
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
 
 
 
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=mercurixito.github.io/2020/04/03/RP-InterFaceGAN/&title=《论文研读：InterFaceGAN》 — Hako&pic=mercurixito.github.io/img/nero.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=mercurixito.github.io/2020/04/03/RP-InterFaceGAN/&title=《论文研读：InterFaceGAN》 — Hako&source=本文是对&quot;Interpreting the Latent Space of GANs for Semantic Face Editing. [p..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=mercurixito.github.io/2020/04/03/RP-InterFaceGAN/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《论文研读：InterFaceGAN》 — Hako&url=mercurixito.github.io/2020/04/03/RP-InterFaceGAN/&via=mercurixito.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=mercurixito.github.io/2020/04/03/RP-InterFaceGAN/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
 
-<script src="/js/script.js"></script>
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=mercurixito.github.io/2020/04/03/RP-InterFaceGAN/" alt="微信分享二维码">
+</div>
 
 
 
 
-  </div><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
 </script>
 
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Queue(function() {
-    var all = MathJax.Hub.getAllJax(), i;
-    for(i=0; i < all.length; i += 1) {
-      all[i].SourceElement().parentNode.className += ' has-jax';
-    }
-  });
-</script>
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
 
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
-</script>
-<!-- End: Injected MathJax -->
-<!-- hexo-inject:end -->
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+
+
+
+
+
+
+
+
+
 </body>
 </html>

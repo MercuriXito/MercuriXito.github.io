@@ -1,32 +1,32 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq" crossorigin="anonymous">
-  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js" integrity="sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz" crossorigin="anonymous"></script>
+    
 
-  <!-- Default Mathjax Support -->
-<!--   <script type="text/x-mathjax-config">
-     MathJax.Hub.Config({"HTML-CSS": { preferredFont: "TeX", availableFonts: ["STIX","TeX"], linebreaks: { automatic:true }, EqnChunk: (MathJax.Hub.Browser.isMobile ? 10 : 50) },
-          tex2jax: { inlineMath: [ ["$", "$"], ["\\(","\\)"] ], processEscapes: true, ignoreClass: "tex2jax_ignore|dno",skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']},
-          TeX: {  noUndefined: { attributes: { mathcolor: "red", mathbackground: "#FFEEEE", mathsize: "90%" } }, Macros: { href: "{}" } },
-          messageStyle: "none"
-      }); 
-  </script>
-  <script type="text/x-mathjax-config">
-      MathJax.Hub.Queue(function() {
-          var all = MathJax.Hub.getAllJax(), i;
-          for(i=0; i < all.length; i += 1) {
-              all[i].SourceElement().parentNode.className += ' has-jax';
-          }
-      });
-  </script>
-  <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
+    
 
-  
-  <title>每日文章：Hyperprior Induced Unsupervised Disentanglement of Latent Representations | Hako</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Preface A Paper A Day Keep the Doctor Away. 今天的文章是： Hyperprior Induced Unsupervised Disentanglement of Latent Representations. [paper]  [codes] (AAAI2019) 本文通过引入principled hierarchical bayes prior，修改">
+    
+
+
+
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
+    <!-- for katex render -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css" integrity="sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3+Aro6EYUG4+cU+KJWu/X" crossorigin="anonymous">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.js" integrity="sha384-g7c+Jr9ZivxKLnZTDUhnkOnsh30B4H0rpLUpJ4jAIKs4fnJI+sEnkvrMWph2EDg4" crossorigin="anonymous"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/contrib/auto-render.min.js" integrity="sha384-mll67QQFJfxn0IYznZYonOWZ644AWYC+Pt2cHqMaRhXVrursRwvLnLaebdGIlYNa" crossorigin="anonymous"
+        onload="renderMathInElement(document.body);"></script>
+    
+    
+    
+    
+    <title>每日文章：Hyperprior Induced Unsupervised Disentanglement of Latent Representations | Hako</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="APAD,VAE,Disentangled Representation Learning">
+    <meta name="description" content="Preface A Paper A Day Keep the Doctor Away. 今天的文章是： Hyperprior Induced Unsupervised Disentanglement of Latent Representations. [paper]  [codes] (AAAI2019) 本文通过引入principled hierarchical bayes prior，修改">
 <meta property="og:type" content="article">
 <meta property="og:title" content="每日文章：Hyperprior Induced Unsupervised Disentanglement of Latent Representations">
 <meta property="og:url" content="mercurixito.github.io/2020/06/17/RP-200617-CHyVAE/index.html">
@@ -38,88 +38,154 @@
 <meta property="article:modified_time" content="2020-06-20T07:30:46.008Z">
 <meta property="article:author" content="Victor Chen">
 <meta property="article:tag" content="APAD">
-<meta property="article:tag" content="Disentangled Representation Learning">
 <meta property="article:tag" content="VAE">
+<meta property="article:tag" content="Disentangled Representation Learning">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="/images/2020-06-17/inference_clarify.png">
-  
-    <link rel="alternate" href="/atom.xml" title="Hako" type="application/atom+xml">
-  
-  
-    <link rel="icon" href="/favicon.png">
-  
-  
-    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
-  
-  
-<link rel="stylesheet" href="/css/style.css">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
 
 <meta name="generator" content="Hexo 4.2.0"><!-- hexo-inject:begin --><!-- hexo-inject:end --></head>
 
 <body>
-  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div id="container">
-    <div id="wrap">
-      <header id="header">
-  <div id="banner"></div>
-  <div id="header-outer" class="outer">
-    <div id="header-title" class="inner">
-      <h1 id="logo-wrap">
-        <a href="/" id="logo">Hako</a>
-      </h1>
-      
-    </div>
-    <div id="header-inner" class="inner">
-      <nav id="main-nav">
-        <a id="main-nav-toggle" class="nav-icon"></a>
-        
-          <a class="main-nav-link" href="/">Home</a>
-        
-          <a class="main-nav-link" href="/archives">Archives</a>
-        
-      </nav>
-      <nav id="sub-nav">
-        
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
-        
-        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
-      </nav>
-      <div id="search-form-wrap">
-        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="mercurixito.github.io"></form>
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/sun.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/nero.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Victor Chen</h5>
+          <a href="mailto:victor_tochen@foxmail.com" title="victor_tochen@foxmail.com" class="mail">victor_tochen@foxmail.com</a>
+        </hgroup>
       </div>
     </div>
-  </div>
-</header>
-      <div class="outer">
-        <section id="main"><article id="post-RP-200617-CHyVAE" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2020/06/17/RP-200617-CHyVAE/" class="article-date">
-  <time datetime="2020-06-17T07:29:44.000Z" itemprop="datePublished">2020-06-17</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
         
-  
-    <h1 class="article-title" itemprop="name">
-      每日文章：Hyperprior Induced Unsupervised Disentanglement of Latent Representations
-    </h1>
-  
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/MercuriXito" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
 
-      </header>
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">每日文章：Hyperprior Induced Unsupervised Disentanglement of Latent Representations</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header", style="background-image: url(/img/sakura.png)">
+
+    <div class="container fade-scale">
+        <h1 class="title">每日文章：Hyperprior Induced Unsupervised Disentanglement of Latent Representations</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2020-06-17T07:29:44.000Z" itemprop="datePublished" class="page-time">
+  2020-06-17
+</time>
+
+
+            
+        </h5>
+    </div>
+
     
-    <div class="article-new-date">
-	<span> 
-	  发布时间: <time datetime="2020-06-17T07:29:44.000Z" itemprop="datePublished">2020-06-17</time>
-	   | 
-	  最近更新: <time datetime="2020-06-20T07:30:46.008Z" itemprop="datePublished">2020-06-20</time>
-  	</span>
-</div>
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="preface"><a class="markdownIt-Anchor" href="#preface"></a> Preface</h2>
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#preface"><span class="post-toc-number">1.</span> <span class="post-toc-text"> Preface</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#main-contents"><span class="post-toc-number">2.</span> <span class="post-toc-text"> Main Contents</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#elbo-decomposition"><span class="post-toc-number">2.1.</span> <span class="post-toc-text"> ELBO Decomposition</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#prior-specification-and-inference"><span class="post-toc-number">2.2.</span> <span class="post-toc-text"> Prior Specification and Inference</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#实验"><span class="post-toc-number">3.</span> <span class="post-toc-text"> 实验</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#思维发散"><span class="post-toc-number">4.</span> <span class="post-toc-text"> 思维发散</span></a></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-RP-200617-CHyVAE"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">每日文章：Hyperprior Induced Unsupervised Disentanglement of Latent Representations</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2020-06-17 15:29:44" datetime="2020-06-17T07:29:44.000Z"  itemprop="datePublished">2020-06-17</time>
+
+            
+
+
+            
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h2 id="preface"><a class="markdownIt-Anchor" href="#preface"></a> Preface</h2>
 <p>A Paper A Day Keep the Doctor Away. 今天的文章是：</p>
 <p>Hyperprior Induced Unsupervised Disentanglement of Latent Representations. <a href="https://arxiv.org/abs/1809.04497" target="_blank" rel="noopener">[paper]</a>  <a href="https://github.com/crslab/CHyVAE" target="_blank" rel="noopener">[codes]</a> (AAAI2019)</p>
 <p>本文通过引入principled hierarchical bayes prior，修改VAE种隐编码的先验<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>p</mi><mo stretchy="false">(</mo><mi>z</mi><mo stretchy="false">)</mo><mo>=</mo><mi mathvariant="script">N</mi><mo stretchy="false">(</mo><mi>z</mi><mo separator="true">;</mo><mn>0</mn><mo separator="true">,</mo><mi mathvariant="normal">Σ</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">{p(z) = \mathcal{N}(z;0,\Sigma)}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathdefault">p</span><span class="mopen">(</span><span class="mord mathdefault" style="margin-right:0.04398em;">z</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mord"><span class="mord mathcal" style="margin-right:0.14736em;">N</span></span><span class="mopen">(</span><span class="mord mathdefault" style="margin-right:0.04398em;">z</span><span class="mpunct">;</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord">0</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord">Σ</span><span class="mclose">)</span></span></span></span></span>，将先验的方差作为随机变量，让VAE学习方差的分布。该方法的引入使得我们可以通过控制<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi mathvariant="normal">Σ</mi></mrow><annotation encoding="application/x-tex">{\Sigma}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord"><span class="mord">Σ</span></span></span></span></span>的期望分布形式，学习隐编码的变量之间的关系的模型，而不仅仅是要求相互独立。</p>
@@ -219,7 +285,13 @@ c100.7 8.3 195.3 44 280 108 55.3 42 101.7 93 139 153l9 14c2.7-4 5.7-8.7 9-14
 q(\mathbf{\Sigma} | \mathbf{z}) \approx p(\mathbf{\Sigma} | \mathbf{z})=\frac{p(\mathbf{z} | \mathbf{\Sigma}) p(\mathbf{\Sigma})}{\int_{\mathbf{\Sigma}^{\prime}} p\left(\mathbf{z} | \mathbf{\Sigma}^{\prime}\right) p\left(\mathbf{\Sigma}^{\prime}\right) d \mathbf{\Sigma}^{\prime}}
 }</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:2.4778200000000004em;vertical-align:-1.05082em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.03588em;">q</span><span class="mopen">(</span><span class="mord"><span class="mord mathbf">Σ</span></span><span class="mord">∣</span><span class="mord"><span class="mord mathbf">z</span></span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">≈</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mord mathdefault">p</span><span class="mopen">(</span><span class="mord"><span class="mord mathbf">Σ</span></span><span class="mord">∣</span><span class="mord"><span class="mord mathbf">z</span></span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.427em;"><span style="top:-2.3049999999999997em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mop"><span class="mop op-symbol small-op" style="margin-right:0.19445em;position:relative;top:-0.0005599999999999772em;">∫</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.12445699999999993em;"><span style="top:-2.34418em;margin-left:-0.19445em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight"><span class="mord mtight"><span class="mord mathbf mtight">Σ</span></span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.6828285714285715em;"><span style="top:-2.786em;margin-right:0.07142857142857144em;"><span class="pstrut" style="height:2.5em;"></span><span class="sizing reset-size3 size1 mtight"><span class="mord mtight"><span class="mord mtight">′</span></span></span></span></span></span></span></span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.35582em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault">p</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="minner"><span class="mopen delimcenter" style="top:0em;">(</span><span class="mord"><span class="mord mathbf">z</span></span><span class="mord">∣</span><span class="mord"><span class="mord"><span class="mord mathbf">Σ</span></span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.6778919999999999em;"><span style="top:-2.9890000000000003em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">′</span></span></span></span></span></span></span></span></span><span class="mclose delimcenter" style="top:0em;">)</span></span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault">p</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="minner"><span class="mopen delimcenter" style="top:0em;">(</span><span class="mord"><span class="mord"><span class="mord mathbf">Σ</span></span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.6778919999999999em;"><span style="top:-2.9890000000000003em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">′</span></span></span></span></span></span></span></span></span><span class="mclose delimcenter" style="top:0em;">)</span></span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault">d</span><span class="mord"><span class="mord"><span class="mord mathbf">Σ</span></span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.6778919999999999em;"><span style="top:-2.9890000000000003em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">′</span></span></span></span></span></span></span></span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathdefault">p</span><span class="mopen">(</span><span class="mord"><span class="mord mathbf">z</span></span><span class="mord">∣</span><span class="mord"><span class="mord mathbf">Σ</span></span><span class="mclose">)</span><span class="mord mathdefault">p</span><span class="mopen">(</span><span class="mord"><span class="mord mathbf">Σ</span></span><span class="mclose">)</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:1.05082em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span></span></span></p>
 <p>推得：（但是<strong>我还并没有理解这里怎么得来的，如下是作者的表述</strong>）</p>
-<p><img src="/images/2020-06-17/inference_clarify.png" alt="图1：近似估计思路" /></p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/images/2020-06-17/inference_clarify.png" alt="图1：近似估计思路" title="">
+                </div>
+                <div class="image-caption">图1：近似估计思路</div>
+            </figure>
 <p>最终得到：</p>
 <p class='katex-block'><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>p</mi><mo stretchy="false">(</mo><mi mathvariant="bold">Σ</mi><mi mathvariant="normal">∣</mi><mi mathvariant="bold">z</mi><mo stretchy="false">)</mo><mo>=</mo><msubsup><mi mathvariant="script">W</mi><mi>p</mi><mrow><mo>−</mo><mn>1</mn></mrow></msubsup><mrow><mo fence="true">(</mo><mi mathvariant="bold">Ψ</mi><mo>+</mo><msub><mi mathvariant="bold">z</mi><mi>i</mi></msub><msubsup><mi mathvariant="bold">z</mi><mi>i</mi><mi mathvariant="normal">⊤</mi></msubsup><mo separator="true">,</mo><mi>ν</mi><mo>+</mo><mn>1</mn><mo fence="true">)</mo></mrow></mrow><annotation encoding="application/x-tex">{
     p(\mathbf{\Sigma} | \mathbf{z})=\mathcal{W}_{p}^{-1}\left(\mathbf{\Psi}+\mathbf{z}_{i} \mathbf{z}_{i}^{\top}, \nu+1\right)
@@ -254,195 +326,250 @@ q(\mathbf{\Sigma} | \mathbf{z}) \approx p(\mathbf{\Sigma} | \mathbf{z})=\frac{p(
 <p><strong>(1)</strong> 为什么作者引入Bayes Hyperprior的方法可以更有效地平衡重建误差和Disentangled约束（如作者在第三节开始所述）。也就是，如何思考引入Bayes Hyperpiror的作用？</p>
 <p><strong>(2)</strong>  BF-VAE(Bayes-Factor-VAE)是本文形式的扩展，具体表现在替换了Bayes先验的形式，不是简单地将协方差<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi mathvariant="bold">Σ</mi></mrow><annotation encoding="application/x-tex">{\mathbf{\Sigma}}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68611em;vertical-align:0em;"></span><span class="mord"><span class="mord"><span class="mord mathbf">Σ</span></span></span></span></span></span>作为随机变量（<strong>因为很可能引起计算上的问题，协方差包含的参数量太大了，O(d*d)，d为分量的个数</strong>），而是先将<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>p</mi><mo stretchy="false">(</mo><mi>z</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">{p(z)}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathdefault">p</span><span class="mopen">(</span><span class="mord mathdefault" style="margin-right:0.04398em;">z</span><span class="mclose">)</span></span></span></span></span>定义成分解的形式，再将各分量的方差组成一个向量，将它作为随机变量（<strong>参数量降为O(d)</strong>），并且定义的是Gamma分布。</p>
 
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="mercurixito.github.io/2020/06/17/RP-200617-CHyVAE/" data-id="ckbnbnoex0000ewuceknu0dbn" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/APAD/" rel="tag">APAD</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Disentangled-Representation-Learning/" rel="tag">Disentangled Representation Learning</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/VAE/" rel="tag">VAE</a></li></ul>
+        </div>
 
-    </footer>
-  </div>
-  
+        <blockquote class="post-copyright">
     
-<nav id="article-nav">
-  
-    <a href="/2020/06/18/RP-200618-DIP-VAE/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
+    <div class="content">
         
-          每日文章：Variational Inference of Disentangled Latent Concepts from Unlabeled Observations
+<span class="post-time">
+    最后更新时间：<time datetime="2020-06-20T07:30:46.008Z" itemprop="dateUpdated">2020-06-20 15:30:46</time>
+</span><br>
+
+
         
-      </div>
+        这里可以写作者留言，标签和 hexo 中所有变量及辅助函数等均可调用，示例：<a href="/2020/06/17/RP-200617-CHyVAE/" target="_blank" rel="external">mercurixito.github.io/2020/06/17/RP-200617-CHyVAE/</a>
+        
+    </div>
+    
+    <footer>
+        <a href="mercurixito.github.io">
+            <img src="/img/nero.jpg" alt="Victor Chen">
+            Victor Chen
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/APAD/" rel="tag">APAD</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Disentangled-Representation-Learning/" rel="tag">Disentangled Representation Learning</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/VAE/" rel="tag">VAE</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=mercurixito.github.io/2020/06/17/RP-200617-CHyVAE/&title=《每日文章：Hyperprior Induced Unsupervised Disentanglement of Latent Representations》 — Hako&pic=mercurixito.github.io/img/nero.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=mercurixito.github.io/2020/06/17/RP-200617-CHyVAE/&title=《每日文章：Hyperprior Induced Unsupervised Disentanglement of Latent Representations》 — Hako&source= Preface
+A Paper A Day Keep the Doctor Away. 今天的文章是：
+Hyperprior Induced Unsup..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=mercurixito.github.io/2020/06/17/RP-200617-CHyVAE/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《每日文章：Hyperprior Induced Unsupervised Disentanglement of Latent Representations》 — Hako&url=mercurixito.github.io/2020/06/17/RP-200617-CHyVAE/&via=mercurixito.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=mercurixito.github.io/2020/06/17/RP-200617-CHyVAE/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
     </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
   
+    <div class="waves-block waves-effect prev">
+      <a href="/2020/06/18/RP-200618-DIP-VAE/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">每日文章：Variational Inference of Disentangled Latent Concepts from Unlabeled Observations</h4>
+      </a>
+    </div>
   
-    <a href="/2020/06/14/RP-200614-RFVAE/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">每日文章： Relevance Factor VAE： Learning and Identifying Disentangled Factors.</div>
-    </a>
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2020/06/14/RP-200614-RFVAE/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">每日文章： Relevance Factor VAE： Learning and Identifying Disentangled Factors.</h4>
+      </a>
+    </div>
   
 </nav>
 
-  
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 </article>
 
-</section>
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
         
-          <aside id="sidebar">
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">最近更新文章</h3>
-    <div class="widget">
-      <ul>
-        
-          <li>
-            <a href="/2020/07/17/Stereo-200717/">基于双目视觉的景深估计</a>
-          </li>
-        
-          <li>
-            <a href="/2020/07/17/SPM-200717/">基于BoW特征的图像分类(1)</a>
-          </li>
-        
-          <li>
-            <a href="/2020/07/17/SPM2-200717/">基于BoW特征的图像分类(2) —— 空间金字塔匹配</a>
-          </li>
-        
-          <li>
-            <a href="/2020/06/26/RP-200626-FewLabels/">Weekly Paper： Disentangling Factors of Variatons Using Few Labels</a>
-          </li>
-        
-          <li>
-            <a href="/2020/06/21/RP-200621-ALAE/">每日文章： Adversarial Latent Autoencoders</a>
-          </li>
-        
-      </ul>
+
+        <p>
+            
+            <span>博客内容遵循 <a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
     </div>
-  </div>
-
-  
-    
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">标签</h3>
-    <div class="widget">
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/APAD/" rel="tag">APAD</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/AutoEncoder/" rel="tag">AutoEncoder</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Disentangled-Representation-Learning/" rel="tag">Disentangled Representation Learning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GAN/" rel="tag">GAN</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linear-Algebra/" rel="tag">Linear Algebra</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mathematic/" rel="tag">Mathematic</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Object-Detection/" rel="tag">Object Detection</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Paper-Reading/" rel="tag">Paper Reading</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Probability/" rel="tag">Probability</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spatial-Pyramid-Matching/" rel="tag">Spatial Pyramid Matching</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VAE/" rel="tag">VAE</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/disentanglement/" rel="tag">disentanglement</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/information-theory/" rel="tag">information theory</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mathematics/" rel="tag">mathematics</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/metrics/" rel="tag">metrics</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/resources/" rel="tag">resources</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/topic-sorted/" rel="tag">topic sorted</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/two-frame-stereo/" rel="tag">two-frame stereo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/unsupervised-gan-controlling/" rel="tag">unsupervised gan controlling</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9D%82%E8%B0%88/" rel="tag">杂谈</a></li></ul>
+    <div class="bottom">
+        <p><span>Victor Chen &copy; 2020</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
     </div>
-  </div>
-
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">标签云</h3>
-    <div class="widget tagcloud">
-      <a href="/tags/APAD/" style="font-size: 16.67px;">APAD</a> <a href="/tags/AutoEncoder/" style="font-size: 10px;">AutoEncoder</a> <a href="/tags/Disentangled-Representation-Learning/" style="font-size: 18.33px;">Disentangled Representation Learning</a> <a href="/tags/GAN/" style="font-size: 20px;">GAN</a> <a href="/tags/Linear-Algebra/" style="font-size: 10px;">Linear Algebra</a> <a href="/tags/Mathematic/" style="font-size: 11.67px;">Mathematic</a> <a href="/tags/Object-Detection/" style="font-size: 11.67px;">Object Detection</a> <a href="/tags/Paper-Reading/" style="font-size: 16.67px;">Paper Reading</a> <a href="/tags/Probability/" style="font-size: 10px;">Probability</a> <a href="/tags/Spatial-Pyramid-Matching/" style="font-size: 10px;">Spatial Pyramid Matching</a> <a href="/tags/VAE/" style="font-size: 18.33px;">VAE</a> <a href="/tags/disentanglement/" style="font-size: 11.67px;">disentanglement</a> <a href="/tags/information-theory/" style="font-size: 10px;">information theory</a> <a href="/tags/mathematics/" style="font-size: 10px;">mathematics</a> <a href="/tags/metrics/" style="font-size: 11.67px;">metrics</a> <a href="/tags/resources/" style="font-size: 13.33px;">resources</a> <a href="/tags/topic-sorted/" style="font-size: 11.67px;">topic sorted</a> <a href="/tags/two-frame-stereo/" style="font-size: 10px;">two-frame stereo</a> <a href="/tags/unsupervised-gan-controlling/" style="font-size: 15px;">unsupervised gan controlling</a> <a href="/tags/%E6%9D%82%E8%B0%88/" style="font-size: 13.33px;">杂谈</a>
-    </div>
-  </div>
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">归档</h3>
-    <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/07/">七月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/06/">六月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/05/">五月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">四月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">三月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">二月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">十月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">九月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">五月 2019</a></li></ul>
-    </div>
-  </div>
-
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">最新文章</h3>
-    <div class="widget">
-      <ul>
-        
-          <li>
-            <a href="/2020/07/17/SPM2-200717/">基于BoW特征的图像分类(2) —— 空间金字塔匹配</a>
-          </li>
-        
-          <li>
-            <a href="/2020/07/17/Stereo-200717/">基于双目视觉的景深估计</a>
-          </li>
-        
-          <li>
-            <a href="/2020/07/17/SPM-200717/">基于BoW特征的图像分类(1)</a>
-          </li>
-        
-          <li>
-            <a href="/2020/06/26/RP-200626-FewLabels/">Weekly Paper： Disentangling Factors of Variatons Using Few Labels</a>
-          </li>
-        
-          <li>
-            <a href="/2020/06/21/RP-200621-ALAE/">每日文章： Adversarial Latent Autoencoders</a>
-          </li>
-        
-      </ul>
-    </div>
-  </div>
-
-  
-</aside>
-        
-      </div>
-      <footer id="footer">
-  
-  <div class="outer">
-    <div id="footer-info" class="inner">
-      &copy; 2020 Victor Chen<br>
-      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a><br>
-      banner image from <a href="https://www.pixiv.net/artworks/80036479" target="_blank">This</a>
-    </div>
-  </div>
 </footer>
-    </div>
-    <nav id="mobile-nav">
-  
-    <a href="/" class="mobile-nav-link">Home</a>
-  
-    <a href="/archives" class="mobile-nav-link">Archives</a>
-  
-</nav>
-    
 
-<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
-
-
-  
-<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
-
-  
-<script src="/fancybox/jquery.fancybox.pack.js"></script>
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
 
 
 
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=mercurixito.github.io/2020/06/17/RP-200617-CHyVAE/&title=《每日文章：Hyperprior Induced Unsupervised Disentanglement of Latent Representations》 — Hako&pic=mercurixito.github.io/img/nero.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=mercurixito.github.io/2020/06/17/RP-200617-CHyVAE/&title=《每日文章：Hyperprior Induced Unsupervised Disentanglement of Latent Representations》 — Hako&source= Preface
+A Paper A Day Keep the Doctor Away. 今天的文章是：
+Hyperprior Induced Unsup..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=mercurixito.github.io/2020/06/17/RP-200617-CHyVAE/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《每日文章：Hyperprior Induced Unsupervised Disentanglement of Latent Representations》 — Hako&url=mercurixito.github.io/2020/06/17/RP-200617-CHyVAE/&via=mercurixito.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=mercurixito.github.io/2020/06/17/RP-200617-CHyVAE/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
 
-<script src="/js/script.js"></script>
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=mercurixito.github.io/2020/06/17/RP-200617-CHyVAE/" alt="微信分享二维码">
+</div>
 
 
 
 
-  </div><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
 </script>
 
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Queue(function() {
-    var all = MathJax.Hub.getAllJax(), i;
-    for(i=0; i < all.length; i += 1) {
-      all[i].SourceElement().parentNode.className += ' has-jax';
-    }
-  });
-</script>
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
 
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
-</script>
-<!-- End: Injected MathJax -->
-<!-- hexo-inject:end -->
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+
+
+
+
+
+
+
+
+
 </body>
 </html>

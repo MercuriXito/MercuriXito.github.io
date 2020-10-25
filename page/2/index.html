@@ -1,32 +1,32 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq" crossorigin="anonymous">
-  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js" integrity="sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz" crossorigin="anonymous"></script>
+    
 
-  <!-- Default Mathjax Support -->
-<!--   <script type="text/x-mathjax-config">
-     MathJax.Hub.Config({"HTML-CSS": { preferredFont: "TeX", availableFonts: ["STIX","TeX"], linebreaks: { automatic:true }, EqnChunk: (MathJax.Hub.Browser.isMobile ? 10 : 50) },
-          tex2jax: { inlineMath: [ ["$", "$"], ["\\(","\\)"] ], processEscapes: true, ignoreClass: "tex2jax_ignore|dno",skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']},
-          TeX: {  noUndefined: { attributes: { mathcolor: "red", mathbackground: "#FFEEEE", mathsize: "90%" } }, Macros: { href: "{}" } },
-          messageStyle: "none"
-      }); 
-  </script>
-  <script type="text/x-mathjax-config">
-      MathJax.Hub.Queue(function() {
-          var all = MathJax.Hub.getAllJax(), i;
-          for(i=0; i < all.length; i += 1) {
-              all[i].SourceElement().parentNode.className += ' has-jax';
-          }
-      });
-  </script>
-  <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
+    
 
-  
-  <title>Hako</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="無様だ">
+    
+
+
+
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
+    <!-- for katex render -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css" integrity="sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3+Aro6EYUG4+cU+KJWu/X" crossorigin="anonymous">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.js" integrity="sha384-g7c+Jr9ZivxKLnZTDUhnkOnsh30B4H0rpLUpJ4jAIKs4fnJI+sEnkvrMWph2EDg4" crossorigin="anonymous"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/contrib/auto-render.min.js" integrity="sha384-mll67QQFJfxn0IYznZYonOWZ644AWYC+Pt2cHqMaRhXVrursRwvLnLaebdGIlYNa" crossorigin="anonymous"
+        onload="renderMathInElement(document.body);"></script>
+    
+    
+    
+    
+    <title>Hako</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="">
+    <meta name="description" content="無様だ">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Hako">
 <meta property="og:url" content="mercurixito.github.io/page/2/index.html">
@@ -35,290 +35,532 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="article:author" content="Victor Chen">
 <meta name="twitter:card" content="summary">
-  
-    <link rel="alternate" href="/atom.xml" title="Hako" type="application/atom+xml">
-  
-  
-    <link rel="icon" href="/favicon.png">
-  
-  
-    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
-  
-  
-<link rel="stylesheet" href="/css/style.css">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
 
 <meta name="generator" content="Hexo 4.2.0"><!-- hexo-inject:begin --><!-- hexo-inject:end --></head>
 
 <body>
-  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div id="container">
-    <div id="wrap">
-      <header id="header">
-  <div id="banner"></div>
-  <div id="header-outer" class="outer">
-    <div id="header-title" class="inner">
-      <h1 id="logo-wrap">
-        <a href="/" id="logo">Hako</a>
-      </h1>
-      
-    </div>
-    <div id="header-inner" class="inner">
-      <nav id="main-nav">
-        <a id="main-nav-toggle" class="nav-icon"></a>
-        
-          <a class="main-nav-link" href="/">Home</a>
-        
-          <a class="main-nav-link" href="/archives">Archives</a>
-        
-      </nav>
-      <nav id="sub-nav">
-        
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
-        
-        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
-      </nav>
-      <div id="search-form-wrap">
-        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="mercurixito.github.io"></form>
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><div id="loading" class="active"></div>
+
+    <aside id="menu"  >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/sun.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/nero.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Victor Chen</h5>
+          <a href="mailto:victor_tochen@foxmail.com" title="victor_tochen@foxmail.com" class="mail">victor_tochen@foxmail.com</a>
+        </hgroup>
       </div>
     </div>
-  </div>
-</header>
-      <div class="outer">
-        <section id="main">
-  
-    <article id="post-RP-200611-HFVAE" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2020/06/11/RP-200611-HFVAE/" class="article-date">
-  <time datetime="2020-06-11T14:20:41.000Z" itemprop="datePublished">2020-06-11</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
         
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/MercuriXito" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">Hako</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header index-header", style="background-image: url(/img/sakura.png)">
+
+    <div class="container fade-scale">
+        <h1 class="title">Hako</h1>
+        <h5 class="subtitle">
+            
+                
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+<div class="container body-wrap">
+
+    <ul class="post-list">
+    
+        <li class="post-list-item fade">
+            <article id="post-RP-200618-DIP-VAE"
+  class="article-card article-type-post" itemprop="blogPost">
+
+    <div class="post-meta">
+        <time class="post-time" title="2020-06-18 14:23:47" datetime="2020-06-18T06:23:47.000Z"  itemprop="datePublished">2020-06-18</time>
+
+        
+
+
+    </div>
+
+    
+
+
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/06/11/RP-200611-HFVAE/">每日文章： Structured Disentangled Representations</a>
-    </h1>
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/2020/06/18/RP-200618-DIP-VAE/">每日文章：Variational Inference of Disentangled Latent Concepts from Unlabeled Observations</a>
+    </h3>
   
 
-      </header>
+
+
+
+    <div class="post-content" id="post-content" itemprop="postContent">
+
     
-    <div class="article-new-date">
-	<span> 
-	  发布时间: <time datetime="2020-06-11T14:20:41.000Z" itemprop="datePublished">2020-06-11</time>
-	   | 
-	  最近更新: <time datetime="2020-06-13T03:20:45.389Z" itemprop="datePublished">2020-06-13</time>
-  	</span>
-</div>
-    <div class="article-entry" itemprop="articleBody">
-      
+        <h2 id="preface"><a class="markdownIt-Anchor" href="#preface"></a> Preface</h2>
+<p>A Paper A Day Keep the Doctor Away. 今天的文章是：</p>
+<p>Variational Inference of Disentangled Latent Concepts from Unlabeled Observations. (ICLR2018) <a href="https://arxiv.org/abs/1711.00848" target="_blank" rel="noopener">[paper]</a></p>
+<p>本文也是通过修改ELBO的方法促进Disentanglement，并提出了基于协方差惩罚的DIP-VAE-I, DIP-VAE-II的模型，和SAP(<em>Separated Attribute Predictability</em>)Metric。</p>
+    
+
+        <a href="/2020/06/18/RP-200618-DIP-VAE/" class="post-more waves-effect waves-button">
+            阅读全文…
+        </a>
+    </div>
+    
+    <div class="post-footer">
+        
+	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/APAD/" rel="tag">APAD</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Disentangled-Representation-Learning/" rel="tag">Disentangled Representation Learning</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/VAE/" rel="tag">VAE</a></li></ul>
+
+    </div>
+    
+</article>
+
+        </li>
+    
+        <li class="post-list-item fade">
+            <article id="post-RP-200617-CHyVAE"
+  class="article-card article-type-post" itemprop="blogPost">
+
+    <div class="post-meta">
+        <time class="post-time" title="2020-06-17 15:29:44" datetime="2020-06-17T07:29:44.000Z"  itemprop="datePublished">2020-06-17</time>
+
+        
+
+
+    </div>
+
+    
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/2020/06/17/RP-200617-CHyVAE/">每日文章：Hyperprior Induced Unsupervised Disentanglement of Latent Representations</a>
+    </h3>
+  
+
+
+
+
+    <div class="post-content" id="post-content" itemprop="postContent">
+
+    
+        <h2 id="preface"><a class="markdownIt-Anchor" href="#preface"></a> Preface</h2>
+<p>A Paper A Day Keep the Doctor Away. 今天的文章是：</p>
+<p>Hyperprior Induced Unsupervised Disentanglement of Latent Representations. <a href="https://arxiv.org/abs/1809.04497" target="_blank" rel="noopener">[paper]</a>  <a href="https://github.com/crslab/CHyVAE" target="_blank" rel="noopener">[codes]</a> (AAAI2019)</p>
+<p>本文通过引入principled hierarchical bayes prior，修改VAE种隐编码的先验<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>p</mi><mo stretchy="false">(</mo><mi>z</mi><mo stretchy="false">)</mo><mo>=</mo><mi mathvariant="script">N</mi><mo stretchy="false">(</mo><mi>z</mi><mo separator="true">;</mo><mn>0</mn><mo separator="true">,</mo><mi mathvariant="normal">Σ</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">{p(z) = \mathcal{N}(z;0,\Sigma)}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathdefault">p</span><span class="mopen">(</span><span class="mord mathdefault" style="margin-right:0.04398em;">z</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mord"><span class="mord mathcal" style="margin-right:0.14736em;">N</span></span><span class="mopen">(</span><span class="mord mathdefault" style="margin-right:0.04398em;">z</span><span class="mpunct">;</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord">0</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord">Σ</span><span class="mclose">)</span></span></span></span></span>，将先验的方差作为随机变量，让VAE学习方差的分布。该方法的引入使得我们可以通过控制<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi mathvariant="normal">Σ</mi></mrow><annotation encoding="application/x-tex">{\Sigma}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord"><span class="mord">Σ</span></span></span></span></span>的期望分布形式，学习隐编码的变量之间的关系的模型，而不仅仅是要求相互独立。</p>
+    
+
+        <a href="/2020/06/17/RP-200617-CHyVAE/" class="post-more waves-effect waves-button">
+            阅读全文…
+        </a>
+    </div>
+    
+    <div class="post-footer">
+        
+	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/APAD/" rel="tag">APAD</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Disentangled-Representation-Learning/" rel="tag">Disentangled Representation Learning</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/VAE/" rel="tag">VAE</a></li></ul>
+
+    </div>
+    
+</article>
+
+        </li>
+    
+        <li class="post-list-item fade">
+            <article id="post-RP-200614-RFVAE"
+  class="article-card article-type-post" itemprop="blogPost">
+
+    <div class="post-meta">
+        <time class="post-time" title="2020-06-14 17:32:00" datetime="2020-06-14T09:32:00.000Z"  itemprop="datePublished">2020-06-14</time>
+
+        
+
+
+    </div>
+
+    
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/2020/06/14/RP-200614-RFVAE/">每日文章： Relevance Factor VAE： Learning and Identifying Disentangled Factors.</a>
+    </h3>
+  
+
+
+
+
+    <div class="post-content" id="post-content" itemprop="postContent">
+
+    
+        <h2 id="preface"><a class="markdownIt-Anchor" href="#preface"></a> Preface</h2>
+<p>A Paper A Day Keep the Doctor Away. 今天的文章是：</p>
+<p>Relevance Factor VAE: Learning and Identifying Disentangled Factors. <a href="https://arxiv.org/abs/1902.01568" target="_blank" rel="noopener">[paper]</a></p>
+<p>本文提出的RF-VAE是BF-VAE的前作，也是同一个组的工作。RF-VAE主要基于FactorVAE，通过对隐分量中的relevant变量和nuisance变量分别取不同的约束强度形式，希望二者学习到不同的分布，并引入了一个relevance indicator变量的学习同时达到辨识隐编码中有用和无用的分量的效果。</p>
+    
+
+        <a href="/2020/06/14/RP-200614-RFVAE/" class="post-more waves-effect waves-button">
+            阅读全文…
+        </a>
+    </div>
+    
+    <div class="post-footer">
+        
+	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/APAD/" rel="tag">APAD</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Disentangled-Representation-Learning/" rel="tag">Disentangled Representation Learning</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/VAE/" rel="tag">VAE</a></li></ul>
+
+    </div>
+    
+</article>
+
+        </li>
+    
+        <li class="post-list-item fade">
+            <article id="post-RP-200613-AAE"
+  class="article-card article-type-post" itemprop="blogPost">
+
+    <div class="post-meta">
+        <time class="post-time" title="2020-06-13 15:17:31" datetime="2020-06-13T07:17:31.000Z"  itemprop="datePublished">2020-06-13</time>
+
+        
+
+
+    </div>
+
+    
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/2020/06/13/RP-200613-AAE/">每日文章： Adversarial AutoEncoders</a>
+    </h3>
+  
+
+
+
+
+    <div class="post-content" id="post-content" itemprop="postContent">
+
+    
+        <h2 id="preface"><a class="markdownIt-Anchor" href="#preface"></a> Preface</h2>
+<p>A Paper A Day Keep the Doctor Away. 今天的文章是：</p>
+<p>Adversarial AutoEncoders. <a href="https://arxiv.org/abs/1511.05644" target="_blank" rel="noopener">[paper]</a></p>
+<p>本文就是有名的AAE模型，对AutoEncoder加入Adversarial Regularization，将它变成了生成模型。本文借鉴了VAE的思路扩展AutoEncoder，同时借鉴GAN的思路促使合计后验<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>q</mi><mo stretchy="false">(</mo><mi>z</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">{q(z)}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.03588em;">q</span><span class="mopen">(</span><span class="mord mathdefault" style="margin-right:0.04398em;">z</span><span class="mclose">)</span></span></span></span></span>和期望先验<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>p</mi><mo stretchy="false">(</mo><mi>z</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">{p(z)}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathdefault">p</span><span class="mopen">(</span><span class="mord mathdefault" style="margin-right:0.04398em;">z</span><span class="mclose">)</span></span></span></span></span>的prior match。</p>
+    
+
+        <a href="/2020/06/13/RP-200613-AAE/" class="post-more waves-effect waves-button">
+            阅读全文…
+        </a>
+    </div>
+    
+    <div class="post-footer">
+        
+	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/APAD/" rel="tag">APAD</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/GAN/" rel="tag">GAN</a></li></ul>
+
+    </div>
+    
+</article>
+
+        </li>
+    
+        <li class="post-list-item fade">
+            <article id="post-RP-200611-HFVAE"
+  class="article-card article-type-post" itemprop="blogPost">
+
+    <div class="post-meta">
+        <time class="post-time" title="2020-06-11 22:20:41" datetime="2020-06-11T14:20:41.000Z"  itemprop="datePublished">2020-06-11</time>
+
+        
+
+
+    </div>
+
+    
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/2020/06/11/RP-200611-HFVAE/">每日文章： Structured Disentangled Representations</a>
+    </h3>
+  
+
+
+
+
+    <div class="post-content" id="post-content" itemprop="postContent">
+
+    
         <h2 id="preface"><a class="markdownIt-Anchor" href="#preface"></a> Preface</h2>
 <p>A Paper A Day Keep the Doctor Away. 今天的文章是：</p>
 <p>Structured Disentangled Representations. <a href="https://arxiv.org/abs/1804.02086" target="_blank" rel="noopener">[paper]</a></p>
 <p>本文也是针对ELBO分解的方式试图提高VAE的disentanglement效果，作者在以往的<code>prior match</code>的基础上进行进一步分解，加入了组变量（<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>z</mi></mrow><annotation encoding="application/x-tex">{z}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.04398em;">z</span></span></span></span></span>的多个维度构成）<span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>z</mi><mi>d</mi></msub></mrow><annotation encoding="application/x-tex">{z_d}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.58056em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord"><span class="mord mathdefault" style="margin-right:0.04398em;">z</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.33610799999999996em;"><span style="top:-2.5500000000000003em;margin-left:-0.04398em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">d</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span></span>的独立性和<span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>z</mi><mi>d</mi></msub></mrow><annotation encoding="application/x-tex">{z_d}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.58056em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord"><span class="mord mathdefault" style="margin-right:0.04398em;">z</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.33610799999999996em;"><span style="top:-2.5500000000000003em;margin-left:-0.04398em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">d</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span></span>组内的变量<span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>z</mi><mrow><mi>d</mi><mo separator="true">,</mo><mi>e</mi></mrow></msub></mrow><annotation encoding="application/x-tex">{z_{d,e}}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.716668em;vertical-align:-0.286108em;"></span><span class="mord"><span class="mord"><span class="mord mathdefault" style="margin-right:0.04398em;">z</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3361079999999999em;"><span style="top:-2.5500000000000003em;margin-left:-0.04398em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">d</span><span class="mpunct mtight">,</span><span class="mord mathdefault mtight">e</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.286108em;"><span></span></span></span></span></span></span></span></span></span></span>变量的独立性的讨论，于是就将<code>prior match</code>变成了层级式。作者也是基于<strong>隐分量之间不可能完全独立，并且分量建模的特征差异性不同</strong>出发，并<strong>试图将隐变量之间的差异性大小分层建模</strong>。<strong>将多个相近的分量构成一个“组特征”，而“组特征”之间存在很大的差异性</strong>。比如说组特征可以为手写数字的类别和形状，形状又可以由大小、粗细等比较相近的特征组成。最后，作者将“组特征”用于区分离散变量和连续变量。 But codes is not available…</p>
-        
-          <p class="article-more-link">
-            <a href="/2020/06/11/RP-200611-HFVAE/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="mercurixito.github.io/2020/06/11/RP-200611-HFVAE/" data-id="ckbd2lu690001aouc60u9hyl9" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/APAD/" rel="tag">APAD</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Disentangled-Representation-Learning/" rel="tag">Disentangled Representation Learning</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/VAE/" rel="tag">VAE</a></li></ul>
+    
 
-    </footer>
-  </div>
-  
+        <a href="/2020/06/11/RP-200611-HFVAE/" class="post-more waves-effect waves-button">
+            阅读全文…
+        </a>
+    </div>
+    
+    <div class="post-footer">
+        
+	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/APAD/" rel="tag">APAD</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Disentangled-Representation-Learning/" rel="tag">Disentangled Representation Learning</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/VAE/" rel="tag">VAE</a></li></ul>
+
+    </div>
+    
 </article>
 
+        </li>
+    
+        <li class="post-list-item fade">
+            <article id="post-RP-200607-JointVAE"
+  class="article-card article-type-post" itemprop="blogPost">
 
-  
-    <article id="post-RP-200607-JointVAE" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2020/06/07/RP-200607-JointVAE/" class="article-date">
-  <time datetime="2020-06-07T07:37:47.000Z" itemprop="datePublished">2020-06-07</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
+    <div class="post-meta">
+        <time class="post-time" title="2020-06-07 15:37:47" datetime="2020-06-07T07:37:47.000Z"  itemprop="datePublished">2020-06-07</time>
+
         
+
+
+    </div>
+
+    
+
+
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/06/07/RP-200607-JointVAE/">每日文章： Learning Disentangled Joint Continuous and Discrete Representations</a>
-    </h1>
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/2020/06/07/RP-200607-JointVAE/">每日文章： Learning Disentangled Joint Continuous and Discrete Representations</a>
+    </h3>
   
 
-      </header>
+
+
+
+    <div class="post-content" id="post-content" itemprop="postContent">
+
     
-    <div class="article-new-date">
-	<span> 
-	  发布时间: <time datetime="2020-06-07T07:37:47.000Z" itemprop="datePublished">2020-06-07</time>
-	   | 
-	  最近更新: <time datetime="2020-06-13T03:09:08.920Z" itemprop="datePublished">2020-06-13</time>
-  	</span>
-</div>
-    <div class="article-entry" itemprop="articleBody">
-      
         <h2 id="preface"><a class="markdownIt-Anchor" href="#preface"></a> Preface</h2>
 <p>A Paper A Day Keep the Doctor Away. 今天的文章是：</p>
 <p>Learning Disentangled Joint Continuous and Discrete Representations. (NIPS2018) <a href="https://arxiv.org/abs/1804.00104" target="_blank" rel="noopener">[paper]</a> <a href="https://github.com/Schlumberger/joint-vae" target="_blank" rel="noopener">[代码]</a></p>
 <p>本文整体基于AnnealVAE，将隐空间中连续变量和离散变量的空间分开建模，并分开限制信道容量。在离散变量的分布的重参数化上，作者使用了[1]的&quot;Gumbel Softmax&quot;方法，在MNIST、FashionMNIST数据集上学习到了一定的离散分量。</p>
-        
-          <p class="article-more-link">
-            <a href="/2020/06/07/RP-200607-JointVAE/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="mercurixito.github.io/2020/06/07/RP-200607-JointVAE/" data-id="ckb4rrz680000hkuc8n618mhg" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/APAD/" rel="tag">APAD</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Disentangled-Representation-Learning/" rel="tag">Disentangled Representation Learning</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/VAE/" rel="tag">VAE</a></li></ul>
+    
 
-    </footer>
-  </div>
-  
+        <a href="/2020/06/07/RP-200607-JointVAE/" class="post-more waves-effect waves-button">
+            阅读全文…
+        </a>
+    </div>
+    
+    <div class="post-footer">
+        
+	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/APAD/" rel="tag">APAD</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Disentangled-Representation-Learning/" rel="tag">Disentangled Representation Learning</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/VAE/" rel="tag">VAE</a></li></ul>
+
+    </div>
+    
 </article>
 
+        </li>
+    
+        <li class="post-list-item fade">
+            <article id="post-RP-0604-Understanding-betaVAE"
+  class="article-card article-type-post" itemprop="blogPost">
 
-  
-    <article id="post-RP-0604-Understanding-betaVAE" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2020/06/04/RP-0604-Understanding-betaVAE/" class="article-date">
-  <time datetime="2020-06-04T07:18:50.000Z" itemprop="datePublished">2020-06-04</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
+    <div class="post-meta">
+        <time class="post-time" title="2020-06-04 15:18:50" datetime="2020-06-04T07:18:50.000Z"  itemprop="datePublished">2020-06-04</time>
+
         
+
+
+    </div>
+
+    
+
+
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/06/04/RP-0604-Understanding-betaVAE/">每日文章： Understanding disentangling in β-VAE</a>
-    </h1>
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/2020/06/04/RP-0604-Understanding-betaVAE/">每日文章： Understanding disentangling in β-VAE</a>
+    </h3>
   
 
-      </header>
+
+
+
+    <div class="post-content" id="post-content" itemprop="postContent">
+
     
-    <div class="article-new-date">
-	<span> 
-	  发布时间: <time datetime="2020-06-04T07:18:50.000Z" itemprop="datePublished">2020-06-04</time>
-	   | 
-	  最近更新: <time datetime="2020-06-06T08:42:26.537Z" itemprop="datePublished">2020-06-06</time>
-  	</span>
-</div>
-    <div class="article-entry" itemprop="articleBody">
-      
         <h2 id="preface"><a class="markdownIt-Anchor" href="#preface"></a> Preface</h2>
 <p>A Paper A day Keep the Doctor Away。 今天的文章是：</p>
 <p>Understanding disentangling in β-VAE. (NIPS2017) <a href="https://arxiv.org/abs/1804.03599" target="_blank" rel="noopener">[paper]</a></p>
 <p>本文从Information BottleNeck的角度分析了beta-VAE的ELBO，第一项为图像重建的<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>q</mi><mo stretchy="false">(</mo><mi>z</mi><mi mathvariant="normal">∣</mi><mi>x</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">{q(z|x)}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.03588em;">q</span><span class="mopen">(</span><span class="mord mathdefault" style="margin-right:0.04398em;">z</span><span class="mord">∣</span><span class="mord mathdefault">x</span><span class="mclose">)</span></span></span></span></span>的BottleNeck，KL项为X和Z的互信息量。<strong>优化KL项，使得Z和X的互信息量减小，阻碍了图像重建</strong>。除此之外，作者认为<strong>beta-VAE会根据KL项限制（BottleNeck的容量）按对重建贡献大小的顺序学习不同的generative factors</strong>。由此，作者提出<strong>限制BottleNeck的容量从小到大的训练方法修改了beta-VAE的ELBO，使得模型可以按对重建贡献大小顺序逐渐学习不同的generative factors的Disentangled表示</strong>。</p>
-        
-          <p class="article-more-link">
-            <a href="/2020/06/04/RP-0604-Understanding-betaVAE/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="mercurixito.github.io/2020/06/04/RP-0604-Understanding-betaVAE/" data-id="ckb3tdmgg0003x4uc5yy9090f" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/APAD/" rel="tag">APAD</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Disentangled-Representation-Learning/" rel="tag">Disentangled Representation Learning</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/VAE/" rel="tag">VAE</a></li></ul>
+    
 
-    </footer>
-  </div>
-  
+        <a href="/2020/06/04/RP-0604-Understanding-betaVAE/" class="post-more waves-effect waves-button">
+            阅读全文…
+        </a>
+    </div>
+    
+    <div class="post-footer">
+        
+	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/APAD/" rel="tag">APAD</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Disentangled-Representation-Learning/" rel="tag">Disentangled Representation Learning</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/VAE/" rel="tag">VAE</a></li></ul>
+
+    </div>
+    
 </article>
 
+        </li>
+    
+        <li class="post-list-item fade">
+            <article id="post-Math-IM1"
+  class="article-card article-type-post" itemprop="blogPost">
 
-  
-    <article id="post-Math-IM1" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2020/06/04/Math-IM1/" class="article-date">
-  <time datetime="2020-06-04T02:23:00.000Z" itemprop="datePublished">2020-06-04</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
+    <div class="post-meta">
+        <time class="post-time" title="2020-06-04 10:23:00" datetime="2020-06-04T02:23:00.000Z"  itemprop="datePublished">2020-06-04</time>
+
         
+
+
+    </div>
+
+    
+
+
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/06/04/Math-IM1/">Basic Information Theory</a>
-    </h1>
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/2020/06/04/Math-IM1/">Basic Information Theory</a>
+    </h3>
   
 
-      </header>
+
+
+
+    <div class="post-content" id="post-content" itemprop="postContent">
+
     
-    <div class="article-new-date">
-	<span> 
-	  发布时间: <time datetime="2020-06-04T02:23:00.000Z" itemprop="datePublished">2020-06-04</time>
-	   | 
-	  最近更新: <time datetime="2020-06-04T02:24:25.694Z" itemprop="datePublished">2020-06-04</time>
-  	</span>
-</div>
-    <div class="article-entry" itemprop="articleBody">
-      
         <p>DL 中信息论的有关公式和内容：</p>
 
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="mercurixito.github.io/2020/06/04/Math-IM1/" data-id="ckb3tdmg30000x4ucez8n2nwi" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/information-theory/" rel="tag">information theory</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/mathematics/" rel="tag">mathematics</a></li></ul>
+    
 
-    </footer>
-  </div>
-  
+        <a href="/2020/06/04/Math-IM1/" class="post-more waves-effect waves-button">
+            阅读全文…
+        </a>
+    </div>
+    
+    <div class="post-footer">
+        
+	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/information-theory/" rel="tag">information theory</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/mathematics/" rel="tag">mathematics</a></li></ul>
+
+    </div>
+    
 </article>
 
+        </li>
+    
+        <li class="post-list-item fade">
+            <article id="post-RP-0603-DreamingToDistill"
+  class="article-card article-type-post" itemprop="blogPost">
 
-  
-    <article id="post-RP-0603-DreamingToDistill" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2020/06/03/RP-0603-DreamingToDistill/" class="article-date">
-  <time datetime="2020-06-03T06:09:25.000Z" itemprop="datePublished">2020-06-03</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
+    <div class="post-meta">
+        <time class="post-time" title="2020-06-03 14:09:25" datetime="2020-06-03T06:09:25.000Z"  itemprop="datePublished">2020-06-03</time>
+
         
+
+
+    </div>
+
+    
+
+
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/06/03/RP-0603-DreamingToDistill/">每日文章： Dreaming to Distill</a>
-    </h1>
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/2020/06/03/RP-0603-DreamingToDistill/">每日文章： Dreaming to Distill</a>
+    </h3>
   
 
-      </header>
+
+
+
+    <div class="post-content" id="post-content" itemprop="postContent">
+
     
-    <div class="article-new-date">
-	<span> 
-	  发布时间: <time datetime="2020-06-03T06:09:25.000Z" itemprop="datePublished">2020-06-03</time>
-	   | 
-	  最近更新: <time datetime="2020-06-06T06:47:20.592Z" itemprop="datePublished">2020-06-06</time>
-  	</span>
-</div>
-    <div class="article-entry" itemprop="articleBody">
-      
         <h2 id="preface"><a class="markdownIt-Anchor" href="#preface"></a> Preface</h2>
 <p>A Paper A day Keep the Doctor Away。 今天的文章是：</p>
 <p>Dreaming to Distill: Data-free Knowledge Transfer via DeepInversion. (CVPR2020 Oral). <a href="https://arxiv.org/abs/1912.08795" target="_blank" rel="noopener">[paper]</a></p>
@@ -334,453 +576,188 @@
 </ul>
 </li>
 </ul>
-        
-          <p class="article-more-link">
-            <a href="/2020/06/03/RP-0603-DreamingToDistill/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="mercurixito.github.io/2020/06/03/RP-0603-DreamingToDistill/" data-id="ckb3tdmg80001x4uc9n0w2d06" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/APAD/" rel="tag">APAD</a></li></ul>
+    
 
-    </footer>
-  </div>
-  
+        <a href="/2020/06/03/RP-0603-DreamingToDistill/" class="post-more waves-effect waves-button">
+            阅读全文…
+        </a>
+    </div>
+    
+    <div class="post-footer">
+        
+	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/APAD/" rel="tag">APAD</a></li></ul>
+
+    </div>
+    
 </article>
 
+        </li>
+    
+        <li class="post-list-item fade">
+            <article id="post-RP-TCVAE"
+  class="article-card article-type-post" itemprop="blogPost">
 
-  
-    <article id="post-RP-TCVAE" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2020/05/08/RP-TCVAE/" class="article-date">
-  <time datetime="2020-05-08T02:43:43.000Z" itemprop="datePublished">2020-05-08</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
+    <div class="post-meta">
+        <time class="post-time" title="2020-05-08 10:43:43" datetime="2020-05-08T02:43:43.000Z"  itemprop="datePublished">2020-05-08</time>
+
         
+
+
+    </div>
+
+    
+
+
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/05/08/RP-TCVAE/">论文阅读： Isolating Sources of Disentanglement in VAEs</a>
-    </h1>
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/2020/05/08/RP-TCVAE/">论文阅读： Isolating Sources of Disentanglement in VAEs</a>
+    </h3>
   
 
-      </header>
+
+
+
+    <div class="post-content" id="post-content" itemprop="postContent">
+
     
-    <div class="article-new-date">
-	<span> 
-	  发布时间: <time datetime="2020-05-08T02:43:43.000Z" itemprop="datePublished">2020-05-08</time>
-	   | 
-	  最近更新: <time datetime="2020-05-10T08:09:58.529Z" itemprop="datePublished">2020-05-10</time>
-  	</span>
-</div>
-    <div class="article-entry" itemprop="articleBody">
-      
         <p>本周阅读的是&quot;Isolating Sources of Disentanglement in VAEs&quot;。</p>
 <p>本文是一篇典型的探索VAE损失函数，促进模型的Disentangled Representation的文章。这类文章的套路是：从损失函数的KL项中<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>q</mi><mo stretchy="false">(</mo><mi>z</mi><mi mathvariant="normal">∣</mi><mi>x</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">{q(z | x)}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.03588em;">q</span><span class="mopen">(</span><span class="mord mathdefault" style="margin-right:0.04398em;">z</span><span class="mord">∣</span><span class="mord mathdefault">x</span><span class="mclose">)</span></span></span></span></span>贴合的分布形式出发，提出一种直觉上看起来合理的损失函数形式，在几个ToyDataset上报告看起来还不错的结果就完事。本文对KL项的分解借鉴了几篇之前的文献，比较可取，同时比较符合直观感受，而且近似计算上下了很大的功夫，对比实验也比较详实。公式看的我比较辛苦。。。。</p>
-        
-          <p class="article-more-link">
-            <a href="/2020/05/08/RP-TCVAE/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="mercurixito.github.io/2020/05/08/RP-TCVAE/" data-id="ckb3tdmhp001ax4uc33xx0nko" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Disentangled-Representation-Learning/" rel="tag">Disentangled Representation Learning</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Paper-Reading/" rel="tag">Paper Reading</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/VAE/" rel="tag">VAE</a></li></ul>
+    
 
-    </footer>
-  </div>
-  
+        <a href="/2020/05/08/RP-TCVAE/" class="post-more waves-effect waves-button">
+            阅读全文…
+        </a>
+    </div>
+    
+    <div class="post-footer">
+        
+	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Disentangled-Representation-Learning/" rel="tag">Disentangled Representation Learning</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Paper-Reading/" rel="tag">Paper Reading</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/VAE/" rel="tag">VAE</a></li></ul>
+
+    </div>
+    
 </article>
 
+        </li>
+    
+    </ul>
 
-  
-    <article id="post-Resources-VAE" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2020/05/05/Resources-VAE/" class="article-date">
-  <time datetime="2020-05-05T14:43:07.000Z" itemprop="datePublished">2020-05-05</time>
-</a>
     
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/05/05/Resources-VAE/">Resources： VAE</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-new-date">
-	<span> 
-	  发布时间: <time datetime="2020-05-05T14:43:07.000Z" itemprop="datePublished">2020-05-05</time>
-	   | 
-	  最近更新: <time datetime="2020-06-14T02:56:11.627Z" itemprop="datePublished">2020-06-14</time>
-  	</span>
-</div>
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="vae"><a class="markdownIt-Anchor" href="#vae"></a> VAE</h2>
-<p>VAE 最通常联系的topic有：</p>
-<ul>
-<li>Disentangled Representation Learning.</li>
-<li>Image Generation. 趋势是VAE和GAN模型的融合，优势互补。</li>
-</ul>
-        
-          <p class="article-more-link">
-            <a href="/2020/05/05/Resources-VAE/#more">Read More</a>
-          </p>
-        
-      
+<nav id="page-nav">
+    <div class="inner">
+    <a class="extend prev" rel="prev" href="/">上一页</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/3/">下一页</a>
     </div>
-    <footer class="article-footer">
-      <a data-url="mercurixito.github.io/2020/05/05/Resources-VAE/" data-id="ckb3tdmi2001px4uch2nz1z74" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/VAE/" rel="tag">VAE</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/resources/" rel="tag">resources</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-RP-betaVAE" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2020/05/01/RP-betaVAE/" class="article-date">
-  <time datetime="2020-05-01T08:46:30.000Z" itemprop="datePublished">2020-05-01</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/05/01/RP-betaVAE/">论文阅读： ${beta}$-VAE： Learning Basic Visual Concepts with a constrained variational framework.</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-new-date">
-	<span> 
-	  发布时间: <time datetime="2020-05-01T08:46:30.000Z" itemprop="datePublished">2020-05-01</time>
-	   | 
-	  最近更新: <time datetime="2020-05-10T02:45:02.242Z" itemprop="datePublished">2020-05-10</time>
-  	</span>
-</div>
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>本周阅读的是&quot;<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>β</mi></mrow><annotation encoding="application/x-tex">{\beta}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.05278em;">β</span></span></span></span></span>-VAE:Learning Basic Visual Concepts with a constrained variational framework&quot;。</p>
-<p>本文是Disentangled Representation领域中比较有代表性的文章，首先VAE模型本身有利于学习disentangled隐编码表示（由于Encoder,Decoder结构和变分下界损失），而作者提出的<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>β</mi></mrow><annotation encoding="application/x-tex">{\beta}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.05278em;">β</span></span></span></span></span>-VAE，通过加强分量独立性限制的方式增强了VAE模型的disentangle能力，但是对<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>β</mi></mrow><annotation encoding="application/x-tex">{\beta}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.05278em;">β</span></span></span></span></span>所起的作用分析还不够清楚。</p>
-        
-          <p class="article-more-link">
-            <a href="/2020/05/01/RP-betaVAE/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="mercurixito.github.io/2020/05/01/RP-betaVAE/" data-id="ckb3tdmi8001zx4uc0oaw3pmd" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Disentangled-Representation-Learning/" rel="tag">Disentangled Representation Learning</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Paper-Reading/" rel="tag">Paper Reading</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/VAE/" rel="tag">VAE</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-Resources-Controlling-GAN" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2020/04/26/Resources-Controlling-GAN/" class="article-date">
-  <time datetime="2020-04-26T15:26:42.000Z" itemprop="datePublished">2020-04-26</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/04/26/Resources-Controlling-GAN/">Resources： Controlling GAN</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-new-date">
-	<span> 
-	  发布时间: <time datetime="2020-04-26T15:26:42.000Z" itemprop="datePublished">2020-04-26</time>
-	   | 
-	  最近更新: <time datetime="2020-05-07T08:49:20.181Z" itemprop="datePublished">2020-05-07</time>
-  	</span>
-</div>
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>最近阅读的文章围绕的主题是：<strong>对pre-trained的GAN，通过在隐空间移动原始的隐编码，完成原图像的某种操作。</strong></p>
-<p>Wrt. one pre-trained GAN model, we would like to get edited images, which orginally generated by some latent codes through GAN, by simply moving the original latent codes in the latent space and passing them through GAN.</p>
-<p>这种操作包括：</p>
-<ul>
-<li>语义编辑</li>
-<li>图像变换</li>
-</ul>
-<p>而在语义编辑方向，势必要涉及到Disentangled Representation的问题。</p>
-        
-          <p class="article-more-link">
-            <a href="/2020/04/26/Resources-Controlling-GAN/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="mercurixito.github.io/2020/04/26/Resources-Controlling-GAN/" data-id="ckb3tdmhx001ix4uceefj8d73" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/GAN/" rel="tag">GAN</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/topic-sorted/" rel="tag">topic sorted</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/unsupervised-gan-controlling/" rel="tag">unsupervised gan controlling</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-RP-GANSpace" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2020/04/24/RP-GANSpace/" class="article-date">
-  <time datetime="2020-04-24T08:46:18.000Z" itemprop="datePublished">2020-04-24</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/04/24/RP-GANSpace/">论文阅读： GANSpace： Discovering Intrepretable GAN controls</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-new-date">
-	<span> 
-	  发布时间: <time datetime="2020-04-24T08:46:18.000Z" itemprop="datePublished">2020-04-24</time>
-	   | 
-	  最近更新: <time datetime="2020-05-10T01:45:00.534Z" itemprop="datePublished">2020-05-10</time>
-  	</span>
-</div>
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>本周阅读的文献是：“GANSpace： Discovering Intrepretable GAN controls”。</p>
-<p>本文作者提出用PCA寻找latent space上有意义的语义变换方向，对以StyleGAN和BigGAN为代表的两类模型分别提出了对<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi mathvariant="script">W</mi></mrow><annotation encoding="application/x-tex">{\mathcal{W}}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord"><span class="mord"><span class="mord mathcal" style="margin-right:0.08222em;">W</span></span></span></span></span></span>隐空间分解和输出激活分解的方法，然后对得到的主成分方向的语义进行了定性分析。最后作者提出了一种比较novel的Layer-wise Edit方法，使得BigGAN可以像StyleGAN一样通过不同层注入的噪声改变输出的图像的不同尺度的细节。</p>
-        
-          <p class="article-more-link">
-            <a href="/2020/04/24/RP-GANSpace/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="mercurixito.github.io/2020/04/24/RP-GANSpace/" data-id="ckb3tdmhm0018x4ucfner03i4" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/GAN/" rel="tag">GAN</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/unsupervised-gan-controlling/" rel="tag">unsupervised gan controlling</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-
-
-  <nav id="page-nav">
-    
-    <a class="extend prev" rel="prev" href="/">&amp;laquo; 上一页</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/3/">下一页 &amp;raquo;</a>
-  </nav>
-
-</section>
-        
-          <aside id="sidebar">
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">最近更新文章</h3>
-    <div class="widget">
-      <ul>
-        
-          <li>
-            <a href="/2020/07/17/Stereo-200717/">基于双目视觉的景深估计</a>
-          </li>
-        
-          <li>
-            <a href="/2020/07/17/SPM-200717/">基于BoW特征的图像分类(1)</a>
-          </li>
-        
-          <li>
-            <a href="/2020/07/17/SPM2-200717/">基于BoW特征的图像分类(2) —— 空间金字塔匹配</a>
-          </li>
-        
-          <li>
-            <a href="/2020/06/26/RP-200626-FewLabels/">Weekly Paper： Disentangling Factors of Variatons Using Few Labels</a>
-          </li>
-        
-          <li>
-            <a href="/2020/06/21/RP-200621-ALAE/">每日文章： Adversarial Latent Autoencoders</a>
-          </li>
-        
-      </ul>
-    </div>
-  </div>
-
-  
-    
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">标签</h3>
-    <div class="widget">
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/APAD/" rel="tag">APAD</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/AutoEncoder/" rel="tag">AutoEncoder</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Disentangled-Representation-Learning/" rel="tag">Disentangled Representation Learning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GAN/" rel="tag">GAN</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linear-Algebra/" rel="tag">Linear Algebra</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mathematic/" rel="tag">Mathematic</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Object-Detection/" rel="tag">Object Detection</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Paper-Reading/" rel="tag">Paper Reading</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Probability/" rel="tag">Probability</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spatial-Pyramid-Matching/" rel="tag">Spatial Pyramid Matching</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VAE/" rel="tag">VAE</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/disentanglement/" rel="tag">disentanglement</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/information-theory/" rel="tag">information theory</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mathematics/" rel="tag">mathematics</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/metrics/" rel="tag">metrics</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/resources/" rel="tag">resources</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/topic-sorted/" rel="tag">topic sorted</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/two-frame-stereo/" rel="tag">two-frame stereo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/unsupervised-gan-controlling/" rel="tag">unsupervised gan controlling</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9D%82%E8%B0%88/" rel="tag">杂谈</a></li></ul>
-    </div>
-  </div>
-
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">标签云</h3>
-    <div class="widget tagcloud">
-      <a href="/tags/APAD/" style="font-size: 16.67px;">APAD</a> <a href="/tags/AutoEncoder/" style="font-size: 10px;">AutoEncoder</a> <a href="/tags/Disentangled-Representation-Learning/" style="font-size: 18.33px;">Disentangled Representation Learning</a> <a href="/tags/GAN/" style="font-size: 20px;">GAN</a> <a href="/tags/Linear-Algebra/" style="font-size: 10px;">Linear Algebra</a> <a href="/tags/Mathematic/" style="font-size: 11.67px;">Mathematic</a> <a href="/tags/Object-Detection/" style="font-size: 11.67px;">Object Detection</a> <a href="/tags/Paper-Reading/" style="font-size: 16.67px;">Paper Reading</a> <a href="/tags/Probability/" style="font-size: 10px;">Probability</a> <a href="/tags/Spatial-Pyramid-Matching/" style="font-size: 10px;">Spatial Pyramid Matching</a> <a href="/tags/VAE/" style="font-size: 18.33px;">VAE</a> <a href="/tags/disentanglement/" style="font-size: 11.67px;">disentanglement</a> <a href="/tags/information-theory/" style="font-size: 10px;">information theory</a> <a href="/tags/mathematics/" style="font-size: 10px;">mathematics</a> <a href="/tags/metrics/" style="font-size: 11.67px;">metrics</a> <a href="/tags/resources/" style="font-size: 13.33px;">resources</a> <a href="/tags/topic-sorted/" style="font-size: 11.67px;">topic sorted</a> <a href="/tags/two-frame-stereo/" style="font-size: 10px;">two-frame stereo</a> <a href="/tags/unsupervised-gan-controlling/" style="font-size: 15px;">unsupervised gan controlling</a> <a href="/tags/%E6%9D%82%E8%B0%88/" style="font-size: 13.33px;">杂谈</a>
-    </div>
-  </div>
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">归档</h3>
-    <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/07/">七月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/06/">六月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/05/">五月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">四月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">三月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">二月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">十月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">九月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">五月 2019</a></li></ul>
-    </div>
-  </div>
-
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">最新文章</h3>
-    <div class="widget">
-      <ul>
-        
-          <li>
-            <a href="/2020/07/17/SPM2-200717/">基于BoW特征的图像分类(2) —— 空间金字塔匹配</a>
-          </li>
-        
-          <li>
-            <a href="/2020/07/17/Stereo-200717/">基于双目视觉的景深估计</a>
-          </li>
-        
-          <li>
-            <a href="/2020/07/17/SPM-200717/">基于BoW特征的图像分类(1)</a>
-          </li>
-        
-          <li>
-            <a href="/2020/06/26/RP-200626-FewLabels/">Weekly Paper： Disentangling Factors of Variatons Using Few Labels</a>
-          </li>
-        
-          <li>
-            <a href="/2020/06/21/RP-200621-ALAE/">每日文章： Adversarial Latent Autoencoders</a>
-          </li>
-        
-      </ul>
-    </div>
-  </div>
-
-  
-</aside>
-        
-      </div>
-      <footer id="footer">
-  
-  <div class="outer">
-    <div id="footer-info" class="inner">
-      &copy; 2020 Victor Chen<br>
-      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a><br>
-      banner image from <a href="https://www.pixiv.net/artworks/80036479" target="_blank">This</a>
-    </div>
-  </div>
-</footer>
-    </div>
-    <nav id="mobile-nav">
-  
-    <a href="/" class="mobile-nav-link">Home</a>
-  
-    <a href="/archives" class="mobile-nav-link">Archives</a>
-  
 </nav>
-    
-
-<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
 
 
-  
-<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+</div>
 
-  
-<script src="/fancybox/jquery.fancybox.pack.js"></script>
+        <footer class="footer">
+    <div class="top">
+        
+
+        <p>
+            
+            <span>博客内容遵循 <a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>Victor Chen &copy; 2020</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=mercurixito.github.io/page/2/&title=Hako&pic=mercurixito.github.io/img/nero.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=mercurixito.github.io/page/2/&title=Hako&source=無様だ" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=mercurixito.github.io/page/2/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=Hako&url=mercurixito.github.io/page/2/&via=mercurixito.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=mercurixito.github.io/page/2/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=mercurixito.github.io/page/2/" alt="微信分享二维码">
+</div>
 
 
 
 
-<script src="/js/script.js"></script>
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
 
 
-
-
-  </div><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
 </script>
 
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Queue(function() {
-    var all = MathJax.Hub.getAllJax(), i;
-    for(i=0; i < all.length; i += 1) {
-      all[i].SourceElement().parentNode.className += ' has-jax';
-    }
-  });
-</script>
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
 
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
-</script>
-<!-- End: Injected MathJax -->
-<!-- hexo-inject:end -->
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+
+
+
+
+
+
+
+
+
 </body>
 </html>
