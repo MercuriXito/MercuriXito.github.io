@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
+    <!-- for katex render -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css" integrity="sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3+Aro6EYUG4+cU+KJWu/X" crossorigin="anonymous">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.js" integrity="sha384-g7c+Jr9ZivxKLnZTDUhnkOnsh30B4H0rpLUpJ4jAIKs4fnJI+sEnkvrMWph2EDg4" crossorigin="anonymous"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/contrib/auto-render.min.js" integrity="sha384-mll67QQFJfxn0IYznZYonOWZ644AWYC+Pt2cHqMaRhXVrursRwvLnLaebdGIlYNa" crossorigin="anonymous"
+        onload="renderMathInElement(document.body);"></script>
+    
+    
+    
+    
+    <title>Metrics: mAP | Hako</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="metrics">
+    <meta name="description" content="指标：mAP  mAP 是目标检测、重识别等领域的重要指标。计算 mAP 的关键是计算 AP，而计算 AP 关键的是 TP, FP, FN 的定义，如果我们能够将一个输出序列标注为 TP, FN，并且得到它们的置信度，那么剩余的其实直接套公式计算即可。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Metrics: mAP">
+<meta property="og:url" content="mercurixito.github.io/2021/05/22/metric-map/index.html">
+<meta property="og:site_name" content="Hako">
+<meta property="og:description" content="指标：mAP  mAP 是目标检测、重识别等领域的重要指标。计算 mAP 的关键是计算 AP，而计算 AP 关键的是 TP, FP, FN 的定义，如果我们能够将一个输出序列标注为 TP, FN，并且得到它们的置信度，那么剩余的其实直接套公式计算即可。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-05-22T07:18:32.000Z">
+<meta property="article:modified_time" content="2021-05-22T09:19:14.655Z">
+<meta property="article:author" content="Victor Chen">
+<meta property="article:tag" content="metrics">
+<meta name="twitter:card" content="summary">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+<meta name="generator" content="Hexo 4.2.1"><!-- hexo-inject:begin --><!-- hexo-inject:end --></head>
+
+<body>
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/sun.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/nero.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Victor Chen</h5>
+          <a href="mailto:victor_tochen@foxmail.com" title="victor_tochen@foxmail.com" class="mail">victor_tochen@foxmail.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/MercuriXito" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">Metrics: mAP</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header", style="background-image: url(/img/sakura.png)">
+
+    <div class="container fade-scale">
+        <h1 class="title">Metrics: mAP</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2021-05-22T07:18:32.000Z" itemprop="datePublished" class="page-time">
+  2021-05-22
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/">基础知识</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#指标map"><span class="post-toc-number">1.</span> <span class="post-toc-text"> 指标：mAP</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#recallprecision-的计算"><span class="post-toc-number">2.</span> <span class="post-toc-text"> Recall&#x2F;Precision 的计算</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#apmap"><span class="post-toc-number">3.</span> <span class="post-toc-text"> AP&#x2F;mAP</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#理论计算"><span class="post-toc-number">3.1.</span> <span class="post-toc-text"> 理论计算</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#实际计算"><span class="post-toc-number">3.2.</span> <span class="post-toc-text"> 实际计算</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#map"><span class="post-toc-number">3.3.</span> <span class="post-toc-text"> mAP</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#其他任务下的-apmap"><span class="post-toc-number">4.</span> <span class="post-toc-text"> 其他任务下的 AP&#x2F;mAP</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#detection下的apmap"><span class="post-toc-number">4.1.</span> <span class="post-toc-text"> Detection下的AP&#x2F;mAP</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#reid下的map"><span class="post-toc-number">4.2.</span> <span class="post-toc-text"> ReID下的mAP</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#person-search-下的-map"><span class="post-toc-number">4.3.</span> <span class="post-toc-text"> Person Search 下的 mAP</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#map-涨点"><span class="post-toc-number">5.</span> <span class="post-toc-text"> mAP 涨点</span></a></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="posts-metric-map"
+  class="post-article article-type-posts fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">Metrics: mAP</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2021-05-22 15:18:32" datetime="2021-05-22T07:18:32.000Z"  itemprop="datePublished">2021-05-22</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/">基础知识</a></li></ul>
+
+
+
+            
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h2 id="指标map"><a class="markdownIt-Anchor" href="#指标map"></a> 指标：mAP</h2>
+<hr />
+<p>mAP 是目标检测、重识别等领域的重要指标。计算 mAP 的关键是计算 AP，而计算 AP 关键的是 TP, FP, FN 的定义，如果我们能够将一个输出序列标注为 TP, FN，并且得到它们的置信度，那么剩余的其实直接套公式计算即可。</p>
+<a id="more"></a>
+<h2 id="recallprecision-的计算"><a class="markdownIt-Anchor" href="#recallprecision-的计算"></a> Recall/Precision 的计算</h2>
+<hr />
+<p><strong>1. TP/FP/TN/FN的定义</strong></p>
+<p>首先我们要知道 T/F, P/N 的定义：</p>
+<ul>
+<li>Positive or Negative: 表示分类给出的结果</li>
+<li>True or False: 表示分类结果是否正确</li>
+</ul>
+<p>那么组合以下：</p>
+<ul>
+<li>TP: True Positive;</li>
+<li>FP: False Positive;</li>
+<li>TN: True Negative;</li>
+<li><strong>FN: False Negative; 表示分为负样本，但是分错的样本 =&gt; 真实值为正样本</strong></li>
+</ul>
+<p>所以易得 Precision 和 Recall 的公式：</p>
+<p class='katex-block'><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mtable rowspacing="0.24999999999999992em" columnalign="right left" columnspacing="0em"><mtr><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow><mi>P</mi><mi>r</mi><mi>e</mi><mi>c</mi><mi>i</mi><mi>s</mi><mi>i</mi><mi>o</mi><mi>n</mi></mrow></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow><mrow></mrow><mo>=</mo><mfrac><mrow><mi>T</mi><mi>P</mi></mrow><mrow><mi>T</mi><mi>P</mi><mo>+</mo><mi>F</mi><mi>P</mi></mrow></mfrac></mrow></mstyle></mtd></mtr><mtr><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow><mi>R</mi><mi>e</mi><mi>c</mi><mi>a</mi><mi>l</mi><mi>l</mi></mrow></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow><mrow></mrow><mo>=</mo><mfrac><mrow><mi>T</mi><mi>P</mi></mrow><mrow><mi>T</mi><mi>P</mi><mo>+</mo><mi>F</mi><mi>N</mi></mrow></mfrac></mrow></mstyle></mtd></mtr></mtable><annotation encoding="application/x-tex">{
+    \begin{aligned}
+    Precision &amp;= \frac{TP}{TP + FP} \\
+    Recall &amp;= \frac{TP}{TP + FN} \\
+    \end{aligned}
+}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:4.85932em;vertical-align:-2.17966em;"></span><span class="mord"><span class="mord"><span class="mtable"><span class="col-align-r"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:2.67966em;"><span style="top:-4.67966em;"><span class="pstrut" style="height:3.3603300000000003em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.13889em;">P</span><span class="mord mathdefault" style="margin-right:0.02778em;">r</span><span class="mord mathdefault">e</span><span class="mord mathdefault">c</span><span class="mord mathdefault">i</span><span class="mord mathdefault">s</span><span class="mord mathdefault">i</span><span class="mord mathdefault">o</span><span class="mord mathdefault">n</span></span></span><span style="top:-2.25em;"><span class="pstrut" style="height:3.3603300000000003em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.00773em;">R</span><span class="mord mathdefault">e</span><span class="mord mathdefault">c</span><span class="mord mathdefault">a</span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:2.17966em;"><span></span></span></span></span></span><span class="col-align-l"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:2.67966em;"><span style="top:-4.67966em;"><span class="pstrut" style="height:3.3603300000000003em;"></span><span class="mord"><span class="mord"></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.36033em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.13889em;">T</span><span class="mord mathdefault" style="margin-right:0.13889em;">P</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mord mathdefault" style="margin-right:0.13889em;">F</span><span class="mord mathdefault" style="margin-right:0.13889em;">P</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.13889em;">T</span><span class="mord mathdefault" style="margin-right:0.13889em;">P</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.7693300000000001em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span><span style="top:-2.25em;"><span class="pstrut" style="height:3.3603300000000003em;"></span><span class="mord"><span class="mord"></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.36033em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.13889em;">T</span><span class="mord mathdefault" style="margin-right:0.13889em;">P</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mord mathdefault" style="margin-right:0.13889em;">F</span><span class="mord mathdefault" style="margin-right:0.10903em;">N</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.13889em;">T</span><span class="mord mathdefault" style="margin-right:0.13889em;">P</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.7693300000000001em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:2.17966em;"><span></span></span></span></span></span></span></span></span></span></span></span></span></p>
+<p>通俗地说：</p>
+<ul>
+<li>Recall: 真实的样本被分对了多少</li>
+<li>Precision: 分类的结果中有多少是对的</li>
+</ul>
+<p>多分类情况下，对各类，recall 选出真实值为第 i 类的样本，输出 accuracy，precision 选出预测结果为第 i 类的样本，输出 accuracy。</p>
+<p><strong>计算:</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line">num_classes = <span class="number">3</span></span><br><span class="line">num_samples = <span class="number">100</span></span><br><span class="line">samples = np.random.randint(<span class="number">0</span>, num_classes, (num_samples, ))  <span class="comment"># ground truth</span></span><br><span class="line">results = np.random.randint(<span class="number">0</span>, num_classes, (num_samples, ))</span><br><span class="line"></span><br><span class="line"><span class="comment"># precision</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(num_classes):</span><br><span class="line">    pos = np.where(results == i)</span><br><span class="line">    sample = samples[pos]</span><br><span class="line">    acc = ((sample == i).sum() / sample.size)</span><br><span class="line">    print(acc)</span><br><span class="line"></span><br><span class="line"><span class="comment"># recall</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(num_classes):</span><br><span class="line">    pos = np.where(samples == i)</span><br><span class="line">    result = results[pos]</span><br><span class="line">    recall = ((result == i).sum() / result.size)</span><br><span class="line">    print(recall)</span><br><span class="line"></span><br><span class="line"><span class="comment"># total accuracy</span></span><br><span class="line">accuracy = (samples == results).sum() / results.size</span><br><span class="line"></span><br><span class="line"><span class="comment"># 验证</span></span><br><span class="line"><span class="keyword">from</span> sklearn.metrics <span class="keyword">import</span> recall_score, precision_score \</span><br><span class="line">    accuracy_score</span><br><span class="line">print(recall_score(samples, results, average=<span class="literal">None</span>))</span><br><span class="line">print(precision_score(samples, results, average=<span class="literal">None</span>))</span><br><span class="line">print(accuracy_score(samples, results))</span><br></pre></td></tr></table></figure>
+<h2 id="apmap"><a class="markdownIt-Anchor" href="#apmap"></a> AP/mAP</h2>
+<hr />
+<ul>
+<li>AP: 仅在二分类下使用，表示 Precision-Recall(P-R)曲线下的面积</li>
+<li>mAP: 多分类下使用，每类的 AP 的平均</li>
+</ul>
+<p>二分类情况下AP:</p>
+<h3 id="理论计算"><a class="markdownIt-Anchor" href="#理论计算"></a> 理论计算</h3>
+<p>给定 ground truth: <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo stretchy="false">{</mo><mn>0</mn><mo separator="true">,</mo><mn>1</mn><msubsup><mo stretchy="false">}</mo><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mi>N</mi></msubsup></mrow><annotation encoding="application/x-tex">{\{0, 1\}_{i=1}^{N}}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.0999949999999998em;vertical-align:-0.258664em;"></span><span class="mord"><span class="mopen">{</span><span class="mord">0</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord">1</span><span class="mclose"><span class="mclose">}</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.8413309999999999em;"><span style="top:-2.441336em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">i</span><span class="mrel mtight">=</span><span class="mord mtight">1</span></span></span></span><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight" style="margin-right:0.10903em;">N</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.258664em;"><span></span></span></span></span></span></span></span></span></span></span>，模型预测的概率为 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo stretchy="false">[</mo><mn>0</mn><mo separator="true">,</mo><mn>1</mn><msubsup><mo stretchy="false">]</mo><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mi>N</mi></msubsup></mrow><annotation encoding="application/x-tex">{[0, 1]_{i=1}^{N}}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.0999949999999998em;vertical-align:-0.258664em;"></span><span class="mord"><span class="mopen">[</span><span class="mord">0</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord">1</span><span class="mclose"><span class="mclose">]</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.8413309999999999em;"><span style="top:-2.441336em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">i</span><span class="mrel mtight">=</span><span class="mord mtight">1</span></span></span></span><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight" style="margin-right:0.10903em;">N</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.258664em;"><span></span></span></span></span></span></span></span></span></span></span>，调整 threshold 可以得到不同的 precision/recall，构成 P-R 曲线，计算曲线下的面积即为 AP。</p>
+<p>理解：precision, recall 仅针对正类，根据 precision 和 recall 的公式：</p>
+<p class='katex-block'><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mtable rowspacing="0.24999999999999992em" columnalign="right left" columnspacing="0em"><mtr><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow><mi>P</mi><mi>r</mi><mi>e</mi><mi>c</mi><mi>i</mi><mi>s</mi><mi>i</mi><mi>o</mi><mi>n</mi></mrow></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow><mrow></mrow><mo>=</mo><mfrac><mrow><mi>T</mi><mi>P</mi></mrow><mrow><mi>T</mi><mi>P</mi><mo>+</mo><mi>F</mi><mi>P</mi></mrow></mfrac></mrow></mstyle></mtd></mtr><mtr><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow><mi>R</mi><mi>e</mi><mi>c</mi><mi>a</mi><mi>l</mi><mi>l</mi></mrow></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow><mrow></mrow><mo>=</mo><mfrac><mrow><mi>T</mi><mi>P</mi></mrow><mrow><mi>T</mi><mi>P</mi><mo>+</mo><mi>F</mi><mi>N</mi></mrow></mfrac></mrow></mstyle></mtd></mtr></mtable><annotation encoding="application/x-tex">{
+    \begin{aligned}
+    Precision &amp;= \frac{TP}{TP + FP} \\
+    Recall &amp;= \frac{TP}{TP + FN} \\
+    \end{aligned}
+}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:4.85932em;vertical-align:-2.17966em;"></span><span class="mord"><span class="mord"><span class="mtable"><span class="col-align-r"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:2.67966em;"><span style="top:-4.67966em;"><span class="pstrut" style="height:3.3603300000000003em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.13889em;">P</span><span class="mord mathdefault" style="margin-right:0.02778em;">r</span><span class="mord mathdefault">e</span><span class="mord mathdefault">c</span><span class="mord mathdefault">i</span><span class="mord mathdefault">s</span><span class="mord mathdefault">i</span><span class="mord mathdefault">o</span><span class="mord mathdefault">n</span></span></span><span style="top:-2.25em;"><span class="pstrut" style="height:3.3603300000000003em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.00773em;">R</span><span class="mord mathdefault">e</span><span class="mord mathdefault">c</span><span class="mord mathdefault">a</span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:2.17966em;"><span></span></span></span></span></span><span class="col-align-l"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:2.67966em;"><span style="top:-4.67966em;"><span class="pstrut" style="height:3.3603300000000003em;"></span><span class="mord"><span class="mord"></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.36033em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.13889em;">T</span><span class="mord mathdefault" style="margin-right:0.13889em;">P</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mord mathdefault" style="margin-right:0.13889em;">F</span><span class="mord mathdefault" style="margin-right:0.13889em;">P</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.13889em;">T</span><span class="mord mathdefault" style="margin-right:0.13889em;">P</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.7693300000000001em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span><span style="top:-2.25em;"><span class="pstrut" style="height:3.3603300000000003em;"></span><span class="mord"><span class="mord"></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.36033em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.13889em;">T</span><span class="mord mathdefault" style="margin-right:0.13889em;">P</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mord mathdefault" style="margin-right:0.13889em;">F</span><span class="mord mathdefault" style="margin-right:0.10903em;">N</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.13889em;">T</span><span class="mord mathdefault" style="margin-right:0.13889em;">P</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.7693300000000001em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:2.17966em;"><span></span></span></span></span></span></span></span></span></span></span></span></span></p>
+<ul>
+<li><strong>recall 的分母和预测的结果无关，是定值，所以当 threshold 降低时，TP 的数量是非严格单调递增的，所以 recall 也是非严格单调递增的。特别的，当<code>threshold=1</code>时，<code>recall=0</code>，当 <code>threshold=0</code>时，<code>recall=1</code>。</strong></li>
+<li>precision 的分母和分子都和预测结果有关，所以值是波动的，特别的，当 <code>TP+FP=0</code> 时，规定 <code>precision = 1</code>。</li>
+</ul>
+<h3 id="实际计算"><a class="markdownIt-Anchor" href="#实际计算"></a> 实际计算</h3>
+<hr />
+<p><strong>计算</strong></p>
+<p>可以用 scikit 的 <a href="https://scikit-learn.org/stable/modules/generated/sklearn.metrics.average_precision_score.html#sklearn.metrics.average_precision_score" target="_blank" rel="noopener">sklearn.metrics.average_precision_score</a> 计算 AP，输入为 <code>y_true</code>, <code>y_pred</code>。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">from</span> sklearn.metrics <span class="keyword">import</span> average_precision_score, precision_recall_curve</span><br><span class="line"></span><br><span class="line">samples = np.random.rand(<span class="number">100</span>, )</span><br><span class="line">samples[np.where(samples &gt; <span class="number">0.5</span>)] = <span class="number">1</span></span><br><span class="line">samples[np.where(samples &lt;= <span class="number">0.5</span>)] = <span class="number">0</span></span><br><span class="line">results = np.random.rand(<span class="number">100</span>, )</span><br><span class="line"></span><br><span class="line"><span class="comment"># AP</span></span><br><span class="line">ap = average_precision_score(samples, results)</span><br><span class="line">precisions, recalls, thresholds = precision_recall_curve(samples, results)</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line">plt.plot(recalls, precisions) <span class="comment"># recall 为 x 轴</span></span><br><span class="line">plt.xticks(np.linspace(<span class="number">0</span>, <span class="number">1</span>, <span class="number">11</span>))</span><br><span class="line">plt.yticks(np.linspace(<span class="number">0</span>, <span class="number">1</span>, <span class="number">11</span>))</span><br><span class="line">plt.xlabel(<span class="string">"recalls"</span>)</span><br><span class="line">plt.ylabel(<span class="string">"precisions"</span>)</span><br><span class="line">plt.xlim([<span class="number">0</span>, <span class="number">1</span>])</span><br><span class="line">plt.ylim([<span class="number">0</span>, <span class="number">1</span>])</span><br><span class="line">plt.tight_layout()</span><br><span class="line">plt.title(<span class="string">"P-R curve"</span>)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+<p><strong>深入实际计算</strong></p>
+<ol>
+<li>如果我们有 (precision, recall) 对，计算 AP：</li>
+</ol>
+<p>实际上 <code>average_precision_score</code> 不进行插值计算面积，而是采用以下的公式:</p>
+<p class='katex-block'><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>A</mi><mi>P</mi><mo>=</mo><munder><mo>∑</mo><mi>n</mi></munder><mo stretchy="false">(</mo><msub><mi>R</mi><mi>n</mi></msub><mo>−</mo><msub><mi>R</mi><mrow><mi>n</mi><mo>−</mo><mn>1</mn></mrow></msub><mo stretchy="false">)</mo><msub><mi>P</mi><mi>n</mi></msub></mrow><annotation encoding="application/x-tex">{
+    AP = \sum_{n}(R_n - R_{n-1}) P_n
+}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:2.3000100000000003em;vertical-align:-1.250005em;"></span><span class="mord"><span class="mord mathdefault">A</span><span class="mord mathdefault" style="margin-right:0.13889em;">P</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mop op-limits"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.050005em;"><span style="top:-1.8999949999999999em;margin-left:0em;"><span class="pstrut" style="height:3.05em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">n</span></span></span></span><span style="top:-3.0500049999999996em;"><span class="pstrut" style="height:3.05em;"></span><span><span class="mop op-symbol large-op">∑</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:1.250005em;"><span></span></span></span></span></span><span class="mopen">(</span><span class="mord"><span class="mord mathdefault" style="margin-right:0.00773em;">R</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:-0.00773em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">n</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.00773em;">R</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.301108em;"><span style="top:-2.5500000000000003em;margin-left:-0.00773em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">n</span><span class="mbin mtight">−</span><span class="mord mtight">1</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.208331em;"><span></span></span></span></span></span></span><span class="mclose">)</span><span class="mord"><span class="mord mathdefault" style="margin-right:0.13889em;">P</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:-0.13889em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">n</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span></span></span></p>
+<p>其中 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>R</mi><mi>n</mi></msub><mo separator="true">,</mo><msub><mi>P</mi><mi>n</mi></msub></mrow><annotation encoding="application/x-tex">{R_n, P_n}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8777699999999999em;vertical-align:-0.19444em;"></span><span class="mord"><span class="mord"><span class="mord mathdefault" style="margin-right:0.00773em;">R</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:-0.00773em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">n</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.13889em;">P</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:-0.13889em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">n</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span></span> 是不同 thresholds 下得到的 P-R 对（<strong>并且按 recall 的升序排列</strong>），相当于计算多个矩形的面积，而且矩形的高是右边的数值（如果用左边的话会感觉虚高）。 而且从公式中可以看成是 precisions 的加权平均。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 假设已有 precisions 和 recalls</span></span><br><span class="line"><span class="comment"># way1</span></span><br><span class="line">tres = <span class="number">0.0</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(len(precisions)<span class="number">-1</span>):</span><br><span class="line">    tres += (recalls[i+<span class="number">1</span>] - recall[i]) * precisions[i+<span class="number">1</span>]</span><br><span class="line"><span class="comment"># way2: 更简洁</span></span><br><span class="line">ttres = np.sum((recalls[<span class="number">1</span>:] - recalls[:<span class="number">-1</span>]) * precisions[<span class="number">1</span>:])</span><br><span class="line"><span class="keyword">assert</span> (tres - ttres).sum() == <span class="number">0</span></span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li><strong>更加快速的计算方式：</strong></li>
+</ol>
+<p>如何得到 precision 和 recall 对？ 一种广泛使用的方法是将阈值直接取为 <code>y_pred</code>，而且 <code>y_pred</code> 从大到小排序，每次得到一对 precision 和 recall，这种方法可以很更快地计算 TP, FP 等值。</p>
+<p>如下表：是一个向下累加的过程：</p>
+<table>
+<thead>
+<tr>
+<th>y_pred</th>
+<th>y_true</th>
+<th>threshold</th>
+<th>TP</th>
+<th>FP</th>
+<th>TP + FP</th>
+<th>FN + TP</th>
+<th>recall</th>
+<th>precision</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0.98255475</td>
+<td>0</td>
+<td>0.98255475</td>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+<td>2</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<td>0.96782305</td>
+<td>0</td>
+<td>0.96782305</td>
+<td>0</td>
+<td>2</td>
+<td>2</td>
+<td>2</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<td>0.95248108</td>
+<td>1</td>
+<td>0.95248108</td>
+<td>1</td>
+<td>2</td>
+<td>3</td>
+<td>2</td>
+<td>0.33</td>
+<td>0.5</td>
+</tr>
+<tr>
+<td>0.94590941</td>
+<td>1</td>
+<td>0.94590941</td>
+<td>2</td>
+<td>2</td>
+<td>4</td>
+<td>2</td>
+<td>0.5</td>
+<td>1</td>
+</tr>
+<tr>
+<td>0.90657107</td>
+<td>0</td>
+<td>0.90657107</td>
+<td>2</td>
+<td>3</td>
+<td>5</td>
+<td>2</td>
+<td>0.4</td>
+<td>1</td>
+</tr>
+</tbody>
+</table>
+<p>随着阈值从大到小被取为不同的 <code>y_pred</code>:</p>
+<ul>
+<li>TP 其实就是 <code>y_true</code> 的累加值</li>
+<li>TP + FP 其实就是当前阈值下所有预测结果为 1 的样本数量，也就是表格中阈值以上的所有样本的数量，就是 1,2,3, …</li>
+<li><code>TP + FN</code> 就是 <code>y_true</code> 的和，表示所有真实值为 1 的样本个数，是不变的</li>
+<li>最后我们还需要添加 <code>threshold=1</code> 的情况（并不在上面表格中），此时 precsion, recall 为 (1, 0)。</li>
+</ul>
+<p>完整代码即为：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">from</span> sklearn.metrics <span class="keyword">import</span> average_precision_score</span><br><span class="line"></span><br><span class="line"><span class="comment"># 样本</span></span><br><span class="line">samples = np.random.rand(<span class="number">100</span>, )</span><br><span class="line">samples[np.where(samples &gt; <span class="number">0.5</span>)] = <span class="number">1</span></span><br><span class="line">samples[np.where(samples &lt;= <span class="number">0.5</span>)] = <span class="number">0</span></span><br><span class="line">results = np.random.rand(<span class="number">100</span>, )</span><br><span class="line"></span><br><span class="line"><span class="comment"># AP</span></span><br><span class="line">ap = average_precision_score(samples, results)</span><br><span class="line"></span><br><span class="line"><span class="comment"># handcraft AP</span></span><br><span class="line">indices = results.argsort()[::<span class="number">-1</span>]</span><br><span class="line">y_true = samples[indices]</span><br><span class="line">y_pred = results[indices]</span><br><span class="line"></span><br><span class="line"><span class="comment"># precisions and recalls pair</span></span><br><span class="line">precisions = np.ones((len(y_true) + <span class="number">1</span>, ))</span><br><span class="line">recalls = np.zeros_like(precisions)</span><br><span class="line">tp = np.cumsum(y_true)</span><br><span class="line">tp_plus_fp = np.cumsum(np.ones((len(y_true), )))</span><br><span class="line">precisions[<span class="number">1</span>:] = tp / tp_plus_fp</span><br><span class="line">recalls[<span class="number">1</span>:] = tp / y_true.sum()</span><br><span class="line"></span><br><span class="line"><span class="comment"># AP</span></span><br><span class="line">tap = ((recalls[<span class="number">1</span>:] - recalls[:<span class="number">-1</span>]) * precisions[<span class="number">1</span>:]).sum()</span><br><span class="line"><span class="keyword">assert</span> (tap - ap).sum() == <span class="number">0</span>  <span class="comment"># 和之前的结果一致</span></span><br></pre></td></tr></table></figure>
+<p>在不同任务下的 AP 计算可以采用相似的办法，不同点在于 TP, FP 怎么取。</p>
+<h3 id="map"><a class="markdownIt-Anchor" href="#map"></a> mAP</h3>
+<hr />
+<p>mAP (mean Average Precision)，顾名思义，就是 AP 的平均。在多分类任务下，我们对每个类别计算一个 AP 值，然后取平均，得到 mAP。</p>
+<p>假设我们得到的输出为矩阵 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>Y</mi><mo>∈</mo><msup><mi mathvariant="double-struck">R</mi><mrow><mi>N</mi><mo>×</mo><mi>C</mi></mrow></msup></mrow><annotation encoding="application/x-tex">{Y \in \mathbb{R}^{N \times C}}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.880431em;vertical-align:-0.0391em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.22222em;">Y</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">∈</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mord"><span class="mord"><span class="mord mathbb">R</span></span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8413309999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight" style="margin-right:0.10903em;">N</span><span class="mbin mtight">×</span><span class="mord mathdefault mtight" style="margin-right:0.07153em;">C</span></span></span></span></span></span></span></span></span></span></span></span></span>，N 表示样本个数，C 表示类别个数，<span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>y</mi><mrow><mi>i</mi><mo separator="true">,</mo><mi>j</mi></mrow></msub></mrow><annotation encoding="application/x-tex">{y_{i,j}}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.716668em;vertical-align:-0.286108em;"></span><span class="mord"><span class="mord"><span class="mord mathdefault" style="margin-right:0.03588em;">y</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.311664em;"><span style="top:-2.5500000000000003em;margin-left:-0.03588em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">i</span><span class="mpunct mtight">,</span><span class="mord mathdefault mtight" style="margin-right:0.05724em;">j</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.286108em;"><span></span></span></span></span></span></span></span></span></span></span> 表示为第 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>i</mi></mrow><annotation encoding="application/x-tex">{i}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.65952em;vertical-align:0em;"></span><span class="mord"><span class="mord mathdefault">i</span></span></span></span></span> 个样本被分为第 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>j</mi></mrow><annotation encoding="application/x-tex">{j}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.85396em;vertical-align:-0.19444em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.05724em;">j</span></span></span></span></span> 类的置信度。</p>
+<ul>
+<li>首先根据置信度，我们根据每个样本的置信度将它分类为置信度最高的那一类，并得到相应的置信度。</li>
+<li>对单个类别计算 AP，我们仅针对所有被模型分为该类的样本，<code>y_pred</code> 就是每个样本的置信度，而 <code>y_true</code> 就是该样本是否被正确分类。带入 <code>average_precision_score</code> 即可得到。</li>
+</ul>
+<p>见以下代码:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">from</span> sklearn.metrics <span class="keyword">import</span> average_precision_score</span><br><span class="line"></span><br><span class="line">num_classes = <span class="number">10</span></span><br><span class="line">num_samples = <span class="number">1000</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 样本</span></span><br><span class="line">samples = np.random.randint(<span class="number">0</span>, num_classes, (num_samples, ))</span><br><span class="line">results = np.random.rand(num_samples, num_classes)</span><br><span class="line">results = results / results.sum(axis=<span class="number">1</span>).reshape(num_samples, <span class="number">1</span>)</span><br><span class="line">y_predict_clss = np.argmax(results, axis=<span class="number">1</span>)</span><br><span class="line">y_predict = np.max(results, axis=<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">APs = []</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(num_classes):  <span class="comment"># AP for each class</span></span><br><span class="line">    indices = np.where(y_predict_clss == i)</span><br><span class="line">    y_pred = y_predict[indices]</span><br><span class="line">    y_true = (samples[indices] == i)</span><br><span class="line">    ap = average_precision_score(y_true, y_pred)</span><br><span class="line">    APs.append(ap)</span><br><span class="line">mAP = np.asarray(APs).mean()</span><br></pre></td></tr></table></figure>
+<h2 id="其他任务下的-apmap"><a class="markdownIt-Anchor" href="#其他任务下的-apmap"></a> 其他任务下的 AP/mAP</h2>
+<hr />
+<h3 id="detection下的apmap"><a class="markdownIt-Anchor" href="#detection下的apmap"></a> Detection下的AP/mAP</h3>
+<p>参考 <a href="https://github.com/open-mmlab/mmdetection/blob/master/mmdet/core/evaluation/mean_ap.py" target="_blank" rel="noopener">mmdetection 的evaluation</a>。</p>
+<p><strong>mAP 计算输入：</strong></p>
+<ul>
+<li>模型输出 boxes + pred_logits(N 类)，选取 confidence 最高的那类，得到 boxes + confidence + pred_classes</li>
+<li>ground truth: 每个 gt 框的 gt_boxes + gt_classes</li>
+</ul>
+<p><strong>计算过程：</strong></p>
+<ol>
+<li>
+<p>首先对单个 class i 计算 AP：</p>
+<ol>
+<li>筛选出每个 image 中 pred_classes 为 i 的数据: cls_dets</li>
+<li>筛选出每个 image 中 gt_classes 为 i 的数据: cls_gts</li>
+</ol>
+</li>
+<li>
+<p>对每张 image 进行 TP/FP 的分配：</p>
+<ol>
+<li>如果 gt 框的数量为 0，那么所有的 det 都分配为 FP（当然 det 的数量也可能为 0，那就什么都没有）。</li>
+<li>计算所有 gt_boxes 和 det_boxes 的 iou，得到 iou 的矩阵（MxN, M 为 det_boxes 的数量，N 对应 gt_boxes）</li>
+<li>对每个 det_boxes，选取和它最重叠的 gt_boxes ，得到两两的 pairs，进入下面的分配。</li>
+<li>按照 confidence 从大到小排序 det_boxes</li>
+<li>对每个 det_boxes，如果:
+<ul>
+<li>和 gt_boxes 的 iou 大于 iou_thresh： 如果 gt_boxes 已经在之前被匹配，那么标记为 fp，否则标记为 tp。</li>
+</ul>
+</li>
+</ol>
+</li>
+<li>
+<p>得到所有的 tp 和 fp，以及每个 boxes 的 confidence，各 concat 成一个向量。按照 confidence 从大到小的顺序排序 tp 和 fp，然后按照累加和的计算公式计算 tp 和 fp。</p>
+</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">precisions &#x3D; tp &#x2F; (tp + fp)</span><br><span class="line">recalls &#x3D; tp &#x2F; num_gt</span><br></pre></td></tr></table></figure>
+<ol start="4">
+<li>计算 ap，然后计算 mAP。</li>
+</ol>
+<p>除此之外，可能需要考虑的其他问题：</p>
+<ul>
+<li>规定 iou_thresh 如果小于某个值 <code>min_area</code>，对它忽略，因为可能检测到未标记的 gt 样本。</li>
+<li>计算 recalls 和 precisions 需要注意分母需要 eps。</li>
+<li>等等</li>
+</ul>
+<p>根据以上思路的<a href="https://gitee.com/victorchen_default/codes/xq4uz5f23tcjrnilhkwp859" target="_blank" rel="noopener">简单样例代码</a></p>
+<h3 id="reid下的map"><a class="markdownIt-Anchor" href="#reid下的map"></a> ReID下的mAP</h3>
+<hr />
+<p>ReID 下的 mAP 比较好理解，计算也更简单：就是对每个 probe，计算 AP，最后再对所有 probe 取平均。</p>
+<p>单个 probe 的 AP 计算：首先根据 ground truth，可以得到每个 gallery 的 gt_label 作为<code>y_true</code>，其次 gallery 和 probe 的 feature 计算相似度，得到预测概率作为 <code>y_pred</code>，就可以用于计算 AP。</p>
+<h3 id="person-search-下的-map"><a class="markdownIt-Anchor" href="#person-search-下的-map"></a> Person Search 下的 mAP</h3>
+<hr />
+<h2 id="map-涨点"><a class="markdownIt-Anchor" href="#map-涨点"></a> mAP 涨点</h2>
+<hr />
+<p>从 AP/mAP 的定义就可以看出，实际上 AP/mAP 不关心最终的置信度是多少，而关心样本置信度的相对大小（ recall threshold 从大取到小），我把这个样本的排列称为 <code>rank_list</code>。<strong>AP 涨点的关键就是要使得 TP 尽可能地排在 <code>rank_list</code> 的前面</strong>，当所有的 TP 都排在最前面时，AP 就可以达到最大值 1 。</p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2021-05-22T09:19:14.655Z" itemprop="dateUpdated">2021-05-22 17:19:14</time>
+</span><br>
+
+
+        
+    </div>
+    
+    <footer>
+        <a href="mercurixito.github.io">
+            <img src="/img/nero.jpg" alt="Victor Chen">
+            Victor Chen
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/metrics/" rel="tag">metrics</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=mercurixito.github.io/2021/05/22/metric-map/&title=《Metrics: mAP》 — Hako&pic=mercurixito.github.io/img/nero.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=mercurixito.github.io/2021/05/22/metric-map/&title=《Metrics: mAP》 — Hako&source= 指标：mAP
+
+mAP 是目标检测、重识别等领域的重要指标。计算 mAP 的关键是计算 AP，而计算 AP 关键的是 TP, FP, FN 的定义，如果..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=mercurixito.github.io/2021/05/22/metric-map/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Metrics: mAP》 — Hako&url=mercurixito.github.io/2021/05/22/metric-map/&via=mercurixito.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=mercurixito.github.io/2021/05/22/metric-map/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between flex-row-reverse">
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2020/10/28/RP-VPGAN/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">论文阅读： VPGAN</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+
+        <p>
+            
+            <span>博客内容遵循 <a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>Victor Chen &copy; 2020 - 2021</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=mercurixito.github.io/2021/05/22/metric-map/&title=《Metrics: mAP》 — Hako&pic=mercurixito.github.io/img/nero.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=mercurixito.github.io/2021/05/22/metric-map/&title=《Metrics: mAP》 — Hako&source= 指标：mAP
+
+mAP 是目标检测、重识别等领域的重要指标。计算 mAP 的关键是计算 AP，而计算 AP 关键的是 TP, FP, FN 的定义，如果..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=mercurixito.github.io/2021/05/22/metric-map/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Metrics: mAP》 — Hako&url=mercurixito.github.io/2021/05/22/metric-map/&via=mercurixito.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=mercurixito.github.io/2021/05/22/metric-map/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=mercurixito.github.io/2021/05/22/metric-map/" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>
