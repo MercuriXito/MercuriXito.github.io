@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
+    <!-- for katex render -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css" integrity="sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3+Aro6EYUG4+cU+KJWu/X" crossorigin="anonymous">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.js" integrity="sha384-g7c+Jr9ZivxKLnZTDUhnkOnsh30B4H0rpLUpJ4jAIKs4fnJI+sEnkvrMWph2EDg4" crossorigin="anonymous"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/contrib/auto-render.min.js" integrity="sha384-mll67QQFJfxn0IYznZYonOWZ644AWYC+Pt2cHqMaRhXVrursRwvLnLaebdGIlYNa" crossorigin="anonymous"
+        onload="renderMathInElement(document.body);"></script>
+    
+    
+    
+    
+    <title>NeurIPS 2020 Paper | Hako</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="GAN,NIPS">
+    <meta name="description" content="NeurIPS 2020 paper checker NeurIPS2020 的文章可参考以下的清单阅读不同方向的论文，这里我就按照我感兴趣的方向进行总结了。 部分的文章还没有放出来，所以先放在这。  AI科技评论">
+<meta property="og:type" content="article">
+<meta property="og:title" content="NeurIPS 2020 Paper">
+<meta property="og:url" content="mercurixito.github.io/2020/10/18/papers-checker-nips2020/index.html">
+<meta property="og:site_name" content="Hako">
+<meta property="og:description" content="NeurIPS 2020 paper checker NeurIPS2020 的文章可参考以下的清单阅读不同方向的论文，这里我就按照我感兴趣的方向进行总结了。 部分的文章还没有放出来，所以先放在这。  AI科技评论">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-10-18T19:55:30.000Z">
+<meta property="article:modified_time" content="2021-10-29T14:42:11.260Z">
+<meta property="article:author" content="Victor Chen">
+<meta property="article:tag" content="GAN">
+<meta property="article:tag" content="NIPS">
+<meta name="twitter:card" content="summary">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+<meta name="generator" content="Hexo 4.2.1"><!-- hexo-inject:begin --><!-- hexo-inject:end --></head>
+
+<body>
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/sun.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/nero.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Victor Chen</h5>
+          <a href="mailto:victor_tochen@foxmail.com" title="victor_tochen@foxmail.com" class="mail">victor_tochen@foxmail.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                Home
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/MercuriXito" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">NeurIPS 2020 Paper</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header", style="background-image: url(/img/sakura.png)">
+
+    <div class="container fade-scale">
+        <h1 class="title">NeurIPS 2020 Paper</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2020-10-18T19:55:30.000Z" itemprop="datePublished" class="page-time">
+  2020-10-18
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/papercheck/">论文整理</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#neurips-2020-paper-checker"><span class="post-toc-number">1.</span> <span class="post-toc-text"> NeurIPS 2020 paper checker</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#gan-related"><span class="post-toc-number">2.</span> <span class="post-toc-text"> GAN related</span></a></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-papers-checker-nips2020"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">NeurIPS 2020 Paper</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2020-10-18 19:55:30" datetime="2020-10-18T19:55:30.000Z"  itemprop="datePublished">2020-10-18</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/papercheck/">论文整理</a></li></ul>
+
+
+
+            
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h2 id="neurips-2020-paper-checker"><a class="markdownIt-Anchor" href="#neurips-2020-paper-checker"></a> NeurIPS 2020 paper checker</h2>
+<p>NeurIPS2020 的文章可参考以下的清单阅读不同方向的论文，这里我就按照我感兴趣的方向进行总结了。 部分的文章还没有放出来，所以先放在这。</p>
+<ul>
+<li><a href="https://mp.weixin.qq.com/s?__biz=MzA5ODEzMjIyMA==&amp;mid=2247546408&amp;idx=1&amp;sn=623c529a1be36c2612959eb57beceed7&amp;chksm=90943fbba7e3b6ade0e4b83cce1cd7eea9afd4c20fdc4e68c272e9c453702526e65a22bd37f4&amp;xtrack=1&amp;scene=0&amp;subscene=91&amp;sessionid=1603012860&amp;clicktime=1603012934&amp;enterid=1603012934&amp;ascene=7&amp;devicetype=android-28&amp;version=27001351&amp;nettype=WIFI&amp;abtest_cookie=AAACAA%3D%3D&amp;lang=ja&amp;exportkey=AVlHlnv43%2BTcB4dLQ7w6OVQ%3D&amp;pass_ticket=BwQrlraKIsImPs4IXVcM%2BRgoV1teIMbtUrpDteOYds4hG8BlarsHPJtXe1Q1YJvN&amp;wx_header=1" target="_blank" rel="noopener">AI科技评论</a></li>
+</ul>
+<a id="more"></a>
+<h2 id="gan-related"><a class="markdownIt-Anchor" href="#gan-related"></a> GAN related</h2>
+<ol>
+<li>BlockGAN: Learning 3D Object-aware Scene Representations from Unlabelled Images. <a href="https://arxiv.org/abs/2002.08988" target="_blank" rel="noopener">[paper]</a></li>
+</ol>
+<p>从 2D 图像中无监督地学习 3D 场景的表示学习。 本文主要提出了 BlockGAN 的架构，生成器首先将隐变量映射成背景、基本 3D 物体，再投影成 2D 图像。</p>
+<ol start="2">
+<li>CircleGAN: Generative Adversarial Learning across Spherical Circles.</li>
+</ol>
+<p>Not released.</p>
+<ol start="3">
+<li>COT-GAN: Generating Sequential Data via Causal Optimal Transport. <a href="https://arxiv.org/abs/2006.08571" target="_blank" rel="noopener">[paper]</a></li>
+</ol>
+<p>本文提出了 COT-GAN 用于序列数据的生成。本文基于最优运输理论提出一种新的 adversarial loss，并且根据序列的特点对运输增加了关于时间因果的限制，并且提出了改进的 Sinkorn divergence —— mixed Sinkorn divergence.</p>
+<p>序列数据的生成我还并不怎么了解，本文也比较偏理论，公式偏多，先 mark 下了。</p>
+<ol start="4">
+<li>GANSpace: Discovering Interpretable GAN Controls. <a href="https://arxiv.org/abs/2004.02546" target="_blank" rel="noopener">[paper]</a>.</li>
+</ol>
+<p>这篇不用说了，早已拜读了，见 <a href="https://mercurixito.github.io/2020/04/24/RP-GANSpace/">[Note]</a>，不过从格式上看，作者似乎是先投的 ECCV，然后转投的 NeurIPS ？</p>
+<ol start="5">
+<li>Improving GAN Training with Probability Ratio Clipping and Sample Reweighting. <a href="https://arxiv.org/abs/2006.06900" target="_blank" rel="noopener">[paper]</a></li>
+</ol>
+<p>本文还是从 G 和 D 的梯度角度提出了两个 tricks 稳定 GAN 的训练： (1) probability ratio clipping. (2) sample re-weighting: 将 D 输出的 samples的得分的 exponential value 作为梯度回传时的重要性，以减少较差的 fake samples 引起比较大的梯度。</p>
+<p>注： probabilty ratio clipping 是作者结合强化学习提出的稳定 G 的梯度的方法，强化学习我还不太了解，暂且放置不谈。</p>
+<ol start="6">
+<li>Instance Selection for GANs. <a href="https://arxiv.org/abs/2007.15255" target="_blank" rel="noopener">[paper]</a></li>
+</ol>
+<p>这一篇比较有意思。 为了提高生成图像的质量，现有的方法包括：拒绝不真实的生成样本 和 latent truncation。 作者认为GAN学习的这部分的样本变得非常多余了，使得模型存在冗余。 作者直接在<strong>数据集中剔除数据流形上low-density的样本</strong>，促使模型可以使用之前多余的模型容量学习 high-density 的样本。 当然我认为模型的多样性也会受到影响。</p>
+<ol start="7">
+<li>Top-k Training of GANs: Improving GAN Performance by Throwing Away Bad Samples. <a href="https://arxiv.org/abs/2002.06224" target="_blank" rel="noopener">[paper]</a> <strong>mark</strong></li>
+</ol>
+<p>这一篇稳定 GAN 的训练的方法非常非常简单，思路上和 5 不谋而合，也是降低 bad fake sample 的提供的梯度，本文<strong>甚至直接不使用least unrealistic fake sample 的梯度</strong>，只使用<strong>前 top-k 的 D scores 的生成样本提供生成器的梯度</strong>。超参数 k 使用课程学习的方法，逐渐从 batch size 降低到 0.75 batch size。 作者在实验中想要说明 worst samples 提供的梯度会使得优化偏离 nearest mode。 不过本文只关注了 G 的梯度，而没关注 D 的梯度。</p>
+<p>注：本文提交到 NeurIPS 的最新版在 arxiv 上好像还没更新，需要关注下。</p>
+<ol start="8">
+<li>Your GAN is Secretly an Energy-based Model and You Should Use Discriminator Driven Latent Sampling. <strong>unread</strong></li>
+</ol>
+<p>GAN 和能量概率模型的联系。</p>
+<ol start="9">
+<li>Teaching a GAN What Not to Learn.</li>
+</ol>
+<p>Not released.</p>
+<ol start="10">
+<li>DeepI2I: Enabling Deep Hierarchical Image-to-Image Translation by Transferring from GANs.</li>
+</ol>
+<p>Not released.</p>
+<ol start="11">
+<li>Hierarchical Patch VAE-GAN: Generating Diverse Videos from a Single Sample. <a href="https://arxiv.org/abs/2006.12226" target="_blank" rel="noopener">[paper]</a></li>
+</ol>
+<p>受 SinGAN 启发的 Hierarchical Patch VAE-GAN 模型，目的是从单张图像中学习，生成多样的视频。</p>
+<hr />
+<p>除此之外还有其他我不太了解的和 GAN 结合的领域的文章：</p>
+<ul>
+<li>GS-WGAN: A Gradient-Sanitized Approach for Learning Differentially Private Generators.</li>
+</ul>
+<p>针对 GAN 的隐私保护（梯度清除）</p>
+<ul>
+<li>GAN Memory with No Forgetting.  <a href="https://arxiv.org/abs/2006.07543" target="_blank" rel="noopener">[paper]</a></li>
+</ul>
+<p>对 GAN 的 lifelong learning (incremental learning) 的研究。</p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2021-10-29T14:42:11.260Z" itemprop="dateUpdated">2021-10-29 14:42:11</time>
+</span><br>
+
+
+        
+    </div>
+    
+    <footer>
+        <a href="mercurixito.github.io">
+            <img src="/img/nero.jpg" alt="Victor Chen">
+            Victor Chen
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/GAN/" rel="tag">GAN</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/NIPS/" rel="tag">NIPS</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=mercurixito.github.io/2020/10/18/papers-checker-nips2020/&title=《NeurIPS 2020 Paper》 — Hako&pic=mercurixito.github.io/img/nero.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=mercurixito.github.io/2020/10/18/papers-checker-nips2020/&title=《NeurIPS 2020 Paper》 — Hako&source= NeurIPS 2020 paper checker
+NeurIPS2020 的文章可参考以下的清单阅读不同方向的论文，这里我就按照我感兴趣的方向进行总..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=mercurixito.github.io/2020/10/18/papers-checker-nips2020/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《NeurIPS 2020 Paper》 — Hako&url=mercurixito.github.io/2020/10/18/papers-checker-nips2020/&via=mercurixito.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=mercurixito.github.io/2020/10/18/papers-checker-nips2020/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2020/10/23/iclr2021-under-review-disentangling/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">Papers under review in ICLR2021</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2020/10/10/latest-papers-checker/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">Latest Papers Checker</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+
+        <p>
+            
+            <span>博客内容遵循 <a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>Victor Chen &copy; 2020 - 2021</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=mercurixito.github.io/2020/10/18/papers-checker-nips2020/&title=《NeurIPS 2020 Paper》 — Hako&pic=mercurixito.github.io/img/nero.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=mercurixito.github.io/2020/10/18/papers-checker-nips2020/&title=《NeurIPS 2020 Paper》 — Hako&source= NeurIPS 2020 paper checker
+NeurIPS2020 的文章可参考以下的清单阅读不同方向的论文，这里我就按照我感兴趣的方向进行总..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=mercurixito.github.io/2020/10/18/papers-checker-nips2020/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《NeurIPS 2020 Paper》 — Hako&url=mercurixito.github.io/2020/10/18/papers-checker-nips2020/&via=mercurixito.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=mercurixito.github.io/2020/10/18/papers-checker-nips2020/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=mercurixito.github.io/2020/10/18/papers-checker-nips2020/" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>
