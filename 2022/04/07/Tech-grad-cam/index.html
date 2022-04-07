@@ -37,7 +37,7 @@
 <meta property="og:image" content="/images/2022-04-07/feat_res3_2008_000037.jpg">
 <meta property="og:image" content="/images/2022-04-07/feat_res4_2008_000037.jpg">
 <meta property="article:published_time" content="2022-04-07T19:33:22.000Z">
-<meta property="article:modified_time" content="2022-04-07T12:20:29.798Z">
+<meta property="article:modified_time" content="2022-04-07T12:45:41.044Z">
 <meta property="article:author" content="Victor Chen">
 <meta property="article:tag" content="visualization">
 <meta name="twitter:card" content="summary">
@@ -167,7 +167,7 @@
     <aside class="post-widget">
         <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
             <h4>TOC</h4>
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#grad-cam"><span class="post-toc-number">1.</span> <span class="post-toc-text"> Grad-CAM</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#talk-is-cheap-show-me-the-codes"><span class="post-toc-number">1.1.</span> <span class="post-toc-text"> Talk is cheap, show me the codes</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#可视化的特征结果"><span class="post-toc-number">1.2.</span> <span class="post-toc-text"> 可视化的特征结果</span></a></li></ol></li></ol>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#grad-cam"><span class="post-toc-number">1.</span> <span class="post-toc-text"> Grad-CAM</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#原理"><span class="post-toc-number">1.1.</span> <span class="post-toc-text"> 原理</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#talk-is-cheap-show-me-the-codes"><span class="post-toc-number">1.2.</span> <span class="post-toc-text"> Talk is cheap, show me the codes</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#可视化的特征结果"><span class="post-toc-number">1.3.</span> <span class="post-toc-text"> 可视化的特征结果</span></a></li></ol></li></ol>
         </nav>
     </aside>
 
@@ -191,8 +191,7 @@
         <div class="post-content" id="post-content" itemprop="postContent">
             <p>近来在 coding 中遇到特征图可视化的问题，最终考虑使用 CAM 类的方法，本文主要记述下原理、实现过程遇到的问题以及一些心得。</p>
 <a id="more"></a>
-<p>CAM(Class Activated Mapping)是一类可视化的方法，虽然最早用于对分类模型进行特征可视化，但是也可以扩展到<br />
-其他特征的可视化，这一类方法主要包括以下工作：</p>
+<p>CAM(Class Activated Mapping)是一类可视化的方法，虽然最早用于对分类模型进行特征可视化，但是也可以扩展到 其他特征的可视化，这一类方法主要包括以下工作：</p>
 <ul>
 <li>Grad-CAM</li>
 <li>Grad-CAM++</li>
@@ -202,6 +201,7 @@
 </ul>
 <p>现在只用到了 Grad-CAM，但是感觉没达到预期的效果，后面用到再补上其他方法的坑。 用Pytorch实现各类 CAM 方法的一个很好的 repo: <a href="https://github.com/jacobgil/pytorch-grad-cam" target="_blank" rel="noopener">CAM Methods in Pytorch</a>。</p>
 <h2 id="grad-cam"><a class="markdownIt-Anchor" href="#grad-cam"></a> Grad-CAM</h2>
+<h3 id="原理"><a class="markdownIt-Anchor" href="#原理"></a> 原理</h3>
 <p>Grad-CAM 的原理很简单：</p>
 <p>假设 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>A</mi></mrow><annotation encoding="application/x-tex">{A}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord"><span class="mord mathdefault">A</span></span></span></span></span> 表示模型 forward 中间过程的一个特征图，<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>y</mi></mrow><annotation encoding="application/x-tex">{y}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.625em;vertical-align:-0.19444em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.03588em;">y</span></span></span></span></span> 表示模型最终（当然也可以是中间）得到的一个标量。可视化的目标是输出一张热力图，热力图表示图像每个区域对输出 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>y</mi></mrow><annotation encoding="application/x-tex">{y}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.625em;vertical-align:-0.19444em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.03588em;">y</span></span></span></span></span> 的影响。 Grad-CAM 就是将这一影响定义为梯度，先看热力图的计算公式：</p>
 <p class='katex-block'><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>w</mi><mi>k</mi></msub><mo>=</mo><mfrac><mn>1</mn><mrow><mi>M</mi><mo>×</mo><mi>N</mi></mrow></mfrac><munder><mo>∑</mo><mi>i</mi></munder><munder><mo>∑</mo><mi>j</mi></munder><mfrac><mrow><mi mathvariant="normal">∂</mi><mi>y</mi></mrow><mrow><mi mathvariant="normal">∂</mi><msubsup><mi>A</mi><mrow><mi>i</mi><mo separator="true">,</mo><mi>j</mi></mrow><mi>k</mi></msubsup></mrow></mfrac></mrow><annotation encoding="application/x-tex">{
@@ -222,8 +222,8 @@
 <p>model forward 中间计算结果的 feature map <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>A</mi></mrow><annotation encoding="application/x-tex">{A}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord"><span class="mord mathdefault">A</span></span></span></span></span>，并不是 leaf node，如何得到它的梯度。</p>
 </li>
 </ol>
-<p>首先 eval 模式肯定是可以求梯度的，毕竟不是在 <code>torch.no_grad()</code> 的上下文下，只是因为所有的输入和权重的 Tensor 都设置了 <code>requires_grad=False</code>， 输出才没有 <code>grad_fn</code> 不能够求导；在 forward 过程中，只要计算过程中使用到一个需要求导的 Tensor，后续的输出都会变成可求导的，于是 repo 里将输入的 Tensor 改为 <code>requires_grad=True</code>，输出就是可以求导的（参考<a href="https://github.com/jacobgil/pytorch-grad-cam/blob/3014beaf2877e621e686e5afe7f718c01f1a74d5/pytorch_grad_cam/base_cam.py#L71" target="_blank" rel="noopener">这一行</a>)。<br />
-对目标特征求梯度，本来我是用到 <code>autograd.grad</code> 的方式计算，但是实现上为了得到 model 前向和反向中特征 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>A</mi></mrow><annotation encoding="application/x-tex">{A}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord"><span class="mord mathdefault">A</span></span></span></span></span> 的输出， 需要对模型修改的地方还是挺多。 repo 的方式就是使用 hook，分别在 forward 和 backward 时通过 hook 的方式得到特征图和梯度， 参考<a href="https://github.com/jacobgil/pytorch-grad-cam/blob/3014beaf2877e621e686e5afe7f718c01f1a74d5/pytorch_grad_cam/activations_and_gradients.py#L1" target="_blank" rel="noopener">这里</a>。</p>
+<p>首先 eval 模式肯定是可以求梯度的，毕竟不是在 <code>torch.no_grad()</code> 的上下文下，只是因为所有的输入和权重的 Tensor 都设置了 <code>requires_grad=False</code>， 输出才没有 <code>grad_fn</code> 不能够求导；在 forward 过程中，只要计算过程中使用到一个需要求导的 Tensor，后续的输出都会变成可求导的，于是 repo 里将输入的 Tensor 改为 <code>requires_grad=True</code>，输出就是可以求导的（参考<a href="https://github.com/jacobgil/pytorch-grad-cam/blob/3014beaf2877e621e686e5afe7f718c01f1a74d5/pytorch_grad_cam/base_cam.py#L71" target="_blank" rel="noopener">这一行</a>)。</p>
+<p>对目标特征求梯度，本来我是用到 <code>autograd.grad</code> 的方式计算，但是实现上为了得到 model 前向和反向中特征 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>A</mi></mrow><annotation encoding="application/x-tex">{A}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord"><span class="mord mathdefault">A</span></span></span></span></span> 的输出， 需要对模型修改的地方还是挺多。 repo 的方式就是使用 hook，分别在 forward 和 backward 时通过 hook 的方式得到特征图和梯度， 参考<a href="https://github.com/jacobgil/pytorch-grad-cam/blob/3014beaf2877e621e686e5afe7f718c01f1a74d5/pytorch_grad_cam/activations_and_gradients.py#L1" target="_blank" rel="noopener">这里</a>。</p>
 <p>不过 Grad-CAM 最后还是没有达到我想要的效果，采用了一种不同方式，这里就不提了，除此之外实验中发现 ReLU 其实很重要， <strong>有些情况下，只有用 ReLU 过滤掉对梯度负影响的部分，最终的热力图才能达到想要的效果。ReLU的位置也有一定的影响，可以按需调整。</strong></p>
 <h3 id="talk-is-cheap-show-me-the-codes"><a class="markdownIt-Anchor" href="#talk-is-cheap-show-me-the-codes"></a> Talk is cheap, show me the codes</h3>
 <p>以下是对 ResNet50 的可视化的 demo。 ResNet50 使用 Pytorch 提供的 ImageNet 上的预训练模型， 输入图像是随便选的 VOC2012 的一张图。不得不说使用上面 repo 的实现技巧，代码简洁美观了很多。</p>
@@ -278,7 +278,7 @@
     <div class="content">
         
 <span class="post-time">
-    最后更新时间：<time datetime="2022-04-07T12:20:29.798Z" itemprop="dateUpdated">2022-04-07 12:20:29</time>
+    最后更新时间：<time datetime="2022-04-07T12:45:41.044Z" itemprop="dateUpdated">2022-04-07 12:45:41</time>
 </span><br>
 
 
